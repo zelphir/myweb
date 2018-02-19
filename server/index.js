@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 const { CronJob } = require('cron')
 const queue = require('async/queue')
 const querystring = require('querystring')
@@ -28,7 +26,7 @@ const todayRef = db.collection('languages').doc(today)
 
 const job = async done => {
   try {
-    const res = await fetch(`${apiUrl}?${params}`)
+    const res = await fetch(`${apiUrl}api/v1/users/current/summaries?${params}`)
     const json = await res.json()
     const languages = get(json, 'data[0].languages', [])
 
