@@ -1,4 +1,4 @@
 import * as functions from 'firebase-functions'
-import helloWorld from './helloWorld'
+import instagramFn from './instagram'
 
-export const main = functions.https.onRequest(helloWorld)
+export const instagram = functions.https.onRequest(instagramFn)
