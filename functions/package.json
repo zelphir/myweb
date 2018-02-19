@@ -1,0 +1,34 @@
+{
+  "name": "myweb-functions",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "webpack",
+    "postbuild": "cd build && yarn --prod --ignore-engines",
+    "start": "nodemon --watch src --exec \"yarn serve\"",
+    "serve": "yarn build && firebase serve --only functions",
+    "deploy": "NODE_ENV=production yarn build && ../shared/scripts/deploy.sh functions"
+  },
+  "dependencies": {
+    "firebase-admin": "^5.8.2",
+    "firebase-functions": "^0.8.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.39",
+    "@babel/core": "^7.0.0-beta.39",
+    "@babel/preset-env": "^7.0.0-beta.39",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "8.0.0-beta.0",
+    "clean-webpack-plugin": "^0.1.18",
+    "copy-pkg-json-webpack-plugin": "zelphir/copy-pkg-json-webpack-plugin",
+    "eslint": "^4.1.1",
+    "eslint-config-react-app": "^2.1.0",
+    "eslint-plugin-flowtype": "^2.34.1",
+    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
+    "nodemon": "^1.14.11",
+    "webpack": "^3.10.0",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "private": true
+}

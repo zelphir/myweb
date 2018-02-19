@@ -1,0 +1,22 @@
+{
+  "name": "MyWeb",
+  "version": "0.0.1",
+  "description": "Personal website",
+  "repository": "https://gitlab.com/zelphir/myweb.git",
+  "author": "Roberto Manzella <zelphir@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["web", "shared", "functions", "server"],
+  "scripts": {
+    "precommit": "lint-staged",
+    "postmerge": "./shared/scripts/post-merge.sh"
+  },
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
+    "prettier": "^1.10.2"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,json,css,scss}": ["prettier --write", "git add"]
+  }
+}
