@@ -6,7 +6,7 @@
     "postbuild": "cd build && yarn --prod --ignore-engines",
     "start": "nodemon --watch src --exec \"yarn serve\"",
     "serve": "yarn build && firebase serve --only functions",
-    "deploy": "NODE_ENV=production yarn build && ../shared/scripts/deploy.sh functions,hosting"
+    "deploy": "NODE_ENV=production yarn build && ../shared/scripts/deploy.sh functions"
   },
   "dependencies": {
     "firebase-admin": "^5.8.2",
