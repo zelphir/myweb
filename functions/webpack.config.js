@@ -37,7 +37,15 @@ module.exports = {
                   }
                 }
               ]
-            ]
+            ],
+            env: {
+              development: {
+                plugins: ['inline-dotenv']
+              },
+              production: {
+                plugins: ['transform-inline-environment-variables']
+              }
+            }
           }
         }
       }

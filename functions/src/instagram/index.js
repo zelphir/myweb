@@ -1,7 +1,3 @@
-import * as functions from 'firebase-functions'
-
-const isDev = process.env.NODE_ENV === 'development'
-
 const generateUrl = (url, type) =>
   type === 'thumb'
     ? url.replace('vp/', '').replace('s640x640', 's320x320/c180.0.720.720')
@@ -18,9 +14,7 @@ const transform = ({ tags, imageUrl, caption, ...body }) => {
 }
 
 const instagram = (req, res) => {
-  const xClientID = isDev ? process.env.X_CLIENT_ID : functions.config().instagram.xclientid
-
-  if (req.get('X-Client-ID') !== xClientID) {
+  if (req.get('X-Client-ID') !== process.env.X_CLIENT_ID) {
     return res.sendStatus(403)
   }
 

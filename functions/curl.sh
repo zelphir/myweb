@@ -2,7 +2,7 @@
 
 source .env
 
-URL=${1:-http://localhost:5000/myweb-f4e34/us-central1/instagram}
+URL=${1:-http://localhost:8010/myweb-195810/us-central1/instagram}
 
 curl \
   -X POST \

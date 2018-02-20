@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-source .env
+FUNCTION=${1:-instagram}
 
-NODE_ENV=development \
-X_CLIENT_ID=$X_CLIENT_ID \
-nodemon --watch src --exec "yarn serve"
+functions-emulator start
+nodemon \
+  --watch src \
+  --exec "yarn build && functions-emulator deploy $FUNCTION --trigger-http --local-path=build"
+functions-emulator stop
