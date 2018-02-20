@@ -7,5 +7,6 @@ check_run() {
 }
 
 check_run package.json "yarn"
+check_run yarn.lock "yarn"
 
 exit 0;
