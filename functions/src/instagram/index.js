@@ -1,27 +1,28 @@
-const generateUrl = (url, type) =>
-  type === 'thumb'
-    ? url.replace('vp/', '').replace('s640x640', 's320x320/c180.0.720.720')
-    : url.replace('vp/', '').replace('s640x640', '')
+import { ApolloClient } from 'apollo-client'
+import { createHttpLink } from 'apollo-link-http'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import fetch from 'node-fetch'
 
-const transform = ({ tags, imageUrl, caption, ...body }) => {
-  return {
-    ...body,
-    tags: tags.split(','),
-    imageUrl: generateUrl(imageUrl),
-    thumbnailUrl: generateUrl(imageUrl, 'thumb'),
-    caption: caption.replace(/\s?#\w+/g, '')
+import { getAllTags as query, CreatePicture as mutation } from './schema.graphql'
+import { transformBody } from '../utils'
+
+const link = createHttpLink({ uri: process.env.GRAPHQL_URL, fetch })
+const client = new ApolloClient({ cache: new InMemoryCache(), link })
+
+const instagram = async (req, res) => {
+  if (req.get('X-Client-ID') !== process.env.X_CLIENT_ID) return res.sendStatus(403)
+  if (!req.body) return res.sendStatus(500)
+
+  try {
+    const { data: { allTags } } = await client.query({ query })
+    const variables = await transformBody(req.body, allTags)
+
+    await client.mutate({ variables, mutation })
+    return res.status(200).end()
+  } catch (err) {
+    console.error(err)
+    return res.sendStatus(500)
   }
-}
-
-const instagram = (req, res) => {
-  if (req.get('X-Client-ID') !== process.env.X_CLIENT_ID) {
-    return res.sendStatus(403)
-  }
-
-  if (!req.body) return res.status(200).end()
-
-  console.log(transform(req.body))
-  res.status(200).end()
 }
 
 export default instagram

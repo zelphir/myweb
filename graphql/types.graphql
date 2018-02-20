@@ -1,0 +1,18 @@
+type Tag @model {
+  id: ID! @isUnique
+  name: String!
+  pictures: [Picture!]! @relation(name: "PictureTags")
+}
+
+type Picture @model {
+  id: ID! @isUnique
+  caption: String!
+  imageUrl: String!
+  thumbnailUrl: String!
+  link: String!
+  location: String!
+  lat: String!
+  lng: String!
+  date: DateTime!
+  tags: [Tag!]! @relation(name: "PictureTags")
+}

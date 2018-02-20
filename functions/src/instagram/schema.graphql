@@ -1,0 +1,32 @@
+query getAllTags {
+  allTags {
+    id
+    name
+  }
+}
+
+mutation CreatePicture(
+  $caption: String!
+  $tags: [PicturetagsTag!]
+  $tagsIds: [ID!]
+  $imageUrl: String!
+  $thumbnailUrl: String!
+  $link: String!
+  $location: String!
+  $lat: String!
+  $lng: String!
+  $date: DateTime!
+) {
+  createPicture(
+    caption: $caption
+    tags: $tags
+    tagsIds: $tagsIds
+    imageUrl: $imageUrl
+    thumbnailUrl: $thumbnailUrl
+    link: $link
+    location: $location
+    lat: $lat
+    lng: $lng
+    date: $date
+  )
+}
