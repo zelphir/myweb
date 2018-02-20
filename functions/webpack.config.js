@@ -27,6 +27,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
+            plugins: ['@babel/plugin-proposal-object-rest-spread'],
             presets: [
               [
                 '@babel/preset-env',
