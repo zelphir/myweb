@@ -28,5 +28,8 @@ mutation CreatePicture(
     lat: $lat
     lng: $lng
     date: $date
-  )
+  ) {
+    id
+    link
+  }
 }

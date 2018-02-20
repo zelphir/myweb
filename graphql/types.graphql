@@ -1,6 +1,6 @@
 type Tag @model {
   id: ID! @isUnique
-  name: String!
+  name: String! @isUnique
   pictures: [Picture!]! @relation(name: "PictureTags")
 }
 
