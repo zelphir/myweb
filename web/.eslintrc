@@ -1,6 +1,1 @@
-{
-  "extends": "react-app",
-  "globals": {
-    "graphql": false,
-  }
-}
+shared/.eslintrc

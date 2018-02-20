@@ -6,7 +6,7 @@
   "author": "Roberto Manzella <zelphir@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": ["web", "shared", "functions", "server"],
+  "workspaces": ["web", "shared", "functions", "gce-cron"],
   "scripts": {
     "precommit": "lint-staged",
     "postmerge": "./shared/scripts/post-merge.sh"

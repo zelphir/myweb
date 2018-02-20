@@ -1,59 +1,28 @@
 const path = require('path')
+const merge = require('lodash.merge')
 const nodeExternals = require('webpack-node-externals')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyPkgJsonPlugin = require('copy-pkg-json-webpack-plugin')
 
-const outputPath = 'build'
+const base = require('shared/utils/webpack.config.base')
 
-module.exports = {
+const outputPath = 'build'
+const nodeVersion = '6.11.5'
+
+module.exports = merge(base(nodeVersion), {
   entry: './src',
   output: {
-    path: path.resolve(__dirname, outputPath),
-    filename: 'index.js',
-    libraryTarget: 'commonjs'
+    path: path.resolve(__dirname, outputPath)
   },
-  target: 'node',
   externals: [
     nodeExternals(),
     nodeExternals({
-      modulesDir: path.resolve(__dirname, '../node_modules')
+      modulesDir: path.resolve(__dirname, '../node_modules'),
+      whitelist: [/^shared/]
     })
   ],
-  module: {
-    rules: [
-      { test: /\.(graphql|gql)$/, exclude: /node_modules/, loader: 'graphql-tag/loader' },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: ['@babel/plugin-proposal-object-rest-spread'],
-            presets: [
-              [
-                '@babel/preset-env',
-                {
-                  ***REMOVED*** {
-                    node: '6.11.5'
-                  }
-                }
-              ]
-            ],
-            env: {
-              development: {
-                plugins: ['inline-dotenv']
-              },
-              production: {
-                plugins: ['transform-inline-environment-variables']
-              }
-            }
-          }
-        }
-      }
-    ]
-  },
   plugins: [
     new CleanWebpackPlugin([outputPath], { exclude: ['node_modules', 'yarn.lock'] }),
     new CopyPkgJsonPlugin({ remove: ['devDependencies', 'scripts'] })
   ]
-}
+})

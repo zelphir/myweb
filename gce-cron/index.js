@@ -5,9 +5,8 @@ const format = require('date-fns/format')
 const fetch = require('node-fetch')
 const get = require('lodash.get')
 const isEqual = require('lodash.isequal')
-const admin = require('firebase-admin')
 
-const serviceAccount = require('./serviceAccountKey.json')
+// const serviceAccount = require('./serviceAccountKey.json')
 
 let prevLanguages = []
 
@@ -17,23 +16,19 @@ const params = querystring.stringify({ api_key, start: today, end: today })
 
 const q = queue((task, done) => task(done), 1)
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-})
-
-const db = admin.firestore()
-const todayRef = db.collection('languages').doc(today)
+// const db = admin.firestore()
+// const todayRef = db.collection('languages').doc(today)
 
 const job = async done => {
   try {
-    const res = await fetch(`${apiUrl}api/v1/users/current/summaries?${params}`)
-    const json = await res.json()
-    const languages = get(json, 'data[0].languages', [])
+    // const res = await fetch(`${apiUrl}api/v1/users/current/summaries?${params}`)
+    // const json = await res.json()
+    // const languages = get(json, 'data[0].languages', [])
 
-    if (!isEqual(prevLanguages, languages)) {
-      prevLanguages = languages
-      return todayRef.set({ languages }, { merge: true })
-    }
+    // if (!isEqual(prevLanguages, languages)) {
+    //   prevLanguages = languages
+    //   return todayRef.set({ languages }, { merge: true })
+    // }
 
     return
   } catch (err) {
