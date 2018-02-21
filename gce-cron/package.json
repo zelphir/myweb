@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "start": "yarn build && node build",
+    "start": "yarn build && node .build",
     "create:instance": "../shared/scripts/create_instance.sh",
     "docker:build": "../shared/scripts/docker_build.sh",
     "docker:update": "../shared/scripts/docker_update.sh"

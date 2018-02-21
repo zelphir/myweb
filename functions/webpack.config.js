@@ -6,7 +6,7 @@ const CopyPkgJsonPlugin = require('copy-pkg-json-webpack-plugin')
 
 const base = require('shared/utils/webpack.config.base')
 
-const outputPath = 'build'
+const outputPath = '.build'
 const nodeVersion = '6.11.5'
 
 module.exports = merge(base(nodeVersion), {

@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const base = require('./utils/webpack.config.base')
 
-const outputPath = 'build'
+const outputPath = '.build'
 const nodeVersion = 'current'
 
 module.exports = merge(base(nodeVersion), {

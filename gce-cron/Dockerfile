@@ -13,6 +13,6 @@ RUN yarn
 
 RUN apk del python make gcc g++
 
-COPY build .
+COPY .build .
 
 CMD ["node", "."]

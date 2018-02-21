@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "preload": "webpack",
-    "load": "node build"
+    "load": "node .build"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.39",
