@@ -38,6 +38,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.1.0",
     "graphql-tag": "^2.8.0",
+    "instagram-private-api": "^0.6.7",
     "lodash.merge": "^4.6.1",
     "webpack": "^3.10.0",
     "webpack-node-externals": "^1.6.0"

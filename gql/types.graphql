@@ -1,6 +1,6 @@
 type Tag @model {
   id: ID! @isUnique
-  name: String! @isUnique
+  name: String!
   pictures: [Picture!]! @relation(name: "PictureTags")
 }
 
@@ -11,8 +11,8 @@ type Picture @model {
   thumbnailUrl: String!
   link: String!
   location: String!
-  lat: String!
-  lng: String!
+  lat: Float!
+  lng: Float!
   date: DateTime!
   tags: [Tag!]! @relation(name: "PictureTags")
 }

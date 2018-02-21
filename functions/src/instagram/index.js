@@ -1,4 +1,4 @@
-import { transformBody } from '../utils'
+import { transformBody } from 'shared/helpers'
 import { getTags, addPicture } from 'shared/apollo'
 
 const instagram = async (req, res) => {

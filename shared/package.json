@@ -1,4 +1,7 @@
 {
   "name": "shared",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "devDependencies": {
+    "lodash.flattendeep": "^4.4.0"
+  }
 }

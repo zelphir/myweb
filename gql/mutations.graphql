@@ -6,8 +6,8 @@ mutation CreatePicture(
   $thumbnailUrl: String!
   $link: String!
   $location: String!
-  $lat: String!
-  $lng: String!
+  $lat: Float!
+  $lng: Float!
   $date: DateTime!
 ) {
   createPicture(
