@@ -1,38 +1,45 @@
 {
-  "name": "myweb-functions",
-  "version": "0.1.0",
-  "scripts": {
-    "build": "webpack",
-    "start": "../shared/scripts/start_functions.sh",
-    "deploy": "../shared/scripts/deploy_functions.sh"
-  },
+  "name": "server",
+  "version": "0.0.1",
   "dependencies": {
-    "apollo-cache-inmemory": "^1.1.9",
-    "apollo-client": "^2.2.5",
-    "apollo-link-http": "^1.3.3",
-    "graphql": "^0.13.1",
+    "async": "^2.6.0",
+    "cron": "^1.3.0",
+    "date-fns": "^1.29.0",
+    "lodash.get": "^4.4.2",
+    "lodash.isequal": "^4.5.0",
     "node-fetch": "^2.0.0"
   },
+  "scripts": {
+    "precron": "webpack gce-cron/index.js",
+    "cron": "node .build",
+    "create:instance": "../shared/scripts/create_instance.sh",
+    "docker:build": "../shared/scripts/docker_build.sh",
+    "docker:update": "../shared/scripts/docker_update.sh",
+    "preload": "webpack load-instagram/index.js",
+    "load": "node .build"
+  },
+  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.39",
     "@babel/core": "^7.0.0-beta.39",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.40",
     "@babel/preset-env": "^7.0.0-beta.39",
+    "apollo-cache-inmemory": "^1.1.9",
+    "apollo-client": "^2.2.5",
+    "apollo-link-http": "^1.3.3",
     "babel-eslint": "^8.2.1",
     "babel-loader": "8.0.0-beta.0",
     "babel-plugin-inline-dotenv": "^1.1.2",
     "babel-plugin-transform-inline-environment-variables": "^0.3.0",
-    "clean-webpack-plugin": "^0.1.18",
     "eslint": "^4.1.1",
     "eslint-config-react-app": "^2.1.0",
     "eslint-plugin-flowtype": "^2.34.1",
     "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.1.0",
     "graphql-tag": "^2.8.0",
     "lodash.merge": "^4.6.1",
-    "nodemon": "^1.14.11",
     "webpack": "^3.10.0",
     "webpack-node-externals": "^1.6.0"
-  },
-  "private": true
+  }
 }

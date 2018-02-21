@@ -16,3 +16,9 @@ type Picture @model {
   date: DateTime!
   tags: [Tag!]! @relation(name: "PictureTags")
 }
+
+type Language @model {
+  id: ID! @isUnique
+  date: DateTime!
+  entries: Json!
+}

@@ -1,5 +1,5 @@
 import { transformBody } from '../utils'
-import { getTags, addPicture } from './graphql'
+import { getTags, addPicture } from 'shared/apollo'
 
 const instagram = async (req, res) => {
   if (req.get('X-Client-ID') !== process.env.X_CLIENT_ID) return res.sendStatus(403)

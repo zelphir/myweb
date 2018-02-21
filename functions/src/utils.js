@@ -1,9 +1,9 @@
-export const generateUrl = url => ({
+const generateUrl = url => ({
   imageUrl: url.replace('vp/', '').replace('s640x640', ''),
   thumbnailUrl: url.replace('vp/', '').replace('s640x640', 's320x320/c180.0.720.720')
 })
 
-export const generateTags = (allTags, newTags) => {
+const generateTags = (allTags, newTags) => {
   const tags = []
   const tagsIds = []
 

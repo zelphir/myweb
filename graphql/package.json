@@ -1,8 +1,0 @@
-{
-  "name": "graphql",
-  "version": "1.0.0",
-  "description": "My Graphcool Service",
-  "scripts": {
-    "deploy": "graphcool deploy"
-  }
-}

@@ -6,7 +6,7 @@
   "author": "Roberto Manzella <zelphir@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": ["web", "shared", "functions", "gce-cron"],
+  "workspaces": ["web", "shared", "functions", "tools", "gql"],
   "scripts": {
     "precommit": "lint-staged",
     "postmerge": "./shared/scripts/post-merge.sh"
@@ -17,6 +17,11 @@
     "prettier": "^1.10.2"
   },
   "lint-staged": {
-    "**/*.{js,jsx,json,css,scss,graphql}": ["prettier --write", "git add"]
+    "**/*.{js,jsx,json,css,scss,gql,graphql}": ["prettier --write", "git add"]
+  },
+  "dependencies": {
+    "@google-cloud/functions-emulator": "^1.0.0-alpha.25",
+    "gatsby-cli": "^1.1.40",
+    "serve": "^6.4.9"
   }
 }
