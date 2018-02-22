@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export $(cat .env | grep -v ^# | xargs)
+source "${BASH_SOURCE%/*}/utils.sh"
 
 gcloud beta compute \
   --project "${GOOGLE_PROJECT_ID}" instances create-with-container "gce-cron" \

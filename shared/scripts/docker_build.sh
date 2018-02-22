@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-export $(cat .env | grep -v ^# | xargs)
+source "${BASH_SOURCE%/*}/utils.sh"
 
 IMAGE="gcr.io/${GOOGLE_PROJECT_ID}/cron"
 
-yarn precron
+NODE_ENV=production yarn precron
 cd gce-cron
 cp ../package.json .
 mv ../.build .

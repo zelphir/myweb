@@ -7,5 +7,5 @@ nodemon \
   --watch src \
   --watch ../shared \
   -e js,graphql,gql \
-  --exec "yarn build && functions-emulator deploy $FUNCTION --trigger-http --local-path=.build"
+  --exec "yarn build && cd .build && functions-emulator deploy $FUNCTION --trigger-http"
 functions-emulator stop

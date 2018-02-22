@@ -26,10 +26,24 @@ module.exports = node => ({
             ],
             env: {
               development: {
-                plugins: ['inline-dotenv']
+                plugins: [
+                  [
+                    'inline-dotenv',
+                    {
+                      path: '../.env'
+                    }
+                  ]
+                ]
               },
               production: {
-                plugins: ['transform-inline-environment-variables']
+                plugins: [
+                  [
+                    'inline-dotenv',
+                    {
+                      path: '../.env.production'
+                    }
+                  ]
+                ]
               }
             }
           }

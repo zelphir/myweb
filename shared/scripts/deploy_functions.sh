@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export $(cat .env | grep -v ^# | xargs)
+source "${BASH_SOURCE%/*}/utils.sh"
 
 FUNCTION=${1:-instagram}
 

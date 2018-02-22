@@ -1,18 +1,25 @@
 import fetch from 'node-fetch'
 import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
+import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { startOfToday, endOfToday } from 'date-fns'
 
 import { GetAllTags, GetTodayLanguages } from 'gql/queries.graphql'
 import { CreatePicture, CreateLanguages } from 'gql/mutations.graphql'
 
-const uri = `${process.env.GQL_URL}/simple/v1/${process.env.GRAPHQL_SERVICE_ID}`
-const link = createHttpLink({ uri, fetch })
+const uri = `${process.env.GQL_URL}/simple/v1/${process.env.GQL_SERVICE_ID}`
 const cache = new InMemoryCache()
 const defaultOptions = { query: { fetchPolicy: 'network-only', errorPolicy: 'all' } }
+const httpLink = createHttpLink({ uri, fetch })
+const authLink = setContext((_, { headers }) => ({
+  headers: {
+    ...headers,
+    authorization: `Bearer ${process.env.GQL_TOKEN}`
+  }
+}))
 
-export const client = new ApolloClient({ link, cache, defaultOptions })
+export const client = new ApolloClient({ link: authLink.concat(httpLink), cache, defaultOptions })
 
 export const addPicture = async variables => {
   try {
