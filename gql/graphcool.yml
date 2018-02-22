@@ -7,10 +7,18 @@ types: ./types.graphql
 # Read more here:
 # https://www.graph.cool/docs/reference/auth/authorization/overview-iegoo0heez
 permissions:
-  - operation: "*"
+  - operation: Tag.read
+  - operation: Picture.read
+  - operation: Language.read
+  - operation: Tag.create
+    authenticated: true
+  - operation: Picture.create
+    authenticated: true
+  - operation: Language.create
+    authenticated: true
 
 # Your root tokens used for functions to get full access to the API
 # Read more here:
 # https://www.graph.cool/docs/reference/auth/authentication/authentication-tokens-eip7ahqu5o
-# rootTokens:
-#   - mytoken
+rootTokens:
+  - myWebToken

@@ -18,7 +18,7 @@ module.exports = node => ({
               [
                 '@babel/preset-env',
                 {
-                  ***REMOVED*** {
+                  targets: {
                     node
                   }
                 }

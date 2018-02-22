@@ -7,7 +7,7 @@ import { startOfToday, endOfToday } from 'date-fns'
 import { GetAllTags, GetTodayLanguages } from 'gql/queries.graphql'
 import { CreatePicture, CreateLanguages } from 'gql/mutations.graphql'
 
-const uri = `https://api.graph.cool/simple/v1/${process.env.GRAPHQL_SERVICE_ID}`
+const uri = `${process.env.GQL_URL}/simple/v1/${process.env.GRAPHQL_SERVICE_ID}`
 const link = createHttpLink({ uri, fetch })
 const cache = new InMemoryCache()
 const defaultOptions = { query: { fetchPolicy: 'network-only', errorPolicy: 'all' } }
