@@ -26,11 +26,13 @@ const job = async done => {
       const todayLanguages = await getTodayLanguages()
       prevLanguages = languages
 
-      await addLanguages({
+      const { data: { updateOrCreateLanguage } } = await addLanguages({
         id: todayLanguages ? todayLanguages.id : '',
         date: new Date().toISOString(),
         entries: languages
       })
+      const { date, entries } = updateOrCreateLanguage
+      console.log({ date, entries: entries.length })
     }
   } catch (err) {
     console.error(err)
