@@ -3035,6 +3035,10 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.npmjs.org/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
 
+copy-pkg-json-webpack-plugin@zelphir/copy-pkg-json-webpack-plugin:
+  version "0.0.31"
+  resolved "https://codeload.github.com/zelphir/copy-pkg-json-webpack-plugin/tar.gz/6a1bcec2c924a29c76427739c28158ddd1ab8c28"
+
 copyfiles@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/copyfiles/-/copyfiles-1.2.0.tgz#a8da3ac41aa2220ae29bd3c58b6984294f2c593c"

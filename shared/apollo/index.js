@@ -16,7 +16,7 @@ export const client = new ApolloClient({ link, cache, defaultOptions })
 
 export const addPicture = async variables => {
   try {
-    return client.mutate({ variables, mutation: CreatePicture })
+    return client.mutate({ variables, mutation: CreatePicture, errorPolicy: 'ignore' })
   } catch (err) {
     console.error(err)
   }

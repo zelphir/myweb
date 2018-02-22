@@ -39,7 +39,7 @@ export const transformBody = ({ tags, imageUrl, caption, date, lat, lng, ...body
 })
 
 export const transformImage = (image, allTags) => {
-  const { caption, webLink, location, takenAt, images } = image.getParams()
+  const { caption, webLink, location, takenAt, images, id } = image.getParams()
   return {
     ...generateLoadUrl(flattenDeep(images)[0]),
     ...generateTags(allTags, caption.match(/#\w+/g).map(tag => tag.replace('#', ''))),
@@ -48,6 +48,7 @@ export const transformImage = (image, allTags) => {
     lat: location.lat,
     lng: location.lng,
     date: new Date(takenAt).toISOString(),
+    instagramId: id,
     caption: caption.replace(/\s?#\w+/g, '')
   }
 }

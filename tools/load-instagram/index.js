@@ -8,28 +8,27 @@ const storage = new CookieMemoryStorage()
 const instaUser = process.env.INSTAGRAM_USER
 const instaPass = process.env.INSTAGRAM_PASSWORD
 
-// const wait = ms => new Promise((r, j) => setTimeout(r, ms))
-
-const load = async image => {
-  const allTags = await getTags()
-  console.log('allTags => ', allTags)
-  const newPicture = await transformImage(image, allTags)
-  const { data } = await addPicture(newPicture)
-  // await wait(5000)
-  console.warn('done', data.id, newPicture.tags, newPicture.tagsIds)
-  return data
-}
-
-const start = async () => {
+// Fetch Instagram feed and save images/tags to graphql
+;(async () => {
   try {
     const session = await Session.create(device, storage, instaUser, instaPass)
     const accountId = await session.getAccountId()
-    const feed = await new Feed.UserMedia(session, accountId).get()
 
-    return Promise.all(feed.slice(0, 2).map(load))
+    console.log('Loading Instagram Feed...')
+
+    const feed = await new Feed.UserMedia(session, accountId).all()
+
+    for (let image of feed) {
+      const allTags = await getTags()
+      const newPicture = await transformImage(image, allTags)
+      const { data: { createPicture } } = await addPicture(newPicture)
+      if (createPicture) {
+        console.log('Added', createPicture.instagramId)
+      } else {
+        console.warn('Skipped', `${image.getParams().id} already exists`)
+      }
+    }
   } catch (err) {
     console.error(err)
   }
-}
-
-start()
+})()

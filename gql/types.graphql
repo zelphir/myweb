@@ -1,19 +1,20 @@
 type Tag @model {
   id: ID! @isUnique
-  name: String!
+  name: String! @isUnique
   pictures: [Picture!]! @relation(name: "PictureTags")
 }
 
 type Picture @model {
   id: ID! @isUnique
+  instagramId: String! @isUnique
   caption: String!
   imageUrl: String!
   thumbnailUrl: String!
   link: String!
-  location: String!
-  lat: Float!
-  lng: Float!
-  date: DateTime!
+  location: String
+  lng: Float
+  lat: Float
+  date: DateTime
   tags: [Tag!]! @relation(name: "PictureTags")
 }
 

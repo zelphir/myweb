@@ -5,10 +5,11 @@ mutation CreatePicture(
   $imageUrl: String!
   $thumbnailUrl: String!
   $link: String!
-  $location: String!
-  $lat: Float!
-  $lng: Float!
-  $date: DateTime!
+  $location: String
+  $lat: Float
+  $lng: Float
+  $date: DateTime
+  $instagramId: String!
 ) {
   createPicture(
     caption: $caption
@@ -21,9 +22,11 @@ mutation CreatePicture(
     lat: $lat
     lng: $lng
     date: $date
+    instagramId: $instagramId
   ) {
     id
     link
+    instagramId
   }
 }
 
