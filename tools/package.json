@@ -21,7 +21,9 @@
     "docker:build": "../shared/scripts/docker_build.sh",
     "docker:update": "../shared/scripts/docker_update.sh",
     "preload": "webpack load-instagram/index.js",
-    "load": "node .build"
+    "preload:prod": "NODE_ENV=production webpack load-instagram/index.js",
+    "load": "node .build",
+    "load:prod": "NODE_ENV=production node .build"
   },
   "license": "MIT",
   "devDependencies": {

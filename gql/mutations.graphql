@@ -10,6 +10,7 @@ mutation CreatePicture(
   $lng: Float
   $date: DateTime
   $instagramId: String!
+  $carousel: [String!]!
 ) {
   createPicture(
     caption: $caption
@@ -23,6 +24,7 @@ mutation CreatePicture(
     lng: $lng
     date: $date
     instagramId: $instagramId
+    carousel: $carousel
   ) {
     id
     link

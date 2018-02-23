@@ -21,9 +21,12 @@ const instaPass = process.env.INSTAGRAM_PASSWORD
     for (let image of feed) {
       const allTags = await getTags()
       const newPicture = await transformImage(image, allTags)
-      const { data: { createPicture } } = await addPicture(newPicture)
-      if (createPicture) {
-        console.log('Added', createPicture.instagramId)
+      const { data } = await addPicture(newPicture)
+
+      if (!data) return console.error('Something went wrong, remove errorPolicy to see the error')
+
+      if (data && data.createPicture) {
+        console.log('Added', data.createPicture.instagramId)
       } else {
         console.warn('Skipped', `${image.getParams().id} already exists`)
       }

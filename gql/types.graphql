@@ -15,6 +15,7 @@ type Picture @model {
   lng: Float
   lat: Float
   date: DateTime
+  carousel: [String!]!
   tags: [Tag!]! @relation(name: "PictureTags")
 }
 
