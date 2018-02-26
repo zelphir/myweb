@@ -14,7 +14,7 @@ const instaPass = process.env.INSTAGRAM_PASSWORD
     const session = await Session.create(device, storage, instaUser, instaPass)
     const accountId = await session.getAccountId()
 
-    console.log('Loading Instagram Feed...')
+    console.log('Loading Instagram Feed...') // eslint-disable-line
 
     const feed = await new Feed.UserMedia(session, accountId).all()
 
@@ -23,15 +23,18 @@ const instaPass = process.env.INSTAGRAM_PASSWORD
       const newPicture = await transformImage(image, allTags)
       const { data } = await addPicture(newPicture)
 
-      if (!data) return console.error('Something went wrong, remove errorPolicy to see the error')
+      if (!data) {
+        // eslint-disable-next-line
+        return console.error('Something went wrong, remove errorPolicy to see the error')
+      }
 
       if (data && data.createPicture) {
-        console.log('Added', data.createPicture.instagramId)
+        console.log('Added', data.createPicture.instagramId) // eslint-disable-line
       } else {
-        console.warn('Skipped', `${image.getParams().id} already exists`)
+        console.warn('Skipped', `${image.getParams().id} already exists`) // eslint-disable-line
       }
     }
   } catch (err) {
-    console.error(err)
+    console.error(err) // eslint-disable-line
   }
 })()

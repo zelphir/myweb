@@ -18,10 +18,5 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,json,css,scss,gql,graphql}": ["prettier --write", "git add"]
-  },
-  "dependencies": {
-    "@google-cloud/functions-emulator": "^1.0.0-alpha.25",
-    "gatsby-cli": "^1.1.40",
-    "serve": "^6.4.9"
   }
 }

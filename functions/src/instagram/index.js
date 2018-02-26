@@ -8,12 +8,12 @@ const instagram = async (req, res) => {
   try {
     const allTags = await getTags()
     const newPicture = await transformBody(req.body, allTags)
-    console.log(newPicture)
+    console.log(newPicture) // eslint-disable-line
     const { data } = await addPicture(newPicture)
 
     return res.status(200).send(JSON.stringify(data))
   } catch (err) {
-    console.error(err)
+    console.error(err) // eslint-disable-line
     return res.sendStatus(500)
   }
 }

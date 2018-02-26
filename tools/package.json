@@ -1,25 +1,11 @@
 {
   "name": "server",
   "version": "0.0.1",
-  "dependencies": {
-    "apollo-cache-inmemory": "^1.1.9",
-    "apollo-client": "^2.2.5",
-    "apollo-link-context": "^1.0.6",
-    "apollo-link-http": "^1.3.3",
-    "async": "^2.6.0",
-    "cron": "^1.3.0",
-    "date-fns": "^1.29.0",
-    "lodash.get": "^4.4.2",
-    "lodash.isequal": "^4.5.0",
-    "node-fetch": "^2.0.0"
-  },
   "scripts": {
-    "precron": "webpack gce-cron/index.js --output-path gce-cron/.build",
+    "precron": "webpack gce-cron/index.js --env.outputPath=gce-cron/.build && echo {} > gce-cron/.build/tmp.json",
     "cron": "node gce-cron/.build",
-    "create:instance": "../shared/scripts/create_instance.sh",
-    "docker:build": "../shared/scripts/docker_build.sh",
-    "docker:update": "../shared/scripts/docker_update.sh",
-    "build:load": "webpack load-instagram/index.js --output-path load-instagram/.build",
+    "cron:push": "../shared/scripts/gce_push.sh",
+    "build:load": "webpack load-instagram/index.js --env.outputPath=load-instagram/.build",
     "load": "yarn build:load && node load-instagram/.build",
     "load:prod": "NODE_ENV=production yarn build:load && node load-instagram/.build"
   },
@@ -35,16 +21,22 @@
     "babel-eslint": "^8.2.1",
     "babel-loader": "8.0.0-beta.0",
     "babel-plugin-inline-dotenv": "^1.1.2",
+    "copy-pkg-json-webpack-plugin": "zelphir/copy-pkg-json-webpack-plugin",
     "eslint": "^4.1.1",
-    "eslint-config-react-app": "^2.1.0",
-    "eslint-plugin-flowtype": "^2.34.1",
-    "eslint-plugin-import": "^2.6.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.1.0",
-    "graphql-tag": "^2.8.0",
     "instagram-private-api": "^0.6.7",
+    "graphql-tag": "^2.8.0",
     "lodash.merge": "^4.6.1",
     "webpack": "^3.10.0",
     "webpack-node-externals": "^1.6.0"
+  },
+  "dependencies": {
+    "apollo-cache-inmemory": "^1.1.9",
+    "apollo-client": "^2.2.5",
+    "apollo-link-context": "^1.0.6",
+    "apollo-link-http": "^1.3.3",
+    "date-fns": "^1.29.0",
+    "lodash.get": "^4.4.2",
+    "lodash.isequal": "^4.5.0",
+    "node-fetch": "^2.0.0"
   }
 }

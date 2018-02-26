@@ -22,7 +22,11 @@ module.exports = merge(base(nodeVersion), {
     })
   ],
   plugins: [
-    new CleanWebpackPlugin([outputPath], { exclude: ['node_modules', 'yarn.lock'] }),
-    new CopyPkgJsonPlugin({ remove: ['devDependencies', 'scripts'] })
+    new CleanWebpackPlugin([outputPath]),
+    new CopyPkgJsonPlugin({
+      remove: ['scripts', 'devDependencies'],
+      // Add graphql here so it does not conflict with gatsbyjs
+      replace: { dependencies: { graphql: '^0.13.1' } }
+    })
   ]
 })

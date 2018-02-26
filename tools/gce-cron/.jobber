@@ -1,0 +1,11 @@
+[prefs]
+notifyProgram: /usr/local/bin/jobberNotifier.sh
+
+[jobs]
+- name: ImportStats
+  cmd: "cd ~ && node ."
+  time: "*/5"
+  onError: Continue
+  notifyOnError: true
+  notifyOnSuccess: true
+  notifyOnFailure: true

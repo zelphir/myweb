@@ -25,7 +25,7 @@ export const addPicture = async variables => {
   try {
     return client.mutate({ variables, mutation: CreatePicture, errorPolicy: 'ignore' })
   } catch (err) {
-    console.error(err)
+    console.error(err) // eslint-disable-line
   }
 }
 
@@ -35,7 +35,7 @@ export const getTags = async () => {
 
     return allTags
   } catch (err) {
-    console.error(err)
+    console.error(err) // eslint-disable-line
   }
 }
 
@@ -43,7 +43,7 @@ export const addLanguages = async variables => {
   try {
     return client.mutate({ variables, mutation: CreateLanguages })
   } catch (err) {
-    console.error(err)
+    console.error(err) // eslint-disable-line
   }
 }
 
@@ -54,6 +54,6 @@ export const getTodayLanguages = async () => {
 
     return allLanguages[0]
   } catch (err) {
-    console.error(err)
+    console.error(err) // eslint-disable-line
   }
 }
