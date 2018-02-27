@@ -1,24 +1,23 @@
 import React from 'react'
-import Link from 'gatsby-link'
-import { Container } from 'react-responsive-grid'
+import PropTypes from 'prop-types'
 
-import { rhythm, scale } from '../utils/typography'
+import Sidebar from '../components/Sidebar'
 
-class Template extends React.Component {
+class MainLayout extends React.Component {
+  static propTypes = {
+    children: PropTypes.func.isRequired
+  }
+
   render() {
-    const { location, children } = this.props
+    const { children } = this.props
 
     return (
-      <Container
-        style={{
-          maxWidth: rhythm(24),
-          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-        }}
-      >
-        {children()}
-      </Container>
+      <div id="container">
+        <Sidebar pageWrapId={'page-wrap'} outerContainerId={'container'} isOpen={true} />
+        <div id="page-wrap">{children()}</div>
+      </div>
     )
   }
 }
 
-export default Template
+export default MainLayout
