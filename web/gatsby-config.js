@@ -6,6 +6,7 @@ module.exports = {
     siteUrl: 'https://robertomanzella.com'
   },
   plugins: [
+    'gatsby-plugin-sass',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -52,6 +53,12 @@ module.exports = {
     },
     'gatsby-plugin-feed',
     'gatsby-plugin-offline',
-    'gatsby-plugin-react-helmet'
+    'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-plugin-typography',
+      options: {
+        pathToConfigModule: 'src/utils/typography'
+      }
+    }
   ]
 }

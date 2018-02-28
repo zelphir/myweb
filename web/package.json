@@ -10,7 +10,8 @@
     "gatsby-plugin-google-analytics": "^1.0.19",
     "gatsby-plugin-offline": "^1.0.14",
     "gatsby-plugin-react-helmet": "^1.0.8",
-    "gatsby-plugin-sharp": "^1.6.33",
+    "gatsby-plugin-sharp": "^1.6.36",
+    "gatsby-plugin-typography": "^1.7.15",
     "gatsby-remark-copy-linked-files": "^1.5.28",
     "gatsby-remark-images": "^1.5.49",
     "gatsby-remark-prismjs": "^1.2.15",
@@ -20,7 +21,9 @@
     "gatsby-transformer-remark": "^1.7.33",
     "gatsby-transformer-sharp": "^1.6.21",
     "lodash": "^4.17.5",
-    "react-burger-menu": "^2.3.0"
+    "react-burger-menu": "^2.3.0",
+    "typography": "^0.16.6",
+    "typography-theme-fairy-gates": "^0.15.11"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
@@ -28,13 +31,16 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "eslint": "^4.18.1",
     "eslint-plugin-react": "^7.7.0",
+    "gatsby-plugin-sass": "^1.0.17",
     "nodemon": "^1.15.1",
     "prop-types": "^15.6.1"
   },
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "start": "nodemon -w gatsby-node.js gatsby-config.js --exec 'gatsby develop'",
+    "start": "nodemon -w src/html.js -w src/main.css -w gatsby-node.js -w gatsby-config.js --exec 'gatsby develop'",
+    "serve": "yarn build && serve public",
+    "prebuild": "rm -rf public/*",
     "build": "gatsby build",
     "deploy": "gatsby build --prefix-paths"
   }

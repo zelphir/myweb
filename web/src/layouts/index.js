@@ -12,7 +12,6 @@ class MainLayout extends React.Component {
 
   render() {
     const { children, isMobile } = this.props
-    const width = isMobile ? '100%' : 'calc(100% - 300px)'
 
     return (
       <div id="container">
@@ -22,9 +21,7 @@ class MainLayout extends React.Component {
           id="sidebar"
           isMobile={isMobile}
         />
-        <main id="page-wrap" style={{ width }}>
-          {children()}
-        </main>
+        <main id="page-wrap">{children()}</main>
       </div>
     )
   }

@@ -1,0 +1,26 @@
+html,
+body,
+#___gatsby,
+#container {
+  height: 100%;
+}
+
+main {
+  height: 100%;
+  padding: 80px 30px 30px;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  main {
+    padding: 30px 100px 50px 50px;
+    transform: translateX(35vw) !important;
+    transition: unset !important;
+    width: 65vw !important;
+  }
+}
+
+a {
+  transition: color 0.25s linear;
+}

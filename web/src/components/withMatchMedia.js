@@ -2,18 +2,16 @@ import React from 'react'
 
 const withMatchMedia = WrappedComponent => {
   class WithMatchMedia extends React.Component {
-    matchMedia = window.matchMedia(`(max-width: 768px)`)
-
     state = {
-      isMobile: undefined
+      isMobile: true
     }
 
-    componentWillMount() {
-      this.setState({ isMobile: this.matchMedia.matches })
+    componentDidMount() {
+      this.matchMedia = window.matchMedia(`(max-width: 768px)`)
       this.matchMedia.addListener(this.mediaQueryChanged)
     }
 
-    componentWillUnmount() {
+    componentDidUnmount() {
       this.matchMedia.removeListener(this.mediaQueryChanged)
     }
 
@@ -26,9 +24,9 @@ const withMatchMedia = WrappedComponent => {
     }
   }
 
-  const displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component'
+  const componentName = WrappedComponent.displayName || WrappedComponent.name || 'Component'
 
-  WithMatchMedia.displayName = `WithMatchMedia(${displayName})`
+  WithMatchMedia.displayName = `WithMatchMedia(${componentName})`
 
   return WithMatchMedia
 }
