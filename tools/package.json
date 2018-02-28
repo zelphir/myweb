@@ -23,8 +23,8 @@
     "babel-plugin-inline-dotenv": "^1.1.2",
     "copy-pkg-json-webpack-plugin": "zelphir/copy-pkg-json-webpack-plugin",
     "eslint": "^4.1.1",
-    "instagram-private-api": "^0.6.7",
     "graphql-tag": "^2.8.0",
+    "instagram-private-api": "^0.6.7",
     "lodash.merge": "^4.6.1",
     "webpack": "^3.10.0",
     "webpack-node-externals": "^1.6.0"
