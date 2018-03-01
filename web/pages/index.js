@@ -1,40 +1,37 @@
-import React, { Component } from 'react'
-import Head from 'next/head'
+import React from 'react'
+import PropTypes from 'prop-types'
 import withPosts from 'nextein/posts'
 import { Content } from 'nextein/post'
 import Link from 'nextein/link'
 
+import withData from '../lib/withData'
+import MainLayout from '../layouts/MainLayout'
+import Languages from '../components/Languages'
+
 const dashes = str => str.toLowerCase().replace(' ', '-')
 
-class Index extends Component {
-  render() {
-    const { posts } = this.props
-    return (
-      <main>
-        <Head>
-          <link type="text/css" rel="stylesheet" href="/static/stylesheet.css" />
-        </Head>
-        <header>
-          <h1 className="brand">Nextein</h1>
-          <p className="welcome">Welcome to your Nextein Blog Site!</p>
-        </header>
-        <section>
-          {posts.map(post => (
-            <article key={`post-${dashes(post.data.title)}`}>
-              <header>
-                <h2>
-                  <Link {...post}>
-                    <a>{post.data.title}</a>
-                  </Link>
-                </h2>
-              </header>
-              <Content {...post} excerpt />
-            </article>
-          ))}
-        </section>
-      </main>
-    )
-  }
+const Index = ({ posts }) => (
+  <MainLayout>
+    <section>
+      {posts.map(post => (
+        <article key={`post-${dashes(post.data.title)}`}>
+          <header>
+            <h2>
+              <Link {...post}>
+                <a>{post.data.title}</a>
+              </Link>
+            </h2>
+          </header>
+          <Content {...post} excerpt />
+        </article>
+      ))}
+    </section>
+    <Languages />
+  </MainLayout>
+)
+
+Index.propTypes = {
+  posts: PropTypes.array.isRequired
 }
 
-export default withPosts(Index)
+export default withData(withPosts(Index))
