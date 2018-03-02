@@ -6,7 +6,6 @@ import Link from 'nextein/link'
 
 import withData from '../lib/withData'
 import MainLayout from '../layouts/MainLayout'
-import Languages from '../components/Languages'
 
 const dashes = str => str.toLowerCase().replace(' ', '-')
 
@@ -26,7 +25,6 @@ const Index = ({ posts }) => (
         </article>
       ))}
     </section>
-    <Languages />
   </MainLayout>
 )
 

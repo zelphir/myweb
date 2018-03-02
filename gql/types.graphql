@@ -2,6 +2,8 @@ type Tag @model {
   id: ID! @isUnique
   name: String! @isUnique
   pictures: [Picture!]! @relation(name: "PictureTags")
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type Picture @model {
@@ -17,10 +19,14 @@ type Picture @model {
   date: DateTime
   carousel: [String!]!
   tags: [Tag!]! @relation(name: "PictureTags")
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type Language @model {
   id: ID! @isUnique
   date: DateTime!
   entries: Json!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }

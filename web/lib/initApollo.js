@@ -1,7 +1,31 @@
-import { ApolloClient } from 'apollo-client'
+import { ApolloClient, split } from 'apollo-client-preset'
+import { WebSocketLink } from 'apollo-link-ws'
+import { getMainDefinition } from 'apollo-utilities'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import fetch from 'isomorphic-unfetch'
+
+// Create an http link:
+const httpLink = new HttpLink({
+  uri: `${process.env.GQL_URL}/simple/v1/${process.env.GQL_SERVICE_ID}`
+})
+
+const link = process.browser
+  ? split(
+      ({ query }) => {
+        const { kind, operation } = getMainDefinition(query)
+        return kind === 'OperationDefinition' && operation === 'subscription'
+      },
+      // Create a WebSocket link:
+      new WebSocketLink({
+        uri: process.env.GQL_WSS + process.env.GQL_SERVICE_ID,
+        options: {
+          reconnect: true
+        }
+      }),
+      httpLink
+    )
+  : httpLink
 
 let apolloClient = null
 
@@ -14,10 +38,7 @@ function create(initialState) {
   return new ApolloClient({
     connectToDevTools: process.browser,
     ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
-    link: new HttpLink({
-      uri: `${process.env.GQL_URL}/simple/v1/${process.env.GQL_SERVICE_ID}`
-      // credentials: 'same-origin'
-    }),
+    link,
     cache: new InMemoryCache().restore(initialState || {})
   })
 }

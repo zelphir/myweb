@@ -15,7 +15,7 @@ const withMatchMedia = ComposedComponent =>
       this.matchMedia.addListener(this.mediaQueryChanged)
     }
 
-    componentDidUnmount() {
+    componentWillUnmount() {
       this.matchMedia.removeListener(this.mediaQueryChanged)
     }
 

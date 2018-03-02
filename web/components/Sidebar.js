@@ -5,6 +5,8 @@ import { push as Menu } from 'react-burger-menu'
 import './Sidebar.scss'
 import menu from './SidebarMenu.svg'
 
+import Languages from './Languages'
+
 const Sidebar = ({ isMobile, ...props }) => (
   <Menu
     {...props}
@@ -15,6 +17,7 @@ const Sidebar = ({ isMobile, ...props }) => (
     customBurgerIcon={<img src={menu} />}
   >
     <a href="/">Home</a>
+    <Languages />
   </Menu>
 )
 

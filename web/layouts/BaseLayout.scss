@@ -22,16 +22,16 @@ body {
 main {
   height: 100%;
   padding: 80px 30px 30px;
-  overflow-y: scroll;
   width: 100%;
 }
 
 @media screen and (min-width: 768px) {
   main {
     padding: 30px 100px 50px 50px;
-    transform: translateX(35vw) !important;
+    transform: translateX(450px) !important;
     transition: unset !important;
-    width: 65vw !important;
+    width: calc(100% - 450px) !important;
+    max-width: 830px;
   }
 }
 
