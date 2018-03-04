@@ -4,7 +4,6 @@ import withPosts from 'nextein/posts'
 import { Content } from 'nextein/post'
 import Link from 'nextein/link'
 
-import withData from '../lib/withData'
 import MainLayout from '../layouts/MainLayout'
 
 const dashes = str => str.toLowerCase().replace(' ', '-')
@@ -32,4 +31,4 @@ Index.propTypes = {
   posts: PropTypes.array.isRequired
 }
 
-export default withData(withPosts(Index))
+export default withPosts(Index)

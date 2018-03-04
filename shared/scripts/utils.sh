@@ -28,7 +28,7 @@ fi
 
 export $(cat $DOTENV | grep -v ^# | xargs)
 
-VARIABLES=($(sed -r '/^(\s*#|$)/d;' ../.env.sample))
+VARIABLES=($(sed -r '/^(\s*#|$)/d;' ../.env.example))
 
 for v in "${VARIABLES[@]}" ; do
   var=${v%=}

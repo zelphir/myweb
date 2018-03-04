@@ -2,13 +2,5 @@
   "presets": [
     "next/babel",
   ],
-  "plugins": ["inline-import-graphql-ast"],
-  "env": {
-    "development": {
-      "plugins": [["inline-dotenv", {"path": "../.env"}]]
-    },
-    "production": {
-      "plugins": [["inline-dotenv", {"path": "../.env.production"}]]
-    }
-  }
+  "plugins": ["inline-import-graphql-ast"]
 }

@@ -1,13 +1,18 @@
+import get from 'lodash.get'
 import PropTypes from 'prop-types'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
+import { startOfToday, endOfToday } from 'date-fns'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+
+import './Languages.scss'
+
+import withApollo from '../lib/withApollo'
 import { GetTodayLanguages } from 'gql/queries.graphql'
 import { OnLanguagesUpdate } from 'gql/subscriptions.graphql'
-import { startOfToday, endOfToday } from 'date-fns'
 
 class Languages extends React.Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
-    languages: PropTypes.array.isRequired,
     subscribeToNewLanguages: PropTypes.func
   }
 
@@ -16,41 +21,49 @@ class Languages extends React.Component {
   }
 
   render() {
-    const { data: { loading, error }, languages } = this.props
-    console.log({ loading, error, languages }) // eslint-disable-line
-    return <div>...</div>
-    // if (error) return <div>Error</div>
-    // if (loading) return <div>Loading...</div>
+    const { data } = this.props
+    const languages = get(data.allLanguages, '[0].entries', [])
+    if (data.error) return <div>Error</div>
+    if (data.loading) return <div>Loading...</div>
 
-    // return (
-    //   <div>
-    //     {languages.entries.map(lang => (
-    //       <div key={lang.name}>
-    //         {lang.name} - {lang.percent}
-    //       </div>
-    //     ))}
-    //   </div>
-    // )
+    const items = languages.map(({ name, percent, text }) => (
+      <div key={name}>
+        {percent} - {text}
+      </div>
+    ))
+
+    return (
+      <ReactCSSTransitionGroup
+        transitionName="example"
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={300}
+      >
+        {items}
+      </ReactCSSTransitionGroup>
+    )
   }
 }
 
 const variables = { from: startOfToday().toISOString(), to: endOfToday().toISOString() }
 
-export default graphql(GetTodayLanguages, {
-  name: 'languages',
-  options: { variables },
-  props: props => {
-    return {
-      data: props.languages,
-      languages: props.languages.allLanguages[0] || [],
-      subscribeToNewLanguages: () => {
-        return props.languages.subscribeToMore({
-          document: OnLanguagesUpdate,
-          updateQuery: (prev, { subscriptionData }) => {
-            console.log({ subscriptionData }) // eslint-disable-line
-          }
-        })
+export default compose(
+  withApollo,
+  graphql(GetTodayLanguages, {
+    options: { variables },
+    props: ({ data }) => {
+      return {
+        data,
+        subscribeToNewLanguages: () => {
+          return data.subscribeToMore({
+            document: OnLanguagesUpdate,
+            updateQuery: (prev, { subscriptionData }) => {
+              if (!subscriptionData.data) {
+                return prev
+              }
+            }
+          })
+        }
       }
     }
-  }
-})(Languages)
+  })
+)(Languages)

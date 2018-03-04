@@ -7,20 +7,22 @@ import { getComponentDisplayName } from './utils'
 import initApollo from './initApollo'
 
 export default ComposedComponent => {
-  return class WithData extends React.Component {
-    static displayName = `WithData(${getComponentDisplayName(ComposedComponent)})`
+  return class WithApollo extends React.Component {
+    static displayName = `WithApollo(${getComponentDisplayName(ComposedComponent)})`
 
     static propTypes = {
       serverState: PropTypes.object.isRequired
     }
 
-    static async getInitialProps(ctx) {
-      let serverState = {
+    static defaultProps = {
+      serverState: {
         apollo: {
           data: {}
         }
       }
+    }
 
+    static async getInitialProps(ctx) {
       // Evaluate the composed component's getInitialProps()
       let composedInitialProps = {}
 
@@ -48,9 +50,7 @@ export default ComposedComponent => {
         )
       } catch (e) {
         // Prevent Apollo Client GraphQL errors from crashing SSR.
-        // Handle them in components via the data.error prop:
-        // http://dev.apollodata.com/react/api-queries.html#graphql-query-data-error
-        console.error(e) // eslint-disable-line
+        // console.error('catch', e) // eslint-disable-line
       }
 
       if (!process.browser) {
@@ -59,23 +59,17 @@ export default ComposedComponent => {
         Head.rewind()
       }
 
-      // Extract query data from the Apollo store
-      serverState = {
-        apollo: {
-          data: apollo.cache.extract()
-        }
-      }
-
       return {
-        serverState,
+        serverState: {
+          apollo: {
+            data: apollo.cache.extract()
+          }
+        },
         ...composedInitialProps
       }
     }
 
-    constructor(props) {
-      super(props)
-      this.apollo = initApollo(this.props.serverState.apollo.data)
-    }
+    apollo = initApollo(this.props.serverState.apollo.data)
 
     render() {
       return (
