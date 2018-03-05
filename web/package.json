@@ -1,42 +1,45 @@
 {
   "name": "web",
-  "version": "0.0.1",
+  "version": "1.0.1",
+  "main": "index.js",
   "license": "MIT",
-  "private": true,
+  "scripts": {
+    "start": "react-static start",
+    "stage": "react-static build --staging --debug",
+    "build": "react-static build",
+    "serve": "serve dist -p 3000"
+  },
   "dependencies": {
     "apollo-client-preset": "^1.0.8",
     "apollo-link-error": "^1.0.7",
     "apollo-link-ws": "^1.0.7",
+    "axios": "^0.18.0",
     "date-fns": "^1.29.0",
     "graphql": "^0.13.1",
-    "graphql-anywhere": "^4.1.5",
     "graphql-tag": "^2.8.0",
-    "isomorphic-unfetch": "^2.0.0",
     "lodash.get": "^4.4.2",
-    "next": "^5.0.1-canary.10",
-    "nextein": "^1.2.1",
+    "node-fetch": "^2.1.1",
     "react": "^16.3.0-alpha.1",
     "react-addons-css-transition-group": "^15.6.2",
     "react-apollo": "^2.0.4",
-    "react-burger-menu": "^2.3.0",
     "react-dom": "^16.3.0-alpha.1",
+    "react-hot-loader": "^4.0.0-beta.21",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-static": "^5.3.4",
     "subscriptions-transport-ws": "^0.9.6"
   },
-  "scripts": {
-    "start": "nextein",
-    "build": "nextein build && nextein export",
-    "serve": "yarn build && serve out"
-  },
   "devDependencies": {
-    "@zeit/next-sass": "^0.1.1",
     "babel-plugin-inline-import-graphql-ast": "^2.2.0",
     "dotenv-webpack": "^1.5.5",
     "eslint": "^4.18.1",
     "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-react": "^7.7.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "json-loader": "^0.5.7",
     "node-sass": "^4.7.2",
     "prop-types": "^15.6.1",
-    "serve": "^6.5.1",
-    "url-loader": "^0.6.2"
+    "sass-loader": "^6.0.7",
+    "serve": "^6.1.0"
   }
 }

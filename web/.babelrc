@@ -1,6 +1,4 @@
 {
-  "presets": [
-    "next/babel",
-  ],
+  "extends": "react-static/.babelrc",
   "plugins": ["inline-import-graphql-ast"]
 }

@@ -13,10 +13,10 @@
   },
   "devDependencies": {
     "husky": "^0.14.3",
-    "lint-staged": "^6.0.0",
+    "lint-staged": "^7.0.0",
     "prettier": "^1.10.2"
   },
   "lint-staged": {
-    "**/*.{js,jsx,json,css,scss,gql,graphql}": ["prettier --write", "git add"]
+    "**/*.{js,json,css,scss,gql,graphql}": ["prettier --write", "git add"]
   }
 }

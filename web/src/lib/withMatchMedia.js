@@ -1,14 +1,11 @@
 import React from 'react'
-
 import { getComponentDisplayName } from './utils'
 
 const withMatchMedia = ComposedComponent =>
   class WithMatchMedia extends React.Component {
     static displayName = `WithMatchMedia(${getComponentDisplayName(ComposedComponent)})`
 
-    state = {
-      isMobile: true
-    }
+    state = { isMobile: true }
 
     componentDidMount() {
       this.matchMedia = window.matchMedia(`(max-width: 768px)`)
