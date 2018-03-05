@@ -1,11 +1,56 @@
+import fs from 'fs'
 import path from 'path'
 import Dotenv from 'dotenv-webpack'
-import axios from 'axios'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import klaw from 'klaw'
+import matter from 'gray-matter'
 
 import { isDev } from './src/lib/utils'
 
 const dotEnv = isDev ? '.env' : '.env.production'
+
+const getPosts = () => {
+  const items = []
+
+  const getFiles = () =>
+    new Promise(resolve => {
+      // Check if posts directory exists //
+      if (fs.existsSync('./src/posts')) {
+        klaw('./src/posts')
+          .on('data', item => {
+            // Filter function to retrieve .md files //
+            if (path.extname(item.path) === '.md') {
+              // If markdown file, read contents //
+              const data = fs.readFileSync(item.path, 'utf8')
+              // Convert to frontmatter object and markdown content //
+              const dataObj = matter(data)
+              // Create slug for URL //
+              dataObj.data.slug = dataObj.data.title
+                .toLowerCase()
+                .replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '')
+              // Remove unused key //
+              delete dataObj.orig
+              // Push object into items array //
+              items.push(dataObj)
+            }
+          })
+          .on('error', e => {
+            console.log(e) // eslint-disable-line
+          })
+          .on('end', () => {
+            // Resolve promise for async getRoutes request //
+            // posts = items for below routes //
+            resolve(items)
+          })
+      } else {
+        // If src/posts directory doesn't exist, return items as empty array //
+        resolve(items)
+      }
+    })
+
+  return getFiles()
+}
 
 export default {
   // siteRoot: 'https://robertomanzella.com',
@@ -13,8 +58,7 @@ export default {
     title: 'robertomanzella.com'
   }),
   getRoutes: async () => {
-    const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts')
-    const posts = data.slice(0, 5)
+    const posts = await getPosts()
 
     return [
       {
@@ -30,7 +74,7 @@ export default {
         component: 'src/containers/Blog',
         getData: () => ({ posts }),
         children: posts.map(post => ({
-          path: `/post/${post.id}`,
+          path: `/post/${post.data.slug}`,
           component: 'src/containers/Post',
           getData: () => ({ post })
         }))
