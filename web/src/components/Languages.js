@@ -3,12 +3,18 @@ import get from 'lodash.get'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { startOfToday, endOfToday } from 'date-fns'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
-// import './Languages.scss'
+import './Languages.scss'
 
 import { GetTodayLanguages } from 'gql/queries.graphql'
 import { OnLanguagesUpdate } from 'gql/subscriptions.graphql'
+
+const Fade = ({ children, ...props }) => (
+  <CSSTransition {...props} timeout={1000} classNames="fade">
+    {children}
+  </CSSTransition>
+)
 
 class Languages extends React.Component {
   static propTypes = {
@@ -26,20 +32,20 @@ class Languages extends React.Component {
     if (data.loading) return <div>Loading...</div>
 
     const languages = get(data.allLanguages, '[0].entries', [])
-    const items = languages.map(({ name, percent, text }) => (
-      <div key={name}>
-        {percent} - {text}
-      </div>
-    ))
 
     return (
-      <ReactCSSTransitionGroup
-        transitionName="example"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={300}
-      >
-        {items}
-      </ReactCSSTransitionGroup>
+      <TransitionGroup className="todo-list">
+        {languages.map(({ name, percent, text }) => (
+          <Fade key={name}>
+            <div
+              className="animated-bar"
+              style={{ width: `${percent}%`, height: 30, background: 'red', marginBottom: 5 }}
+            >
+              {name} - {percent} - {text}
+            </div>
+          </Fade>
+        ))}
+      </TransitionGroup>
     )
   }
 }
