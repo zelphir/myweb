@@ -34,12 +34,11 @@ const tmpJson = path.join(__dirname, 'tmp.json')
 
       const { data: { updateOrCreateLanguage } } = await addLanguages({
         id: todayLanguages ? todayLanguages.id : '',
-        date: new Date().toISOString(),
         entries: languages
       })
 
-      const { date, entries } = updateOrCreateLanguage
-      console.log({ date, entries }) // eslint-disable-line
+      const { updatedAt, entries } = updateOrCreateLanguage
+      console.log(JSON.stringify({ updatedAt, entries })) // eslint-disable-line
     } else {
       console.info('Skipping, same entries...') // eslint-disable-line
     }

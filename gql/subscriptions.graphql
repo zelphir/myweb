@@ -2,7 +2,6 @@ subscription OnLanguagesUpdate {
   Language {
     node {
       id
-      date
       entries
     }
   }

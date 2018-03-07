@@ -25,7 +25,6 @@ type Picture @model {
 
 type Language @model {
   id: ID! @isUnique
-  date: DateTime!
   entries: Json!
   createdAt: DateTime!
   updatedAt: DateTime!

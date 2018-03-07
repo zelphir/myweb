@@ -26,7 +26,7 @@ module.exports = ({ outputPath }) =>
       })
     ],
     plugins: [
-      new CleanWebpackPlugin([outputPath]),
+      new CleanWebpackPlugin([outputPath], { exclude: ['tmp.json'] }),
       new CopyPkgJsonPlugin({
         remove: ['scripts', 'devDependencies'],
         // Add graphql here so it does not conflict with gatsbyjs

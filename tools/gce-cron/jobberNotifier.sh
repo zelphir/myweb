@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 LOG=$(cat - | jq .)
-
 SUCCESS=$(echo $LOG | jq '.succeeded')
-STDOUT=$(echo $LOG | jq '.stdout')
+STDOUT=$(echo $LOG | jq -c '.stdout|fromjson')
 STDERR=$(echo $LOG | jq '.stderr')
 
 if [[ $SUCCESS = "true" ]]; then
   if [[ ! $STDOUT =~ "Skipping" ]]; then
-    gcloud logging write --severity=INFO cron-log "${STDOUT}"
+    # NOTE: wrap variablein single quote
+    gcloud logging write --severity=INFO --payload-type=json cron-log ''"$STDOUT"''
   fi
 else
   gcloud logging write --severity=ERROR cron-log "${STDERR}"

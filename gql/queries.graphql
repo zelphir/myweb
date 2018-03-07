@@ -6,9 +6,8 @@ query GetAllTags {
 }
 
 query GetTodayLanguages($from: DateTime!, $to: DateTime!) {
-  allLanguages(filter: { date_gte: $from, date_lte: $to }) {
+  allLanguages(filter: { createdAt_gte: $from, createdAt_lte: $to }) {
     id
-    date
     entries
   }
 }

@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { startOfToday, endOfToday } from 'date-fns'
 import isEqual from 'lodash.isequal'
+
 import { GetTodayLanguages } from 'gql/queries.graphql'
+import { OnLanguagesUpdate } from 'gql/subscriptions.graphql'
 import Language from './Language'
 
 import './Languages.scss'
@@ -12,23 +14,35 @@ import './Languages.scss'
 class Languages extends React.Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
-    subscribeToNewLanguages: PropTypes.func
+    subscribeToLanguages: PropTypes.func
   }
 
-  //   state = {
-  //     showBars: sessionStorage.getItem('showBars') || false
-  //   }
+  state = {
+    showBars: sessionStorage.getItem('showBars') || false
+  }
 
-  //   componentWillUnmount() {
-  //     clearTimeout(this.delay)
-  //   }
+  componentDidMount() {
+    this.props.subscribeToLanguages()
+    this.delayShowBars()
+  }
 
-  //   delayShowBars() {
-  //     this.delay = setTimeout(
-  //       () => this.setState({ showBars: true }, sessionStorage.setItem('showBars', true)),
-  //       1000
-  //     )
-  //   }
+  componentWillUnmount() {
+    clearTimeout(this.delay)
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const prevLanguages = this.getEntries(this.props.data)
+    const nextLanguages = this.getEntries(nextProps.data)
+
+    return !isEqual(nextLanguages, prevLanguages) || nextState.showBars !== this.state.showBars
+  }
+
+  delayShowBars() {
+    this.delay = setTimeout(
+      () => this.setState({ showBars: true }, sessionStorage.setItem('showBars', true)),
+      1000
+    )
+  }
 
   renderWhatDoing() {
     const d = new Date()
@@ -49,19 +63,13 @@ class Languages extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps) {
-    const prevLanguages = this.getEntries(this.props.data)
-    const nextLanguages = this.getEntries(nextProps.data)
-
-    return !isEqual(prevLanguages, nextLanguages)
-  }
-
   getEntries(data) {
     return get(data.allLanguages, '[0].entries', [])
   }
 
   render() {
     const { data } = this.props
+    const { showBars } = this.state
 
     if (data.error) return <div>Error...</div>
     if (data.loading) return <div>Loading...</div>
@@ -71,10 +79,9 @@ class Languages extends React.Component {
     if (!languages.length) return this.renderWhatDoing()
 
     return languages.map(({ name, percent, text }) => {
-      // const width = this.state.showBars ? `${percent}%` : 0
       const languageProps = {
         id: name.replace(/\s/g, '').toLowerCase(),
-        width: `${percent}%`,
+        width: showBars ? `${percent}%` : 0,
         name,
         text
       }
@@ -87,5 +94,14 @@ class Languages extends React.Component {
 const variables = { from: startOfToday().toISOString(), to: endOfToday().toISOString() }
 
 export default graphql(GetTodayLanguages, {
-  options: { variables, pollInterval: 5000 }
+  options: { variables },
+  props: ({ data }) => ({
+    data,
+    subscribeToLanguages: () => {
+      return data.subscribeToMore({
+        document: OnLanguagesUpdate,
+        updateQuery: (prev, { subscriptionData: { data } }) => !data && prev
+      })
+    }
+  })
 })(Languages)

@@ -32,12 +32,11 @@ mutation CreatePicture(
   }
 }
 
-mutation CreateLanguages($id: ID!, $date: DateTime!, $entries: Json!) {
-  updateOrCreateLanguage(
-    update: { id: $id, date: $date, entries: $entries }
-    create: { date: $date, entries: $entries }
-  ) {
-    date
+mutation CreateLanguages($id: ID!, $entries: Json!) {
+  updateOrCreateLanguage(update: { id: $id, entries: $entries }, create: { entries: $entries }) {
+    id
     entries
+    createdAt
+    updatedAt
   }
 }

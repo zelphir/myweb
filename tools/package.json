@@ -2,8 +2,9 @@
   "name": "server",
   "version": "0.0.1",
   "scripts": {
-    "precron": "webpack gce-cron/index.js --env.outputPath=gce-cron/.build && echo {} > gce-cron/.build/tmp.json",
+    "build:cron": "webpack gce-cron/index.js --env.outputPath=gce-cron/.build && echo {} > gce-cron/.build/tmp.json",
     "cron": "node gce-cron/.build",
+    "cron:create-instance": "../shared/scripts/gce_create_instance.sh",
     "cron:push": "../shared/scripts/gce_push.sh",
     "build:load": "webpack load-instagram/index.js --env.outputPath=load-instagram/.build",
     "load": "yarn build:load && node load-instagram/.build",
@@ -36,6 +37,7 @@
     "apollo-link-http": "^1.3.3",
     "date-fns": "^1.29.0",
     "lodash.get": "^4.4.2",
+    "lodash.isequal": "^4.5.0",
     "node-fetch": "^2.0.0"
   }
 }
