@@ -3,18 +3,11 @@ import get from 'lodash.get'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { startOfToday, endOfToday } from 'date-fns'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import isEqual from 'lodash.isequal'
+import { GetTodayLanguages } from 'gql/queries.graphql'
+import Language from './Language'
 
 import './Languages.scss'
-
-import { GetTodayLanguages } from 'gql/queries.graphql'
-import { OnLanguagesUpdate } from 'gql/subscriptions.graphql'
-
-const Fade = ({ children, ...props }) => (
-  <CSSTransition {...props} timeout={1000} classNames="fade">
-    {children}
-  </CSSTransition>
-)
 
 class Languages extends React.Component {
   static propTypes = {
@@ -22,52 +15,77 @@ class Languages extends React.Component {
     subscribeToNewLanguages: PropTypes.func
   }
 
-  componentDidMount() {
-    this.props.subscribeToNewLanguages()
+  //   state = {
+  //     showBars: sessionStorage.getItem('showBars') || false
+  //   }
+
+  //   componentWillUnmount() {
+  //     clearTimeout(this.delay)
+  //   }
+
+  //   delayShowBars() {
+  //     this.delay = setTimeout(
+  //       () => this.setState({ showBars: true }, sessionStorage.setItem('showBars', true)),
+  //       1000
+  //     )
+  //   }
+
+  renderWhatDoing() {
+    const d = new Date()
+    const dayOfWeek = d.getDay()
+    const hour = d.getHours()
+    const isMonFri = dayOfWeek > 0 && dayOfWeek < 6
+    const isFromTo = (from, to) => hour > from && hour < to
+
+    switch (true) {
+      case isFromTo(0, 9):
+        return <div>Probably sleeping...</div>
+      case isMonFri && isFromTo(18, 20):
+        return <div>Probably training...</div>
+      case isFromTo(20, 22):
+        return <div>Probably eating...</div>
+      default:
+        return <div>Probably resting...</div>
+    }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const prevLanguages = this.getEntries(this.props.data)
+    const nextLanguages = this.getEntries(nextProps.data)
+
+    return !isEqual(prevLanguages, nextLanguages)
+  }
+
+  getEntries(data) {
+    return get(data.allLanguages, '[0].entries', [])
   }
 
   render() {
     const { data } = this.props
-    if (data.error) return <div>Error</div>
+
+    if (data.error) return <div>Error...</div>
     if (data.loading) return <div>Loading...</div>
 
-    const languages = get(data.allLanguages, '[0].entries', [])
+    const languages = [...this.getEntries(data)].sort((a, b) => b.percent - a.percent)
 
-    return (
-      <TransitionGroup className="todo-list">
-        {languages.map(({ name, percent, text }) => (
-          <Fade key={name}>
-            <div
-              className="animated-bar"
-              style={{ width: `${percent}%`, height: 30, background: 'red', marginBottom: 5 }}
-            >
-              {name} - {percent} - {text}
-            </div>
-          </Fade>
-        ))}
-      </TransitionGroup>
-    )
+    if (!languages.length) return this.renderWhatDoing()
+
+    return languages.map(({ name, percent, text }) => {
+      // const width = this.state.showBars ? `${percent}%` : 0
+      const languageProps = {
+        id: name.replace(/\s/g, '').toLowerCase(),
+        width: `${percent}%`,
+        name,
+        text
+      }
+
+      return <Language key={languageProps.id} {...languageProps} />
+    })
   }
 }
 
 const variables = { from: startOfToday().toISOString(), to: endOfToday().toISOString() }
 
 export default graphql(GetTodayLanguages, {
-  options: { variables },
-  props: ({ data }) => {
-    return {
-      data,
-      subscribeToNewLanguages: () => {
-        return data.subscribeToMore({
-          document: OnLanguagesUpdate,
-          updateQuery: (prev, { subscriptionData }) => {
-            if (!subscriptionData.data) {
-              return prev
-            }
-          },
-          onError: err => console.error(err) // eslint-disable-line
-        })
-      }
-    }
-  }
+  options: { variables, pollInterval: 5000 }
 })(Languages)
