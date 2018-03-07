@@ -28,10 +28,11 @@
     "react-dom": "^16.3.0-alpha.1",
     "react-hot-loader": "^4.0.0-beta.21",
     "react-markdown": "^3.2.2",
+    "react-motion": "^0.5.2",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-static": "^5.3.4",
-    "react-transition-group": "^2.2.1",
+    "reselect": "^3.0.1",
     "subscriptions-transport-ws": "^0.9.6"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 import path from 'path'
 import { writeFileSync, readFileSync } from 'fs'
 import querystring from 'querystring'
-import { format, startOfToday } from 'date-fns'
+import { format } from 'date-fns'
 import fetch from 'node-fetch'
 import get from 'lodash.get'
 import isEqual from 'lodash.isequal'
@@ -20,11 +20,6 @@ const tmpJson = path.join(__dirname, 'tmp.json')
     const res = await fetch(`${apiUrl}/api/v1/users/current/summaries?${params}`, options)
     const json = await res.json()
     const languages = get(json, 'data[0].languages', [])
-
-    if (new Date() === startOfToday()) {
-      writeFileSync(tmpJson, JSON.stringify({ languages: [] }), 'utf8')
-    }
-
     const prevLanguages = get(JSON.parse(readFileSync(tmpJson, 'utf8')), 'languages', [])
 
     if (!isEqual(prevLanguages, languages)) {

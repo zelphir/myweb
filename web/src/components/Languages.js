@@ -1,47 +1,25 @@
 import React from 'react'
-import get from 'lodash.get'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { startOfToday, endOfToday } from 'date-fns'
-import isEqual from 'lodash.isequal'
+import { TransitionMotion, spring, presets } from 'react-motion'
+import randomColor from 'randomcolor'
 
 import { GetTodayLanguages } from 'gql/queries.graphql'
 import { OnLanguagesUpdate } from 'gql/subscriptions.graphql'
+import { getLanguages } from '../selectors'
 import Language from './Language'
 
-import './Languages.scss'
-
-class Languages extends React.Component {
+class Languages extends React.PureComponent {
   static propTypes = {
-    data: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired,
+    error: PropTypes.object,
+    languages: PropTypes.array.isRequired,
     subscribeToLanguages: PropTypes.func
-  }
-
-  state = {
-    showBars: sessionStorage.getItem('showBars') || false
   }
 
   componentDidMount() {
     this.props.subscribeToLanguages()
-    this.delayShowBars()
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.delay)
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    const prevLanguages = this.getEntries(this.props.data)
-    const nextLanguages = this.getEntries(nextProps.data)
-
-    return !isEqual(nextLanguages, prevLanguages) || nextState.showBars !== this.state.showBars
-  }
-
-  delayShowBars() {
-    this.delay = setTimeout(
-      () => this.setState({ showBars: true }, sessionStorage.setItem('showBars', true)),
-      1000
-    )
   }
 
   renderWhatDoing() {
@@ -63,31 +41,55 @@ class Languages extends React.Component {
     }
   }
 
-  getEntries(data) {
-    return get(data.allLanguages, '[0].entries', [])
+  willLeave() {
+    return { opacity: spring(0), height: spring(0) }
   }
 
-  render() {
-    const { data } = this.props
-    const { showBars } = this.state
+  willEnter() {
+    return { width: 0 }
+  }
 
-    if (data.error) return <div>Error...</div>
-    if (data.loading) return <div>Loading...</div>
+  getStyles = languages =>
+    languages.map(({ name, percent, text }) => {
+      const bg = randomColor({
+        luminosity: 'light',
+        format: 'rgba',
+        hue: '#feb692',
+        alpha: 0.85,
+        seed: name
+      })
 
-    const languages = [...this.getEntries(data)].sort((a, b) => b.percent - a.percent)
-
-    if (!languages.length) return this.renderWhatDoing()
-
-    return languages.map(({ name, percent, text }) => {
-      const languageProps = {
-        id: name.replace(/\s/g, '').toLowerCase(),
-        width: showBars ? `${percent}%` : 0,
-        name,
-        text
+      return {
+        style: { width: spring(percent, presets.wobbly), opacity: 1, height: 40 },
+        key: name.replace(/\s/g, '').toLowerCase(),
+        data: {
+          name,
+          text,
+          bg
+        }
       }
-
-      return <Language key={languageProps.id} {...languageProps} />
     })
+
+  render() {
+    const { error, loading, languages } = this.props
+
+    if (error) return <div>Error...</div>
+    if (loading) return <div>Loading...</div>
+
+    return (
+      <React.Fragment>
+        <TransitionMotion
+          willLeave={this.willLeave}
+          willEnter={this.willEnter}
+          styles={this.getStyles(languages)}
+        >
+          {styles => (
+            <div>{styles.map(({ key, ...props }) => <Language key={key} {...props} />)}</div>
+          )}
+        </TransitionMotion>
+        {!languages.length && this.renderWhatDoing()}
+      </React.Fragment>
+    )
   }
 }
 
@@ -96,12 +98,13 @@ const variables = { from: startOfToday().toISOString(), to: endOfToday().toISOSt
 export default graphql(GetTodayLanguages, {
   options: { variables },
   props: ({ data }) => ({
-    data,
-    subscribeToLanguages: () => {
-      return data.subscribeToMore({
+    loading: data.loading,
+    error: data.error,
+    languages: getLanguages(data),
+    subscribeToLanguages: () =>
+      data.subscribeToMore({
         document: OnLanguagesUpdate,
         updateQuery: (prev, { subscriptionData: { data } }) => !data && prev
       })
-    }
   })
 })(Languages)

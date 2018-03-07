@@ -1,0 +1,8 @@
+.animated-bar {
+  &:after {
+    content: attr(data-lang);
+    position: absolute;
+    line-height: 40px;
+    padding: 0 5px;
+  }
+}
