@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import get from 'lodash.get'
 import { graphql } from 'react-apollo'
 import { startOfToday, endOfToday } from 'date-fns'
 import { TransitionMotion, spring, presets } from 'react-motion'
@@ -55,7 +56,7 @@ class Languages extends React.PureComponent {
         luminosity: 'light',
         format: 'rgba',
         hue: '#feb692',
-        alpha: 0.85,
+        alpha: 0.3,
         seed: name
       })
 
@@ -77,18 +78,20 @@ class Languages extends React.PureComponent {
     if (loading) return <div>Loading...</div>
 
     return (
-      <React.Fragment>
+      <div className="languages">
         <TransitionMotion
           willLeave={this.willLeave}
           willEnter={this.willEnter}
           styles={this.getStyles(languages)}
         >
           {styles => (
-            <div>{styles.map(({ key, ...props }) => <Language key={key} {...props} />)}</div>
+            <React.Fragment>
+              {styles.map(({ key, ...props }) => <Language key={key} {...props} />)}
+            </React.Fragment>
           )}
         </TransitionMotion>
         {!languages.length && this.renderWhatDoing()}
-      </React.Fragment>
+      </div>
     )
   }
 }
@@ -96,7 +99,7 @@ class Languages extends React.PureComponent {
 const variables = { from: startOfToday().toISOString(), to: endOfToday().toISOString() }
 
 export default graphql(GetTodayLanguages, {
-  options: { variables },
+  options: { variables, fetchPolicy: 'cache-and-network' },
   props: ({ data }) => ({
     loading: data.loading,
     error: data.error,
@@ -104,7 +107,16 @@ export default graphql(GetTodayLanguages, {
     subscribeToLanguages: () =>
       data.subscribeToMore({
         document: OnLanguagesUpdate,
-        updateQuery: (prev, { subscriptionData: { data } }) => !data && prev
+        updateQuery: (prev, { subscriptionData: { data } }) => {
+          if (!data) return prev
+
+          const newLanguages = get(data, 'Language.node', {})
+
+          return {
+            ...prev,
+            allLanguages: [newLanguages]
+          }
+        }
       })
   })
 })(Languages)

@@ -1,27 +1,36 @@
 import React from 'react'
-import { Router, Link } from 'react-static'
+import PropTypes from 'prop-types'
+import { Router } from 'react-static'
 import { hot } from 'react-hot-loader'
 import Routes from 'react-static-routes'
-import { ApolloProvider } from 'react-apollo'
+import { ApolloProvider, compose } from 'react-apollo'
+
 import client from './lib/apollo'
+import withMatchMedia from './lib/withMatchMedia'
+import Sidebar from './components/Sidebar'
 
 import './App.scss'
 
-const App = () => (
+const App = ({ isMobile }) => (
   <ApolloProvider client={client}>
     <Router>
-      <div>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/blog">Blog</Link>
-        </nav>
-        <div className="content">
+      <div id="container">
+        <Sidebar
+          pageWrapId={'page-wrap'}
+          outerContainerId={'container'}
+          id="sidebar"
+          isMobile={isMobile}
+        />
+        <main id="page-wrap">
           <Routes />
-        </div>
+        </main>
       </div>
     </Router>
   </ApolloProvider>
 )
 
-export default hot(module)(App)
+App.propTypes = {
+  isMobile: PropTypes.bool
+}
+
+export default compose(hot(module), withMatchMedia)(App)

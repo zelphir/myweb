@@ -21,6 +21,15 @@
   top: 10px;
 }
 
+.bm-item-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  // .menu {}
+  // .languages {}
+}
+
 .bm-cross-button {
   height: 24px;
   width: 24px;
@@ -31,7 +40,7 @@
 }
 
 #sidebar {
-  background-image: url('/static/sidebar-bg.png'), linear-gradient(45deg, #feb692 10%, #ea5455 100%);
+  background-image: url('./SidebarBg.png'), linear-gradient(45deg, #feb692 10%, #ea5455 100%);
 }
 
 @media screen and (min-width: 768px) {
