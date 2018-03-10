@@ -10,7 +10,7 @@ html {
 
 html,
 body,
-#__next,
+#root,
 #container {
   height: 100%;
 }
@@ -25,13 +25,21 @@ main {
   width: 100%;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 480px) {
+  main {
+    padding: 30px;
+    transform: translateX(350px) !important;
+    transition: unset !important;
+    width: calc(100% - 350px) !important;
+    max-width: 830px;
+  }
+}
+
+@media screen and (min-width: 900px) {
   main {
     padding: 30px 100px 50px 50px;
     transform: translateX(450px) !important;
-    transition: unset !important;
     width: calc(100% - 450px) !important;
-    max-width: 830px;
   }
 }
 

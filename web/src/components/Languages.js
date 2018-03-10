@@ -55,8 +55,8 @@ class Languages extends React.PureComponent {
       const bg = randomColor({
         luminosity: 'light',
         format: 'rgba',
-        hue: 'monochrome',
-        alpha: 0.3,
+        hue: '#19282c',
+        alpha: 0.4,
         seed: name
       })
 
@@ -82,7 +82,7 @@ class Languages extends React.PureComponent {
     if (loading) return <div>Loading...</div>
 
     return (
-      <div className="languages">
+      <React.Fragment>
         <TransitionMotion
           willLeave={this.willLeave}
           willEnter={this.willEnter}
@@ -97,7 +97,7 @@ class Languages extends React.PureComponent {
           )}
         </TransitionMotion>
         {!languages.length && this.renderWhatDoing()}
-      </div>
+      </React.Fragment>
     )
   }
 }

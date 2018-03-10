@@ -25,6 +25,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 99% !important;
 
   // .menu {}
   // .languages {}
@@ -41,20 +42,26 @@
 
 #sidebar {
   background-image: url('./SidebarBg.png'),
-    linear-gradient(45deg, #232526 10%, #232526 100%);
+    linear-gradient(45deg, #273c43 10%, #183843 100%);
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 480px) {
   #sidebar {
     transform: unset !important;
     transition: unset !important;
     position: fixed;
-    width: 450px !important;
+    width: 350px !important;
     height: 100%;
   }
 
   .bm-cross-button,
   .bm-burger-button {
     display: none;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  #sidebar {
+    width: 450px !important;
   }
 }

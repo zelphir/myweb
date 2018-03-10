@@ -3,16 +3,13 @@ import PropTypes from 'prop-types'
 
 import './Language.scss'
 
-// #feb692
-// #ea5455
-
 const Language = ({
   style: { width, opacity, height },
   data: { name, text, bg: backgroundColor }
 }) => (
   <div
     data-lang={`${name} - ${text}`}
-    className="animated-bar"
+    className="language"
     style={{
       height,
       opacity

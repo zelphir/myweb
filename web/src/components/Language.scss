@@ -1,13 +1,14 @@
-.animated-bar {
+.language {
   position: relative;
   width: 100%;
   padding: 5px 0;
 
   &:after {
+    color: #abb7bb;
     content: attr(data-lang);
     position: absolute;
-    line-height: 40px;
-    padding: 0 5px;
+    line-height: 42px;
+    padding-left: 10px;
     top: 0;
   }
 

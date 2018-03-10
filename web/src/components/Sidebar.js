@@ -17,10 +17,12 @@ const Sidebar = ({ isMobile, ...props }) => (
     disableCloseOnEsc={!isMobile}
     customBurgerIcon={<img src={menu} />}
   >
-    <div className="menu">
+    <div className="sidebar-top">
       <Link to="/">Home</Link>
     </div>
-    <Languages />
+    <div className="sidebar-bottom">
+      <Languages />
+    </div>
   </Menu>
 )
 
