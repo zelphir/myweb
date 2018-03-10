@@ -14,12 +14,18 @@ const Language = ({
     data-lang={`${name} - ${text}`}
     className="animated-bar"
     style={{
-      width: `${width}%`,
       height,
-      opacity,
-      backgroundColor
+      opacity
     }}
-  />
+  >
+    <div
+      className="bar"
+      style={{
+        width: `${width}%`,
+        backgroundColor
+      }}
+    />
+  </div>
 )
 
 Language.propTypes = {

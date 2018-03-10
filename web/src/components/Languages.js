@@ -55,13 +55,17 @@ class Languages extends React.PureComponent {
       const bg = randomColor({
         luminosity: 'light',
         format: 'rgba',
-        hue: '#feb692',
+        hue: 'monochrome',
         alpha: 0.3,
         seed: name
       })
 
       return {
-        style: { width: spring(percent, presets.wobbly), opacity: 1, height: 40 },
+        style: {
+          width: spring(percent, presets.wobbly),
+          opacity: 1,
+          height: 40
+        },
         key: name.replace(/\s/g, '').toLowerCase(),
         data: {
           name,
@@ -86,7 +90,9 @@ class Languages extends React.PureComponent {
         >
           {styles => (
             <React.Fragment>
-              {styles.map(({ key, ...props }) => <Language key={key} {...props} />)}
+              {styles.map(({ key, ...props }) => (
+                <Language key={key} {...props} />
+              ))}
             </React.Fragment>
           )}
         </TransitionMotion>
@@ -96,7 +102,10 @@ class Languages extends React.PureComponent {
   }
 }
 
-const variables = { from: startOfToday().toISOString(), to: endOfToday().toISOString() }
+const variables = {
+  from: startOfToday().toISOString(),
+  to: endOfToday().toISOString()
+}
 
 export default graphql(GetTodayLanguages, {
   options: { variables, fetchPolicy: 'cache-and-network' },

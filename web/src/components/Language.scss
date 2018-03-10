@@ -1,8 +1,18 @@
 .animated-bar {
+  position: relative;
+  width: 100%;
+  padding: 5px 0;
+
   &:after {
     content: attr(data-lang);
     position: absolute;
     line-height: 40px;
     padding: 0 5px;
+    top: 0;
+  }
+
+  .bar {
+    height: 30px;
+    border-radius: 0 5px 5px 0;
   }
 }
