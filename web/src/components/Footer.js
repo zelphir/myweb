@@ -1,23 +1,26 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { scrollTo, Link, withRouter } from 'react-static'
 import Svg from 'react-inlinesvg'
 
 import twitter from '../assets/twitter.svg'
 import linkedin from '../assets/linkedin.svg'
 import github from '../assets/github.svg'
 import envelope from '../assets/envelope.svg'
+import instagram from '../assets/instagram.svg'
 
 import './Footer.scss'
 
 const socials = [
   {
-    name: 'Twitter',
-    url: 'https://twitter.com/robertomanzella',
-    icon: twitter
-  },
-  {
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/in/rmanzella/',
     icon: linkedin
+  },
+  {
+    name: 'Twitter',
+    url: 'https://twitter.com/robertomanzella',
+    icon: twitter
   },
   {
     name: 'Github',
@@ -25,23 +28,71 @@ const socials = [
     icon: github
   },
   {
+    name: 'Instagram',
+    url: 'https://www.instagram.com/robimanz/',
+    icon: instagram
+  },
+  {
     name: 'Email',
-    url: '',
+    to: '/contact',
     icon: envelope
   }
 ]
 
-const Footer = () => (
-  <footer>
-    <div className="socials">
-      {socials.map(({ name, url, icon }) => (
-        <a href={url} key={name} target="blank" className="social">
-          <Svg src={icon} />
-        </a>
-      ))}
-    </div>
-    <div className="copyright">&copy; robertomanzella.com</div>
-  </footer>
-)
+class Footer extends React.PureComponent {
+  static propTypes = {
+    match: PropTypes.object.isRequired
+  }
 
-export default Footer
+  handleClick = e => {
+    e.preventDefault()
+
+    const element = document.getElementById('contact')
+
+    return scrollTo(element)
+  }
+
+  renderExternalLink({ name, url, icon }) {
+    return (
+      <a href={url} key={name} target="blank" className="social">
+        <Svg src={icon} />
+      </a>
+    )
+  }
+
+  renderInternalLink({ name, to, icon }) {
+    const { match } = this.props
+    return match.isExact ? (
+      <a
+        href="/contact"
+        onClick={this.handleClick}
+        className="social"
+        key={name}
+      >
+        <Svg src={icon} />
+      </a>
+    ) : (
+      <Link to={to} key={name} className="social">
+        <Svg src={icon} />
+      </Link>
+    )
+  }
+
+  render() {
+    return (
+      <footer>
+        <div className="socials">
+          {socials.map(
+            social =>
+              social.url
+                ? this.renderExternalLink(social)
+                : this.renderInternalLink(social)
+          )}
+        </div>
+        <div className="copyright">&copy; robertomanzella.com</div>
+      </footer>
+    )
+  }
+}
+
+export default withRouter(Footer)

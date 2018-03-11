@@ -1,8 +1,7 @@
 footer {
   text-align: right;
-  padding: 50px 50px 30px;
+  padding: 10px 50px 30px;
   margin-top: 20px;
-  color: rgba(255, 255, 255, 0.4);
 
   .social {
     margin-left: 10px;
@@ -16,8 +15,8 @@ footer {
     svg {
       width: 18px;
       height: 18px;
-      fill: rgba(255, 255, 255, 0.6);
       transition: fill 0.5s linear;
+      fill: rgba(255, 255, 255, 0.6);
     }
   }
 

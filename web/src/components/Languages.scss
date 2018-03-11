@@ -1,0 +1,32 @@
+.languages {
+  padding-left: 25%;
+}
+
+.language {
+  position: relative;
+  width: 100%;
+  padding: 2px 0;
+
+  .label {
+    position: absolute;
+    line-height: 25px;
+    padding-right: 10px;
+    font-size: 14px;
+    top: 0;
+    right: 0;
+    z-index: 1200;
+    cursor: help;
+  }
+
+  .bar {
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    float: right;
+  }
+}
+
+.ToolTipPortal {
+  > div {
+    z-index: 2000 !important;
+  }
+}

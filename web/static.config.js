@@ -42,6 +42,10 @@ const getPosts = () => {
 
 export default {
   // siteRoot: 'https://robertomanzella.com',
+  preact: true,
+  // bundleAnalyzer: true,
+  extractCssChunks: true,
+  inlineCss: true,
   getSiteData: () => ({
     title: 'robertomanzella.com'
   }),

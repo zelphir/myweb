@@ -11,6 +11,8 @@ import { OnLanguagesUpdate } from 'gql/subscriptions.graphql'
 import { getLanguages } from '../selectors'
 import Language from './Language'
 
+import './Languages.scss'
+
 class Languages extends React.PureComponent {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
@@ -68,7 +70,7 @@ class Languages extends React.PureComponent {
         style: {
           width: spring(percent, presets.wobbly),
           opacity: 1,
-          height: 40
+          height: 30
         },
         key: name.replace(/\s/g, '').toLowerCase(),
         data: {
@@ -91,14 +93,14 @@ class Languages extends React.PureComponent {
           willEnter={this.willEnter}
           willLeave={this.willLeave}
           didLeave={this.didLeave}
-          styles={this.getStyles(languages)}
+          styles={this.getStyles(languages.slice(0, 6))}
         >
           {styles => (
-            <React.Fragment>
+            <div className="languages">
               {styles.map(({ key, ...props }) => (
                 <Language key={key} {...props} />
               ))}
-            </React.Fragment>
+            </div>
           )}
         </TransitionMotion>
         {!languages.length && this.renderWhatDoing()}

@@ -8,12 +8,12 @@ a {
   transition: color 0.25s linear;
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 768px) {
   #page-wrap {
     padding: 30px;
-    transform: translateX(350px) !important;
+    transform: translateX(280px) !important;
     transition: unset !important;
-    width: calc(100% - 350px) !important;
+    width: calc(100% - 280px) !important;
     max-width: 830px;
   }
 }

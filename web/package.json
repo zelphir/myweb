@@ -31,6 +31,7 @@
     "react-inlinesvg": "^0.8.0",
     "react-markdown": "^3.2.2",
     "react-motion": "^0.5.2",
+    "react-portal-tooltip": "^2.3.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-static": "^5.3.4",

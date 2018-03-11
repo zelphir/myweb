@@ -7719,6 +7719,10 @@ react-motion@^0.5.2:
     prop-types "^15.5.8"
     raf "^3.1.0"
 
+react-portal-tooltip@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-portal-tooltip/-/react-portal-tooltip-2.3.0.tgz#c6f42b36c1a6de8d3f653351594d1420e643426d"
+
 react-router-dom@^4.2.2:
   version "4.2.2"
   resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-4.2.2.tgz#c8a81df3adc58bba8a76782e946cbd4eae649b8d"

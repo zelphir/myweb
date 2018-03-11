@@ -17,9 +17,12 @@ const Sidebar = ({ isMobile, ...props }) => (
     noOverlay={!isMobile}
     disableCloseOnEsc={!isMobile}
     customBurgerIcon={<img src={menu} />}
+    customCrossIcon={false}
   >
     <div className="sidebar-top">
       <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+      <Link to="/blog">Blog</Link>
     </div>
     <div className="sidebar-bottom">
       <Languages />
