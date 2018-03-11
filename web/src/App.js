@@ -21,9 +21,9 @@ const App = ({ isMobile }) => (
           id="sidebar"
           isMobile={isMobile}
         />
-        <main id="page-wrap">
+        <div id="page-wrap">
           <Routes />
-        </main>
+        </div>
       </div>
     </Router>
   </ApolloProvider>

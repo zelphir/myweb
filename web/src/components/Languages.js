@@ -43,7 +43,11 @@ class Languages extends React.PureComponent {
   }
 
   willLeave() {
-    return { opacity: spring(0), height: spring(0) }
+    return { opacity: spring(0), width: spring(0) }
+  }
+
+  didLeave() {
+    return { height: 0 }
   }
 
   willEnter() {
@@ -84,8 +88,9 @@ class Languages extends React.PureComponent {
     return (
       <React.Fragment>
         <TransitionMotion
-          willLeave={this.willLeave}
           willEnter={this.willEnter}
+          willLeave={this.willLeave}
+          didLeave={this.didLeave}
           styles={this.getStyles(languages)}
         >
           {styles => (

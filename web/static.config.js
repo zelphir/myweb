@@ -4,8 +4,10 @@ import Dotenv from 'dotenv-webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import klaw from 'klaw'
 import matter from 'gray-matter'
+import React from 'react'
+import { TypographyStyle, GoogleFont } from 'react-typography'
 
-import { isDev } from './src/lib/utils'
+import typography, { isDev } from './src/lib/utils'
 
 const dotEnv = isDev ? '.env' : '.env.production'
 
@@ -79,7 +81,11 @@ export default {
             test: /\.s(a|c)ss$/,
             use:
               stage === 'dev'
-                ? [{ loader: 'style-loader' }, { loader: 'css-loader' }, { loader: 'sass-loader' }]
+                ? [
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' },
+                    { loader: 'sass-loader' }
+                  ]
                 : ExtractTextPlugin.extract({
                     use: [
                       {
@@ -112,5 +118,17 @@ export default {
     )
 
     return config
-  }
+  },
+  // eslint-disable-next-line
+  Document: ({ Html, Head, Body, children, siteData, renderMeta }) => (
+    <Html lang="en-GB">
+      <Head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <TypographyStyle typography={typography} />
+        <GoogleFont typography={typography} />
+      </Head>
+      <Body>{children}</Body>
+    </Html>
+  )
 }

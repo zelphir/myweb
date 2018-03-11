@@ -7,14 +7,8 @@ const Language = ({
   style: { width, opacity, height },
   data: { name, text, bg: backgroundColor }
 }) => (
-  <div
-    data-lang={`${name} - ${text}`}
-    className="language"
-    style={{
-      height,
-      opacity
-    }}
-  >
+  <div className="language" style={{ height }}>
+    <span style={{ opacity }} className="label">{`${name} - ${text}`}</span>
     <div
       className="bar"
       style={{

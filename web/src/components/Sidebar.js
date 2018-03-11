@@ -4,9 +4,10 @@ import { Link } from 'react-static'
 import { push as Menu } from 'react-burger-menu'
 
 import './Sidebar.scss'
-import menu from './SidebarMenu.svg'
+import menu from '../assets/menu.svg'
 
 import Languages from './Languages'
+import Footer from './Footer'
 
 const Sidebar = ({ isMobile, ...props }) => (
   <Menu
@@ -22,6 +23,7 @@ const Sidebar = ({ isMobile, ...props }) => (
     </div>
     <div className="sidebar-bottom">
       <Languages />
+      <Footer />
     </div>
   </Menu>
 )

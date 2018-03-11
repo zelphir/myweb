@@ -1,32 +1,15 @@
-html {
-  box-sizing: border-box;
-}
-
-*,
-*:after,
-*:before {
-  box-sizing: inherit;
-}
-
-html,
-body,
-#root,
-#container {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-}
-
-main {
+#page-wrap {
   height: 100%;
   padding: 80px 30px 30px;
   width: 100%;
 }
 
+a {
+  transition: color 0.25s linear;
+}
+
 @media screen and (min-width: 480px) {
-  main {
+  #page-wrap {
     padding: 30px;
     transform: translateX(350px) !important;
     transition: unset !important;
@@ -36,13 +19,9 @@ main {
 }
 
 @media screen and (min-width: 900px) {
-  main {
+  #page-wrap {
     padding: 30px 100px 50px 50px;
     transform: translateX(450px) !important;
     width: calc(100% - 450px) !important;
   }
-}
-
-a {
-  transition: color 0.25s linear;
 }
