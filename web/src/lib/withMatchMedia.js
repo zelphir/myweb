@@ -3,7 +3,9 @@ import { getComponentDisplayName } from './utils'
 
 const withMatchMedia = ComposedComponent =>
   class WithMatchMedia extends React.Component {
-    static displayName = `WithMatchMedia(${getComponentDisplayName(ComposedComponent)})`
+    static displayName = `WithMatchMedia(${getComponentDisplayName(
+      ComposedComponent
+    )})`
 
     state = { isMobile: true }
 
@@ -21,7 +23,9 @@ const withMatchMedia = ComposedComponent =>
     }
 
     render() {
-      return <ComposedComponent {...this.props} isMobile={this.state.isMobile} />
+      return (
+        <ComposedComponent {...this.props} isMobile={this.state.isMobile} />
+      )
     }
   }
 

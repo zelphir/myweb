@@ -2,7 +2,9 @@ import { transformBody } from 'shared/helpers'
 import { getTags, addPicture } from 'shared/apollo'
 
 const instagram = async (req, res) => {
-  if (req.get('X-Client-ID') !== process.env.X_CLIENT_ID) return res.sendStatus(403)
+  const xClientID = process.env.X_CLIENT_ID
+
+  if (req.get('X-Client-ID') !== xClientID) return res.sendStatus(403)
   if (!req.body) return res.sendStatus(500)
 
   try {

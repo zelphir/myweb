@@ -10,17 +10,26 @@ import { getTodayLanguages, addLanguages } from 'shared/apollo'
 const apiKey = process.env.STATS_API_KEY
 const apiUrl = process.env.STATS_API_URL
 const today = format(new Date(), 'YYYY-MM-DD')
-const options = { headers: { Authorization: `Basic ${new Buffer(apiKey).toString('base64')}` } }
+const options = {
+  headers: { Authorization: `Basic ${new Buffer(apiKey).toString('base64')}` }
+}
 const params = querystring.stringify({ start: today, end: today })
 const tmpJson = path.join(__dirname, 'tmp.json')
 
 // Fetch stats and send them to graphcool
 ;(async () => {
   try {
-    const res = await fetch(`${apiUrl}/api/v1/users/current/summaries?${params}`, options)
+    const res = await fetch(
+      `${apiUrl}/api/v1/users/current/summaries?${params}`,
+      options
+    )
     const json = await res.json()
     const languages = get(json, 'data[0].languages', [])
-    const prevLanguages = get(JSON.parse(readFileSync(tmpJson, 'utf8')), 'languages', [])
+    const prevLanguages = get(
+      JSON.parse(readFileSync(tmpJson, 'utf8')),
+      'languages',
+      []
+    )
 
     if (!isEqual(prevLanguages, languages)) {
       const todayLanguages = await getTodayLanguages()

@@ -22,7 +22,11 @@ const generateUrl = url => ({
 })
 
 const generateCarousel = carousel =>
-  carousel ? carousel.split(',').map(url => url.replace('vp/', '').replace('s640x640', '')) : []
+  carousel
+    ? carousel
+        .split(',')
+        .map(url => url.replace('vp/', '').replace('s640x640', ''))
+    : []
 
 export const transformBody = (
   { tags, imageUrl, caption, date, lat, lng, carousel, ...body },
@@ -61,7 +65,10 @@ export const transformImage = (image, allTags) => {
   const { caption, webLink, location, takenAt, images, id } = image.getParams()
   return {
     ...generateLoadUrl(images),
-    ...generateTags(allTags, caption.match(/#\w+/g).map(tag => tag.replace('#', ''))),
+    ...generateTags(
+      allTags,
+      caption.match(/#\w+/g).map(tag => tag.replace('#', ''))
+    ),
     link: webLink,
     location: location.name,
     lat: location.lat,

@@ -33,6 +33,7 @@ const getCountry = async ({ lat, lng: lon }) => {
     const params = querystring.stringify({ lat, lon, format: 'json', zoom: 10 })
     const url = `http://nominatim.openstreetmap.org/reverse?${params}`
     const res = await fetch(url, options)
+
     return res.json()
   } catch (err) {
     console.error(err) // eslint-disable-line
