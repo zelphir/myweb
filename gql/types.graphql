@@ -19,6 +19,9 @@ type Picture @model {
   date: DateTime
   carousel: [String!]!
   tags: [Tag!]! @relation(name: "PictureTags")
+  city: String
+  country: String
+  countryCode: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }

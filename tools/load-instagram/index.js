@@ -18,14 +18,16 @@ const instaPass = process.env.INSTAGRAM_PASSWORD
 
     const feed = await new Feed.UserMedia(session, accountId).all()
 
-    for (let image of feed) {
+    for (let image of feed.reverse()) {
       const allTags = await getTags()
       const newPicture = await transformImage(image, allTags)
       const { data } = await addPicture(newPicture)
 
       if (!data) {
         // eslint-disable-next-line
-        return console.error('Something went wrong, remove errorPolicy to see the error')
+        return console.error(
+          'Something went wrong, remove errorPolicy to see the error'
+        )
       }
 
       if (data && data.createPicture) {

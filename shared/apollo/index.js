@@ -1,4 +1,5 @@
 import fetch from 'node-fetch'
+import querystring from 'querystring'
 import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
@@ -10,7 +11,10 @@ import { CreatePicture, CreateLanguages } from 'gql/mutations.graphql'
 
 const uri = `${process.env.GQL_URL}/simple/v1/${process.env.GQL_SERVICE_ID}`
 const cache = new InMemoryCache()
-const defaultOptions = { query: { fetchPolicy: 'network-only', errorPolicy: 'all' } }
+const defaultOptions = {
+  query: { fetchPolicy: 'network-only', errorPolicy: 'all' }
+}
+
 const httpLink = createHttpLink({ uri, fetch })
 const authLink = setContext((_, { headers }) => ({
   headers: {
@@ -19,11 +23,44 @@ const authLink = setContext((_, { headers }) => ({
   }
 }))
 
-export const client = new ApolloClient({ link: authLink.concat(httpLink), cache, defaultOptions })
-
-export const addPicture = async variables => {
+const getCountry = async ({ lat, lng: lon }) => {
   try {
-    return client.mutate({ variables, mutation: CreatePicture, errorPolicy: 'ignore' })
+    if (!lat || !lon) {
+      return { address: { country: null, countryCode: null, city: null } }
+    }
+
+    const options = { headers: { 'Accept-Language': 'en-GB' } }
+    const params = querystring.stringify({ lat, lon, format: 'json', zoom: 10 })
+    const url = `http://nominatim.openstreetmap.org/reverse?${params}`
+    const res = await fetch(url, options)
+    return res.json()
+  } catch (err) {
+    console.error(err) // eslint-disable-line
+  }
+}
+
+export const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache,
+  defaultOptions
+})
+
+export const addPicture = async picture => {
+  try {
+    const {
+      address: { country, country_code: countryCode, city }
+    } = await getCountry(picture)
+
+    return client.mutate({
+      variables: {
+        ...picture,
+        city,
+        country,
+        countryCode
+      },
+      mutation: CreatePicture,
+      errorPolicy: 'ignore'
+    })
   } catch (err) {
     console.error(err) // eslint-disable-line
   }
@@ -49,8 +86,14 @@ export const addLanguages = async variables => {
 
 export const getTodayLanguages = async () => {
   try {
-    const variables = { from: startOfToday().toISOString(), to: endOfToday().toISOString() }
-    const { data: { allLanguages } } = await client.query({ variables, query: GetTodayLanguages })
+    const variables = {
+      from: startOfToday().toISOString(),
+      to: endOfToday().toISOString()
+    }
+    const { data: { allLanguages } } = await client.query({
+      variables,
+      query: GetTodayLanguages
+    })
 
     return allLanguages[0]
   } catch (err) {

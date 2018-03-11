@@ -11,6 +11,9 @@ mutation CreatePicture(
   $date: DateTime
   $instagramId: String!
   $carousel: [String!]!
+  $city: String
+  $country: String
+  $countryCode: String
 ) {
   createPicture(
     caption: $caption
@@ -25,6 +28,9 @@ mutation CreatePicture(
     date: $date
     instagramId: $instagramId
     carousel: $carousel
+    city: $city
+    country: $country
+    countryCode: $countryCode
   ) {
     id
     link
@@ -33,7 +39,10 @@ mutation CreatePicture(
 }
 
 mutation CreateLanguages($id: ID!, $entries: Json!) {
-  updateOrCreateLanguage(update: { id: $id, entries: $entries }, create: { entries: $entries }) {
+  updateOrCreateLanguage(
+    update: { id: $id, entries: $entries }
+    create: { entries: $entries }
+  ) {
     id
     entries
     createdAt
