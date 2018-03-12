@@ -8,7 +8,8 @@
   "private": true,
   "workspaces": ["web", "shared", "functions", "tools", "gql"],
   "scripts": {
-    "precommit": "lint-staged",
+    "lint": "./shared/scripts/lint.sh",
+    "precommit": "lint-staged && yarn lint",
     "postmerge": "./shared/scripts/post-merge.sh"
   },
   "devDependencies": {

@@ -58,10 +58,6 @@ export default {
         component: 'src/containers/Home'
       },
       {
-        path: '/about',
-        component: 'src/containers/About'
-      },
-      {
         path: '/blog',
         component: 'src/containers/Blog',
         getData: () => ({ posts }),
