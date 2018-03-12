@@ -1,27 +1,20 @@
 #page-wrap {
   height: 100%;
-  padding: 80px 30px 30px;
   width: 100%;
+  padding: 80px 30px 30px;
+
+  @include md {
+    @include reset-sidebar(translateX($sb-md), unset, calc(100% - #{$sb-md}));
+    padding: 30px;
+    max-width: 830px;
+  }
+
+  @include lg {
+    @include reset-sidebar(translateX($sb-lg), '', calc(100% - #{$sb-lg}));
+    padding: 30px 100px 50px 50px;
+  }
 }
 
 a {
   transition: color 0.25s linear;
-}
-
-@media screen and (min-width: 768px) {
-  #page-wrap {
-    padding: 30px;
-    transform: translateX(280px) !important;
-    transition: unset !important;
-    width: calc(100% - 280px) !important;
-    max-width: 830px;
-  }
-}
-
-@media screen and (min-width: 900px) {
-  #page-wrap {
-    padding: 30px 100px 50px 50px;
-    transform: translateX(450px) !important;
-    width: calc(100% - 450px) !important;
-  }
 }

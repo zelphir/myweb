@@ -1,0 +1,63 @@
+// Small devices
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+
+// Medium devices
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+// Large devices
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+
+// Extra large devices
+@mixin xl {
+  @media (min-width: #{$screen-xl-min}) {
+    @content;
+  }
+}
+
+@mixin link($normal, $hover) {
+  a {
+    color: $normal;
+
+    &:hover {
+      color: $hover;
+    }
+  }
+}
+
+@mixin reset-sidebar($transform: '', $transition: '', $width: '') {
+  @if $transform != '' {
+    transform: $transform !important;
+  }
+  @if $transition != '' {
+    transition: $transition !important;
+  }
+  @if $width != '' {
+    width: $width !important;
+  }
+}
+
+@mixin menu-shadow($dir, $pos) {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 100%;
+  top: 0;
+  right: $pos;
+  background: linear-gradient(
+    to $dir,
+    rgba($black, 0.25) 0%,
+    rgba($black, 0) 50%
+  );
+}

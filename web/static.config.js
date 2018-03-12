@@ -88,7 +88,18 @@ export default {
                 ? [
                     { loader: 'style-loader' },
                     { loader: 'css-loader' },
-                    { loader: 'sass-loader' }
+                    {
+                      loader: 'sass-loader',
+                      options: {
+                        sourceMap: true,
+                        data:
+                          '@import "variables"; @import "helpers"; @import "mixins";',
+                        includePaths: [
+                          'src/',
+                          path.resolve(__dirname, './src/assets/scss')
+                        ]
+                      }
+                    }
                   ]
                 : ExtractTextPlugin.extract({
                     use: [
@@ -102,7 +113,14 @@ export default {
                       },
                       {
                         loader: 'sass-loader',
-                        options: { includePaths: ['src/'] }
+                        options: {
+                          data:
+                            '@import "variables"; @import "helpers"; @import "mixins";',
+                          includePaths: [
+                            'src/',
+                            path.resolve(__dirname, './src/assets/scss')
+                          ]
+                        }
                       }
                     ]
                   })

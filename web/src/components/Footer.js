@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { scrollTo, Link, withRouter } from 'react-static'
 import Svg from 'react-inlinesvg'
 
-import twitter from '../assets/twitter.svg'
-import linkedin from '../assets/linkedin.svg'
-import github from '../assets/github.svg'
-import envelope from '../assets/envelope.svg'
-import instagram from '../assets/instagram.svg'
+import twitter from '../assets/icons/twitter.svg'
+import linkedin from '../assets/icons/linkedin.svg'
+import github from '../assets/icons/github.svg'
+import envelope from '../assets/icons/envelope.svg'
+import instagram from '../assets/icons/instagram.svg'
 
 import './Footer.scss'
 
@@ -80,7 +80,7 @@ class Footer extends React.PureComponent {
 
   render() {
     return (
-      <footer>
+      <div id="footer">
         <div className="socials">
           {socials.map(
             social =>
@@ -90,7 +90,7 @@ class Footer extends React.PureComponent {
           )}
         </div>
         <div className="copyright">&copy; robertomanzella.com</div>
-      </footer>
+      </div>
     )
   }
 }

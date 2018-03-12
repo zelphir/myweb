@@ -18,7 +18,6 @@ const App = ({ isMobile }) => (
         <Sidebar
           pageWrapId={'page-wrap'}
           outerContainerId={'container'}
-          id="sidebar"
           isMobile={isMobile}
         />
         <div id="page-wrap">
