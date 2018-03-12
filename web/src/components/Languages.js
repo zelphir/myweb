@@ -89,21 +89,30 @@ class Languages extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <TransitionMotion
-          willEnter={this.willEnter}
-          willLeave={this.willLeave}
-          didLeave={this.didLeave}
-          styles={this.getStyles(languages.slice(0, 6))}
-        >
-          {styles => (
-            <div className="languages">
-              {styles.map(({ key, ...props }) => (
-                <Language key={key} {...props} />
-              ))}
-            </div>
+        <div id="stats">
+          {!languages.length && (
+            <div className="no-languages">{this.renderWhatDoing()}</div>
           )}
-        </TransitionMotion>
-        {!languages.length && this.renderWhatDoing()}
+          <TransitionMotion
+            willEnter={this.willEnter}
+            willLeave={this.willLeave}
+            didLeave={this.didLeave}
+            styles={this.getStyles(languages)}
+          >
+            {styles => (
+              <div className="languages">
+                {styles
+                  .slice(0, 5)
+                  .map(({ key, ...props }) => (
+                    <Language key={key} {...props} />
+                  ))}
+              </div>
+            )}
+          </TransitionMotion>
+          <div className="stats-label">
+            <span>Live editor stats</span>
+          </div>
+        </div>
       </React.Fragment>
     )
   }

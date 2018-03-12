@@ -1,0 +1,7 @@
+.menu {
+  @include sb-padding(20);
+  align-items: end;
+  display: flex;
+  flex-direction: column;
+  text-transform: uppercase;
+}

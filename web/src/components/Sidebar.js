@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-static'
 import { push as Menu } from 'react-burger-menu'
 
 import './Sidebar.scss'
@@ -8,6 +7,7 @@ import menu from '../assets/icons/menu.svg'
 
 import Languages from './Languages'
 import Info from './Info'
+import Nav from './Nav'
 import Footer from './Footer'
 
 const Sidebar = ({ isMobile, ...props }) => (
@@ -25,11 +25,7 @@ const Sidebar = ({ isMobile, ...props }) => (
   >
     <div className="sidebar-top">
       <Info />
-      <div className="menu">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/blog">Blog</Link>
-      </div>
+      <Nav />
     </div>
     <div className="sidebar-bottom">
       <Languages />

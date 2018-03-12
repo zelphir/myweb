@@ -6,8 +6,14 @@ import './Info.scss'
 const Info = () => (
   <div className="info">
     <img src={avatar} className="avatar" />
-    <h3 className="name">Roberto Manzella</h3>
-    <span className="about">FullStack developer, passionate photographer.</span>
+    <h3 className="name">
+      <span>Roberto</span>
+      <span>Manzella</span>
+    </h3>
+    <div className="about">
+      <span>Full stack developer,</span>
+      <span>passionate photographer.</span>
+    </div>
   </div>
 )
 

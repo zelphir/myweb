@@ -1,10 +1,3 @@
-// Small devices
-@mixin sm {
-  @media (min-width: #{$screen-sm-min}) {
-    @content;
-  }
-}
-
 // Medium devices
 @mixin md {
   @media (min-width: #{$screen-md-min}) {
@@ -15,13 +8,6 @@
 // Large devices
 @mixin lg {
   @media (min-width: #{$screen-lg-min}) {
-    @content;
-  }
-}
-
-// Extra large devices
-@mixin xl {
-  @media (min-width: #{$screen-xl-min}) {
     @content;
   }
 }
@@ -49,15 +35,30 @@
 }
 
 @mixin menu-shadow($dir, $pos) {
-  content: '';
-  position: absolute;
-  width: 30px;
-  height: 100%;
-  top: 0;
-  right: $pos;
   background: linear-gradient(
     to $dir,
     rgba($black, 0.25) 0%,
     rgba($black, 0) 50%
   );
+  content: '';
+  height: 100%;
+  position: absolute;
+  right: $pos;
+  top: 0;
+  width: 30px;
+}
+
+@mixin line-break {
+  span:first-of-type:after {
+    content: '\A';
+    white-space: pre;
+  }
+}
+
+@mixin sb-padding($top) {
+  padding: #{$top}px $sb-padding-right-md 15px;
+
+  @include lg {
+    padding-right: $sb-padding-right-lg;
+  }
 }

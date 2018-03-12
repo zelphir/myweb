@@ -1,23 +1,24 @@
+// React burger menu overrides
 .bm-burger-button {
+  background: #ccc; // TODO
+  height: 50px;
   position: fixed;
   width: 100%;
-  height: 50px;
   z-index: 999 !important;
-  background: #ccc; // TODO
 
   button {
-    width: 30px !important;
     height: 30px !important;
     left: 20px !important;
     top: 10px !important;
+    width: 30px !important;
   }
 
   .bm-icon {
-    width: 30px !important;
     height: 30px !important;
     left: 20px;
     position: absolute;
     top: 10px;
+    width: 30px !important;
   }
 }
 

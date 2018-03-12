@@ -1,22 +1,22 @@
 #footer {
-  text-align: right;
-  padding: 10px 50px 30px;
+  @include sb-padding(10);
   margin-top: 20px;
+  text-align: right;
 
   .social {
     margin-left: 10px;
 
     &:hover {
       svg {
-        fill: rgba(255, 255, 255, 0.9);
+        fill: rgba($white, 0.9);
       }
     }
 
     svg {
-      width: 18px;
+      fill: rgba($white, 0.6);
       height: 18px;
       transition: fill 0.5s linear;
-      fill: rgba(255, 255, 255, 0.6);
+      width: 18px;
     }
   }
 

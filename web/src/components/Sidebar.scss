@@ -1,9 +1,9 @@
-@import 'menu';
+@import 'burger-menu';
 
 #sidebar {
   background-image: $dev-bg, linear-gradient(45deg, $green1 10%, $green2 100%);
-  font-size: $sb-font-size;
   color: rgba($white, 0.4);
+  font-size: $sb-font-size;
   height: 100%;
 
   @include md {
@@ -15,8 +15,12 @@
   }
 
   &:after {
-    body.menu-open & {
+    .menu-open & {
       @include menu-shadow(right, -30px);
+
+      @include md {
+        @include menu-shadow(left, 0);
+      }
     }
 
     @include md {

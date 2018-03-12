@@ -88,8 +88,7 @@ export default {
                       loader: 'sass-loader',
                       options: {
                         sourceMap: true,
-                        data:
-                          '@import "variables"; @import "helpers"; @import "mixins";',
+                        data: '@import "variables"; @import "mixins";',
                         includePaths: [
                           'src/',
                           path.resolve(__dirname, './src/assets/scss')
@@ -110,8 +109,7 @@ export default {
                       {
                         loader: 'sass-loader',
                         options: {
-                          data:
-                            '@import "variables"; @import "helpers"; @import "mixins";',
+                          data: '@import "variables"; @import "mixins";',
                           includePaths: [
                             'src/',
                             path.resolve(__dirname, './src/assets/scss')

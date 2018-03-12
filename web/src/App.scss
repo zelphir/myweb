@@ -1,12 +1,12 @@
 #page-wrap {
   height: 100%;
-  width: 100%;
   padding: 80px 30px 30px;
+  width: 100%;
 
   @include md {
     @include reset-sidebar(translateX($sb-md), unset, calc(100% - #{$sb-md}));
-    padding: 30px;
     max-width: 830px;
+    padding: 30px;
   }
 
   @include lg {
