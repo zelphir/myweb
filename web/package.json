@@ -30,11 +30,11 @@
     "react-dom": "^16.3.0-alpha.1",
     "react-hot-loader": "^4.0.0-beta.21",
     "react-inlinesvg": "^0.8.0",
-    "react-markdown": "^3.2.2",
+    "react-markdown": "^3.3.0",
     "react-motion": "^0.5.2",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-static": "^5.3.4",
+    "react-static": "5.5.14",
     "react-tooltip": "^3.4.0",
     "react-typography": "^0.16.13",
     "reselect": "^3.0.1",
@@ -43,7 +43,7 @@
     "typography-theme-fairy-gates": "^0.15.11"
   },
   "devDependencies": {
-    "babel-plugin-inline-import-graphql-ast": "^2.2.0",
+    "babel-plugin-inline-import-graphql-ast": "^2.3.3",
     "dotenv-webpack": "^1.5.5",
     "eslint": "^4.18.1",
     "eslint-plugin-babel": "^4.1.2",
@@ -53,6 +53,6 @@
     "node-sass": "^4.7.2",
     "prop-types": "^15.6.1",
     "sass-loader": "^6.0.7",
-    "serve": "^6.1.0"
+    "serve": "^6.5.3"
   }
 }

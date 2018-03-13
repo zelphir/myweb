@@ -1,11 +1,12 @@
 import fs from 'fs'
 import path from 'path'
 import Dotenv from 'dotenv-webpack'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import ExtractCssChunks from 'extract-css-chunks-webpack-plugin'
 import klaw from 'klaw'
 import matter from 'gray-matter'
 import React from 'react'
 import { TypographyStyle, GoogleFont } from 'react-typography'
+import { IgnorePlugin } from 'webpack'
 
 import typography, { isDev } from './src/lib/utils'
 
@@ -41,10 +42,10 @@ const getFiles = folder => {
 
 export default {
   // siteRoot: 'https://robertomanzella.com',
-  preact: true,
+  // preact: true, // not working after react-static@5.4.0
   bundleAnalyzer: process.env.ANALYZE || false,
   extractCssChunks: true,
-  inlineCss: true,
+  // inlineCss: true,
   getSiteData: () => ({
     title: 'robertomanzella.com'
   }),
@@ -54,16 +55,16 @@ export default {
 
     return [
       ...pages.map(page => ({
-        path: `/${page.data.slug}`,
+        path: `/${page.data.slug}/`,
         component: 'src/containers/Page',
         getData: () => ({ page })
       })),
       {
-        path: '/blog',
+        path: '/blog/',
         component: 'src/containers/Blog',
         getData: () => ({ posts }),
         children: posts.map(post => ({
-          path: `/${post.data.slug}`,
+          path: `/${post.data.slug}/`,
           component: 'src/containers/Post',
           getData: () => ({ post })
         }))
@@ -97,7 +98,7 @@ export default {
                       }
                     }
                   ]
-                : ExtractTextPlugin.extract({
+                : ExtractCssChunks.extract({
                     use: [
                       {
                         loader: 'css-loader',
@@ -131,7 +132,10 @@ export default {
       new Dotenv({
         path: path.join(__dirname, '../', dotEnv),
         safe: path.join(__dirname, '../.env.example')
-      })
+      }),
+      // Fix webpack warnings
+      new IgnorePlugin(/iconv-loader|bufferutil|utf-8-validate/),
+      new ExtractCssChunks()
     )
 
     return config
