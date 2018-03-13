@@ -1,23 +1,19 @@
 import React from 'react'
-import { StatefulToolTip } from 'react-portal-tooltip'
+import ReactTooltip from 'react-tooltip'
 import Svg from 'react-inlinesvg'
 
 import info from '../../assets/icons/info.svg'
 
 const StatsInfo = () => (
-  <StatefulToolTip
-    position="left"
-    tooltipTimeout={200}
-    parent={
+  <React.Fragment>
+    <div className="stats-info" data-tip="This is a ... blah blah">
       <span className="stats-label">
         Live coding stats
         <Svg src={info} className="stats-icon" />
       </span>
-    }
-    className="stats-info"
-  >
-    This is a...
-  </StatefulToolTip>
+    </div>
+    <ReactTooltip place="left" type="light" effect="solid" />
+  </React.Fragment>
 )
 
 export default StatsInfo

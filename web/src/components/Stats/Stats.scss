@@ -21,7 +21,7 @@
 
   .stats-info {
     border-left: 1px solid rgba($white, 0.6);
-    cursor: help;
+    cursor: pointer;
     display: block;
     font-size: 12px;
     text-transform: uppercase;
@@ -73,10 +73,10 @@
   width: 100%;
 
   .label {
-    cursor: help;
+    cursor: pointer;
     font-size: $languages-font-size;
     line-height: $languages-bar-height;
-    padding-right: 10px;
+    padding-right: 5px;
     position: absolute;
     right: 0;
     top: 3px;

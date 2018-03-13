@@ -1,34 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StatefulToolTip } from 'react-portal-tooltip'
-
-const style = {
-  style: {
-    background: 'rgba(255, 255, 255, 0.8)',
-    fontSize: 14,
-    padding: 5
-  },
-  arrowStyle: {
-    color: 'rgba(255, 255, 255, 0.8)'
-  }
-}
+import ReactTooltip from 'react-tooltip'
 
 const Language = ({
   style: { width, opacity, height },
   data: { name, text, bg: backgroundColor }
 }) => (
   <div className="language" style={{ height }}>
-    <StatefulToolTip
-      style={style}
-      position="left"
-      arrow="center"
-      group="languages"
-      tooltipTimeout={200}
-      parent={<span style={{ opacity }}>{name}</span>}
-      className="label"
-    >
-      {text}
-    </StatefulToolTip>
+    <span className="label" style={{ opacity }} data-tip={text}>
+      {name}
+    </span>
     <div
       className="bar"
       style={{
@@ -36,6 +17,7 @@ const Language = ({
         backgroundColor
       }}
     />
+    <ReactTooltip place="left" type="light" effect="solid" />
   </div>
 )
 
