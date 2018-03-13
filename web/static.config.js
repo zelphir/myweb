@@ -11,58 +11,59 @@ import typography, { isDev } from './src/lib/utils'
 
 const dotEnv = isDev ? '.env' : '.env.production'
 
-const getPosts = () => {
+const getFiles = folder => {
   const items = []
 
-  const getFiles = () =>
-    new Promise(resolve => {
-      if (!fs.existsSync('./src/posts')) resolve(items)
+  return new Promise(resolve => {
+    if (!fs.existsSync(`./src/${folder}`)) resolve(items)
 
-      klaw('./src/posts')
-        .on('data', item => {
-          if (path.extname(item.path) === '.md') {
-            const data = fs.readFileSync(item.path, 'utf8')
-            const dataObj = matter(data)
+    klaw(`./src/${folder}`)
+      .on('data', item => {
+        if (path.extname(item.path) === '.md') {
+          const data = fs.readFileSync(item.path, 'utf8')
+          const dataObj = matter(data)
 
-            dataObj.data.slug = dataObj.data.title
+          dataObj.data.slug =
+            dataObj.data.slug ||
+            dataObj.data.title
               .toLowerCase()
               .replace(/ /g, '-')
               .replace(/[^\w-]+/g, '')
 
-            delete dataObj.orig
-            items.push(dataObj)
-          }
-        })
-        .on('error', console.error) // eslint-disable-line
-        .on('end', () => resolve(items))
-    })
-
-  return getFiles()
+          delete dataObj.orig
+          items.push(dataObj)
+        }
+      })
+      .on('error', console.error) // eslint-disable-line
+      .on('end', () => resolve(items))
+  })
 }
 
 export default {
   // siteRoot: 'https://robertomanzella.com',
   preact: true,
-  // bundleAnalyzer: true,
+  bundleAnalyzer: process.env.ANALYZE || false,
   extractCssChunks: true,
   inlineCss: true,
   getSiteData: () => ({
     title: 'robertomanzella.com'
   }),
   getRoutes: async () => {
-    const posts = await getPosts()
+    const posts = await getFiles('posts')
+    const pages = await getFiles('pages')
 
     return [
-      {
-        path: '/',
-        component: 'src/containers/Home'
-      },
+      ...pages.map(page => ({
+        path: `/${page.data.slug}`,
+        component: 'src/containers/Page',
+        getData: () => ({ page })
+      })),
       {
         path: '/blog',
         component: 'src/containers/Blog',
         getData: () => ({ posts }),
         children: posts.map(post => ({
-          path: `/post/${post.data.slug}`,
+          path: `/${post.data.slug}`,
           component: 'src/containers/Post',
           getData: () => ({ post })
         }))

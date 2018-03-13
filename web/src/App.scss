@@ -18,3 +18,24 @@
 a {
   transition: color 0.25s linear;
 }
+
+h1 {
+  &.intro {
+    font-size: 1.5rem;
+  }
+}
+
+.intro {
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 16px;
+    margin-bottom: 15px;
+
+    @include lg {
+      font-size: 18px;
+    }
+  }
+}
