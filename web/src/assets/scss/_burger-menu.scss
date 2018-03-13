@@ -28,6 +28,16 @@
   justify-content: space-between;
 }
 
+.bm-cross-button {
+  text-align: right;
+
+  svg {
+    fill: rgba($white, 0.4);
+    height: 14px;
+    width: 14px;
+  }
+}
+
 @include md {
   .bm-cross-button,
   .bm-burger-button {

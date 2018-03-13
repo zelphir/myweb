@@ -7,21 +7,35 @@
 
   .avatar {
     border-radius: 50% 5px 5px 50%;
-    height: 100px;
+    height: 60px;
     margin-bottom: 0;
-    width: 100px;
+    width: 60px;
+
+    @include lg {
+      height: 100px;
+      width: 100px;
+    }
   }
 
   .name {
     @include line-break;
     color: rgba($white, 0.8);
-    font-size: 18px;
+    font-size: 14px;
     margin: 10px 0 5px;
+
+    @include lg {
+      font-size: 18px;
+    }
   }
 
   .about {
     @include line-break;
     color: rgba($white, 0.5);
+    font-size: 12px;
     line-height: initial;
+
+    @include lg {
+      font-size: 14px;
+    }
   }
 }

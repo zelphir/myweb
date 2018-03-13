@@ -6,14 +6,16 @@ import { startOfToday, endOfToday } from 'date-fns'
 import { TransitionMotion, spring, presets } from 'react-motion'
 import randomColor from 'randomcolor'
 
+import WhatDoing from './WhatDoing'
+import Languages from './Languages'
+import StatsInfo from './StatsInfo'
 import { GetTodayLanguages } from 'gql/queries.graphql'
 import { OnLanguagesUpdate } from 'gql/subscriptions.graphql'
-import { getLanguages } from '../selectors'
-import Language from './Language'
+import { getLanguages } from '../../selectors'
 
-import './Languages.scss'
+import './Stats.scss'
 
-class Languages extends React.PureComponent {
+class Stats extends React.PureComponent {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     error: PropTypes.object,
@@ -25,31 +27,8 @@ class Languages extends React.PureComponent {
     this.props.subscribeToLanguages()
   }
 
-  renderWhatDoing() {
-    const d = new Date()
-    const dayOfWeek = d.getDay()
-    const hour = d.getHours()
-    const isMonFri = dayOfWeek > 0 && dayOfWeek < 6
-    const isFromTo = (from, to) => hour > from && hour < to
-
-    switch (true) {
-      case isFromTo(0, 9):
-        return <div>Probably sleeping...</div>
-      case isMonFri && isFromTo(18, 20):
-        return <div>Probably training...</div>
-      case isFromTo(20, 22):
-        return <div>Probably eating...</div>
-      default:
-        return <div>Probably resting...</div>
-    }
-  }
-
   willLeave() {
-    return { opacity: spring(0), width: spring(0) }
-  }
-
-  didLeave() {
-    return { height: 0 }
+    return { opacity: spring(0), width: spring(0), height: 0 }
   }
 
   willEnter() {
@@ -90,28 +69,15 @@ class Languages extends React.PureComponent {
     return (
       <React.Fragment>
         <div id="stats">
-          {!languages.length && (
-            <div className="no-languages">{this.renderWhatDoing()}</div>
-          )}
+          {!languages.length && <WhatDoing />}
           <TransitionMotion
             willEnter={this.willEnter}
             willLeave={this.willLeave}
-            didLeave={this.didLeave}
             styles={this.getStyles(languages)}
           >
-            {styles => (
-              <div className="languages">
-                {styles
-                  .slice(0, 5)
-                  .map(({ key, ...props }) => (
-                    <Language key={key} {...props} />
-                  ))}
-              </div>
-            )}
+            {styles => <Languages languages={styles} />}
           </TransitionMotion>
-          <div className="stats-label">
-            <span>Live editor stats</span>
-          </div>
+          <StatsInfo />
         </div>
       </React.Fragment>
     )
@@ -144,4 +110,4 @@ export default graphql(GetTodayLanguages, {
         }
       })
   })
-})(Languages)
+})(Stats)

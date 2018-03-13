@@ -22,6 +22,7 @@ const Language = ({
       style={style}
       position="left"
       arrow="center"
+      group="languages"
       tooltipTimeout={200}
       parent={<span style={{ opacity }}>{name}</span>}
       className="label"

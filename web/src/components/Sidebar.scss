@@ -16,7 +16,7 @@
 
   &:after {
     .menu-open & {
-      @include menu-shadow(right, -30px);
+      @include menu-shadow(right, -10px, 10px);
 
       @include md {
         @include menu-shadow(left, 0);

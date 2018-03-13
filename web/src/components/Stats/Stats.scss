@@ -19,18 +19,21 @@
     padding: 10px;
   }
 
-  .stats-label {
+  .stats-info {
     border-left: 1px solid rgba($white, 0.6);
+    cursor: help;
+    display: block;
     font-size: 12px;
     text-transform: uppercase;
     width: $sb-padding-right-md;
+    z-index: 1200;
 
     @include lg {
       font-size: 14px;
       width: $sb-padding-right-lg;
     }
 
-    span {
+    .stats-label {
       display: block;
       height: $sb-padding-right-md;
       line-height: $sb-padding-right-md;
@@ -43,6 +46,20 @@
       @include lg {
         height: $sb-padding-right-lg;
         line-height: $sb-padding-right-lg;
+      }
+    }
+
+    .stats-icon {
+      svg {
+        fill: rgba($white, 0.4);
+        height: 14px;
+        vertical-align: middle;
+        width: 14px;
+
+        @include lg {
+          height: 16px;
+          width: 16px;
+        }
       }
     }
   }

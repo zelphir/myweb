@@ -7,4 +7,5 @@ export const getLanguages = createSelector(getEntries, entries =>
   [...entries]
     .sort((a, b) => b.percent - a.percent)
     .filter(({ percent }) => percent > 1)
+    .slice(0, 5)
 )

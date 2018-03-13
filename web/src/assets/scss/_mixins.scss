@@ -34,7 +34,7 @@
   }
 }
 
-@mixin menu-shadow($dir, $pos) {
+@mixin menu-shadow($dir, $pos, $size: 30px) {
   background: linear-gradient(
     to $dir,
     rgba($black, 0.25) 0%,
@@ -45,7 +45,7 @@
   position: absolute;
   right: $pos;
   top: 0;
-  width: 30px;
+  width: $size;
 }
 
 @mixin line-break {

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-static'
 
-import './Menu.scss'
+import './Nav.scss'
 
-const Menu = () => (
+const Nav = () => (
   <div className="menu">
     <Link to="/">Home</Link>
     <Link to="/about">About</Link>
@@ -11,4 +11,4 @@ const Menu = () => (
   </div>
 )
 
-export default Menu
+export default Nav
