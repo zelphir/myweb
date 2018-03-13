@@ -11,7 +11,7 @@
   }
 
   @include lg {
-    width: 450px !important;
+    width: $sb-lg !important;
   }
 
   &:after {

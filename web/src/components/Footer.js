@@ -61,8 +61,7 @@ class Footer extends React.PureComponent {
   }
 
   renderInternalLink({ name, to, icon }) {
-    const { match } = this.props
-    return match.isExact ? (
+    return this.props.match.isExact ? (
       <a
         href="/contact"
         onClick={this.handleClick}

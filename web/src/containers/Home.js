@@ -1,4 +1,21 @@
 import React from 'react'
-import { withSiteData } from 'react-static'
+import Intro from '../components/Intro'
 
-export default withSiteData(() => <div id="contact">Hello</div>)
+const Home = () => (
+  <React.Fragment>
+    <Intro />
+    <hr />
+    <div id="contact">
+      Contact<p>a</p>
+      <p>a</p>
+      <p>a</p>
+      <p>a</p>
+      <p>a</p>
+      <p>a</p>
+      <p>a</p>
+      <p>a</p>
+    </div>
+  </React.Fragment>
+)
+
+export default Home
