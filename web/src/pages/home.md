@@ -1,6 +1,7 @@
 ---
 title: Hi, I'm Roberto, Full stack developer.
 slug: /
+showContact: true
 ---
 
 

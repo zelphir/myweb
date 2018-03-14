@@ -3,6 +3,7 @@ import { withRouteData } from 'react-static'
 import Markdown from 'react-markdown'
 
 import RouterLink from '../components/RouterLink'
+import Contact from '../components/Contact'
 
 export default withRouteData(({ page }) => {
   const introClass = page.data.slug === '/' ? 'intro' : ''
@@ -16,7 +17,7 @@ export default withRouteData(({ page }) => {
         escapeHtml={false}
         renderers={{ link: RouterLink }}
       />
-      {page.data.showContact && <div id="contact">Contact</div>}
+      {page.data.showContact && <Contact />}
     </React.Fragment>
   )
 })

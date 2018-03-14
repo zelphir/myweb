@@ -1,0 +1,61 @@
+import fs from 'fs'
+import path from 'path'
+import klaw from 'klaw'
+import matter from 'gray-matter'
+
+const getFiles = folder => {
+  const items = []
+
+  return new Promise(resolve => {
+    if (!fs.existsSync(`./src/${folder}`)) resolve(items)
+
+    klaw(`./src/${folder}`)
+      .on('data', item => {
+        if (path.extname(item.path) === '.md') {
+          const data = fs.readFileSync(item.path, 'utf8')
+          const dataObj = matter(data)
+
+          dataObj.data.slug =
+            dataObj.data.slug ||
+            dataObj.data.title
+              .toLowerCase()
+              .replace(/ /g, '-')
+              .replace(/[^\w-]+/g, '')
+
+          delete dataObj.orig
+          items.push(dataObj)
+        }
+      })
+      .on('error', console.error) // eslint-disable-line
+      .on('end', () => resolve(items))
+  })
+}
+
+const getRoutes = async () => {
+  const posts = await getFiles('posts')
+  const pages = await getFiles('pages')
+
+  return [
+    ...pages.map(page => ({
+      path: `/${page.data.slug}/`,
+      component: 'src/containers/Page',
+      getData: () => ({ page })
+    })),
+    {
+      path: '/blog/',
+      component: 'src/containers/Blog',
+      getData: () => ({ posts }),
+      children: posts.map(post => ({
+        path: `/${post.data.slug}/`,
+        component: 'src/containers/Post',
+        getData: () => ({ post })
+      }))
+    },
+    {
+      is404: true,
+      component: 'src/containers/404'
+    }
+  ]
+}
+
+export default getRoutes
