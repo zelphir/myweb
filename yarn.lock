@@ -846,7 +846,7 @@ anymatch@^2.0.0:
 
 apollo-cache-inmemory@^1.1.11:
   version "1.1.11"
-  resolved "https://registry.yarnpkg.com/apollo-cache-inmemory/-/apollo-cache-inmemory-1.1.11.tgz#2a96ad076f40575d622c4a45b1eeced18b2dc8ec"
+  resolved "https://registry.npmjs.org/apollo-cache-inmemory/-/apollo-cache-inmemory-1.1.11.tgz#2a96ad076f40575d622c4a45b1eeced18b2dc8ec"
   dependencies:
     apollo-cache "^1.1.6"
     apollo-utilities "^1.0.10"
@@ -898,7 +898,7 @@ apollo-client@^2.2.2:
 
 apollo-client@^2.2.7:
   version "2.2.7"
-  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-2.2.7.tgz#d5adbda81ef1f1c9c105ac71227ca8dc42b5731b"
+  resolved "https://registry.npmjs.org/apollo-client/-/apollo-client-2.2.7.tgz#d5adbda81ef1f1c9c105ac71227ca8dc42b5731b"
   dependencies:
     "@types/zen-observable" "^0.5.3"
     apollo-cache "^1.1.6"
@@ -3606,17 +3606,17 @@ dot-prop@^4.1.0:
   dependencies:
     is-obj "^1.0.0"
 
-dotenv-webpack@^1.5.5:
-  version "1.5.5"
-  resolved "https://registry.npmjs.org/dotenv-webpack/-/dotenv-webpack-1.5.5.tgz#3441094f04d304b6119e6b72524e62fb3252f5f2"
+dotenv-safe@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.npmjs.org/dotenv-safe/-/dotenv-safe-5.0.1.tgz#8c4a79b8978fd4271b3d8ef17be2b2f04588af71"
   dependencies:
-    dotenv "^5.0.1"
+    dotenv "^5.0.0"
 
 dotenv@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
 
-dotenv@^5.0.1:
+dotenv@^5.0.0:
   version "5.0.1"
   resolved "https://registry.npmjs.org/dotenv/-/dotenv-5.0.1.tgz#a5317459bd3d79ab88cff6e44057a6a3fbb1fcef"
 
@@ -4294,7 +4294,7 @@ extract-hoc@^0.0.5:
   version "0.0.5"
   resolved "https://registry.npmjs.org/extract-hoc/-/extract-hoc-0.0.5.tgz#c068e490d492ce61bf0f6b12186bad715987139c"
 
-extract-text-webpack-plugin@^3.0.1, extract-text-webpack-plugin@^3.0.2:
+extract-text-webpack-plugin@^3.0.1:
   version "3.0.2"
   resolved "https://registry.npmjs.org/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.2.tgz#5f043eaa02f9750a9258b78c0a6e0dc1408fb2f7"
   dependencies:
@@ -8393,9 +8393,9 @@ react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
 
-react-form@^3.3.2:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/react-form/-/react-form-3.3.2.tgz#2eeed62393fb44f45b6e9c11b0cc7d175792089e"
+react-form@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.npmjs.org/react-form/-/react-form-3.4.0.tgz#627f702420e0dfa0448b327acd01100bda66eb40"
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.5.10"
@@ -10882,6 +10882,30 @@ webpack-sources@^1.0.1, webpack-sources@^1.1.0:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
+webpack@4, webpack@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.npmjs.org/webpack/-/webpack-4.1.1.tgz#44e4d6a869dd36fdfc0b227f9bd865a4bccfd81c"
+  dependencies:
+    acorn "^5.0.0"
+    acorn-dynamic-import "^3.0.0"
+    ajv "^6.1.0"
+    ajv-keywords "^3.1.0"
+    chrome-trace-event "^0.1.1"
+    enhanced-resolve "^4.0.0"
+    eslint-scope "^3.7.1"
+    loader-runner "^2.3.0"
+    loader-utils "^1.1.0"
+    memory-fs "~0.4.1"
+    micromatch "^3.1.8"
+    mkdirp "~0.5.0"
+    neo-async "^2.5.0"
+    node-libs-browser "^2.0.0"
+    schema-utils "^0.4.2"
+    tapable "^1.0.0"
+    uglifyjs-webpack-plugin "^1.1.1"
+    watchpack "^1.5.0"
+    webpack-sources "^1.0.1"
+
 webpack@^3.6.0:
   version "3.11.0"
   resolved "https://registry.npmjs.org/webpack/-/webpack-3.11.0.tgz#77da451b1d7b4b117adaf41a1a93b5742f24d894"
@@ -10908,30 +10932,6 @@ webpack@^3.6.0:
     watchpack "^1.4.0"
     webpack-sources "^1.0.1"
     yargs "^8.0.2"
-
-webpack@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.npmjs.org/webpack/-/webpack-4.1.1.tgz#44e4d6a869dd36fdfc0b227f9bd865a4bccfd81c"
-  dependencies:
-    acorn "^5.0.0"
-    acorn-dynamic-import "^3.0.0"
-    ajv "^6.1.0"
-    ajv-keywords "^3.1.0"
-    chrome-trace-event "^0.1.1"
-    enhanced-resolve "^4.0.0"
-    eslint-scope "^3.7.1"
-    loader-runner "^2.3.0"
-    loader-utils "^1.1.0"
-    memory-fs "~0.4.1"
-    micromatch "^3.1.8"
-    mkdirp "~0.5.0"
-    neo-async "^2.5.0"
-    node-libs-browser "^2.0.0"
-    schema-utils "^0.4.2"
-    tapable "^1.0.0"
-    uglifyjs-webpack-plugin "^1.1.1"
-    watchpack "^1.5.0"
-    webpack-sources "^1.0.1"
 
 websocket-driver@>=0.5.1:
   version "0.7.0"

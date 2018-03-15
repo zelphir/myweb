@@ -1,9 +1,18 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+
+const webpack = require('webpack')
 const rules = require('./rules')
 const externals = require('./externals')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
+const getEnvVariables = require('./env')
+const env = getEnvVariables()
+
 module.exports = ({ nodeVersion, dirname, plugins }, outputPath) => {
-  const basePlugins = [new CleanWebpackPlugin([outputPath], { root: dirname })]
+  const basePlugins = [
+    new webpack.DefinePlugin(env.processified),
+    new CleanWebpackPlugin([outputPath], { root: dirname })
+  ]
 
   if (plugins && plugins.length) {
     basePlugins.push(...plugins)

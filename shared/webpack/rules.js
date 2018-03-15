@@ -20,29 +20,7 @@ module.exports = nodeVersion => [
               }
             }
           ]
-        ],
-        env: {
-          development: {
-            plugins: [
-              [
-                'inline-dotenv',
-                {
-                  path: '../.env'
-                }
-              ]
-            ]
-          },
-          production: {
-            plugins: [
-              [
-                'inline-dotenv',
-                {
-                  path: '../.env.production'
-                }
-              ]
-            ]
-          }
-        }
+        ]
       }
     }
   }
