@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form } from 'react-form'
 
+import mailgun from '../lib/mailgun'
 import FormField from './FormField'
 
 const fields = [
@@ -26,8 +27,11 @@ class Contact extends React.PureComponent {
     isSending: false
   }
 
-  onSubmit = values => {
-    console.log({ values }) // eslint-disable-line
+  onSubmit = async values => {
+    const res = await mailgun()
+    const json = await res.json()
+    console.log({ values, json }) // eslint-disable-line
+
     this.setState({ isSending: true })
 
     setTimeout(() => {
