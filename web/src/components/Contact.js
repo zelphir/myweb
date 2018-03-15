@@ -29,8 +29,8 @@ class Contact extends React.PureComponent {
 
   onSubmit = async values => {
     const res = await mailgun()
-    const json = await res.json()
-    console.log({ values, json }) // eslint-disable-line
+    // const json = await res.json()
+    console.log({ values, res }) // eslint-disable-line
 
     this.setState({ isSending: true })
 

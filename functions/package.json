@@ -12,6 +12,7 @@
     "apollo-link-context": "^1.0.6",
     "apollo-link-http": "^1.5.3",
     "date-fns": "^1.29.0",
+    "graphql": "^0.13.1",
     "node-fetch": "^2.0.0"
   },
   "devDependencies": {

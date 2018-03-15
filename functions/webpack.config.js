@@ -1,32 +1,23 @@
 const path = require('path')
 const merge = require('lodash.merge')
-const nodeExternals = require('webpack-node-externals')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyPkgJsonPlugin = require('copy-pkg-json-webpack-plugin')
-
-const base = require('shared/utils/webpack.config.base')
+const base = require('shared/webpack/webpack.config.base')
 
 const outputPath = '.build'
-const nodeVersion = '6.11.5'
 
-module.exports = merge(base(nodeVersion), {
+const options = {
+  nodeVersion: '6.11.5',
+  dirname: path.resolve(__dirname),
+  plugins: [
+    new CopyPkgJsonPlugin({
+      remove: ['scripts', 'devDependencies']
+    })
+  ]
+}
+
+module.exports = merge(base(options, outputPath), {
   entry: './src',
   output: {
     path: path.resolve(__dirname, outputPath)
-  },
-  externals: [
-    nodeExternals(),
-    nodeExternals({
-      modulesDir: path.resolve(__dirname, '../node_modules'),
-      whitelist: [/^shared/, /^gql/]
-    })
-  ],
-  plugins: [
-    new CleanWebpackPlugin([outputPath]),
-    new CopyPkgJsonPlugin({
-      remove: ['scripts', 'devDependencies'],
-      // Add graphql here so it does not conflict with gatsbyjs
-      replace: { dependencies: { graphql: '^0.13.1' } }
-    })
-  ]
+  }
 })

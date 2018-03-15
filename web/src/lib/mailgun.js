@@ -1,28 +1,31 @@
 import fetch from 'node-fetch'
-import FormData from 'form-data'
 
-const domain = 'sandbox2ca449adf0df487e8978c1b2e0c98600.mailgun.org'
-const apiKey = 'key-6bef467422ce1439263923ee37ca92a5'
+const apiKey =
+  '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'
 
 const options = {
   method: 'POST',
   headers: {
-    Authorization: `Basic ${new Buffer(`api:${apiKey}`).toString('base64')}`
+    Authorization: `Bearer ${apiKey}`,
+    'Content-Type': 'application/json'
   }
 }
 
+const body = JSON.stringify({
+  personalizations: [{ to: [{ email: 'zelphir@gmail.com' }] }],
+  from: { email: 'example@example.com' },
+  subject: 'Hello, World!',
+  content: [{ type: 'text/plain', value: 'Heya!' }]
+})
+
 const mailgun = () => {
-  const form = new FormData()
-
-  form.append('from', 'example@robertomanzella.com')
-  form.append('to', 'zelphir@gmail.com')
-  form.append('subject', 'Test email')
-  form.append('text', 'Test email message')
-
-  return fetch(`https://api.mailgun.net/v3/${domain}/message`, {
-    ...options,
-    body: form
-  })
+  return fetch(
+    'http://cors-proxy.htmldriven.com/?url=https://api.sendgrid.com/v3/mail/send',
+    {
+      ...options,
+      body
+    }
+  )
 }
 
 export default mailgun
