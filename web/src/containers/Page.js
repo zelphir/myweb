@@ -9,15 +9,20 @@ export default withRouteData(({ page }) => {
   const introClass = page.data.slug === '/' ? 'intro' : ''
 
   return (
-    <React.Fragment>
-      <h1 className={introClass}>{page.data.title}</h1>
+    <div className={introClass}>
+      <h1>{page.data.title}</h1>
       <Markdown
-        className={introClass}
         source={page.content}
         escapeHtml={false}
         renderers={{ link: RouterLink }}
       />
-      {page.data.showContact && <Contact />}
-    </React.Fragment>
+      {page.data.showContact && (
+        <React.Fragment>
+          <hr />
+          <h2>Get in contact</h2>
+          <Contact />
+        </React.Fragment>
+      )}
+    </div>
   )
 })

@@ -4,6 +4,8 @@ import { Form } from 'react-form'
 import sendgrid from '../lib/sendgrid'
 import FormField from './FormField'
 
+import './Contact.scss'
+
 const fields = [
   {
     id: 'name',
@@ -29,28 +31,52 @@ class Contact extends React.PureComponent {
 
   onSubmit = async values => {
     this.setState({ isSending: true })
-    const res = await sendgrid(values)
+    await sendgrid(values)
     this.setState({ isSending: false })
-    console.log(res) // eslint-disable-line
+  }
+
+  validations({ name, email, message }) {
+    // const validate = value =>
+    //   id === 'email'
+    //     ? !value
+    //       ? `${placeholder} is required`
+    //       : !isEmail(value) ? 'Please enter a valid email' : null
+    //     : !value ? `${placeholder} is required` : null
+    return {
+      name: !name ? 'name required' : null,
+      email: !email ? 'email required' : null,
+      message: !message ? 'message required' : null
+    }
   }
 
   render() {
     return (
       <Form
         onSubmit={this.onSubmit}
-        render={({ submitForm, errors }) => (
+        validate={this.validations}
+        render={({ submitForm, errors, touched }) => (
           <form onSubmit={submitForm} id="contact">
-            {fields.map(field => (
-              <div className="form-field" key={field.id}>
-                <FormField {...field} />
-                <span className="error-message">
-                  {errors && errors[field.id] ? errors[field.id] : null}
-                </span>
-              </div>
-            ))}
-            <button type="submit" disabled={this.state.isSending}>
-              Send
-            </button>
+            {fields.map(field => {
+              const isError = touched[field.id] && (errors && errors[field.id])
+              const fieldClass = ['form-field', field.type, isError && 'error']
+                .filter(Boolean)
+                .join(' ')
+
+              return (
+                <div className={fieldClass} key={field.id}>
+                  <FormField {...field} />
+                  {isError && (
+                    <span className="error-message">{errors[field.id]}</span>
+                  )}
+                </div>
+              )
+            })}
+
+            <div className="form-field">
+              <button type="submit" disabled={this.state.isSending}>
+                Send
+              </button>
+            </div>
           </form>
         )}
       />
