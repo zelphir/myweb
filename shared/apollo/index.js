@@ -9,7 +9,9 @@ import { startOfToday, endOfToday } from 'date-fns'
 import { GetAllTags, GetTodayLanguages } from 'gql/queries.graphql'
 import { CreatePicture, CreateLanguages } from 'gql/mutations.graphql'
 
-const uri = `${process.env.GQL_URL}/simple/v1/${process.env.GQL_SERVICE_ID}`
+const uri = `${process.env.GRAPHCOOL_URL}/simple/v1/${
+  process.env.GRAPHCOOL_SERVICE_ID
+}`
 const cache = new InMemoryCache()
 const defaultOptions = {
   query: { fetchPolicy: 'network-only', errorPolicy: 'all' }
@@ -19,7 +21,7 @@ const httpLink = createHttpLink({ uri, fetch })
 const authLink = setContext((_, { headers }) => ({
   headers: {
     ...headers,
-    authorization: `Bearer ${process.env.GQL_TOKEN}`
+    authorization: `Bearer ${process.env.GRAPHCOOL_TOKEN}`
   }
 }))
 

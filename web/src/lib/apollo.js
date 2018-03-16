@@ -23,12 +23,14 @@ const errorLink = onError(({ networkError, graphQLErrors }) => {
 })
 
 const httpLink = new HttpLink({
-  uri: `${process.env.GQL_URL}/simple/v1/${process.env.GQL_SERVICE_ID}`
+  uri: `${process.env.GRAPHCOOL_URL}/simple/v1/${
+    process.env.GRAPHCOOL_SERVICE_ID
+  }`
 })
 
 const wsLink = isBrowser
   ? new WebSocketLink({
-      uri: process.env.GQL_WSS + process.env.GQL_SERVICE_ID,
+      uri: process.env.GRAPHCOOL_WSS + process.env.GRAPHCOOL_SERVICE_ID,
       options: { reconnect: true }
     })
   : () => {}

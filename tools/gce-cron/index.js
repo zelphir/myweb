@@ -7,8 +7,7 @@ import get from 'lodash.get'
 import isEqual from 'lodash.isequal'
 import { getTodayLanguages, addLanguages } from 'shared/apollo'
 
-const apiKey = process.env.STATS_API_KEY
-const apiUrl = process.env.STATS_API_URL
+const apiKey = process.env.WAKATIME_API_KEY
 const today = format(new Date(), 'YYYY-MM-DD')
 const options = {
   headers: { Authorization: `Basic ${new Buffer(apiKey).toString('base64')}` }
@@ -20,7 +19,7 @@ const tmpJson = path.join(__dirname, 'tmp.json')
 ;(async () => {
   try {
     const res = await fetch(
-      `${apiUrl}/api/v1/users/current/summaries?${params}`,
+      `https://wakatime.com/api/v1/users/current/summaries?${params}`,
       options
     )
     const json = await res.json()

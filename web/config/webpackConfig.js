@@ -1,12 +1,12 @@
 import path from 'path'
-import Dotenv from 'dotenv-webpack'
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin'
 import { IgnorePlugin } from 'webpack'
 
-import { isDev } from '../src/lib/utils'
+import getEnvVariables from 'shared/webpack/env'
 
 const dirname = path.resolve(__dirname, '../')
-const dotEnv = isDev ? '.env' : '.env.production'
+
+getEnvVariables()
 
 const webpackConfig = (config, { defaultLoaders, stage }) => {
   config.node = { fs: 'empty' }
@@ -63,10 +63,6 @@ const webpackConfig = (config, { defaultLoaders, stage }) => {
   ]
 
   config.plugins.push(
-    new Dotenv({
-      path: path.join(dirname, '../', dotEnv),
-      safe: path.join(dirname, '../.env.example')
-    }),
     // Fix webpack warnings
     new IgnorePlugin(/iconv-loader|bufferutil|utf-8-validate/),
     new ExtractCssChunks()

@@ -16,20 +16,21 @@
     "node-fetch": "^2.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.41",
-    "@babel/core": "^7.0.0-beta.41",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.41",
-    "@babel/preset-env": "^7.0.0-beta.41",
+    "@babel/cli": "^7.0.0-beta.42",
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
     "babel-eslint": "^8.2.1",
     "babel-loader": "8.0.0-beta.0",
     "clean-webpack-plugin": "^0.1.19",
     "copy-pkg-json-webpack-plugin": "zelphir/copy-pkg-json-webpack-plugin",
+    "dotenv-expand": "^4.2.0",
+    "dotenv-safe": "^5.0.1",
     "eslint": "^4.1.1",
     "graphql-tag": "^2.8.0",
     "lodash.merge": "^4.6.1",
     "nodemon": "^1.17.2",
-    "webpack": "4",
-    "webpack-cli": "^2.0.12",
+    "webpack": "^3.11.0",
     "webpack-node-externals": "^1.6.0"
   },
   "private": true

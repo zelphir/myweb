@@ -10,7 +10,7 @@ const env = getEnvVariables()
 
 module.exports = ({ nodeVersion, dirname, plugins }, outputPath) => {
   const basePlugins = [
-    new webpack.DefinePlugin(env.processified),
+    new webpack.DefinePlugin(env),
     new CleanWebpackPlugin([outputPath], { root: dirname })
   ]
 
@@ -23,7 +23,6 @@ module.exports = ({ nodeVersion, dirname, plugins }, outputPath) => {
       filename: 'index.js',
       libraryTarget: 'commonjs'
     },
-    mode: 'development',
     target: 'node',
     module: {
       rules: rules(nodeVersion)
