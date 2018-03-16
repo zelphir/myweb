@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form } from 'react-form'
 
-import mailgun from '../lib/mailgun'
+import sendgrid from '../lib/sendgrid'
 import FormField from './FormField'
 
 const fields = [
@@ -28,15 +28,10 @@ class Contact extends React.PureComponent {
   }
 
   onSubmit = async values => {
-    const res = await mailgun()
-    // const json = await res.json()
-    console.log({ values, res }) // eslint-disable-line
-
     this.setState({ isSending: true })
-
-    setTimeout(() => {
-      this.setState({ isSending: false })
-    }, 2000)
+    const res = await sendgrid(values)
+    this.setState({ isSending: false })
+    console.log(res) // eslint-disable-line
   }
 
   render() {
