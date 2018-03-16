@@ -1,7 +1,7 @@
 import { transformBody } from 'shared/helpers'
 import { getTags, addPicture } from 'shared/apollo'
 
-const instagram = async (req, res) => {
+export const instagram = async (req, res) => {
   const xClientID = process.env.X_CLIENT_ID
 
   if (req.get('X-Client-ID') !== xClientID) return res.sendStatus(403)
@@ -19,5 +19,3 @@ const instagram = async (req, res) => {
     return res.sendStatus(500)
   }
 }
-
-export default instagram

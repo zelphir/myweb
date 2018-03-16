@@ -19,13 +19,10 @@ const body = JSON.stringify({
 })
 
 const mailgun = () => {
-  return fetch(
-    'http://cors-proxy.htmldriven.com/?url=https://api.sendgrid.com/v3/mail/send',
-    {
-      ...options,
-      body
-    }
-  )
+  return fetch('http://localhost:8010/myweb-195810/us-central1/sendgrid', {
+    ...options,
+    body
+  })
 }
 
 export default mailgun

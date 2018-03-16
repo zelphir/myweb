@@ -19,19 +19,11 @@ ${NC}
 [[ -f "../.env" ]]
 trap - ERR
 
-ENV=${1:-production}
-DOTENV="../.env.${ENV}"
+VARIABLES=($(sed -r '/^(\s*#|$)/d;s/="?(.*)"?//g' ../.env))
+SCHEMA=($(sed -r '/^(\s*#|$)/d;s/=//g' ../.env.example))
 
-if [[ ! -f "$DOTENV" ]]; then
-  DOTENV="../.env"
-fi
-
-export $(cat $DOTENV | grep -v ^# | xargs)
-
-VARIABLES=($(sed -r '/^(\s*#|$)/d;' ../.env.example))
-
-for v in "${VARIABLES[@]}" ; do
-  var=${v%=}
+for v in "${SCHEMA[@]}" ; do
+  var=${v}
   trap 'echo -e "${RED}
 ================== ERROR ====================
 
@@ -39,6 +31,13 @@ for v in "${VARIABLES[@]}" ; do
 
 =============================================
 ${NC}"' ERR
-  [[ ! -z ${!var} ]]
+  [[ ${VARIABLES[*]} =~ $var ]]
   trap - ERR
 done
+
+ENV=${1:-production}
+DOTLOCAL="../.env"
+DOTENV="../.env.${ENV}"
+
+export $(cat $DOTLOCAL | grep -v ^# | xargs)
+export $(cat $DOTENV | grep -v ^# | xargs)

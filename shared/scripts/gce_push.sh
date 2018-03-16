@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-source "${BASH_SOURCE%/*}/utils.sh"
-
 NODE_ENV=production yarn build:cron
+
+source "${BASH_SOURCE%/*}/utils.sh"
 
 cd gce-cron
 
