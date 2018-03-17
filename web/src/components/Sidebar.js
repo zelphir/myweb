@@ -31,7 +31,7 @@ const Sidebar = ({ isMobile, ...props }) => (
     </div>
     <div className="sidebar-bottom">
       <Stats />
-      <Footer />
+      <Footer isMobile={isMobile} />
     </div>
   </Menu>
 )

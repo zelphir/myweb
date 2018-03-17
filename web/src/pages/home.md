@@ -7,11 +7,11 @@ showContact: true
 
 I've been playing with computers for a long time! :-)
 
-Based in London... love NodeJS/React/Docker/Git/Serverless!
+Based in London... love NodeJS/React/GraphQL/Docker/Git/Serverless!
 
-I have an extensive understanding of working in an Agile environments and several years of experience. I can be a strong driving force for improving the performance, scalability and reliability of different projects. I have a long track record of creating dynamic, rich and interesting web/mobile projects. I've worked in several leading global internet technology companies.
+In the past years I've worked for different companies, from startups to leading global technology companies.
 
-As a self directed and self managed person I am always pushing myself to deliver ongoing process improvements in anything I do.
+I always push myself to improve the code quality and the working flow everywhere I go. Automation is very important for me, and I always try to speed up and automate as much stuff as I can, from testing tools, continuous delivery, utility tools, etc... to make other devs' lives easier and more relaxed. Trying to use serverless architecture (from different provider like AWS, Google, Azure) as much as I can.
 
 I'm also an enthusiast photographer.
 

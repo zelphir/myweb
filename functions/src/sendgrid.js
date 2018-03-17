@@ -38,16 +38,15 @@ export const sendgrid = async (req, res) => {
     })
 
     try {
-      const { status, statusText } = await fetch(
-        'https://api.sendgrid.com/v3/mail/send',
-        {
-          ...options,
-          body: email
-        }
-      )
+      const { status } = await fetch('https://api.sendgrid.com/v3/mail/send', {
+        ...options,
+        body: email
+      })
 
-      if (status !== 200) return res.status(status).send(statusText)
-      return res.sendStatus(200)
+      return res.status(status).send({
+        status,
+        statusText: status === 202 ? 'Sent, thanks!' : 'Sorry, try again'
+      })
     } catch (err) {
       return res.status(500).send(JSON.stringify(err))
     }

@@ -41,7 +41,8 @@ const socials = [
 
 class Footer extends React.PureComponent {
   static propTypes = {
-    match: PropTypes.object.isRequired
+    match: PropTypes.object.isRequired,
+    isMobile: PropTypes.bool.isRequired
   }
 
   handleClick = e => {
@@ -61,7 +62,7 @@ class Footer extends React.PureComponent {
   }
 
   renderInternalLink({ name, to, icon }) {
-    return this.props.match.isExact ? (
+    return this.props.match.isExact && !this.props.isMobile ? (
       <a
         href="/contact"
         onClick={this.handleClick}

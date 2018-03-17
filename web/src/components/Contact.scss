@@ -4,35 +4,85 @@
 
   .form-field {
     flex: 0 0 100%;
-    height: 76px;
 
     input,
-    textarea,
-    button {
-      width: 100%;
+    textarea {
+      background: rgba($black, 0.05);
       border-radius: 5px;
-      background: #eaeaea;
-      border: 0;
+      border: 2px solid rgba($black, 0.05);
+      font-size: 16px;
+      outline: 0;
       padding: 5px 10px;
+      width: 100%;
+    }
+
+    button {
+      background: rgba($green2, 0.8);
+      border-radius: 5px;
+      border: 0;
+      color: $white;
+      cursor: pointer;
+      outline: 0;
+      padding: 5px 20px;
+      position: relative;
+      width: 100%;
+
+      &:hover {
+        background: rgba($green2, 0.9);
+      }
+
+      &.loading {
+        background: rgba($green1, 0.9);
+      }
+
+      &:after {
+        border-radius: 5px;
+        color: $white;
+        content: attr(data-status);
+        font-size: 14px;
+        height: 100%;
+        left: 0;
+        line-height: 42px;
+        opacity: 0;
+        position: absolute;
+        text-align: center;
+        top: 0;
+        width: 100%;
+      }
+
+      &.ok {
+        &:after {
+          animation: FadeAnimation 5s ease-in 0.2s forwards;
+          background: #4fc99e;
+        }
+      }
+
+      &.error {
+        &:after {
+          animation: FadeAnimation 5s ease-in 0.2s forwards;
+          background: #cc0000;
+        }
+      }
     }
 
     &.error {
       input,
       textarea,
       button {
+        background: rgba(#cc0000, 0.05);
         border: 2px solid #cc0000;
       }
     }
 
-    .error-message {
-      color: #cc0000;
-      font-size: 14px;
-      display: block;
-      padding: 4px;
-      line-height: 22px;
+    &.button {
+      text-align: right;
     }
 
     @include md {
+      button {
+        width: 200px;
+      }
+
       &.input {
         flex: 0 50%;
 
@@ -45,5 +95,34 @@
         }
       }
     }
+  }
+
+  .error-message {
+    color: #cc0000;
+    font-size: 12px;
+    height: 18px;
+    line-height: 16px;
+  }
+}
+
+@keyframes FadeAnimation {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  10% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  90% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
   }
 }

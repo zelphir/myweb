@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form } from 'react-form'
+import isEmail from 'validator/lib/isEmail'
 
 import sendgrid from '../lib/sendgrid'
 import FormField from './FormField'
@@ -26,30 +27,34 @@ const fields = [
 
 class Contact extends React.PureComponent {
   state = {
-    isSending: false
+    isSending: false,
+    status: undefined,
+    statusText: undefined
   }
 
-  onSubmit = async values => {
+  onSubmit = async (values, _, formApi) => {
     this.setState({ isSending: true })
-    await sendgrid(values)
+    const res = await sendgrid(values)
+    const { status, statusText } = await res.json()
+    this.setState({ status: status === 202 ? 'ok' : 'error', statusText })
     this.setState({ isSending: false })
+    formApi.resetAll()
   }
 
   validations({ name, email, message }) {
-    // const validate = value =>
-    //   id === 'email'
-    //     ? !value
-    //       ? `${placeholder} is required`
-    //       : !isEmail(value) ? 'Please enter a valid email' : null
-    //     : !value ? `${placeholder} is required` : null
+    const isValidEmail = !email
+      ? 'Email is required'
+      : !isEmail(email) ? 'Please enter a valid email' : null
+
     return {
-      name: !name ? 'name required' : null,
-      email: !email ? 'email required' : null,
-      message: !message ? 'message required' : null
+      name: !name ? 'Name is required' : null,
+      email: isValidEmail,
+      message: !message ? 'Message is required' : null
     }
   }
 
   render() {
+    const { isSending, status, statusText } = this.state
     return (
       <Form
         onSubmit={this.onSubmit}
@@ -57,7 +62,7 @@ class Contact extends React.PureComponent {
         render={({ submitForm, errors, touched }) => (
           <form onSubmit={submitForm} id="contact">
             {fields.map(field => {
-              const isError = touched[field.id] && (errors && errors[field.id])
+              const isError = errors && touched[field.id] && errors[field.id]
               const fieldClass = ['form-field', field.type, isError && 'error']
                 .filter(Boolean)
                 .join(' ')
@@ -65,16 +70,20 @@ class Contact extends React.PureComponent {
               return (
                 <div className={fieldClass} key={field.id}>
                   <FormField {...field} />
-                  {isError && (
-                    <span className="error-message">{errors[field.id]}</span>
-                  )}
+                  <div className="error-message">
+                    {isError && errors[field.id]}
+                  </div>
                 </div>
               )
             })}
-
-            <div className="form-field">
-              <button type="submit" disabled={this.state.isSending}>
-                Send
+            <div className="form-field button">
+              <button
+                type="submit"
+                disabled={isSending}
+                className={isSending ? 'loading' : status}
+                data-status={statusText}
+              >
+                {isSending ? 'Sending...' : 'Send'}
               </button>
             </div>
           </form>

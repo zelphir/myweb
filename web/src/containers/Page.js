@@ -19,7 +19,7 @@ export default withRouteData(({ page }) => {
       {page.data.showContact && (
         <React.Fragment>
           <hr />
-          <h2>Get in contact</h2>
+          <h2>Get in touch</h2>
           <Contact />
         </React.Fragment>
       )}

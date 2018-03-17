@@ -43,4 +43,9 @@
   .bm-burger-button {
     display: none;
   }
+
+  .menu-open,
+  #container {
+    overflow: initial !important;
+  }
 }

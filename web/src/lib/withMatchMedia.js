@@ -7,10 +7,11 @@ const withMatchMedia = ComposedComponent =>
       ComposedComponent
     )})`
 
-    state = { isMobile: true }
+    state = { isMobile: false }
 
     componentDidMount() {
-      this.matchMedia = window.matchMedia(`(max-width: 768px)`)
+      this.matchMedia = window.matchMedia('(max-width: 768px)')
+      this.setState({ isMobile: this.matchMedia.matches })
       this.matchMedia.addListener(this.mediaQueryChanged)
     }
 
