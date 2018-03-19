@@ -1,3 +1,5 @@
+#import "./EntriesFragment.graphql"
+
 query GetAllTags {
   allTags {
     id
@@ -5,9 +7,9 @@ query GetAllTags {
   }
 }
 
-query GetTodayLanguages($from: DateTime!, $to: DateTime!) {
-  allLanguages(filter: { createdAt_gte: $from, createdAt_lte: $to }) {
+query GetDailyStats {
+  allDailyStats {
     id
-    entries
+    ...Entries
   }
 }

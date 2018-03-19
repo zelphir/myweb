@@ -26,9 +26,23 @@ type Picture @model {
   updatedAt: DateTime!
 }
 
-type Language @model {
+type DailyStat @model {
   id: ID! @isUnique
-  entries: Json!
+  timestamp: DateTime!
+  entries: [Language!]! @relation(name: "DailyStatLanguages")
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type Language @model {
+  id: ID! @isUnique
+  name: String
+  totalSeconds: Int
+  seconds: Int
+  text: String
+  minutes: Int
+  hours: Int
+  percent: Float
+  digital: String
+  day: DailyStat @relation(name: "DailyStatLanguages")
 }

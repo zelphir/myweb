@@ -19,7 +19,7 @@
 
   .name {
     @include line-break;
-    color: rgba($white, 0.8);
+    color: rgba($black, 0.8);
     font-size: 14px;
     margin: 10px 0 5px;
 
@@ -30,7 +30,7 @@
 
   .about {
     @include line-break;
-    color: rgba($white, 0.5);
+    color: rgba($black, 0.6);
     font-size: 12px;
     line-height: initial;
 

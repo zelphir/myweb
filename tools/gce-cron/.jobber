@@ -4,7 +4,7 @@ notifyProgram: /usr/local/bin/jobberNotifier.sh
 [jobs]
 - name: ImportStats
   cmd: "cd ~ && node ."
-  time: "*/5"
+  time: "*/20 * 9-23,0-1 * * *"
   onError: Continue
   notifyOnError: true
   notifyOnSuccess: true

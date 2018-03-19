@@ -4,10 +4,9 @@ import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { startOfToday, endOfToday } from 'date-fns'
 
-import { GetAllTags, GetTodayLanguages } from 'gql/queries.graphql'
-import { CreatePicture, CreateLanguages } from 'gql/mutations.graphql'
+import { GetAllTags, GetDailyStats } from 'gql/queries.graphql'
+import { CreatePicture, UpdateDailyStats } from 'gql/mutations.graphql'
 
 const uri = `${process.env.GRAPHCOOL_URL}/simple/v1/${
   process.env.GRAPHCOOL_SERVICE_ID
@@ -25,6 +24,7 @@ const authLink = setContext((_, { headers }) => ({
   }
 }))
 
+// =========== Instagram ============ //
 const getCountry = async ({ lat, lng: lon }) => {
   try {
     if (!lat || !lon) {
@@ -79,26 +79,22 @@ export const getTags = async () => {
   }
 }
 
-export const addLanguages = async variables => {
+// =========== Stats ============ //
+export const updateDailyStats = async variables => {
   try {
-    return client.mutate({ variables, mutation: CreateLanguages })
+    return client.mutate({ variables, mutation: UpdateDailyStats })
   } catch (err) {
     console.error(err) // eslint-disable-line
   }
 }
 
-export const getTodayLanguages = async () => {
+export const getDailyStats = async () => {
   try {
-    const variables = {
-      from: startOfToday().toISOString(),
-      to: endOfToday().toISOString()
-    }
-    const { data: { allLanguages } } = await client.query({
-      variables,
-      query: GetTodayLanguages
+    const { data: { allDailyStats } } = await client.query({
+      query: GetDailyStats
     })
 
-    return allLanguages[0]
+    return allDailyStats[0]
   } catch (err) {
     console.error(err) // eslint-disable-line
   }

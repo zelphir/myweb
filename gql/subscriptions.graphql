@@ -1,8 +1,10 @@
-subscription OnLanguagesUpdate {
-  Language {
+#import "./EntriesFragment.graphql"
+
+subscription OnDailyStatsUpdate {
+  DailyStat {
     node {
       id
-      entries
+      ...Entries
     }
   }
 }

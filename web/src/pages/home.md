@@ -1,5 +1,5 @@
 ---
-title: Hi, I'm Roberto, Full stack developer.
+title: Hi, I'm Roberto.
 slug: /
 showContact: true
 ---
@@ -24,3 +24,7 @@ The source code of this project is open source and you can find it in this [Gith
 In the sidebar you can see, if I'm coding, today's live stats coming from my IDE, I use **tmux+neovim**. You should see the bars moving and if you mouseover them you can see how much time I'm spending on each language.
 
 You can also find my latest resume and some pictures taken around the world.
+
+* * *
+
+## Get in touch

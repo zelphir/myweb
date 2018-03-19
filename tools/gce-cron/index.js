@@ -3,12 +3,16 @@ import { writeFileSync, readFileSync } from 'fs'
 import querystring from 'querystring'
 import { format } from 'date-fns'
 import fetch from 'node-fetch'
-import get from 'lodash.get'
-import isEqual from 'lodash.isequal'
-import { getTodayLanguages, addLanguages } from 'shared/apollo'
+import getOr from 'lodash/fp/getOr'
+import get from 'lodash/get'
+import map from 'lodash/fp/map'
+import flow from 'lodash/fp/flow'
+import isEqual from 'lodash/isEqual'
+import { getDailyStats, updateDailyStats } from 'shared/apollo'
 
 const apiKey = process.env.WAKATIME_API_KEY
-const today = format(new Date(), 'YYYY-MM-DD')
+const date = new Date()
+const today = format(date, 'YYYY-MM-DD')
 const options = {
   headers: { Authorization: `Basic ${new Buffer(apiKey).toString('base64')}` }
 }
@@ -23,7 +27,13 @@ const tmpJson = path.join(__dirname, 'tmp.json')
       options
     )
     const json = await res.json()
-    const languages = get(json, 'data[0].languages', [])
+    const languages = flow(
+      getOr([], 'data[0].languages'),
+      map(({ total_seconds, ...values }) => ({
+        ...values,
+        totalSeconds: total_seconds
+      }))
+    )(json)
     const prevLanguages = get(
       JSON.parse(readFileSync(tmpJson, 'utf8')),
       'languages',
@@ -31,16 +41,17 @@ const tmpJson = path.join(__dirname, 'tmp.json')
     )
 
     if (!isEqual(prevLanguages, languages)) {
-      const todayLanguages = await getTodayLanguages()
+      const todayLanguages = await getDailyStats()
 
       writeFileSync(tmpJson, JSON.stringify({ languages }), 'utf8')
 
-      const { data: { updateOrCreateLanguage } } = await addLanguages({
+      const { data: { updateOrCreateDailyStat } } = await updateDailyStats({
         id: todayLanguages ? todayLanguages.id : '',
-        entries: languages
+        entries: languages,
+        timestamp: date.toISOString()
       })
 
-      const { updatedAt, entries } = updateOrCreateLanguage
+      const { updatedAt, entries } = updateOrCreateDailyStat
       console.log(JSON.stringify({ updatedAt, entries })) // eslint-disable-line
     } else {
       console.info('Skipping, same entries...') // eslint-disable-line

@@ -17,10 +17,10 @@
     }
 
     button {
-      background: rgba($green2, 0.8);
+      background-color: $primary;
       border-radius: 5px;
       border: 0;
-      color: $white;
+      color: rgba($black, 0.6);
       cursor: pointer;
       outline: 0;
       padding: 5px 20px;
@@ -28,11 +28,11 @@
       width: 100%;
 
       &:hover {
-        background: rgba($green2, 0.9);
+        background-color: rgba($primary, 0.8);
       }
 
       &.loading {
-        background: rgba($green1, 0.9);
+        background-color: rgba($primary, 0.5);
       }
 
       &:after {
@@ -53,14 +53,14 @@
       &.ok {
         &:after {
           animation: FadeAnimation 5s ease-in 0.2s forwards;
-          background: #4fc99e;
+          background-color: $secondary;
         }
       }
 
       &.error {
         &:after {
           animation: FadeAnimation 5s ease-in 0.2s forwards;
-          background: #cc0000;
+          background-color: $red;
         }
       }
     }
@@ -69,8 +69,8 @@
       input,
       textarea,
       button {
-        background: rgba(#cc0000, 0.05);
-        border: 2px solid #cc0000;
+        background: rgba($red, 0.05);
+        border: 2px solid $red;
       }
     }
 
@@ -98,7 +98,7 @@
   }
 
   .error-message {
-    color: #cc0000;
+    color: $red;
     font-size: 12px;
     height: 18px;
     line-height: 16px;

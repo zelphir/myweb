@@ -12,6 +12,13 @@ import Info from './Info'
 import Nav from './Nav'
 import Footer from './Footer'
 
+const MobileHeader = (
+  <React.Fragment>
+    <div className="bm-header">{process.env.DOMAIN}</div>
+    <img src={menu} className="bm-icon" />
+  </React.Fragment>
+)
+
 const Sidebar = ({ isMobile, ...props }) => (
   <Menu
     id="sidebar"
@@ -20,7 +27,7 @@ const Sidebar = ({ isMobile, ...props }) => (
     disableOverlayClick={!isMobile}
     noOverlay={!isMobile}
     disableCloseOnEsc={!isMobile}
-    customBurgerIcon={<img src={menu} />}
+    customBurgerIcon={MobileHeader}
     customCrossIcon={<Svg src={cross} />}
     width={280}
     bodyClassName="menu-open"

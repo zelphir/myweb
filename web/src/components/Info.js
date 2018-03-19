@@ -11,8 +11,7 @@ const Info = () => (
       <span>Manzella</span>
     </h3>
     <div className="about">
-      <span>Full stack developer,</span>
-      <span>passionate photographer.</span>
+      <span>Full stack developer</span>
     </div>
   </div>
 )

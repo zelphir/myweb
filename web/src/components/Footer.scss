@@ -8,12 +8,12 @@
 
     &:hover {
       svg {
-        fill: rgba($white, 0.9);
+        fill: rgba($black, 0.9);
       }
     }
 
     svg {
-      fill: rgba($white, 0.6);
+      fill: rgba($black, 0.6);
       height: 18px;
       transition: fill 0.5s linear;
       width: 18px;

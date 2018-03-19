@@ -1,6 +1,6 @@
 // React burger menu overrides
 .bm-burger-button {
-  background: #ccc; // TODO
+  background: $primary;
   height: 50px;
   position: fixed;
   width: 100%;
@@ -11,6 +11,12 @@
     left: 20px !important;
     top: 10px !important;
     width: 30px !important;
+  }
+
+  .bm-header {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
   }
 
   .bm-icon {
@@ -32,7 +38,7 @@
   text-align: right;
 
   svg {
-    fill: rgba($white, 0.4);
+    fill: rgba($black, 0.4);
     height: 14px;
     width: 14px;
   }

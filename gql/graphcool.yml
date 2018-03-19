@@ -10,9 +10,12 @@ permissions:
   - operation: Tag.read
   - operation: Picture.read
   - operation: Language.read
+  - operation: DailyStat.read
   - operation: Tag.create
     authenticated: true
   - operation: Picture.create
+    authenticated: true
+  - operation: DailyStat.create
     authenticated: true
   - operation: Language.create
     authenticated: true

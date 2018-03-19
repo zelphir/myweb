@@ -1,0 +1,8 @@
+fragment Entries on DailyStat {
+  entries(filter: { percent_gte: 1 }, first: 5, orderBy: percent_DESC) {
+    id
+    name
+    text
+    percent
+  }
+}

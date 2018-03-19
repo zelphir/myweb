@@ -38,14 +38,21 @@ mutation CreatePicture(
   }
 }
 
-mutation CreateLanguages($id: ID!, $entries: Json!) {
-  updateOrCreateLanguage(
-    update: { id: $id, entries: $entries }
-    create: { entries: $entries }
+mutation UpdateDailyStats(
+  $id: ID!
+  $entries: [DailyStatentriesLanguage!]
+  $timestamp: DateTime!
+) {
+  updateOrCreateDailyStat(
+    update: { id: $id, entries: $entries, timestamp: $timestamp }
+    create: { entries: $entries, timestamp: $timestamp }
   ) {
     id
-    entries
     createdAt
     updatedAt
+    entries {
+      name
+      percent
+    }
   }
 }

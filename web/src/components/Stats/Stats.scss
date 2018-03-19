@@ -20,13 +20,12 @@
   }
 
   .stats-info {
-    border-left: 1px solid rgba($white, 0.6);
-    cursor: pointer;
+    border-left: 1px solid rgba($black, 0.6);
+    cursor: default;
     display: block;
     font-size: 12px;
     text-transform: uppercase;
     width: $sb-padding-right-md;
-    z-index: 1200;
 
     @include lg {
       font-size: 14px;
@@ -51,7 +50,7 @@
 
     .stats-icon {
       svg {
-        fill: rgba($white, 0.4);
+        fill: rgba($black, 0.4);
         height: 14px;
         vertical-align: middle;
         width: 14px;

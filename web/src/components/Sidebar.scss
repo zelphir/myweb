@@ -1,10 +1,12 @@
 @import 'burger-menu';
 
 #sidebar {
-  background-image: $dev-bg, linear-gradient(45deg, $green1 10%, $green2 100%);
-  color: rgba($white, 0.4);
+  background-image: $dev-bg,
+    linear-gradient(45deg, lighten($primary, 5%) 10%, $primary 100%);
+  color: rgba($black, 0.6);
   font-size: $sb-font-size;
   height: 100%;
+  border-right: 5px solid darken($primary, 5%);
 
   @include md {
     @include reset-sidebar(unset, unset);
@@ -14,21 +16,7 @@
     width: $sb-lg !important;
   }
 
-  &:after {
-    .menu-open & {
-      @include menu-shadow(right, -10px, 10px);
-
-      @include md {
-        @include menu-shadow(left, 0);
-      }
-    }
-
-    @include md {
-      @include menu-shadow(left, 0);
-    }
-  }
-
   .sidebar-top {
-    @include link(rgba($white, 0.4), rgba($white, 0.9));
+    @include link(rgba($black, 0.8), rgba($black, 0.4));
   }
 }

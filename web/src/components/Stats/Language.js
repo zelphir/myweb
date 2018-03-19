@@ -17,7 +17,7 @@ const Language = ({
         backgroundColor
       }}
     />
-    <ReactTooltip place="left" type="light" effect="solid" />
+    <ReactTooltip place="left" effect="solid" />
   </div>
 )
 
