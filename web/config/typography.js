@@ -10,7 +10,6 @@ FairyGates.overrideThemeStyles = ({ rhythm }) => ({
   'html,body,#root,#container': { height: '100%' },
   'h1,h2,h3,h4,h5,h6': { marginTop: 0, color: gray(25) },
   'a:hover': { color: secondary },
-  'p a': { textDecoration: 'underline' },
   p: { color: gray(30) },
   html: { lineHeight: 1.6 },
   a: { color: primary, textShadow: 'none', backgroundImage: 'none' },
@@ -21,10 +20,5 @@ FairyGates.overrideThemeStyles = ({ rhythm }) => ({
 })
 
 const typography = new Typography(FairyGates)
-
-// Hot reload typography in development.
-if (process.env.NODE_ENV !== 'production' && module.hot) {
-  typography.injectStyles()
-}
 
 export default typography

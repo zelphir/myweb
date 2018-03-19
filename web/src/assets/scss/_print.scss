@@ -1,0 +1,78 @@
+@page {
+  @top-center {
+    content: 'TOP SECRET';
+    color: red;
+  }
+  @bottom-center {
+    content: counter(page);
+    font-style: italic;
+  }
+}
+
+@media print {
+  // @page {
+  //   size: A4 portrait;
+  //   margin: 10%;
+  // }
+
+  // @top-left {
+  //   content: element(pageHeader);
+  // }
+
+  // #pageHeader {
+  //   position: running(pageHeader);
+  // }
+
+  // @top-center {
+  //   content: 'Show me';
+  // }
+
+  // @bottom-center {
+  //   content: 'Page ' counter(page);
+  // }
+
+  html {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  #sidebar {
+    display: none;
+  }
+
+  #page-wrap {
+    transform: translate3d(0, 0, 0) !important;
+    width: 100% !important;
+    max-width: 100%;
+    padding: 30px;
+  }
+
+  .resume {
+    > div p {
+      font-size: inherit;
+    }
+
+    h4 {
+      color: $black;
+
+      em {
+        font-family: inherit;
+        font-size: inherit;
+      }
+    }
+
+    h5 {
+      color: #666;
+
+      em {
+        font-family: inherit;
+        font-size: inherit;
+      }
+    }
+
+    li,
+    ul p {
+      font-size: inherit;
+    }
+  }
+}

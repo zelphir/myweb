@@ -56,3 +56,9 @@ mutation UpdateDailyStats(
     }
   }
 }
+
+mutation deleteNullLanguages($id: ID!) {
+  deleteLanguage(id: $id) {
+    id
+  }
+}

@@ -3,8 +3,22 @@ notifyProgram: /usr/local/bin/jobberNotifier.sh
 
 [jobs]
 - name: ImportStats
-  cmd: "cd ~ && node ."
-  time: "*/20 * 9-23,0-1 * * *"
+  cmd: "cd ~ && node import.js"
+  time: "*/20 * 0-1 * * *"
+  onError: Continue
+  notifyOnError: true
+  notifyOnSuccess: true
+  notifyOnFailure: true
+- name: ImportStats
+  cmd: "cd ~ && node import.js"
+  time: "*/20 * 9-23 * * *"
+  onError: Continue
+  notifyOnError: true
+  notifyOnSuccess: true
+  notifyOnFailure: true
+- name: CleanLanguages
+  cmd: "cd ~ && node cleanup.js"
+  time: "0 30 2 * * *"
   onError: Continue
   notifyOnError: true
   notifyOnSuccess: true

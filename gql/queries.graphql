@@ -13,3 +13,9 @@ query GetDailyStats {
     ...Entries
   }
 }
+
+query GetAllNullLanguages {
+  allLanguages(filter: { day: null }) {
+    id
+  }
+}

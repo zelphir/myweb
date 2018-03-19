@@ -1,6 +1,6 @@
 import React from 'react'
 
-import avatar from '../assets/images/avatar.jpg'
+import avatar from '../assets/images/avatar_dev.jpg'
 import './Info.scss'
 
 const Info = () => (

@@ -5,8 +5,16 @@ import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
-import { GetAllTags, GetDailyStats } from 'gql/queries.graphql'
-import { CreatePicture, UpdateDailyStats } from 'gql/mutations.graphql'
+import {
+  GetAllTags,
+  GetDailyStats,
+  GetAllNullLanguages
+} from 'gql/queries.graphql'
+import {
+  CreatePicture,
+  UpdateDailyStats,
+  deleteNullLanguages
+} from 'gql/mutations.graphql'
 
 const uri = `${process.env.GRAPHCOOL_URL}/simple/v1/${
   process.env.GRAPHCOOL_SERVICE_ID
@@ -95,6 +103,25 @@ export const getDailyStats = async () => {
     })
 
     return allDailyStats[0]
+  } catch (err) {
+    console.error(err) // eslint-disable-line
+  }
+}
+
+export const cleanLanguagesUp = async () => {
+  try {
+    const { data: { allLanguages } } = await client.query({
+      query: GetAllNullLanguages
+    })
+
+    return Promise.all(
+      allLanguages.map(({ id }) =>
+        client.mutate({
+          variables: { id },
+          mutation: deleteNullLanguages
+        })
+      )
+    )
   } catch (err) {
     console.error(err) // eslint-disable-line
   }
