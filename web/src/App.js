@@ -8,6 +8,7 @@ import { ApolloProvider, compose } from 'react-apollo'
 import client from './lib/apollo'
 import withMatchMedia from './lib/withMatchMedia'
 import Sidebar from './components/Sidebar'
+import PrintInfo from './components/PrintInfo'
 
 import './App.scss'
 
@@ -15,6 +16,7 @@ const App = ({ isMobile }) => (
   <ApolloProvider client={client}>
     <Router>
       <div id="container">
+        <PrintInfo />
         <Sidebar
           pageWrapId={'page-wrap'}
           outerContainerId={'container'}

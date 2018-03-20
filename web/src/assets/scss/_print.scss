@@ -1,53 +1,73 @@
-@page {
-  @top-center {
-    content: 'TOP SECRET';
-    color: red;
-  }
-  @bottom-center {
-    content: counter(page);
-    font-style: italic;
-  }
-}
-
 @media print {
-  // @page {
-  //   size: A4 portrait;
-  //   margin: 10%;
-  // }
+  @page {
+    size: A4 landscape;
+    margin: 1cm 1cm 0.5cm 1cm;
+  }
 
-  // @top-left {
-  //   content: element(pageHeader);
-  // }
+  html,
+  body,
+  .menu-open,
+  #root,
+  #container,
+  #page-wrap {
+    overflow: visible !important;
+    height: auto !important;
 
-  // #pageHeader {
-  //   position: running(pageHeader);
-  // }
-
-  // @top-center {
-  //   content: 'Show me';
-  // }
-
-  // @bottom-center {
-  //   content: 'Page ' counter(page);
-  // }
+    &:-webkit-scrollbar {
+      display: none;
+    }
+  }
 
   html {
-    font-size: 12px;
+    font-size: 11px;
     line-height: 1.2;
+    position: relative;
   }
 
+  .bm-burger-button,
+  .bm-overlay,
   #sidebar {
-    display: none;
+    display: none !important;
   }
 
   #page-wrap {
-    transform: translate3d(0, 0, 0) !important;
+    column-count: 2;
+    transform: translateX(0) !important;
     width: 100% !important;
     max-width: 100%;
-    padding: 30px;
+    padding: 0;
+    margin-top: 30px;
+  }
+
+  .print {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    top: 0;
+
+    div {
+      flex: 0 50%;
+      display: flex;
+      flex-direction: column;
+      padding: 5px;
+    }
+
+    .print-left {
+      border-left: 1px solid $black;
+    }
+
+    .print-right {
+      border-right: 1px solid $black;
+      text-align: right;
+    }
   }
 
   .resume {
+    h1 {
+      position: relative;
+    }
+
     > div p {
       font-size: inherit;
     }
@@ -69,6 +89,11 @@
         font-size: inherit;
       }
     }
+
+    // ul:nth-of-type(5) {
+    //   page-break-before: always;
+    //   margin-top: 2cm;
+    // }
 
     li,
     ul p {
