@@ -8,6 +8,12 @@ const dirname = path.resolve(__dirname, '../')
 
 getEnvVariables()
 
+const sassLoaderOptions = {
+  sourceMap: true,
+  data: '@import "variables"; @import "mixins";',
+  includePaths: ['src/', path.resolve(dirname, 'src/assets/scss')]
+}
+
 const webpackConfig = (config, { defaultLoaders, stage }) => {
   config.node = { fs: 'empty' }
   config.module.rules = [
@@ -22,14 +28,7 @@ const webpackConfig = (config, { defaultLoaders, stage }) => {
                   { loader: 'css-loader' },
                   {
                     loader: 'sass-loader',
-                    options: {
-                      sourceMap: true,
-                      data: '@import "variables"; @import "mixins";',
-                      includePaths: [
-                        'src/',
-                        path.resolve(dirname, 'src/assets/scss')
-                      ]
-                    }
+                    options: sassLoaderOptions
                   }
                 ]
               : ExtractCssChunks.extract({
@@ -45,11 +44,8 @@ const webpackConfig = (config, { defaultLoaders, stage }) => {
                     {
                       loader: 'sass-loader',
                       options: {
-                        data: '@import "variables"; @import "mixins";',
-                        includePaths: [
-                          'src/',
-                          path.resolve(dirname, 'src/assets/scss')
-                        ]
+                        ...sassLoaderOptions,
+                        sourceMap: false
                       }
                     }
                   ]

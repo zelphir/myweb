@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Text, TextArea } from 'react-form'
-// import isEmail from 'validator/lib/isEmail'
 
 const FormField = ({ id, placeholder, type }) => {
   const Field = type === 'input' ? Text : TextArea

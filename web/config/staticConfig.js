@@ -38,22 +38,22 @@ const getRoutes = async () => {
   return [
     ...pages.map(page => ({
       path: `/${page.data.slug}/`,
-      component: 'src/containers/Page',
+      component: 'src/layouts/Page',
       getData: () => ({ page })
     })),
     {
       path: '/blog/',
-      component: 'src/containers/Blog',
+      component: 'src/layouts/Blog',
       getData: () => ({ posts }),
       children: posts.map(post => ({
         path: `/${post.data.slug}/`,
-        component: 'src/containers/Post',
+        component: 'src/layouts/Post',
         getData: () => ({ post })
       }))
     },
     {
       is404: true,
-      component: 'src/containers/404'
+      component: 'src/layouts/404'
     }
   ]
 }

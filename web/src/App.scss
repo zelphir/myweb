@@ -1,5 +1,4 @@
 #page-wrap {
-  height: 100%;
   padding: 80px 30px 30px;
   width: 100%;
 
@@ -13,14 +12,6 @@
     @include reset-sidebar(translateX($sb-lg), '', calc(100% - #{$sb-lg}));
     padding: 30px 100px 50px 50px;
   }
-}
-
-a {
-  transition: color 0.25s linear;
-}
-
-button {
-  transition: background-color 0.25s linear;
 }
 
 @import 'print';
