@@ -13,7 +13,7 @@ const getFiles = folder => {
       .on('data', item => {
         if (path.extname(item.path) === '.md') {
           const data = fs.readFileSync(item.path, 'utf8')
-          const dataObj = matter(data)
+          const dataObj = matter(data, { excerpt: true })
 
           dataObj.data.slug =
             dataObj.data.slug ||
@@ -37,12 +37,12 @@ const getRoutes = async () => {
 
   return [
     ...pages.map(page => ({
-      path: `/${page.data.slug}/`,
+      path: `/${page.data.slug}`,
       component: 'src/layouts/Page',
       getData: () => ({ page })
     })),
     {
-      path: '/blog/',
+      path: '/blog',
       component: 'src/layouts/Blog',
       getData: () => ({ posts }),
       children: posts.map(post => ({

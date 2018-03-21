@@ -1,7 +1,6 @@
 ---
 title: Hi, I'm Roberto.
 slug: /
-showContact: true
 ---
 
 
@@ -28,3 +27,6 @@ You can also find my latest resume and some pictures taken around the world.
 * * *
 
 ## Get in touch
+
+<Contact />
+

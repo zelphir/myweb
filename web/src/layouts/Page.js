@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouteData } from 'react-static'
-import Markdown from 'react-markdown'
+import Markdown from 'markdown-to-jsx'
 
 import RouterLink from '../components/RouterLink'
 import Contact from '../components/Contact'
@@ -14,11 +14,19 @@ export default withRouteData(({ page }) => {
     <div className={className}>
       <h1>{page.data.title}</h1>
       <Markdown
-        source={page.content}
-        escapeHtml={false}
-        renderers={{ link: RouterLink }}
-      />
-      {page.data.showContact && <Contact />}
+        options={{
+          overrides: {
+            a: {
+              component: RouterLink
+            },
+            Contact: {
+              component: Contact
+            }
+          }
+        }}
+      >
+        {page.content}
+      </Markdown>
     </div>
   )
 })

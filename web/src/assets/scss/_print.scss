@@ -1,6 +1,6 @@
 @media print {
   @page {
-    size: A4 landscape;
+    size: A4 portrait;
     margin: 1cm 1cm 0.5cm 1cm;
   }
 
@@ -31,19 +31,18 @@
   }
 
   #page-wrap {
-    column-count: 2;
     transform: translateX(0) !important;
     width: 100% !important;
     max-width: 100%;
+    margin-top: 80px;
     padding: 0;
-    margin-top: 30px;
   }
 
   .print {
     display: flex;
     position: fixed;
     width: 100%;
-    height: 50px;
+    height: 40px;
     top: 0;
 
     div {
@@ -64,40 +63,50 @@
   }
 
   .resume {
-    h1 {
-      position: relative;
-    }
-
     > div p {
       font-size: inherit;
     }
 
-    h4 {
-      color: $black;
+    h3 {
+      margin: 15px 0;
+    }
 
-      em {
-        font-family: inherit;
+    .resume-list {
+      column-count: 2;
+      column-gap: 20px;
+
+      h4 {
+        color: $black;
+
+        &:first-of-type {
+          margin-top: 0;
+        }
+
+        em {
+          font-family: inherit;
+          font-size: inherit;
+        }
+      }
+
+      h5 {
+        color: #666;
+
+        em {
+          font-family: inherit;
+          font-size: inherit;
+        }
+      }
+
+      li,
+      ul p {
         font-size: inherit;
+        margin-bottom: 2px;
       }
     }
 
-    h5 {
-      color: #666;
-
-      em {
-        font-family: inherit;
-        font-size: inherit;
-      }
-    }
-
-    // ul:nth-of-type(5) {
-    //   page-break-before: always;
-    //   margin-top: 2cm;
-    // }
-
-    li,
-    ul p {
-      font-size: inherit;
+    small {
+      font-size: 8px;
+      color: rgba($black, 0.8);
     }
   }
 }

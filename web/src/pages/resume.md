@@ -13,83 +13,72 @@ I always push myself to improve the code quality and the working flow everywhere
 
 I'm also an enthusiast photographer.
 
+
 ### Experience
 
-*   #### NowTV - Sky *(London, GB)*
+<div class="resume-list">
 
-    ##### Senior Frontend/NodeJS Developer | consultant, *2016 - Present*
+#### NowTV - Sky *(London, GB)*
+##### Senior Frontend/NodeJS Developer | consultant, *2016 - Present*
+<small>*NodeJS, Docker, React, Redux, React Native, AngularJS, ExpressJS, Jenkins, Mongo, Redis, AWS, Kubernetes*</small>
 
-    -   Internal CMS for editors to curate the NowTV Devices Homepage
-    -   NodeJS, Mongo, Redis app to feed all the NowTV apps and devices
-    -   Account broadband/tv status page
-    -   Sales website for UK
-
-    *NodeJS, Docker, AngularJS, ExpressJS, Jenkins, React, Redux, React Native, Mongo, Redis, AWS, Kubernetes*
-
-
-*   #### Photobox *(London, GB)*
-
-    ##### Senior NodeJS Developer | consultant, *2015 - 2016*
-
-    -   NodeJS checkout (payment flow)
-    -   Scaling application for peak season
-
-    *NodeJS, Docker, AWS, ExpressJS*
+-   Internal CMS for editors to curate the NowTV Devices Homepage
+-   NodeJS, Mongo, Redis app to feed all the NowTV apps and devices
+-   Account broadband/tv status page
+-   Sales website for UK
 
 
-*   #### DigitasLBi *(London, GB)*
+#### Photobox *(London, GB)*
+##### Senior NodeJS Developer | consultant, *2015 - 2016*
+<small>*NodeJS, Docker, AWS, ExpressJS*</small>
 
-    ##### Lead Front End Developer, *2014 - 2015*
-
-    -   World wide platform for Renault, Nissan, Infiniti, Datsun and Dacia. I worked as a Lead FE, leading a team of 10 people and managing offshore resources from Vietnam, Costa Rica, France and Colombia. This team was part of a 200 people group all around the World. A huge platform based on Adobe AEM.
-    -   Various internal projects
-
-    *Backbone, AngularJS, ElasticSearch, NodeJS, Docker, Mongo, Redis*
+-   NodeJS checkout (payment flow)
+-   Scaling application for peak season
 
 
-*   #### OutOfView Ltd *(London, GB)*
+#### DigitasLBi *(London, GB)*
+##### Lead Front End Developer, *2014 - 2015*
+<small>*React, Backbone, AngularJS, ElasticSearch, NodeJS, Docker, Mongo, Redis*</small>
 
-    ##### Lead Front End Developer, *2012 - 2014*
-
-    -   Gliff App (IOS, Android). Not on the Stores anymore. It was supposed to be a viral social app using Memes generated on the app using Canvas
-    -   Quib.ly: A Questions and Answers portal (a la Stack Overflow or Quora) for tech savvy parents and kids (not online anymore)
-    -   Other minor projects (nexus-club.com, mindthegap.org.uk, thegliff.com, altanawealth.com, etc…)
-
-    *Elasticsearch, NodeJS, Git, Python, Pyramid, AngularJS, Cordova, Ionic*
+-   World wide platform for Renault, Nissan, Infiniti, Datsun and Dacia. I worked as a Lead FE, leading a team of 10 people and managing offshore resources from Vietnam, Costa Rica, France and Colombia. This team was part of a 200 people group all around the World. A huge platform based on Adobe AEM.
+-   Various internal projects
 
 
-*   #### giglio.com *(Palermo, Italy)*
+#### OutOfView Ltd *(London, GB)*
+##### Lead Front End Developer, *2012 - 2014*
+<small>*Elasticsearch, NodeJS, Git, Python, Pyramid, AngularJS, Cordova, Ionic*</small>
 
-    ##### Senior Full Stack Developer, *2010 - 2012*
-
-    -   Frontend/Backend for the blogs and the e-commerce website
-    -   DevOps
-
-    *PHP, Wordpress, Magento, Apache, Nginx, Varnish*
+-   Gliff App (IOS, Android). Not on the Stores anymore. It was supposed to be a viral social app using Memes generated on the app using Canvas
+-   Quib.ly: A Questions and Answers portal (a la Stack Overflow or Quora) for tech savvy parents and kids (not online anymore)
+-   Other minor projects (nexus-club.com, mindthegap.org.uk, thegliff.com, altanawealth.com, etc…)
 
 
-*   #### Freelancer *(Palermo, Italy)*
+#### giglio.com *(Palermo, Italy)*
+##### Senior Full Stack Developer, *2010 - 2012*
+<small>*PHP, Wordpress, Magento, Apache, Nginx, Varnish*</small>
 
-    ##### UI designer/Frontend/Backend developer, *2000 - 2012*
+-   Frontend/Backend for the blogs and the e-commerce website
+-   DevOps
 
-    -   Wordpress specialist, templating, etc...
 
-    *PHP, Wordpress, Joomla, Magento, Apache, Nginx*
+#### Freelancer *(Palermo, Italy)*
+##### UI designer/Frontend/Backend developer, *2000 - 2012*
+<small>*PHP, Wordpress, Joomla, Magento, Apache, Nginx*</small>
 
+-   Wordpress specialist, templating, etc...
+
+</div>
 
 ### Education
 
 *   **Computer Science** (Università degli Studi di Palermo)
-
-    *Degree not completed*, 2005 - 2007
+    <small>*Degree not completed*, 2005 - 2007</small>
 
 *   **Electrical Engineering** (Università degli Studi di Palermo)
-
-    *Degree not completed*, 2002 - 2004
+    <small>*Degree not completed*, 2002 - 2004</small>
 
 *   **Classical Lyceum** (Liceo Classico G. Garibaldi di Palermo)
-
-    *High School Diploma*, 2002 - 2004
+    <small>*High School Diploma*, 2002 - 2004</small>
 
 
 ### More
@@ -97,3 +86,4 @@ I'm also an enthusiast photographer.
 *   **Languages**: *Italian, English*
 
 *   **Interests**: *Sports, Photography, New technologies, Motorbikes*
+

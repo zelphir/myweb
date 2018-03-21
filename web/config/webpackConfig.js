@@ -52,7 +52,19 @@ const webpackConfig = (config, { defaultLoaders, stage }) => {
                 })
         },
         defaultLoaders.cssLoader,
-        defaultLoaders.jsLoader,
+        {
+          test: /\.(js|jsx)$/,
+          // add also top-level node_modules to work with Yarn workspaces
+          exclude: [/node_modules/, path.resolve(dirname, '../node_modules')],
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                cacheDirectory: stage !== 'production'
+              }
+            }
+          ]
+        },
         defaultLoaders.fileLoader
       ]
     }
