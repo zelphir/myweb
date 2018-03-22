@@ -1,21 +1,25 @@
-#page-wrap {
+.main {
   padding: 80px 30px 30px;
-  width: 100%;
 
   @include md {
-    @include reset-sidebar(translateX($sb-md), unset, calc(100% - #{$sb-md}));
-    max-width: 830px;
+    left: $sb-md !important;
     padding: 30px;
+
+    > div {
+      max-width: 830px;
+    }
   }
 
   @include lg {
-    @include reset-sidebar(translateX($sb-lg), '', calc(100% - #{$sb-lg}));
+    left: $sb-lg !important;
     padding: 30px 100px 50px 50px;
   }
 }
 
-.print {
-  display: none;
+.open-menu {
+  @include md {
+    display: none;
+  }
 }
 
 @import 'print';

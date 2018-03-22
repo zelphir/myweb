@@ -47,10 +47,9 @@ class Footer extends React.PureComponent {
 
   handleClick = e => {
     e.preventDefault()
-
-    const element = document.getElementById('contact')
-
-    return scrollTo(element)
+    return scrollTo(document.getElementById('contact'), {
+      context: document.getElementsByClassName('main')[0]
+    })
   }
 
   renderExternalLink({ name, url, icon }) {

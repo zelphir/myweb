@@ -1,32 +1,33 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withRouteData } from 'react-static'
-import Markdown from 'markdown-to-jsx'
+import { compose } from 'react-apollo'
 
-import RouterLink from '../components/RouterLink'
-import Contact from '../components/Contact'
+import withMatchMedia from '../lib/withMatchMedia'
+import renderMarkdown from '../lib/renderMarkdown.js'
 
 import './Page.scss'
 
-export default withRouteData(({ page }) => {
-  const className = page.data.slug === '/' ? 'intro' : page.data.class || ''
+const Page = ({ page, isPrint }) => {
+  const { partials, slug, title } = page.data
+  const className = slug === '/' ? 'home' : slug
 
   return (
     <div className={className}>
-      <h1>{page.data.title}</h1>
-      <Markdown
-        options={{
-          overrides: {
-            a: {
-              component: RouterLink
-            },
-            Contact: {
-              component: Contact
-            }
-          }
-        }}
-      >
-        {page.content}
-      </Markdown>
+      <h1>{title}</h1>
+      {partials &&
+        isPrint &&
+        partials.map((partial, key) => (
+          <React.Fragment key={key}>{renderMarkdown(partial)}</React.Fragment>
+        ))}
+      {renderMarkdown(page.content)}
     </div>
   )
-})
+}
+
+Page.propTypes = {
+  page: PropTypes.object.isRequired,
+  isPrint: PropTypes.bool.isRequired
+}
+
+export default compose(withRouteData, withMatchMedia)(Page)

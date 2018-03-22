@@ -7,25 +7,38 @@ const withMatchMedia = ComposedComponent =>
       ComposedComponent
     )})`
 
-    state = { isMobile: false }
+    state = { isMobile: true, isPrint: false }
 
     componentDidMount() {
-      this.matchMedia = window.matchMedia('(max-width: 768px)')
-      this.setState({ isMobile: this.matchMedia.matches })
-      this.matchMedia.addListener(this.mediaQueryChanged)
+      this.mqlMobile = window.matchMedia('(max-width: 768px)')
+      this.mqlPrint = window.matchMedia('print')
+      this.setState({
+        isMobile: this.mqlMobile.matches,
+        isPrint: this.mqlPrint.matches
+      })
+      this.mqlMobile.addListener(this.mediaQueryChanged)
+      this.mqlPrint.addListener(this.mediaQueryChanged)
     }
 
     componentWillUnmount() {
-      this.matchMedia.removeListener(this.mediaQueryChanged)
+      this.mqlMobile.removeListener(this.mediaQueryChanged)
+      this.mqlPrint.removeListener(this.mediaQueryChanged)
     }
 
     mediaQueryChanged = () => {
-      this.setState({ isMobile: this.matchMedia.matches })
+      this.setState({
+        isMobile: this.mqlMobile.matches,
+        isPrint: this.mqlPrint.matches
+      })
     }
 
     render() {
       return (
-        <ComposedComponent {...this.props} isMobile={this.state.isMobile} />
+        <ComposedComponent
+          {...this.props}
+          isMobile={this.state.isMobile}
+          isPrint={this.state.isPrint}
+        />
       )
     }
   }

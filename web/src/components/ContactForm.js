@@ -25,7 +25,7 @@ const fields = [
   }
 ]
 
-class Contact extends React.PureComponent {
+class ContactForm extends React.PureComponent {
   state = {
     isSending: false,
     status: undefined,
@@ -93,4 +93,4 @@ class Contact extends React.PureComponent {
   }
 }
 
-export default Contact
+export default ContactForm

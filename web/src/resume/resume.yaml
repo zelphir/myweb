@@ -1,0 +1,175 @@
+---
+name: Roberto Manzella
+info:
+  label: Full Stack Developer
+  brief: |-
+    I've been playing with computers for a long time! :-)
+    Based in London... love NodeJS/React/GraphQL/Docker/Git/Serverless!
+    In the past years I've worked for different companies, from startups to leading global technology companies.
+    I always push myself to improve the code quality and the working flow everywhere I go. Automation is very important for me, and I always try to speed up and automate as much stuff as I can, from testing tools, continuous delivery, utility tools, etc... to make other devs' lives easier and more relaxed. Trying to use serverless architecture (from different provider like AWS, Google, Azure) as much as I can.
+    I'm also an enthusiast photographer.
+
+contact:
+  email: info@robertomanzella.com
+  phone: "+44 (0) 7707797695"
+  website: https://robertomanzella.com
+
+meta:
+  format: FRESH@^1.0.0-beta
+  modified: '2018-03-22T14:47:27.519Z'
+
+location:
+  city: London
+  country: GB
+
+employment:
+  history:
+  - position: Senior Full Stack Developer, consultant
+    employer: NowTV - Sky
+    summary: |-
+      Internal CMS for editors to curate the NowTV Devices Homepage
+      NodeJS, Mongo, Redis app to feed all the NowTV apps and devices
+      Account broadband/tv status page
+      Sales website for UK
+    start: '2016-01-05'
+    end: Present
+    url: https://www.sky.com
+    location: London, GB
+    keywords:
+    - NodeJS
+    - Docker
+    - React
+    - Redux
+    - React Native
+    - AngularJS
+    - ExpressJS
+    - Jenkins
+    - Mongo
+    - Redis
+    - AWS
+    - Kubernetes
+  - position: Senior NodeJS Developer, consultant
+    employer: Photobox
+    summary: |-
+      NodeJS checkout (payment flow)
+      Scaling application for peak season
+    start: '2015-09-01'
+    end: '2015-12-31'
+    url: https://www.photobox.co.uk
+    location: London, GB
+    keywords:
+    - NodeJS
+    - Docker
+    - ExpressJS
+    - AWS
+  - position: Lead Front End Developer
+    employer: DigitasLBi
+    summary: |-
+      World wide platform for Renault, Nissan, Infiniti, Datsun and Dacia. I worked as a Lead FE, leading a team of 10 people and managing offshore resources from Vietnam, Costa Rica, France and Colombia. This team was part of a 200 people group all around the World. A huge platform based on Adobe AEM.
+      Various internal projects
+    start: '2014-09-01'
+    end: '2015-08-31'
+    url: https://www.digitas.com
+    location: London, GB
+    keywords:
+    - React
+    - Backbone
+    - AngularJS
+    - ElasticSearch
+    - NodeJS
+    - Docker
+    - Mongo
+    - Redis
+  - position: Lead Front End Developer
+    employer: OutOfView Ltd
+    summary: |-
+      Gliff App (IOS, Android). Not on the Stores anymore. It was supposed to be a viral social app using Memes generated on the app using Canvas
+      Quib.ly: A Questions and Answers portal (a la Stack Overflow or Quora) for tech savvy parents and kids (not online anymore)
+      Other minor projects (nexus-club.com, mindthegap.org.uk, thegliff.com, altanawealth.com, etc…)
+    start: '2012-11-01'
+    end: '2014-08-31'
+    url: http://www.altanawealth.com/
+    location: London, GB
+    keywords:
+    - Elasticsearch
+    - NodeJS
+    - Python
+    - Pyramid
+    - AngularJS
+    - Cordova
+    - Ionic
+  - position: Senior Full Stack Developer
+    employer: Giglio.com
+    summary: |-
+      Frontend/Backend for the blogs and the e-commerce website
+      DevOps
+    start: '2010-01-07'
+    end: '2012-10-30'
+    url: https://www.giglio.com/
+    location: Palermo, Italy
+    keywords:
+    - PHP
+    - Wordpress
+    - Magento
+    - Apache
+    - Nginx
+    - Varnish
+  - position: UI designer/Frontend/Backend Developer
+    employer: Freelancer
+    summary: |-
+      Frontend/Backend for the blogs and the e-commerce website
+      DevOps
+    start: '2010-01-07'
+    end: '2009-12-30'
+    location: Palermo, Italy
+    keywords:
+    - PHP
+    - Wordpress
+    - Magento
+    - Apache
+    - Nginx
+    - Varnish
+
+education:
+  history:
+  - institution: University of Palermo
+    start: '2005-09-01'
+    end: '2007-06-01'
+    area: Computer Science
+    degree: Degree not completed
+  - institution: University of Palermo
+    start: '2002-09-01'
+    end: '2004-06-01'
+    area: Electrical Engineering
+    degree: Degree not completed
+  - institution: Garibaldi High School of Palermo
+    start: '1997-09-01'
+    end: '2002-06-01'
+    area: Classical Lyceum
+    degree: High School Diploma
+
+social:
+- label: Linkedin
+  network: Linkedin
+  url: https://www.linkedin.com/in/rmanzella
+  user: rmanzella
+- label: Twitter
+  network: Twitter
+  url: https://twitter.com/robertomanzella
+  user: robertomanzella
+- label: Github
+  network: Github
+  url: https://github.com/zelphir
+  user: zelphir
+
+interests:
+- name: Sports
+- name: Photography
+- name: New technologies
+- name: Motorbikes
+
+languages:
+- language: English
+  level: Fluent
+- language: Italian
+  level: Native speaker

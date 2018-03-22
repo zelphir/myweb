@@ -1,89 +1,86 @@
 ---
-title: 'Resume'
-class: resume
+title: Resume
+pdf: resume.pdf
+partials:
+- contact-details.md
+- cover.md
 ---
 
-I've been playing with computers for a long time! :-)
+## Experience
 
-Based in London... love NodeJS/React/GraphQL/Docker/Git/Serverless!
+*   ### [NowTV - Sky](https://www.sky.com) *(2016 — Present)*
+    #### Senior Full Stack Developer, consultant
 
-In the past years I've worked for different companies, from startups to leading global technology companies.
+    -   Internal CMS for editors to curate the NowTV Devices Homepage
+    -   NodeJS, Mongo, Redis app to feed all the NowTV apps and devices
+    -   Account broadband/tv status page
+    -   Sales website for UK
 
-I always push myself to improve the code quality and the working flow everywhere I go. Automation is very important for me, and I always try to speed up and automate as much stuff as I can, from testing tools, continuous delivery, utility tools, etc... to make other devs' lives easier and more relaxed. Trying to use serverless architecture (from different provider like AWS, Google, Azure) as much as I can.
+    NodeJS, Docker, React, Redux, React Native, AngularJS, ExpressJS, Jenkins, Mongo, Redis, AWS, Kubernetes
 
-I'm also an enthusiast photographer.
+*   ### [Photobox](https://www.photobox.co.uk) *(2015 — 2015)*
+    #### Senior NodeJS Developer, consultant
 
+    -   NodeJS checkout (payment flow)
+    -   Scaling application for peak season
 
-### Experience
+    NodeJS, Docker, AWS, ExpressJS
 
-<div class="resume-list">
+*   ### [DigitasLBi](https://www.digitas.com) *(2014 — 2015)*
+    #### Lead Front End Developer
 
-#### NowTV - Sky *(London, GB)*
-##### Senior Frontend/NodeJS Developer | consultant, *2016 - Present*
-<small>*NodeJS, Docker, React, Redux, React Native, AngularJS, ExpressJS, Jenkins, Mongo, Redis, AWS, Kubernetes*</small>
+    -   World wide platform for Renault, Nissan, Infiniti, Datsun and Dacia. I worked as a Lead FE, leading a team of 10 people and managing offshore resources from Vietnam, Costa Rica, France and Colombia. This team was part of a 200 people group. A huge platform based on Adobe AEM.
+    -   Various internal projects
 
--   Internal CMS for editors to curate the NowTV Devices Homepage
--   NodeJS, Mongo, Redis app to feed all the NowTV apps and devices
--   Account broadband/tv status page
--   Sales website for UK
+    React, Backbone, AngularJS, ElasticSearch, NodeJS, Docker, Mongo, Redis
 
+*   ### [OutOfView Ltd](http://www.altanawealth.com/) *(2012 — 2014)*
+    #### Lead Front End Developer
 
-#### Photobox *(London, GB)*
-##### Senior NodeJS Developer | consultant, *2015 - 2016*
-<small>*NodeJS, Docker, AWS, ExpressJS*</small>
+    -   Gliff App (IOS, Android). Not on the Stores anymore. It was supposed to be a viral social app using Memes generated on the app using Canvas
+    -   Quib.ly: A Questions and Answers portal (a la Stack Overflow or Quora) for tech savvy parents and kids (not online anymore)
+    -   Other minor projects (nexus-club.com, mindthegap.org.uk, thegliff.com, altanawealth.com, etc…)
 
--   NodeJS checkout (payment flow)
--   Scaling application for peak season
+    Elasticsearch, NodeJS, Git, Python, Pyramid, AngularJS, Cordova, Ionic
 
+*   ### [Giglio.com](https://www.giglio.com/) *(2010 — 2012)*
+    #### Senior Full Stack Developer
 
-#### DigitasLBi *(London, GB)*
-##### Lead Front End Developer, *2014 - 2015*
-<small>*React, Backbone, AngularJS, ElasticSearch, NodeJS, Docker, Mongo, Redis*</small>
+    -   Frontend/Backend for the blogs and the e-commerce website
+    -   DevOps
 
--   World wide platform for Renault, Nissan, Infiniti, Datsun and Dacia. I worked as a Lead FE, leading a team of 10 people and managing offshore resources from Vietnam, Costa Rica, France and Colombia. This team was part of a 200 people group all around the World. A huge platform based on Adobe AEM.
--   Various internal projects
+    PHP, Wordpress, Magento, Apache, Nginx, Varnish
 
+*   ### Freelancer *(2000 — 2009)*
+    #### UI designer/Frontend/Backend Developer
 
-#### OutOfView Ltd *(London, GB)*
-##### Lead Front End Developer, *2012 - 2014*
-<small>*Elasticsearch, NodeJS, Git, Python, Pyramid, AngularJS, Cordova, Ionic*</small>
+    -   Wordpress specialist, templating, etc...
 
--   Gliff App (IOS, Android). Not on the Stores anymore. It was supposed to be a viral social app using Memes generated on the app using Canvas
--   Quib.ly: A Questions and Answers portal (a la Stack Overflow or Quora) for tech savvy parents and kids (not online anymore)
--   Other minor projects (nexus-club.com, mindthegap.org.uk, thegliff.com, altanawealth.com, etc…)
-
-
-#### giglio.com *(Palermo, Italy)*
-##### Senior Full Stack Developer, *2010 - 2012*
-<small>*PHP, Wordpress, Magento, Apache, Nginx, Varnish*</small>
-
--   Frontend/Backend for the blogs and the e-commerce website
--   DevOps
+    PHP, Wordpress, Joomla, Magento, Apache, Nginx
 
 
-#### Freelancer *(Palermo, Italy)*
-##### UI designer/Frontend/Backend developer, *2000 - 2012*
-<small>*PHP, Wordpress, Joomla, Magento, Apache, Nginx*</small>
+## Education
 
--   Wordpress specialist, templating, etc...
+*   ### University of Palermo *(2005 — 2007)*
+    #### Computer Science
+    Degree not completed
 
-</div>
+*   ### University of Palermo *(2002 — 2004)*
+    #### Electrical Engineering
+    Degree not completed
 
-### Education
-
-*   **Computer Science** (Università degli Studi di Palermo)
-    <small>*Degree not completed*, 2005 - 2007</small>
-
-*   **Electrical Engineering** (Università degli Studi di Palermo)
-    <small>*Degree not completed*, 2002 - 2004</small>
-
-*   **Classical Lyceum** (Liceo Classico G. Garibaldi di Palermo)
-    <small>*High School Diploma*, 2002 - 2004</small>
+*   ### Garibaldi High School of Palermo *(1997 — 2002)*
+    #### Classical Lyceum -
+    High School Diploma
 
 
-### More
+## Languages
+-   Italian *Native*
+-   English *Fluent*
 
-*   **Languages**: *Italian, English*
 
-*   **Interests**: *Sports, Photography, New technologies, Motorbikes*
-
+## Interests
+-   Sports
+-   Photography
+-   New technologies
+-   Motorbikes

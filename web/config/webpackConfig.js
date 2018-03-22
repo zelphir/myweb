@@ -25,7 +25,7 @@ const webpackConfig = (config, { defaultLoaders, stage }) => {
             stage === 'dev'
               ? [
                   { loader: 'style-loader' },
-                  { loader: 'css-loader' },
+                  { loader: 'css-loader', options: { sourceMap: true } },
                   {
                     loader: 'sass-loader',
                     options: sassLoaderOptions

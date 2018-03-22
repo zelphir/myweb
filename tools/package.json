@@ -24,7 +24,7 @@
     "copy-pkg-json-webpack-plugin": "zelphir/copy-pkg-json-webpack-plugin",
     "dotenv-expand": "^4.2.0",
     "dotenv-safe": "^5.0.1",
-    "eslint": "^4.19.0",
+    "eslint": "^4.19.1",
     "graphql-tag": "^2.8.0",
     "instagram-private-api": "^0.6.7",
     "webpack": "^3.11.0",

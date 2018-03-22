@@ -22,32 +22,6 @@
   }
 }
 
-@mixin reset-sidebar($transform: '', $transition: '', $width: '') {
-  @if $transform != '' {
-    transform: $transform !important;
-  }
-  @if $transition != '' {
-    transition: $transition !important;
-  }
-  @if $width != '' {
-    width: $width !important;
-  }
-}
-
-@mixin menu-shadow($dir, $pos, $size: 30px) {
-  background: linear-gradient(
-    to $dir,
-    rgba($black, 0.25) 0%,
-    rgba($black, 0) 50%
-  );
-  content: '';
-  height: 100%;
-  position: absolute;
-  right: $pos;
-  top: 0;
-  width: $size;
-}
-
 @mixin line-break {
   span:first-of-type:after {
     content: '\A';

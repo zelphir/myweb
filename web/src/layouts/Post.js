@@ -1,18 +1,24 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withRouteData, Link } from 'react-static'
-import Markdown from 'react-markdown'
 
-import RouterLink from '../components/RouterLink'
+import renderMarkdown from '../lib/renderMarkdown.js'
 
-export default withRouteData(({ post }) => (
-  <div>
-    <Link to="/blog/">{'<'} Back</Link>
-    <br />
-    <h3>{post.data.title}</h3>
-    <Markdown
-      source={post.content}
-      escapeHtml={false}
-      renderers={{ link: RouterLink }}
-    />
-  </div>
-))
+const Post = ({ post }) => {
+  const renderedMarkdown = renderMarkdown(post.content)
+
+  return (
+    <div>
+      <Link to="/blog/">{'<'} Back</Link>
+      <br />
+      <h3>{post.data.title}</h3>
+      {renderedMarkdown}
+    </div>
+  )
+}
+
+Post.propTypes = {
+  post: PropTypes.object.isRequired
+}
+
+export default withRouteData(Post)
