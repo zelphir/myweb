@@ -16,12 +16,6 @@
   }
 }
 
-.open-menu {
-  @include md {
-    display: none;
-  }
-}
-
 @media print {
   @include print;
 }

@@ -29,7 +29,7 @@
   ul {
     &:first-of-type {
       list-style: none;
-      margin: 0 0 30px;
+      margin: 0 0 10px;
 
       li {
         margin-bottom: 2px;
@@ -63,6 +63,14 @@
       margin-bottom: calc(1.45rem / 2);
       margin-top: calc(1.45rem / 2);
     }
+  }
+
+  hr {
+    margin: 0 0 20px;
+    padding: 0;
+    background: #999 !important;
+    border: none;
+    height: 1px;
   }
 
   #contact,

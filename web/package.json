@@ -57,7 +57,6 @@
     "json-loader": "^0.5.7",
     "klaw-sync": "^3.0.2",
     "node-sass": "^4.8.3",
-    "pdf-puppeteer": "^1.0.4",
     "prop-types": "^15.6.1",
     "remarkable": "^1.7.1",
     "sass-loader": "^6.0.7",

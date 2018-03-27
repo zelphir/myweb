@@ -28,7 +28,7 @@ const generatePdf = (md, pdfFile) => {
   console.time(chalk.green(`=> [\u2713] Created ${pdfPath}`)) // eslint-disable-line
 
   return new Promise((resolve, reject) =>
-    conversion({ html }, function(err, result) {
+    conversion({ html, pdf: { printBackground: true } }, (err, result) => {
       if (err) return reject(err)
       result.stream.pipe(fs.createWriteStream(pdfPath))
       conversion.kill()

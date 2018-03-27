@@ -9,7 +9,7 @@ import Sidebar from 'react-sidebar'
 import client from './lib/apollo'
 import withMatchMedia from './lib/withMatchMedia'
 import SidebarContent from './components/SidebarContent'
-import ScrollToTop from './components/ScrollToTop'
+import MobileHeader from './components/MobileHeader'
 
 import './App.scss'
 
@@ -37,14 +37,13 @@ class App extends React.PureComponent {
             contentClassName="main"
             shadow={false}
             onSetOpen={this.onSetOpen}
-            sidebar={<SidebarContent isMobile={isMobile} />}
+            sidebar={
+              <SidebarContent isMobile={isMobile} onSetOpen={this.onSetOpen} />
+            }
             docked={!isMobile}
             transitions={isMobile}
           >
-            <ScrollToTop />
-            <a className="open-menu" onClick={this.handleOnClick} href="#">
-              =
-            </a>
+            {isMobile && <MobileHeader openMenu={this.handleOnClick} />}
             <Routes />
           </Sidebar>
         </Router>
