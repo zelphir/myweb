@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouteData } from 'react-static'
 import { compose } from 'react-apollo'
+import classNames from 'classnames/dedupe'
 
 import withMatchMedia from '../lib/withMatchMedia'
 import renderMarkdown from '../lib/renderMarkdown.js'
@@ -10,16 +11,22 @@ import './Page.scss'
 
 const Page = ({ page, isPrint }) => {
   const { partials, slug, title } = page.data
-  const className = slug === '/' ? 'home' : slug
 
   return (
-    <div className={className}>
+    <div
+      className={classNames(slug === '/' ? 'home' : slug, {
+        'no-print': !isPrint
+      })}
+    >
       <h1>{title}</h1>
       {partials &&
-        isPrint &&
-        partials.map((partial, key) => (
-          <React.Fragment key={key}>{renderMarkdown(partial)}</React.Fragment>
-        ))}
+        partials
+          .filter(partial => !!partial.printOnly === isPrint)
+          .map(({ file, content }) => (
+            <React.Fragment key={file}>
+              {renderMarkdown(content)}
+            </React.Fragment>
+          ))}
       {renderMarkdown(page.content)}
     </div>
   )

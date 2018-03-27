@@ -48,6 +48,7 @@ class Footer extends React.PureComponent {
   handleClick = e => {
     e.preventDefault()
     return scrollTo(document.getElementById('contact'), {
+      offset: 500,
       context: document.getElementsByClassName('main')[0]
     })
   }

@@ -1,9 +1,12 @@
 .sidebar {
   background-image: $dev-bg,
     linear-gradient(45deg, lighten($primary, 5%) 10%, $primary 100%);
-  color: rgba($black, 0.6);
-  font-size: $sb-font-size;
   border-right: 5px solid darken($primary, 5%);
+  color: rgba($black, 0.6);
+  display: flex;
+  flex-direction: column;
+  font-size: $sb-font-size;
+  justify-content: space-between;
   width: $sb-md;
 
   @include lg {

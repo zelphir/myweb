@@ -10,7 +10,7 @@ getEnvVariables()
 
 const sassLoaderOptions = {
   sourceMap: true,
-  data: '@import "variables"; @import "mixins";',
+  data: '@import "variables"; @import "mixins"; @import "print";',
   includePaths: ['src/', path.resolve(dirname, 'src/assets/scss')]
 }
 

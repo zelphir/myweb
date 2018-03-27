@@ -31,13 +31,13 @@
     "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
-    "apollo-cache-inmemory": "^1.1.11",
-    "apollo-client": "^2.2.7",
+    "apollo-cache-inmemory": "^1.1.12",
+    "apollo-client": "^2.2.8",
     "apollo-link-context": "^1.0.6",
     "apollo-link-http": "^1.5.3",
     "date-fns": "^1.29.0",
     "graphql": "^0.13.2",
     "lodash": "^4.17.5",
-    "node-fetch": "^2.0.0"
+    "node-fetch": "^2.1.2"
   }
 }

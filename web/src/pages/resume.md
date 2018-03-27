@@ -2,8 +2,11 @@
 title: Resume
 pdf: resume.pdf
 partials:
-- contact-details.md
-- cover.md
+- file: contact-details.md
+  printOnly: true
+- file: cover.md
+  printOnly: true
+
 ---
 
 ## Experience

@@ -7,11 +7,10 @@ const primary = '#b3b300'
 const secondary = '#cccc00'
 
 FairyGates.overrideThemeStyles = ({ rhythm }) => ({
-  'html,body,#root': { height: '100%' },
   'h1,h2,h3,h4,h5,h6': { marginTop: 0, color: gray(25) },
   'a:hover': { color: secondary },
   p: { color: gray(30) },
-  html: { lineHeight: 1.6 },
+  html: { lineHeight: 1.6, overflowY: 'auto' },
   a: {
     color: primary,
     textShadow: 'none',

@@ -1,4 +1,4 @@
-@media print {
+@mixin print {
   @page {
     size: A4 portrait;
     margin: 1.2cm 1cm;
@@ -10,32 +10,12 @@
   .main {
     overflow: visible !important;
     height: auto !important;
+    margin: 0;
   }
 
   html {
     font-size: 11px;
     line-height: 1.3;
-  }
-
-  #contact,
-  .open-menu,
-  .sidebar {
-    display: none !important;
-  }
-
-  [role='navigation'],
-  .main {
-    left: 0 !important;
-    position: static !important;
-    padding: 0;
-
-    > div {
-      max-width: 100%;
-    }
-  }
-
-  .resume h1 {
-    display: none;
   }
 
   a {
@@ -83,5 +63,26 @@
       margin-bottom: calc(1.45rem / 2);
       margin-top: calc(1.45rem / 2);
     }
+  }
+
+  #contact,
+  .open-menu,
+  .sidebar {
+    display: none !important;
+  }
+
+  [role='navigation'],
+  .main {
+    left: 0 !important;
+    position: static !important;
+    padding: 0;
+
+    > div {
+      max-width: 100%;
+    }
+  }
+
+  .resume h1 {
+    display: none;
   }
 }

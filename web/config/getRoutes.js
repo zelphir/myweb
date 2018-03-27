@@ -2,40 +2,50 @@ import fs from 'fs'
 import path from 'path'
 import klaw from 'klaw-sync'
 import matter from 'gray-matter'
-import markdownPdf from 'markdown-pdf'
 import chalk from 'chalk'
 import sass from 'node-sass'
-import tmp from 'tmp'
+import Remarkable from 'remarkable'
+import Html2Pdf from 'electron-html-to'
 
-const generatePdf = (md, pdf) => {
-  const pdfPath = `public/${pdf}`
-  const output = path.resolve(__dirname, '..', pdfPath)
+const remarkable = new Remarkable()
+const conversion = Html2Pdf({ converterPath: Html2Pdf.converters.PDF })
+
+const generatePdf = (md, pdfFile) => {
+  const pdfPath = `./public/${pdfFile}`
   const contact = fs.readFileSync('./src/pages/partials/contact-details.md')
   const cover = fs.readFileSync('./src/pages/partials/cover.md')
-  const tmpCss = tmp.fileSync({ postfix: '.css' })
-  const mdDocs = [contact, cover, md]
-  const { css } = sass.renderSync({ file: './src/assets/scss/_print.scss' })
-
+  const { css } = sass.renderSync({ file: './src/assets/scss/_pdf.scss' })
+  const html = `
+    <html>
+      <head>
+        <style>${css}</style>
+      </head>
+      <body>
+        ${remarkable.render(contact + cover + md)}
+      </body>
+    </html>
+  `
   console.time(chalk.green(`=> [\u2713] Created ${pdfPath}`)) // eslint-disable-line
-  fs.writeFileSync(tmpCss.name, css)
 
-  return new Promise(resolve =>
-    markdownPdf({ cssPath: tmpCss.name })
-      .concat.from.strings(mdDocs)
-      .to.path(output, () => {
-        console.timeEnd(chalk.green(`=> [\u2713] Created ${pdfPath}`)) // eslint-disable-line
-        resolve(pdfPath)
-      })
+  return new Promise((resolve, reject) =>
+    conversion({ html }, function(err, result) {
+      if (err) return reject(err)
+      result.stream.pipe(fs.createWriteStream(pdfPath))
+      conversion.kill()
+      console.timeEnd(chalk.green(`=> [\u2713] Created ${pdfPath}`)) // eslint-disable-line
+      resolve(pdfPath)
+    })
   )
 }
 
 const generatePartials = partials =>
-  partials.map(partial =>
-    fs.readFileSync(
-      path.resolve(__dirname, '../src/pages/partials', partial),
+  partials.map(partial => ({
+    ...partial,
+    content: fs.readFileSync(
+      path.resolve(__dirname, '../src/pages/partials', partial.file),
       'utf8'
     )
-  )
+  }))
 
 const generatePage = async file => {
   if (path.extname(file.path) === '.md') {
