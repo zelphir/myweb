@@ -14,7 +14,6 @@ const Document = ({ Html, Head, Body, children, siteData, renderMeta }) => (
         content="Roberto Manzella: Full Stack developer in London, GB"
       />
       <meta name="theme-color" content="#e6e600" />
-      <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
       <link rel="manifest" href="/manifest.json" />
       <title>{siteData.title}</title>
       <TypographyStyle typography={typography} />
