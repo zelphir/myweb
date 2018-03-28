@@ -9,6 +9,12 @@ const Document = ({ Html, Head, Body, children, siteData, renderMeta }) => (
     <Head>
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta
+        name="description"
+        content="Roberto Manzella: Full Stack developer in London, GB"
+      />
+      <meta name="theme-color" content="#e6e600" />
+      <link rel="manifest" href="/manifest.json" />
       <title>{siteData.title}</title>
       <TypographyStyle typography={typography} />
       <GoogleFont typography={typography} />

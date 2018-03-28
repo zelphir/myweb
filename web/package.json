@@ -7,6 +7,9 @@
     "start": "react-static start",
     "stage": "react-static build --staging",
     "build": "react-static build",
+    "pwa": "sw-precache --root=dist",
+    "postbuild": "yarn pwa",
+    "poststage": "yarn pwa",
     "analyze": "ANALYZE=true react-static build",
     "serve": "serve dist -p 3000"
   },
@@ -60,6 +63,7 @@
     "prop-types": "^15.6.1",
     "remarkable": "^1.7.1",
     "sass-loader": "^6.0.7",
-    "serve": "^6.5.3"
+    "serve": "^6.5.3",
+    "sw-precache": "^5.2.1"
   }
 }

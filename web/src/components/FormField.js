@@ -4,7 +4,14 @@ import { Text, TextArea } from 'react-form'
 
 const FormField = ({ id, placeholder, type }) => {
   const Field = type === 'input' ? Text : TextArea
-  return <Field field={id} placeholder={placeholder} />
+  return (
+    <React.Fragment>
+      <label htmlFor={id} style={{ display: 'none' }}>
+        {placeholder}
+      </label>
+      <Field field={id} placeholder={placeholder} />
+    </React.Fragment>
+  )
 }
 
 FormField.propTypes = {

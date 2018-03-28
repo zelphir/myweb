@@ -5,7 +5,7 @@ import './Info.scss'
 
 const Info = () => (
   <div className="info">
-    <img src={avatar} className="avatar" />
+    <img src={avatar} className="avatar" alt="Roberto Manzella" />
     <h3 className="name">
       <span>Roberto</span>
       <span>Manzella</span>

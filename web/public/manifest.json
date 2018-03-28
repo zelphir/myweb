@@ -1,0 +1,9 @@
+{
+  "name": "robertomanzella.com",
+  "short_name": "robertomanzella",
+  "theme_color": "#e6e600",
+  "background_color": "#ffffff",
+  "display": "browser",
+  "scope": "/",
+  "start_url": "/"
+}

@@ -3,7 +3,7 @@ import Typography from 'typography'
 import FairyGates from 'typography-theme-fairy-gates'
 import { MOBILE_MEDIA_QUERY } from 'typography-breakpoint-constants'
 
-const primary = '#b3b300'
+const primary = '#adab35'
 const secondary = '#cccc00'
 
 FairyGates.overrideThemeStyles = ({ rhythm }) => ({
