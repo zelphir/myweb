@@ -7770,7 +7770,7 @@ pretty-bytes@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-4.0.2.tgz#b2bf82e7350d65c6c33aa95aaa5a4f6327f61cd9"
 
-pretty-error@^2.0.2:
+pretty-error@^2.0.2, pretty-error@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmjs.org/pretty-error/-/pretty-error-2.1.1.tgz#5f4f87c8f91e5ae3f3ba87ab4cf5e03b1a17f1a3"
   dependencies:
@@ -8060,9 +8060,9 @@ react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
 
-react-form@^3.4.3:
-  version "3.4.3"
-  resolved "https://registry.npmjs.org/react-form/-/react-form-3.4.3.tgz#4c9b04078d6d419f081851b3c0bf7a5db24d6870"
+react-form@^3.4.4:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/react-form/-/react-form-3.4.4.tgz#70de9fde89eab4b7a929df723d2d69b17124c752"
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.5.10"
@@ -8149,9 +8149,9 @@ react-sidebar@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/react-sidebar/-/react-sidebar-2.3.2.tgz#ec140bea8a6f5fa3d8ea7a56479665b44cf4f9cf"
 
-react-static@5.5.14:
-  version "5.5.14"
-  resolved "https://registry.yarnpkg.com/react-static/-/react-static-5.5.14.tgz#3366d54198583e40d77d5d6ee82f10204f5e5053"
+react-static@5.6.4:
+  version "5.6.4"
+  resolved "https://registry.yarnpkg.com/react-static/-/react-static-5.6.4.tgz#0f612772ec22f503160f781ada90dae5b2fd70d6"
   dependencies:
     "@types/react" "^16.0.18"
     "@types/react-helmet" "^5.0.3"
@@ -8194,12 +8194,14 @@ react-static@5.5.14:
     html-webpack-plugin "^2.30.1"
     inquirer "^3.3.0"
     inquirer-autocomplete-prompt "^0.11.1"
+    jsesc "^2.5.1"
     match-sorter "^2.0.2"
     openport "^0.0.4"
     postcss-flexbugs-fixes "^3.2.0"
     postcss-loader "^2.0.6"
     preact "^8.2.7"
     preact-compat "^3.17.0"
+    pretty-error "^2.1.1"
     progress "^2.0.0"
     prop-types "^15.5.10"
     raf "^3.4.0"

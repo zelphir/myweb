@@ -1,7 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withRouteData, Link } from 'react-static'
 
-export default withRouteData(({ posts }) => (
+const Blog = ({ posts }) => (
   <div className="blog">
     <h1>Blog time.</h1>
     <br />
@@ -14,4 +15,10 @@ export default withRouteData(({ posts }) => (
       ))}
     </ul>
   </div>
-))
+)
+
+Blog.propTypes = {
+  posts: PropTypes.array.isRequired
+}
+
+export default withRouteData(Blog)

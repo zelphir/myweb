@@ -59,6 +59,7 @@ const generatePage = async file => {
       excerpt,
       data: {
         ...data,
+        date: data.date && data.date.toString(),
         partials: data.partials && generatePartials(data.partials),
         slug:
           data.slug ||
@@ -96,7 +97,7 @@ const getRoutes = async () => {
       component: 'src/layouts/Blog',
       getData: () => ({ posts }),
       children: posts.map(post => ({
-        path: `/${post.data.slug}/`,
+        path: `/${post.data.slug}`,
         component: 'src/layouts/Post',
         getData: () => ({ post })
       }))
