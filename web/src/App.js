@@ -11,6 +11,8 @@ import withMatchMedia from './lib/withMatchMedia'
 import SidebarContent from './components/SidebarContent'
 import MobileHeader from './components/MobileHeader'
 
+import 'typeface-work-sans'
+import 'typeface-quattrocento-sans'
 import './App.scss'
 
 class App extends React.PureComponent {

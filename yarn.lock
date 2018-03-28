@@ -5666,6 +5666,10 @@ is-symbol@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/is-symbol/-/is-symbol-1.0.1.tgz#3cc59f00025194b6ab2e38dbae6689256b660572"
 
+is-there@^4.0.0:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/is-there/-/is-there-4.4.3.tgz#a2c49366c6a487f719dbcad80cbde21248d2c18d"
+
 is-typedarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
@@ -5980,7 +5984,7 @@ json3@^3.3.2:
   version "3.3.2"
   resolved "https://registry.npmjs.org/json3/-/json3-3.3.2.tgz#3c0434743df93e2f5c42aee7b19bcb483575f4e1"
 
-json5@^0.5.0, json5@^0.5.1:
+json5@0.5.1, json5@^0.5.0, json5@^0.5.1:
   version "0.5.1"
   resolved "https://registry.npmjs.org/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
 
@@ -6333,7 +6337,7 @@ lodash@4.17.5, lodash@4.x, lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.0, lodash
   version "4.17.5"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
-lodash@^3.10.0:
+lodash@^3.10.0, lodash@^3.10.1:
   version "3.10.1"
   resolved "https://registry.npmjs.org/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
@@ -6834,6 +6838,14 @@ node-pre-gyp@^0.6.39:
     semver "^5.3.0"
     tar "^2.2.1"
     tar-pack "^3.4.0"
+
+node-sass-json-importer@^3.1.6:
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/node-sass-json-importer/-/node-sass-json-importer-3.1.6.tgz#88fdc6c00934d248430d94fb2cafe93b21ef1cdb"
+  dependencies:
+    is-there "^4.0.0"
+    json5 "0.5.1"
+    lodash "^3.10.1"
 
 node-sass@^4.8.3:
   version "4.8.3"
@@ -8149,7 +8161,7 @@ react-sidebar@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/react-sidebar/-/react-sidebar-2.3.2.tgz#ec140bea8a6f5fa3d8ea7a56479665b44cf4f9cf"
 
-react-static@5.6.4:
+react-static@^5.6.4:
   version "5.6.4"
   resolved "https://registry.yarnpkg.com/react-static/-/react-static-5.6.4.tgz#0f612772ec22f503160f781ada90dae5b2fd70d6"
   dependencies:
@@ -9894,6 +9906,14 @@ type-is@~1.6.15, type-is@~1.6.16:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+
+typeface-quattrocento-sans@^0.0.54:
+  version "0.0.54"
+  resolved "https://registry.yarnpkg.com/typeface-quattrocento-sans/-/typeface-quattrocento-sans-0.0.54.tgz#bdd1f323c48b4f0a181edca93d7f58c4a5578afa"
+
+typeface-work-sans@^0.0.54:
+  version "0.0.54"
+  resolved "https://registry.yarnpkg.com/typeface-work-sans/-/typeface-work-sans-0.0.54.tgz#1bf57d6a2c7dfa6f820adbe12d8c2291835f07c4"
 
 typography-breakpoint-constants@^0.15.10:
   version "0.15.10"

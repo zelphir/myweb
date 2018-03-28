@@ -1,5 +1,6 @@
 import path from 'path'
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin'
+import jsonImporter from 'node-sass-json-importer'
 import { IgnorePlugin } from 'webpack'
 
 import getEnvVariables from 'shared/webpack/env'
@@ -10,8 +11,12 @@ getEnvVariables()
 
 const sassLoaderOptions = {
   sourceMap: true,
-  data: '@import "variables"; @import "mixins"; @import "print";',
-  includePaths: ['src/', path.resolve(dirname, 'src/assets/scss')]
+  data: '@import "variables.json"; @import "mixins"; @import "print";',
+  includePaths: [
+    path.resolve(dirname, 'src/'),
+    path.resolve(dirname, 'src/assets/scss')
+  ],
+  importer: jsonImporter
 }
 
 const webpackConfig = (config, { defaultLoaders, stage }) => {

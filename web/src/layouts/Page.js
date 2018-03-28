@@ -19,6 +19,7 @@ const Page = ({ page, isPrint }) => {
       })}
     >
       <h1>{title}</h1>
+      {slug === 'resume' && <div>download</div>}
       {partials &&
         partials
           .filter(partial => !!partial.printOnly === isPrint)

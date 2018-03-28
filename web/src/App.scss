@@ -16,6 +16,12 @@
   }
 }
 
+@include md {
+  .mobile-header {
+    display: none;
+  }
+}
+
 @media print {
   @include print;
 }
