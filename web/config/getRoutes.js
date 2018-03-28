@@ -52,7 +52,7 @@ const generatePage = async file => {
     const markdownData = fs.readFileSync(file.path, 'utf8')
     const { content, data, excerpt } = matter(markdownData, { excerpt: true })
 
-    if (data.pdf) await generatePdf(content, data.pdf)
+    if (data.pdf && !process.env.NO_PDF) await generatePdf(content, data.pdf)
 
     return {
       content,
