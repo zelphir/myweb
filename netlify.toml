@@ -1,0 +1,16 @@
+[build]
+  base    = "web"
+  publish = "dist"
+  command = "NODE_ENV=production yarn build"
+
+[context.production]
+  [context.production.environment]
+    NODE_VERSION       = "9.9.0"
+    X_CLIENT_ID        = ""
+    GOOGLE_PROJECT_ID  = ""
+    GCE_USERNAME       = ""
+    GCE_INSTANCE_NAME  = ""
+    WAKATIME_API_KEY   = ""
+    INSTAGRAM_USER     = ""
+    INSTAGRAM_PASSWORD = ""
+    SENDGRID_API_KEY   = ""
