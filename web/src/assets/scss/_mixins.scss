@@ -36,3 +36,20 @@
     padding-right: $sb-padding-right-lg;
   }
 }
+
+@mixin icon($size: 18px, $color: $black) {
+  margin-left: 10px;
+
+  &:hover {
+    svg {
+      fill: rgba($color, 0.9);
+    }
+  }
+
+  svg {
+    fill: rgba($color, 0.6);
+    height: $size;
+    transition: fill 0.5s linear;
+    width: $size;
+  }
+}

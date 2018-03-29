@@ -24,6 +24,10 @@
     margin: 15px 0 10px;
   }
 
+  p {
+    margin-bottom: 10px;
+  }
+
   ul {
     &:first-of-type {
       list-style: none;
@@ -74,6 +78,7 @@
   #contact,
   .mobile-header,
   .sidebarjs--left,
+  .pdf-print,
   .sidebar {
     display: none !important;
   }

@@ -1,0 +1,9 @@
+.resume {
+  .pdf-print {
+    text-align: right;
+  }
+
+  .icon {
+    @include icon(24px);
+  }
+}

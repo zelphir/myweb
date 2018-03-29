@@ -5,6 +5,7 @@ import classNames from 'classnames/dedupe'
 
 import { Ctx } from '../lib/contexts'
 import renderMarkdown from '../lib/renderMarkdown.js'
+import PrintPdf from '../components/PrintPdf'
 
 import './Page.scss'
 
@@ -20,7 +21,7 @@ const Page = ({ page }) => {
           })}
         >
           <h1>{title}</h1>
-          {slug === 'resume' && <div>download</div>}
+          {slug === 'resume' && <PrintPdf />}
           {partials &&
             partials
               .filter(partial => !!partial.printOnly === isPrint)
