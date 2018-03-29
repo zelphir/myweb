@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouteData, Link } from 'react-static'
 
 const Blog = ({ posts }) => (
-  <div className="blog">
+  <main className="blog">
     <h1>Blog time.</h1>
     <br />
     All Posts:
@@ -14,7 +14,7 @@ const Blog = ({ posts }) => (
         </li>
       ))}
     </ul>
-  </div>
+  </main>
 )
 
 Blog.propTypes = {

@@ -1,24 +1,23 @@
-.main {
+html,
+body,
+#root {
+  height: 100%;
+}
+
+main {
   padding: 80px 30px 30px;
 
   @include md {
-    left: $sb-md !important;
+    max-width: 830px;
     padding: 30px;
-
-    > div {
-      max-width: 830px;
-    }
+    transform: translateX($sb-md);
+    width: calc(100% - #{$sb-md});
   }
 
   @include lg {
-    left: $sb-lg !important;
     padding: 30px 100px 50px 50px;
-  }
-}
-
-@include md {
-  .mobile-header {
-    display: none;
+    transform: translateX($sb-lg);
+    width: calc(100% - #{$sb-lg});
   }
 }
 

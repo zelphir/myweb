@@ -8,10 +8,10 @@ const Post = ({ post }) => {
   const renderedMarkdown = renderMarkdown(post.content)
 
   return (
-    <React.Fragment>
+    <main>
       <h3>{post.data.title}</h3>
       {renderedMarkdown}
-    </React.Fragment>
+    </main>
   )
 }
 

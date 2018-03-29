@@ -1,9 +1,11 @@
 import React from 'react'
+import { Link } from 'react-static'
 
 const NotFound = () => (
-  <div>
+  <main>
     <h1>404 - :(</h1>
-  </div>
+    <Link to="/">Home</Link>
+  </main>
 )
 
 export default NotFound

@@ -5,7 +5,7 @@ import isEmail from 'validator/lib/isEmail'
 import sendgrid from '../lib/sendgrid'
 import FormField from './FormField'
 
-import './Contact.scss'
+import './ContactForm.scss'
 
 const fields = [
   {

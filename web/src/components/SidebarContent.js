@@ -1,46 +1,43 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-static'
-
-import './SidebarContent.scss'
+import { sidebarService } from 'react-sidebarjs'
 
 import Stats from './Stats'
 import Info from './Info'
 import Footer from './Footer'
 
-const Sidebar = ({ isMobile, onSetOpen }) => {
-  const scrollToTop = () => {
-    document.getElementsByClassName('main')[0].scrollTo(0, 0)
-    isMobile && onSetOpen(false)
+class Sidebar extends React.PureComponent {
+  closeMenu = () => {
+    sidebarService.toggle('sidebar')
   }
 
-  return (
-    <React.Fragment>
-      <div className="sidebar-top">
-        <Info />
-        <div className="menu">
-          <Link to="/" onClick={scrollToTop}>
-            Home
-          </Link>
-          <Link to="/resume" onClick={scrollToTop}>
-            Resume
-          </Link>
-          <Link to="/blog" onClick={scrollToTop}>
-            Blog
-          </Link>
+  render() {
+    return (
+      <aside className="sidebar">
+        <div className="sidebar-top">
+          <Info />
+          <div className="menu">
+            <Link to="/" onClick={this.closeMenu}>
+              Home
+            </Link>
+            <Link to="/photos" onClick={this.closeMenu}>
+              Photos
+            </Link>
+            <Link to="/resume" onClick={this.closeMenu}>
+              Resume
+            </Link>
+            <Link to="/blog" onClick={this.closeMenu}>
+              Blog
+            </Link>
+          </div>
         </div>
-      </div>
-      <div className="sidebar-bottom">
-        <Stats />
-        <Footer isMobile={isMobile} />
-      </div>
-    </React.Fragment>
-  )
-}
-
-Sidebar.propTypes = {
-  isMobile: PropTypes.bool.isRequired,
-  onSetOpen: PropTypes.func
+        <div className="sidebar-bottom">
+          <Stats />
+          <Footer />
+        </div>
+      </aside>
+    )
+  }
 }
 
 export default Sidebar

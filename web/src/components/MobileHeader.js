@@ -1,20 +1,26 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Svg from 'react-inlinesvg'
+import { sidebarService } from 'react-sidebarjs'
 
 import menu from '../assets/icons/menu.svg'
 import './MobileHeader.scss'
 
-const MobileHeader = ({ openMenu }) => (
-  <div className="mobile-header">
-    <span onClick={openMenu}>
-      <Svg src={menu} />
-    </span>
-  </div>
-)
+class MobileHeader extends React.PureComponent {
+  handleOnClick = e => {
+    e.preventDefault()
+    sidebarService.toggle('sidebar')
+  }
 
-MobileHeader.propTypes = {
-  openMenu: PropTypes.func.isRequired
+  render() {
+    return (
+      <div className="mobile-header">
+        <span className="toggle-menu" onClick={this.handleOnClick}>
+          <Svg src={menu} />
+        </span>
+        <span className="mobile-title">{process.env.DOMAIN}</span>
+      </div>
+    )
+  }
 }
 
 export default MobileHeader

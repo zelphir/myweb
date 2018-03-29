@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { scrollTo, Link, withRouter } from 'react-static'
 import Svg from 'react-inlinesvg'
+import { sidebarService } from 'react-sidebarjs'
 
+import { Ctx } from '../lib/contexts'
 import twitter from '../assets/icons/twitter.svg'
 import linkedin from '../assets/icons/linkedin.svg'
 import github from '../assets/icons/github.svg'
@@ -41,16 +43,16 @@ const socials = [
 
 class Footer extends React.PureComponent {
   static propTypes = {
-    match: PropTypes.object.isRequired,
-    isMobile: PropTypes.bool.isRequired
+    match: PropTypes.object.isRequired
   }
 
   handleClick = e => {
     e.preventDefault()
-    return scrollTo(document.getElementById('contact'), {
-      offset: 500,
-      context: document.getElementsByClassName('main')[0]
-    })
+    return scrollTo(document.getElementById('contact'))
+  }
+
+  closeMenu = () => {
+    sidebarService.toggle('sidebar')
   }
 
   renderExternalLink({ name, url, icon }) {
@@ -61,18 +63,13 @@ class Footer extends React.PureComponent {
     )
   }
 
-  renderInternalLink({ name, to, icon }) {
-    return this.props.match.isExact && !this.props.isMobile ? (
-      <a
-        href="/contact"
-        onClick={this.handleClick}
-        className="social"
-        key={name}
-      >
+  renderInternalLink({ name, to, icon }, isMobile) {
+    return this.props.match.isExact && !isMobile ? (
+      <a href="" onClick={this.handleClick} className="social" key={name}>
         <Svg src={icon} />
       </a>
     ) : (
-      <Link to={to} key={name} className="social">
+      <Link to={to} key={name} className="social" onClick={this.closeMenu}>
         <Svg src={icon} />
       </Link>
     )
@@ -80,17 +77,21 @@ class Footer extends React.PureComponent {
 
   render() {
     return (
-      <div id="footer">
-        <div className="socials">
-          {socials.map(
-            social =>
-              social.url
-                ? this.renderExternalLink(social)
-                : this.renderInternalLink(social)
-          )}
-        </div>
-        <div className="copyright">&copy; robertomanzella.com</div>
-      </div>
+      <Ctx.Consumer>
+        {({ isMobile }) => (
+          <div id="footer">
+            <div className="socials">
+              {socials.map(
+                social =>
+                  social.url
+                    ? this.renderExternalLink(social)
+                    : this.renderInternalLink(social, isMobile)
+              )}
+            </div>
+            <div className="copyright">&copy; robertomanzella.com</div>
+          </div>
+        )}
+      </Ctx.Consumer>
     )
   }
 }
