@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-static'
 import { sidebarService } from 'react-sidebarjs'
+import PerfectScrollbar from 'perfect-scrollbar'
 
 import Stats from './Stats'
 import Info from './Info'
@@ -11,9 +12,20 @@ class Sidebar extends React.PureComponent {
     sidebarService.toggle('sidebar')
   }
 
+  ps = null
+
+  componentDidMount() {
+    this.ps = new PerfectScrollbar('#sidebar', { suppressScrollX: true })
+    this.ps.update()
+  }
+
+  componentWillUmnount() {
+    this.ps.destroy()
+  }
+
   render() {
     return (
-      <aside className="sidebar">
+      <aside className="sidebar" id="sidebar">
         <div className="sidebar-top">
           <Info />
           <div className="menu">

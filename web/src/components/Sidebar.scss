@@ -7,6 +7,7 @@
   flex-direction: column;
   font-size: $sb-font-size;
   height: 100%;
+  overflow-y: auto;
   justify-content: space-between;
 
   .sidebar-top {
@@ -34,4 +35,8 @@
   @include md {
     font-size: 18px;
   }
+}
+
+.ps__rail-y {
+  margin-right: -5px;
 }

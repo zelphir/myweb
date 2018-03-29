@@ -6,6 +6,7 @@ import SidebarContent from './SidebarContent'
 import MobileHeader from './MobileHeader'
 
 import './Sidebar.scss'
+import 'perfect-scrollbar/css/perfect-scrollbar.css'
 
 const Sidebar = () => (
   <Ctx.Consumer>
