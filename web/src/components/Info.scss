@@ -1,6 +1,10 @@
 .info {
-  @include sb-padding(40);
+  @include sb-padding(10);
   text-align: right;
+
+  @include md {
+    padding-top: 40px;
+  }
 
   .avatar {
     border-radius: 50% 5px 5px 50%;
