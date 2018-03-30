@@ -11,6 +11,10 @@ import renderMarkdown from '../lib/renderMarkdown.js'
 import './Page.scss'
 
 class Page extends React.PureComponent {
+  static propTypes = {
+    page: PropTypes.object.isRequired
+  }
+
   renderPdf() {
     return (
       <a href="/resume.pdf" target="blank" className="icon">
@@ -74,10 +78,6 @@ class Page extends React.PureComponent {
       </Ctx.Consumer>
     )
   }
-}
-
-Page.propTypes = {
-  page: PropTypes.object.isRequired
 }
 
 export default withRouteData(Page)

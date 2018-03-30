@@ -67,7 +67,7 @@ class Footer extends React.PureComponent {
 
   render() {
     return (
-      <div id="footer">
+      <div className="footer">
         <div className="socials">
           {socials.map(
             social =>
