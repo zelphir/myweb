@@ -15,22 +15,19 @@ export class DeviceProvider extends React.Component {
   state = { isMobile: false, isPrint: false }
 
   componentDidMount() {
-    this.mqlMobile = window.matchMedia(`(max-width: 768px)`)
     this.mqlPrint = window.matchMedia('print')
-    this.setState({
-      isMobile: this.mqlMobile.matches,
-      isPrint: this.mqlPrint.matches
-    })
-    this.mqlMobile.addListener(this.mediaQueryChanged)
-    this.mqlPrint.addListener(this.mediaQueryChanged)
+    this.mqlMobile = window.matchMedia(`(max-width: 768px)`)
+    this.mqlMobile.addListener(this.setMql)
+    this.mqlPrint.addListener(this.setMql)
+    this.setMql()
   }
 
   componentWillUnmount() {
-    this.mqlMobile.removeListener(this.mediaQueryChanged)
-    this.mqlPrint.removeListener(this.mediaQueryChanged)
+    this.mqlMobile.removeListener(this.setMql)
+    this.mqlPrint.removeListener(this.setMql)
   }
 
-  mediaQueryChanged = () => {
+  setMql = () => {
     this.setState({
       isMobile: this.mqlMobile.matches,
       isPrint: this.mqlPrint.matches
