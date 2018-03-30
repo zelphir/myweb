@@ -8,6 +8,10 @@
     @include icon(28px);
   }
 
+  h2 {
+    color: rgba($black, 0.6);
+  }
+
   h3 {
     color: $secondary;
     font-size: 20px;
@@ -23,7 +27,7 @@
   h4 {
     font-size: 18px;
     color: rgba($black, 0.6);
-    margin: 0;
+    margin-bottom: 5px;
   }
 
   ul {

@@ -6,10 +6,8 @@ const FormField = ({ id, placeholder, type }) => {
   const Field = type === 'input' ? Text : TextArea
   return (
     <React.Fragment>
-      <label htmlFor={id} style={{ display: 'none' }}>
-        {placeholder}
-      </label>
-      <Field field={id} placeholder={placeholder} />
+      <Field field={id} />
+      <label htmlFor={id}>{placeholder}</label>
     </React.Fragment>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form } from 'react-form'
 import isEmail from 'validator/lib/isEmail'
+import classNames from 'classnames/dedupe'
 
 import sendgrid from '../lib/sendgrid'
 import FormField from './FormField'
@@ -59,13 +60,14 @@ class ContactForm extends React.PureComponent {
       <Form
         onSubmit={this.onSubmit}
         validate={this.validations}
-        render={({ submitForm, errors, touched }) => (
+        render={({ submitForm, errors, touched, values }) => (
           <form onSubmit={submitForm} id="contact">
             {fields.map(field => {
               const isError = errors && touched[field.id] && errors[field.id]
-              const fieldClass = ['form-field', field.type, isError && 'error']
-                .filter(Boolean)
-                .join(' ')
+              const fieldClass = classNames('form-field', field.type, {
+                error: isError,
+                dirty: values[field.id]
+              })
 
               return (
                 <div className={fieldClass} key={field.id}>
