@@ -2,9 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import createReactContext from 'create-react-context'
 
-export const Ctx = createReactContext()
+import { getComponentDisplayName } from './utils'
 
-export class DeviceProvider extends React.Component {
+const Ctx = createReactContext()
+
+export class MqlProvider extends React.Component {
   static propTypes = {
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
@@ -38,3 +40,20 @@ export class DeviceProvider extends React.Component {
     return <Ctx.Provider value={this.state}>{this.props.children}</Ctx.Provider>
   }
 }
+
+export const withMql = ComposedComponent =>
+  class WithMql extends React.Component {
+    static displayName = `WithMql(${getComponentDisplayName(
+      ComposedComponent
+    )})`
+
+    render() {
+      return (
+        <Ctx.Consumer>
+          {({ isMobile, isPrint }) => (
+            <ComposedComponent isMobile={isMobile} isPrint={isPrint} />
+          )}
+        </Ctx.Consumer>
+      )
+    }
+  }

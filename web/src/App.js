@@ -6,7 +6,7 @@ import { ApolloProvider } from 'react-apollo'
 
 import client from './lib/apollo'
 import Sidebar from './components/Sidebar'
-import { DeviceProvider } from './lib/contexts'
+import { MqlProvider } from './lib/withMql'
 import 'typeface-work-sans'
 import 'typeface-quattrocento-sans'
 import './App.scss'
@@ -14,10 +14,10 @@ import './App.scss'
 const App = () => (
   <ApolloProvider client={client}>
     <Router>
-      <DeviceProvider>
+      <MqlProvider>
         <Sidebar />
         <Routes />
-      </DeviceProvider>
+      </MqlProvider>
     </Router>
   </ApolloProvider>
 )

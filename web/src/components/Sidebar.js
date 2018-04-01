@@ -2,35 +2,31 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { SidebarJS } from 'react-sidebarjs'
 import { withRouter } from 'react-static'
+import { compose } from 'react-apollo'
 
-import { Ctx } from '../lib/contexts'
+import { withMql } from '../lib/withMql'
 import SidebarContent from './SidebarContent'
 import MobileHeader from './MobileHeader'
 
 import './Sidebar.scss'
 
-const Sidebar = ({ location }) => {
+const Sidebar = ({ location, isMobile }) => {
   const type = location.pathname === '/photos' ? 'photos' : 'dev'
-  return (
-    <Ctx.Consumer>
-      {({ isMobile }) =>
-        isMobile ? (
-          <React.Fragment>
-            <SidebarJS sidebarjsName="sidebar">
-              <SidebarContent type={type} />
-            </SidebarJS>
-            <MobileHeader />
-          </React.Fragment>
-        ) : (
-          <SidebarContent type={type} />
-        )
-      }
-    </Ctx.Consumer>
+  return isMobile ? (
+    <React.Fragment>
+      <SidebarJS sidebarjsName="sidebar">
+        <SidebarContent type={type} />
+      </SidebarJS>
+      <MobileHeader />
+    </React.Fragment>
+  ) : (
+    <SidebarContent type={type} />
   )
 }
 
 Sidebar.propTypes = {
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool
 }
 
-export default withRouter(Sidebar)
+export default compose(withMql, withRouter)(Sidebar)

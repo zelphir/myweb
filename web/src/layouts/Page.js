@@ -1,18 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouteData } from 'react-static'
+import { compose } from 'react-apollo'
 import classNames from 'classnames/dedupe'
 import Svg from 'react-inlinesvg'
 
 import pdf from '../assets/icons/pdf.svg'
-import { Ctx } from '../lib/contexts'
+import { withMql } from '../lib/withMql'
 import renderMarkdown from '../lib/renderMarkdown.js'
 
 import './Page.scss'
 
 class Page extends React.PureComponent {
   static propTypes = {
-    page: PropTypes.object.isRequired
+    page: PropTypes.object.isRequired,
+    isPrint: PropTypes.bool
   }
 
   renderPdf() {
@@ -52,32 +54,28 @@ class Page extends React.PureComponent {
   }
 
   render() {
-    const { page } = this.props
+    const { page, isPrint } = this.props
     const { partials, slug, title } = page.data
 
     return (
-      <Ctx.Consumer>
-        {({ isPrint }) => (
-          <main
-            className={classNames(slug === '/' ? 'home' : slug, {
-              'no-print': this.isResumePage(slug) && !isPrint
-            })}
-          >
-            {this.isResumePage(slug) ? (
-              <header>
-                <h1>{title}</h1>
-                {this.renderPdf()}
-              </header>
-            ) : (
-              <h1>{title}</h1>
-            )}
-            {partials && this.renderPartials(isPrint)}
-            {renderMarkdown(page.content, this.customH6(isPrint))}
-          </main>
+      <main
+        className={classNames(slug === '/' ? 'home' : slug, {
+          'no-print': this.isResumePage(slug) && !isPrint
+        })}
+      >
+        {this.isResumePage(slug) ? (
+          <header>
+            <h1>{title}</h1>
+            {!isPrint && this.renderPdf()}
+          </header>
+        ) : (
+          <h1>{title}</h1>
         )}
-      </Ctx.Consumer>
+        {partials && this.renderPartials(isPrint)}
+        {renderMarkdown(page.content, this.customH6(isPrint))}
+      </main>
     )
   }
 }
 
-export default withRouteData(Page)
+export default compose(withMql, withRouteData)(Page)

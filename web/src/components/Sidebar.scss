@@ -14,8 +14,6 @@
   }
 
   &.photos {
-    background-color: rgba(0, 0, 0, 0.4);
-    background-blend-mode: soft-light;
     background-image: $photos-bg;
     background-position: top;
     background-size: cover;
