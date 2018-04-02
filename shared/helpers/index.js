@@ -1,4 +1,15 @@
-const thumbnail = 's240x240/c180.0.720.720'
+const generateThumbnail = ({ width: w, height: h, url }) => {
+  const isSquare = w === h
+  const isPortrait = w < h
+
+  if (isSquare) return url.replace('vp/', `s320x320/vp/`)
+
+  const crop = isPortrait
+    ? `c0.${parseInt((h - w) / 2)}.${w}.${w}`
+    : `c${parseInt((w - h) / 2)}.0.${h}.${h}`
+
+  return url.replace('vp/', `s320x320/${crop}/vp/`)
+}
 
 const generateTags = (allTags, newTags) => {
   const tags = []
@@ -16,17 +27,8 @@ const generateTags = (allTags, newTags) => {
 }
 
 // For the new posted media
-const generateUrl = url => ({
-  imageUrl: url.replace('vp/', '').replace('s640x640', ''),
-  thumbnailUrl: url.replace('vp/', '').replace('s640x640', thumbnail)
-})
-
 const generateCarousel = carousel =>
-  carousel
-    ? carousel
-        .split(',')
-        .map(url => url.replace('vp/', '').replace('s640x640', ''))
-    : []
+  carousel ? carousel.split(',').map(url => url.replace('s640x640', '')) : []
 
 export const transformBody = (
   { tags, imageUrl, caption, date, lat, lng, carousel, ...body },
@@ -34,7 +36,7 @@ export const transformBody = (
 ) => ({
   ...body,
   ...generateTags(allTags, tags.split(',')),
-  ...generateUrl(imageUrl),
+  imageUrl: imageUrl.replace('s640x640', ''),
   carousel: generateCarousel(carousel),
   lat: lat && parseFloat(lat),
   lng: lng && parseFloat(lng),
@@ -49,20 +51,21 @@ const generateLoadUrl = images => {
   if (Array.isArray(mainImage)) {
     return {
       imageUrl: mainImage[0].url,
-      thumbnailUrl: mainImage[0].url.replace('vp/', thumbnail),
+      thumbnailUrl: generateThumbnail(mainImage[0]),
       carousel: images.slice(1).map(image => image[0].url)
     }
   }
 
   return {
     imageUrl: mainImage.url,
-    thumbnailUrl: mainImage.url.replace('vp/', thumbnail),
+    thumbnailUrl: generateThumbnail(mainImage),
     carousel: []
   }
 }
 
 export const transformImage = (image, allTags) => {
   const { caption, webLink, location, takenAt, images, id } = image.getParams()
+
   return {
     ...generateLoadUrl(images),
     ...generateTags(

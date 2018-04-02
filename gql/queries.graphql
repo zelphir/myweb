@@ -19,3 +19,24 @@ query GetAllNullLanguages {
     id
   }
 }
+
+query GetCountries($country: String!) {
+  allPictures(filter: { country: $country }) {
+    country
+  }
+  _allPicturesMeta(filter: { country: $country }) {
+    count
+  }
+}
+
+query GetPhotos {
+  allPictures(orderBy: date_DESC, first: 10) {
+    id
+    country
+    caption
+    thumbnailUrl
+  }
+  _allPicturesMeta {
+    count
+  }
+}

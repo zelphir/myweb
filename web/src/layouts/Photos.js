@@ -1,12 +1,12 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
+
+import PhotoList from '../components/PhotoList'
 
 const Photos = () => (
   <main className="photos">
     <h1>Photos time</h1>
+    <PhotoList />
   </main>
 )
-
-Photos.propTypes = {}
 
 export default Photos
