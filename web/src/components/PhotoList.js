@@ -1,44 +1,24 @@
 import React from 'react'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
 
-class Photos extends React.PureComponent {
+class PhotoList extends React.PureComponent {
   static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    error: PropTypes.object,
     photos: PropTypes.array,
+    count: PropTypes.number,
+    onLoadMore: PropTypes.func,
     subscribeToPhotos: PropTypes.func
   }
 
   render() {
-    const { error, loading, photos } = this.props
+    const { count, photos, onLoadMore } = this.props
 
-    if (error) return <div>Error...</div>
-    if (loading) return <div>Loading...</div>
-
-    return photos.map(photo => <img key={photo.id} src={photo.thumbnailUrl} />)
+    return (
+      <React.Fragment>
+        {photos.map(photo => <img key={photo.id} src={photo.thumbnailUrl} />)}
+        {count > photos.length && <button onClick={onLoadMore}>more</button>}
+      </React.Fragment>
+    )
   }
 }
 
-const GetPhotos = gql`
-  query GetPhotos {
-    allPictures(orderBy: date_DESC, first: 10) {
-      id
-      country
-      caption
-      thumbnailUrl
-    }
-    _allPicturesMeta {
-      count
-    }
-  }
-`
-
-export default graphql(GetPhotos, {
-  props: ({ data }) => ({
-    loading: data.loading,
-    error: data.error,
-    photos: data.allPictures
-  })
-})(Photos)
+export default PhotoList
