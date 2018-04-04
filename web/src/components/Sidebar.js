@@ -12,6 +12,7 @@ import './Sidebar.scss'
 
 const Sidebar = ({ location, isMobile }) => {
   const type = location.pathname === '/photos' ? 'photos' : 'dev'
+
   return isMobile ? (
     <React.Fragment>
       <SidebarJS sidebarjsName="sidebar">

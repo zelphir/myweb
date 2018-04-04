@@ -1,10 +1,18 @@
 .sidebar {
-  display: flex;
+  display: none;
   flex-direction: column;
   font-size: $sb-font-size;
   height: 100%;
   overflow-y: auto;
   justify-content: space-between;
+
+  .sidebarjs--left & {
+    display: flex;
+  }
+
+  @include md {
+    display: flex;
+  }
 
   &.dev {
     background-image: $dev-bg,

@@ -14,7 +14,7 @@ export class MqlProvider extends React.Component {
     ])
   }
 
-  state = { isMobile: false, isPrint: false }
+  state = { isMobile: undefined, isPrint: undefined }
 
   componentDidMount() {
     this.mqlPrint = window.matchMedia('print')
