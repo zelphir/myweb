@@ -8,7 +8,7 @@ const Post = ({ post }) => {
   const renderedMarkdown = renderMarkdown(post.content)
 
   return (
-    <main>
+    <main id="post">
       <h3>{post.data.title}</h3>
       {renderedMarkdown}
     </main>

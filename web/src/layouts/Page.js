@@ -59,7 +59,8 @@ class Page extends React.PureComponent {
 
     return (
       <main
-        className={classNames(slug === '/' ? 'home' : slug, {
+        id={slug === '/' ? 'home' : slug}
+        className={classNames({
           'no-print': this.isResumePage(slug) && !isPrint
         })}
       >

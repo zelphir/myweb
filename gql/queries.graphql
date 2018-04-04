@@ -29,8 +29,8 @@ query GetCountries($country: String!) {
   }
 }
 
-query GetPhotos($skip: Int!) {
-  allPictures(orderBy: date_DESC, skip: $skip, first: 10) {
+query GetPictures($skip: Int!) {
+  allPictures(orderBy: date_DESC, skip: $skip, first: 9) {
     id
     country
     caption

@@ -1,24 +1,29 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 
-import { GetPhotos } from 'gql/queries.graphql'
-// import { OnPhotosUpdate } from 'gql/subscriptions.graphql'
+import { GetPictures } from 'gql/queries.graphql'
+// import { OnPicturesUpdate } from 'gql/subscriptions.graphql'
 import PhotoList from '../components/PhotoList'
 
 const Photos = () => (
-  <main className="photos">
+  <main id="photos">
     <h1>Photos time</h1>
-    <Query query={GetPhotos} variables={{ skip: 0 }}>
+    <Query
+      query={GetPictures}
+      variables={{ skip: 0 }}
+      notifyOnNetworkStatusChange
+    >
       {({ loading, error, data, fetchMore }) => {
-        if (loading) return 'Loading...'
-        if (error) return `Error! ${error.message}`
-
         const photos = data.allPictures
+
+        if (loading && !photos) return 'Loading...'
+        if (error) return `Error! ${error.message}`
 
         return (
           <PhotoList
             photos={photos}
-            count={data._allPicturesMeta.count}
+            isLoading={loading}
+            hasMore={photos.length !== data._allPicturesMeta.count}
             onLoadMore={() =>
               fetchMore({
                 variables: { skip: photos.length },

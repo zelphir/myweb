@@ -14,6 +14,12 @@ export class PhotosProvider extends React.Component {
     ])
   }
 
+  state = {
+    photos: []
+  }
+
+  setPhotos = photos => this.setState({ photos })
+
   render() {
     return <Ctx.Provider value={this.state}>{this.props.children}</Ctx.Provider>
   }
@@ -26,6 +32,16 @@ export const withPhotos = ComposedComponent =>
     )})`
 
     render() {
-      return <Ctx.Consumer>{() => <ComposedComponent />}</Ctx.Consumer>
+      return (
+        <Ctx.Consumer>
+          {({ photos }) => (
+            <ComposedComponent
+              photos={photos}
+              setPhotos={this.setPhotos}
+              {...this.props}
+            />
+          )}
+        </Ctx.Consumer>
+      )
     }
   }

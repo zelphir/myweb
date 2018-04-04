@@ -14,7 +14,7 @@ export class MqlProvider extends React.Component {
     ])
   }
 
-  state = { isMobile: undefined, isPrint: undefined }
+  state = { isMobile: false, isPrint: false }
 
   componentDidMount() {
     this.mqlPrint = window.matchMedia('print')
@@ -51,7 +51,11 @@ export const withMql = ComposedComponent =>
       return (
         <Ctx.Consumer>
           {({ isMobile, isPrint }) => (
-            <ComposedComponent isMobile={isMobile} isPrint={isPrint} />
+            <ComposedComponent
+              isMobile={isMobile}
+              isPrint={isPrint}
+              {...this.props}
+            />
           )}
         </Ctx.Consumer>
       )

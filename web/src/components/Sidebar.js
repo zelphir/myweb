@@ -5,6 +5,7 @@ import { withRouter } from 'react-static'
 import { compose } from 'react-apollo'
 
 import { withMql } from '../lib/withMql'
+import { withPhotos } from '../lib/withPhotos'
 import SidebarContent from './SidebarContent'
 import MobileHeader from './MobileHeader'
 
@@ -30,4 +31,4 @@ Sidebar.propTypes = {
   isMobile: PropTypes.bool
 }
 
-export default compose(withMql, withRouter)(Sidebar)
+export default compose(withMql, withPhotos, withRouter)(Sidebar)
