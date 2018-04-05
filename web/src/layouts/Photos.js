@@ -2,6 +2,7 @@ import React from 'react'
 import { Query } from 'react-apollo'
 import { GetPictures } from 'gql/queries.graphql'
 import PhotoList from '../components/PhotoList'
+import Spinner from '../components/Spinner'
 // import { OnPicturesUpdate } from 'gql/subscriptions.graphql'
 
 const Photos = () => (
@@ -9,14 +10,14 @@ const Photos = () => (
     <h1>Photos time</h1>
     <Query
       query={GetPictures}
-      variables={{ skip: 0 }}
+      variables={{ skip: 0, first: 12, countryCode: '', orderBy: 'date_DESC' }}
       notifyOnNetworkStatusChange
     >
       {({ loading, error, data, fetchMore }) => {
-        const photos = data.allPictures
-
-        if (loading && !photos) return 'Loading...'
         if (error) return `Error! ${error.message}`
+        if (loading && !data.allPictures) return <Spinner fluid />
+
+        const photos = data.allPictures
 
         return (
           <PhotoList

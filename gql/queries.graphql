@@ -20,17 +20,18 @@ query GetAllNullLanguages {
   }
 }
 
-query GetCountries($country: String!) {
-  allPictures(filter: { country: $country }) {
-    country
-  }
-  _allPicturesMeta(filter: { country: $country }) {
-    count
-  }
-}
-
-query GetPictures($skip: Int!) {
-  allPictures(orderBy: date_DESC, skip: $skip, first: 9) {
+query GetPictures(
+  $countryCode: String
+  $first: Int
+  $orderBy: PictureOrderBy
+  $skip: Int
+) {
+  allPictures(
+    filter: { countryCode_contains: $countryCode }
+    first: $first
+    orderBy: $orderBy
+    skip: $skip
+  ) {
     id
     country
     caption
@@ -38,5 +39,12 @@ query GetPictures($skip: Int!) {
   }
   _allPicturesMeta {
     count
+  }
+}
+
+query GetCountries {
+  allPictures {
+    country
+    countryCode
   }
 }

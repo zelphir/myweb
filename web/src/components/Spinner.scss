@@ -2,7 +2,10 @@
   align-items: center;
   display: flex;
   justify-content: center;
-  width: 100%;
+
+  &.fluid {
+    width: 100%;
+  }
 
   svg {
     margin-left: 10px;
@@ -16,6 +19,7 @@
 
   &.light {
     svg {
+      rect,
       circle,
       path {
         fill: $white;

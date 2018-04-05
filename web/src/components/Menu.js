@@ -1,6 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-static'
+import { Query } from 'react-apollo'
+import sortBy from 'lodash/sortBy'
+import Spinner from './Spinner'
+import { GetCountries } from 'gql/queries.graphql'
 
 const menus = {
   dev: [
@@ -19,6 +23,33 @@ const Menu = ({ closeMenu, type }) => (
         {label}
       </Link>
     ))}
+    {type === 'photos' && (
+      <Query query={GetCountries}>
+        {({ loading, error, data }) => {
+          if (error) return null
+          if (loading) return <Spinner light />
+
+          return (
+            <React.Fragment>
+              {data.allPictures.reduce((prev, { country, countryCode }) => {
+                if (country === null) return prev
+                if (prev.find(({ key }) => countryCode === key)) return prev
+
+                return sortBy(
+                  [
+                    ...prev,
+                    <Link to={`/photos/${countryCode}`} key={countryCode}>
+                      {country}
+                    </Link>
+                  ],
+                  'props.children'
+                )
+              }, [])}
+            </React.Fragment>
+          )
+        }}
+      </Query>
+    )}
   </div>
 )
 
