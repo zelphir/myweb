@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { compose } from 'react-apollo'
-
-import { withMql } from '../lib/withMql'
-import { withPhotos } from '../lib/withPhotos'
+import LazyLoad from 'react-lazyload'
+import Spinner from './Spinner'
 import './PhotoList.scss'
 
 class PhotoList extends React.PureComponent {
@@ -38,18 +36,22 @@ class PhotoList extends React.PureComponent {
     const { photos, isLoading } = this.props
 
     return (
-      <React.Fragment>
-        <div className="photo-list">
-          {photos.map(photo => (
-            <div key={photo.id} src={photo.thumbnailUrl}>
+      <div className="photo-list">
+        {photos.map(photo => (
+          <div key={photo.id}>
+            <LazyLoad placeholder={<Spinner pacman />} offset={[100, 0]} resize>
               <img src={photo.thumbnailUrl} />
-            </div>
-          ))}
-        </div>
-        {isLoading && <div>loading more...</div>}
-      </React.Fragment>
+            </LazyLoad>
+          </div>
+        ))}
+        {isLoading && (
+          <div>
+            <Spinner pacman />
+          </div>
+        )}
+      </div>
     )
   }
 }
 
-export default compose(withMql, withPhotos)(PhotoList)
+export default PhotoList

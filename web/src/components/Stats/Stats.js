@@ -2,16 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { TransitionMotion, spring, presets } from 'react-motion'
 import randomColor from 'randomcolor'
-
+import get from 'lodash/get'
 import WhatDoing from './WhatDoing'
 import Languages from './Languages'
 import StatsInfo from './StatsInfo'
-
+import Spinner from '../Spinner'
 import './Stats.scss'
 
 class Stats extends React.PureComponent {
   static propTypes = {
-    languages: PropTypes.array.isRequired,
+    data: PropTypes.object.isRequired,
+    loading: PropTypes.bool,
+    error: PropTypes.object,
     subscribeToDailyStats: PropTypes.func.isRequired
   }
 
@@ -53,18 +55,29 @@ class Stats extends React.PureComponent {
     })
 
   render() {
-    const { languages } = this.props
+    const { error, loading, data } = this.props
+    const languages = get(data, 'allDailyStats[0].entries', [])
 
     return (
       <div id="stats">
-        {!languages.length && <WhatDoing />}
-        <TransitionMotion
-          willEnter={this.willEnter}
-          willLeave={this.willLeave}
-          styles={this.getStyles(languages)}
-        >
-          {styles => <Languages languages={styles} />}
-        </TransitionMotion>
+        {error ? (
+          <div className="stats-error">{error.message}</div>
+        ) : loading ? (
+          <Spinner />
+        ) : (
+          <React.Fragment>
+            {!languages.length && <WhatDoing />}
+            {!!languages.length && (
+              <TransitionMotion
+                willEnter={this.willEnter}
+                willLeave={this.willLeave}
+                styles={this.getStyles(languages)}
+              >
+                {styles => <Languages languages={styles} />}
+              </TransitionMotion>
+            )}
+          </React.Fragment>
+        )}
         <StatsInfo />
       </div>
     )

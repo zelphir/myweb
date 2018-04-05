@@ -1,14 +1,24 @@
 #stats {
   display: flex;
+  height: 165px;
+  justify-content: flex-end;
   overflow: hidden;
+  padding: 0 0 0 20px;
+
+  .stats-error {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $red;
+  }
 
   .languages {
     display: flex;
     flex-direction: column;
     flex: 1;
-    height: 165px;
     justify-content: center;
-    padding: 10px 0 5px 20px;
+    padding: 10px 0 5px;
     position: relative;
   }
 

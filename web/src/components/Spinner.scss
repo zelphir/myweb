@@ -1,0 +1,25 @@
+.spinner {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  svg {
+    margin-left: 10px;
+    opacity: 0.4;
+
+    circle,
+    path {
+      fill: $black;
+    }
+  }
+
+  &.light {
+    svg {
+      circle,
+      path {
+        fill: $white;
+      }
+    }
+  }
+}

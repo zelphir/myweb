@@ -9,14 +9,11 @@ import { OnDailyStatsUpdate } from 'gql/subscriptions.graphql'
 const StatsWrapper = () => (
   <Query query={GetDailyStats}>
     {({ loading, error, data, subscribeToMore }) => {
-      if (loading) return 'Loading...'
-      if (error) return `Error! ${error.message}`
-
-      const languages = get(data, 'allDailyStats[0].entries', [])
-
       return (
         <Stats
-          languages={languages}
+          error={error}
+          loading={loading}
+          data={data}
           subscribeToDailyStats={() =>
             subscribeToMore({
               document: OnDailyStatsUpdate,

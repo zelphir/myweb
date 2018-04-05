@@ -5,7 +5,7 @@ import { compose } from 'react-apollo'
 import classNames from 'classnames/dedupe'
 import Svg from 'react-inlinesvg'
 
-import pdf from '../assets/icons/pdf.svg'
+import pdf from '../assets/svgs/pdf.svg'
 import { withMql } from '../lib/withMql'
 import renderMarkdown from '../lib/renderMarkdown.js'
 

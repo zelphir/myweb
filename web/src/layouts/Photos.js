@@ -1,9 +1,8 @@
 import React from 'react'
 import { Query } from 'react-apollo'
-
 import { GetPictures } from 'gql/queries.graphql'
-// import { OnPicturesUpdate } from 'gql/subscriptions.graphql'
 import PhotoList from '../components/PhotoList'
+// import { OnPicturesUpdate } from 'gql/subscriptions.graphql'
 
 const Photos = () => (
   <main id="photos">

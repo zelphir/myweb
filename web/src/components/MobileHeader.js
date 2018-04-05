@@ -2,7 +2,7 @@ import React from 'react'
 import Svg from 'react-inlinesvg'
 import { sidebarService } from 'react-sidebarjs'
 
-import menu from '../assets/icons/menu.svg'
+import menu from '../assets/svgs/menu.svg'
 import './MobileHeader.scss'
 
 class MobileHeader extends React.PureComponent {

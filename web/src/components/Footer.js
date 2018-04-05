@@ -3,11 +3,11 @@ import Svg from 'react-inlinesvg'
 import { Link } from 'react-static'
 import { sidebarService } from 'react-sidebarjs'
 
-import twitter from '../assets/icons/twitter.svg'
-import linkedin from '../assets/icons/linkedin.svg'
-import github from '../assets/icons/github.svg'
-import envelope from '../assets/icons/envelope.svg'
-import instagram from '../assets/icons/instagram.svg'
+import twitter from '../assets/svgs/twitter.svg'
+import linkedin from '../assets/svgs/linkedin.svg'
+import github from '../assets/svgs/github.svg'
+import envelope from '../assets/svgs/envelope.svg'
+import instagram from '../assets/svgs/instagram.svg'
 
 import './Footer.scss'
 
