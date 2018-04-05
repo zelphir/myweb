@@ -10,7 +10,7 @@ import MobileHeader from './MobileHeader'
 import './Sidebar.scss'
 
 const Sidebar = ({ location, isMobile }) => {
-  const type = location.pathname === '/photos' ? 'photos' : 'dev'
+  const type = location.pathname.includes('/photos') ? 'photos' : 'dev'
 
   return isMobile ? (
     <React.Fragment>

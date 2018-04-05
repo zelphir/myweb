@@ -1,5 +1,6 @@
 import React from 'react'
 import { Query } from 'react-apollo'
+import { withRouter } from 'react-static'
 import { GetPictures } from 'gql/queries.graphql'
 import PhotoList from '../components/PhotoList'
 import Spinner from '../components/Spinner'
@@ -47,4 +48,4 @@ const Photos = () => (
   </main>
 )
 
-export default Photos
+export default withRouter(Photos)
