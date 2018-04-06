@@ -32,7 +32,7 @@ const Menu = ({ closeMenu, type }) => (
           return (
             <React.Fragment>
               {data.allPictures.reduce((prev, { country, countryCode }) => {
-                if (country === null) return prev
+                if (!country || !countryCode) return prev
                 if (prev.find(({ key }) => countryCode === key)) return prev
 
                 return sortBy(
@@ -41,6 +41,7 @@ const Menu = ({ closeMenu, type }) => (
                     <Link
                       to={`/photos?country=${countryCode}`}
                       key={countryCode}
+                      onClick={closeMenu}
                     >
                       {country}
                     </Link>

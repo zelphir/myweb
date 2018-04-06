@@ -1,16 +1,14 @@
-.sidebar-close {
-  color: rgba($white, 0.5);
-  font-size: 28px;
-  position: fixed;
-  right: -20px;
-  top: 0;
-}
-
-@include md {
-  display: flex;
-
-  .sidebar-close {
-    display: none;
+.sidebarjs--is-visible {
+  [sidebarjs-backdrop] {
+    &:before {
+      @include font-work;
+      content: '\d7';
+      color: rgba($white, 0.3);
+      font-size: 30px;
+      position: absolute;
+      right: 6px;
+      top: 0;
+    }
   }
 }
 
