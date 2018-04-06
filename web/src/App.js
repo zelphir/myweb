@@ -19,7 +19,7 @@ const App = () => (
       <MqlProvider>
         <Sidebar />
         <Switch>
-          <Route path="/photos/:country?/:tag?" component={Photos} />
+          <Route path="/photos/:country/:tag?" component={Photos} />
           <Routes />
         </Switch>
       </MqlProvider>
