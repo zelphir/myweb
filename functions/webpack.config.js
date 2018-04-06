@@ -1,23 +1,27 @@
-const path = require('path')
-const merge = require('lodash.merge')
-const CopyPkgJsonPlugin = require('copy-pkg-json-webpack-plugin')
-const base = require('shared/webpack/webpack.config.base')
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
+const path = require('path')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyPkgJsonPlugin = require('copy-pkg-json-webpack-plugin')
+const { DefinePlugin } = require('webpack')
+const rules = require('shared/webpack/rules')
+const externals = require('shared/webpack/externals')
+const env = require('shared/webpack/env')
 const outputPath = '.build'
 
-const options = {
-  nodeVersion: '6.11.5',
-  dirname: path.resolve(__dirname),
+module.exports = ({ fnName }) => ({
+  mode: 'production',
+  output: {
+    filename: 'index.js',
+    libraryTarget: 'commonjs',
+    path: path.resolve(__dirname, outputPath, fnName)
+  },
+  module: { rules: rules('6.11.5') },
+  externals: externals(__dirname),
+  target: 'node',
   plugins: [
-    new CopyPkgJsonPlugin({
-      remove: ['scripts', 'devDependencies']
-    })
+    new DefinePlugin(env()),
+    new CleanWebpackPlugin([outputPath]),
+    new CopyPkgJsonPlugin({ remove: ['scripts', 'devDependencies'] })
   ]
-}
-
-module.exports = ({ fnName }) =>
-  merge(base(options, outputPath), {
-    output: {
-      path: path.resolve(__dirname, outputPath, fnName)
-    }
-  })
+})

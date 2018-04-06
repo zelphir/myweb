@@ -1,24 +1,18 @@
-const path = require('path')
-const merge = require('lodash.merge')
-const base = require('shared/webpack/webpack.config.base')
-const CopyPkgJsonPlugin = require('copy-pkg-json-webpack-plugin')
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
-const options = {
-  nodeVersion: 'current',
-  dirname: path.resolve(__dirname)
-}
+const path = require('path')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyPkgJsonPlugin = require('copy-pkg-json-webpack-plugin')
+const { DefinePlugin } = require('webpack')
+const rules = require('shared/webpack/rules')
+const externals = require('shared/webpack/externals')
+const env = require('shared/webpack/env')
 
 const cron = {
-  entry: {
-    import: './gce-cron/import.js',
-    cleanup: './gce-cron/cleanup.js'
-  },
-  output: {
-    filename: '[name].js'
-  },
+  entry: { import: './gce-cron/import.js', cleanup: './gce-cron/cleanup.js' },
+  output: { filename: '[name].js' },
   outputPath: './gce-cron/.build'
 }
-
 const load = {
   entry: './load-instagram/index.js',
   outputPath: './load-instagram/.build'
@@ -27,17 +21,20 @@ const load = {
 module.exports = ({ tool }) => {
   const isCron = tool === 'cron'
   const outputPath = isCron ? cron.outputPath : load.outputPath
+  const plugins = [
+    new DefinePlugin(env()),
+    new CleanWebpackPlugin([outputPath])
+  ]
   const defaultOutput = {
+    filename: 'index.js',
     libraryTarget: 'var',
     path: path.resolve(__dirname, outputPath)
   }
 
   if (isCron) {
-    options.plugins = [
-      new CopyPkgJsonPlugin({
-        remove: ['scripts', 'devDependencies']
-      })
-    ]
+    plugins.push(
+      new CopyPkgJsonPlugin({ remove: ['scripts', 'devDependencies'] })
+    )
   }
 
   const output = isCron
@@ -45,12 +42,18 @@ module.exports = ({ tool }) => {
     : defaultOutput
   const entry = isCron ? cron.entry : load.entry
 
-  return merge(base(options, outputPath), {
+  return {
+    mode: 'production',
     entry,
     output,
-    node: {
-      __dirname: false,
-      __filename: false
-    }
-  })
+    node: { __dirname: false, __filename: false },
+    module: { rules: rules('current') },
+    externals: externals(__dirname),
+    target: 'node',
+    plugins: [
+      new DefinePlugin(env()),
+      new CleanWebpackPlugin([outputPath]),
+      new CopyPkgJsonPlugin({ remove: ['scripts', 'devDependencies'] })
+    ]
+  }
 }

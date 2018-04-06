@@ -31,7 +31,8 @@
     "graphql-tag": "^2.8.0",
     "lodash.merge": "^4.6.1",
     "nodemon": "^1.17.3",
-    "webpack": "^3.11.0",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14",
     "webpack-node-externals": "^1.7.2"
   },
   "private": true

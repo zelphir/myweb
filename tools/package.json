@@ -27,7 +27,8 @@
     "eslint": "^4.19.1",
     "graphql-tag": "^2.8.0",
     "instagram-private-api": "^0.6.7",
-    "webpack": "^3.11.0",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14",
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
