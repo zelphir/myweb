@@ -24,6 +24,10 @@
     display: flex;
   }
 
+  @include md {
+    display: flex;
+  }
+
   &.dev {
     background-image: $dev-bg,
       linear-gradient(45deg, lighten($primary, 5%) 10%, $primary 100%);

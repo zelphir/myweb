@@ -93,10 +93,6 @@ const getRoutes = async () => {
       getData: () => ({ page })
     })),
     {
-      path: '/photos',
-      component: 'src/layouts/Photos'
-    },
-    {
       path: '/blog',
       component: 'src/layouts/Blog',
       getData: () => ({ posts }),

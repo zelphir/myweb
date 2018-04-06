@@ -1,18 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-static'
-import qs from 'query-string'
 import PhotoList from '../components/PhotoList'
 
-const Photos = ({ location }) => (
+const Photos = ({ match }) => (
   <main id="photos">
     <h1>Photos time</h1>
-    <PhotoList params={qs.parse(location.search)} />
+    <PhotoList params={match.params} />
   </main>
 )
 
 Photos.propTypes = {
-  location: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired
 }
 
 export default withRouter(Photos)

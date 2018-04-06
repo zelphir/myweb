@@ -8,12 +8,11 @@ import { GetCountries } from 'gql/queries.graphql'
 
 const menus = {
   dev: [
-    { to: '/', label: 'Home' },
     { to: '/resume', label: 'Resume' },
     { to: '/blog', label: 'Blog' },
     { to: '/photos', label: 'Photos' }
   ],
-  photos: [{ to: '/', label: 'Home' }]
+  photos: [{ to: '/photos', label: 'Home' }]
 }
 
 const Menu = ({ closeMenu, type }) => (
@@ -39,7 +38,7 @@ const Menu = ({ closeMenu, type }) => (
                   [
                     ...prev,
                     <Link
-                      to={`/photos?country=${countryCode}`}
+                      to={`/photos/${countryCode}`}
                       key={countryCode}
                       onClick={closeMenu}
                     >
