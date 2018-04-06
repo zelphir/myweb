@@ -17,7 +17,7 @@ const Sidebar = ({ location, isMobile }) => {
       <SidebarJS sidebarjsName="sidebar">
         <SidebarContent type={type} />
       </SidebarJS>
-      <MobileHeader />
+      <MobileHeader type={type} />
     </React.Fragment>
   ) : (
     <SidebarContent type={type} />

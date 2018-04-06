@@ -38,7 +38,10 @@ const Menu = ({ closeMenu, type }) => (
                 return sortBy(
                   [
                     ...prev,
-                    <Link to={`/photos/${countryCode}`} key={countryCode}>
+                    <Link
+                      to={`/photos?country=${countryCode}`}
+                      key={countryCode}
+                    >
                       {country}
                     </Link>
                   ],

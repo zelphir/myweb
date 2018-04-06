@@ -1,31 +1,39 @@
+#photos {
+  padding-left: 5px;
+  padding-right: 5px;
+
+  @include md {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
 .photo-list {
   > div {
     background: lighten($black, 90%);
   }
 
-  @include md {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 
-    > div {
-      flex-basis: calc(50% - 10px);
-      margin: 5px;
-      position: relative;
+  > div {
+    flex-basis: calc(50% - 10px);
+    margin: 5px;
+    position: relative;
 
-      &:before {
-        content: '';
-        display: block;
-        padding-top: 100%;
-      }
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
 
-      .spinner,
-      img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-      }
+    .spinner,
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
     }
   }
 

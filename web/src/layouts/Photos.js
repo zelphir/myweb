@@ -1,51 +1,18 @@
 import React from 'react'
-import { Query } from 'react-apollo'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-static'
-import { GetPictures } from 'gql/queries.graphql'
+import qs from 'query-string'
 import PhotoList from '../components/PhotoList'
-import Spinner from '../components/Spinner'
-// import { OnPicturesUpdate } from 'gql/subscriptions.graphql'
 
-const Photos = () => (
+const Photos = ({ location }) => (
   <main id="photos">
     <h1>Photos time</h1>
-    <Query
-      query={GetPictures}
-      variables={{ skip: 0, first: 12, countryCode: '', orderBy: 'date_DESC' }}
-      notifyOnNetworkStatusChange
-    >
-      {({ loading, error, data, fetchMore }) => {
-        if (error) return `Error! ${error.message}`
-        if (loading && !data.allPictures) return <Spinner fluid />
-
-        const photos = data.allPictures
-
-        return (
-          <PhotoList
-            photos={photos}
-            isLoading={loading}
-            hasMore={photos.length !== data._allPicturesMeta.count}
-            onLoadMore={() =>
-              fetchMore({
-                variables: { skip: photos.length },
-                updateQuery: (prev, { fetchMoreResult }) => {
-                  if (!fetchMoreResult) return prev
-
-                  return {
-                    ...prev,
-                    allPictures: [
-                      ...prev.allPictures,
-                      ...fetchMoreResult.allPictures
-                    ]
-                  }
-                }
-              })
-            }
-          />
-        )
-      }}
-    </Query>
+    <PhotoList params={qs.parse(location.search)} />
   </main>
 )
+
+Photos.propTypes = {
+  location: PropTypes.object.isRequired
+}
 
 export default withRouter(Photos)

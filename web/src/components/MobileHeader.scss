@@ -10,6 +10,12 @@
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 1;
+
+  &.photos {
+    background: lighten($black, 30%);
+    color: rgba($white, 0.6);
+  }
 
   .toggle-menu {
     height: 30px;
