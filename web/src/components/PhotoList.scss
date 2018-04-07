@@ -9,16 +9,15 @@
 }
 
 .photo-list {
-  > div {
-    background: lighten($black, 90%);
-  }
-
   display: flex;
   flex-wrap: wrap;
 
-  > div {
+  .picture {
+    background: lighten($black, 90%);
+    display: block;
     flex-basis: calc(50% - 10px);
     margin: 5px;
+    outline: 0;
     position: relative;
 
     &:before {
@@ -29,16 +28,17 @@
 
     .spinner,
     img {
+      height: 100%;
+      left: 0;
+      margin: 0;
       position: absolute;
       top: 0;
-      left: 0;
-      height: 100%;
       width: 100%;
     }
   }
 
   @include lg {
-    > div {
+    .picture {
       flex-basis: calc(33.333% - 10px);
     }
   }

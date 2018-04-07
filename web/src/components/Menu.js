@@ -12,7 +12,7 @@ const menus = {
     { to: '/blog', label: 'Blog' },
     { to: '/photos', label: 'Photos' }
   ],
-  photos: [{ to: '/photos', label: 'Home' }]
+  photos: [{ to: '/photos', label: 'All' }]
 }
 
 const Menu = ({ closeMenu, type }) => (
