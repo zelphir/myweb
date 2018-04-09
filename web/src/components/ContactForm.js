@@ -3,7 +3,7 @@ import { Form } from 'react-form'
 import isEmail from 'validator/lib/isEmail'
 import classNames from 'classnames/dedupe'
 
-import sendgrid from '../lib/sendgrid'
+// import sendgrid from '../lib/sendgrid'
 import FormField from './FormField'
 
 import './ContactForm.scss'
@@ -33,14 +33,14 @@ class ContactForm extends React.PureComponent {
     statusText: undefined
   }
 
-  onSubmit = async (values, _, formApi) => {
-    this.setState({ isSending: true })
-    const res = await sendgrid(values)
-    const { status, statusText } = await res.json()
-    this.setState({ status: status === 202 ? 'ok' : 'error', statusText })
-    this.setState({ isSending: false })
-    formApi.resetAll()
-  }
+  // onSubmit = async (values, _, formApi) => {
+  //   this.setState({ isSending: true })
+  //   const res = await sendgrid(values)
+  //   const { status, statusText } = await res.json()
+  //   this.setState({ status: status === 202 ? 'ok' : 'error', statusText })
+  //   this.setState({ isSending: false })
+  //   formApi.resetAll()
+  // }
 
   validations({ name, email, message }) {
     const isValidEmail = !email

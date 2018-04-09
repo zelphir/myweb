@@ -1,14 +1,10 @@
-import { ApolloClient, split } from 'apollo-client-preset'
+import { ApolloClient, split } from 'apollo-boost'
 import { HttpLink } from 'apollo-link-http'
 import { WebSocketLink } from 'apollo-link-ws'
 import { onError } from 'apollo-link-error'
 import { getMainDefinition } from 'apollo-utilities'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import fetch from 'node-fetch'
-
-import { isDev, isBrowser } from './utils'
-
-if (!isBrowser) global.fetch = fetch
+import { isDev } from './utils'
 
 const errorLink = onError(({ networkError, graphQLErrors }) => {
   if (networkError) console.log('[Network error]', networkError) // eslint-disable-line
@@ -23,17 +19,17 @@ const errorLink = onError(({ networkError, graphQLErrors }) => {
 })
 
 const httpLink = new HttpLink({
-  uri: `${process.env.GRAPHCOOL_URL}/simple/v1/${
-    process.env.GRAPHCOOL_SERVICE_ID
+  uri: `${process.env.REACT_APP_GRAPHCOOL_URL}/simple/v1/${
+    process.env.REACT_APP_GRAPHCOOL_SERVICE_ID
   }`
 })
 
-const wsLink = isBrowser
-  ? new WebSocketLink({
-      uri: process.env.GRAPHCOOL_WSS + process.env.GRAPHCOOL_SERVICE_ID,
-      options: { reconnect: true }
-    })
-  : () => {}
+const wsLink = new WebSocketLink({
+  uri:
+    process.env.REACT_APP_GRAPHCOOL_WSS +
+    process.env.REACT_APP_GRAPHCOOL_SERVICE_ID,
+  options: { reconnect: true }
+})
 
 const links = [
   ({ query }) => {

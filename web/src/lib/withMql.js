@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import createReactContext from 'create-react-context'
 
 import { getComponentDisplayName } from './utils'
 
-const Ctx = createReactContext()
+const Ctx = React.createContext()
 
 export class MqlProvider extends React.Component {
   static propTypes = {

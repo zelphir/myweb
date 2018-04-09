@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withRouteData, Link } from 'react-static'
+import { Link } from 'react-router-dom'
 
 const Blog = ({ posts }) => (
   <main id="blog">
@@ -21,4 +21,4 @@ Blog.propTypes = {
   posts: PropTypes.array.isRequired
 }
 
-export default withRouteData(Blog)
+export default Blog

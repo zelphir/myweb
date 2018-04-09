@@ -1,0 +1,13 @@
+.footer {
+  @include sb-padding(10);
+  margin-top: 20px;
+  text-align: right;
+
+  .social {
+    @include icon;
+  }
+
+  .copyright {
+    margin-top: 10px;
+  }
+}

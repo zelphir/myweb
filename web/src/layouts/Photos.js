@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-static'
+import { withRouter } from 'react-router-dom'
 import PhotoList from '../components/PhotoList'
 
 const Photos = ({ match }) => (

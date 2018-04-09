@@ -1,0 +1,105 @@
+#stats {
+  display: flex;
+  height: 165px;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding: 0 0 0 20px;
+
+  .stats-error {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $red;
+  }
+
+  .languages {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    padding: 10px 0 5px;
+    position: relative;
+  }
+
+  .no-languages {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .stats-info {
+    border-left: 1px solid rgba($black, 0.6);
+    cursor: default;
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    width: $sb-padding-right-md;
+
+    @include lg {
+      font-size: 14px;
+      width: $sb-padding-right-lg;
+    }
+
+    .stats-label {
+      display: block;
+      height: $sb-padding-right-md;
+      line-height: $sb-padding-right-md;
+      text-align: center;
+      transform-origin: top left;
+      transform: rotate(90deg) translate(0, -100%);
+      white-space: nowrap;
+      width: 165px;
+
+      @include lg {
+        height: $sb-padding-right-lg;
+        line-height: $sb-padding-right-lg;
+      }
+    }
+
+    .stats-icon {
+      svg {
+        fill: rgba($black, 0.4);
+        height: 14px;
+        vertical-align: middle;
+        width: 14px;
+
+        @include lg {
+          height: 16px;
+          width: 16px;
+        }
+      }
+    }
+  }
+}
+
+.language {
+  display: flex;
+  justify-content: flex-end;
+  padding: 2px 0;
+  position: relative;
+  width: 100%;
+
+  .label {
+    cursor: pointer;
+    font-size: $languages-font-size;
+    line-height: $languages-bar-height;
+    padding-right: 5px;
+    position: absolute;
+    right: 0;
+    top: 3px;
+    z-index: 1200;
+  }
+
+  .bar {
+    border-radius: 5px 0 0 5px;
+    height: $languages-bar-height;
+  }
+}
+
+.ToolTipPortal {
+  > div {
+    z-index: 2000 !important;
+  }
+}

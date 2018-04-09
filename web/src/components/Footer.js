@@ -42,7 +42,7 @@ const socials = [
 class Footer extends React.PureComponent {
   handleClick = e => {
     e.preventDefault()
-    return scrollTo(document.getElementById('contact'))
+    // return scrollTo(document.getElementById('contact'))
   }
 
   closeMenu = () => {

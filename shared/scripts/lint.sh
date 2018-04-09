@@ -11,6 +11,6 @@ DIRS=(
 
 for i in "${DIRS[@]}"; do
   cd $i
-  eslint --ignore-pattern '**/dist/*' --ignore-pattern '**/tmp/*' --ignore-pattern '**/.build/*' .
+  eslint --ignore-pattern '**/dist/*' --ignore-pattern '**/.build/*' .
   cd ..
 done

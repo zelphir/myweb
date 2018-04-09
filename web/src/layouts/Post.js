@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withRouteData } from 'react-static'
 
 import renderMarkdown from '../lib/renderMarkdown.js'
 
@@ -19,4 +18,4 @@ Post.propTypes = {
   post: PropTypes.object.isRequired
 }
 
-export default withRouteData(Post)
+export default Post

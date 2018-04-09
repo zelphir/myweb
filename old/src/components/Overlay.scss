@@ -1,0 +1,23 @@
+.ReactModal__Body--open,
+.ReactModal__Html--open {
+  overflow: hidden;
+}
+
+.modal {
+  bottom: 20px;
+  left: 20px;
+  outline: none;
+  overflow: auto;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.modal-overlay {
+  background-color: rgba($black, 0.9);
+  bottom: 0px;
+  left: 0px;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+}

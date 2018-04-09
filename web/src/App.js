@@ -1,30 +1,51 @@
 import React from 'react'
-import { Router, Route, Switch } from 'react-static'
-import universal from 'react-universal-component'
-import { hot } from 'react-hot-loader'
-import Routes from 'react-static-routes'
-import { ApolloProvider } from 'react-apollo'
-import client from './lib/apollo'
-import Sidebar from './components/Sidebar'
-import { MqlProvider } from './lib/withMql'
-import 'typeface-work-sans'
-import 'typeface-quattrocento-sans'
-import './App.scss'
+import Helmet from 'react-helmet'
+import { Route, Switch } from 'react-router-dom'
+import loadable from 'loadable-components'
+import routes from './routes'
 
-const Photos = universal(import('./layouts/Photos'))
+class App extends React.Component {
+  state = { serviceWorkerState: null }
 
-const App = () => (
-  <ApolloProvider client={client}>
-    <Router>
-      <MqlProvider>
-        <Sidebar />
+  onSwUpdate = e => {
+    this.setState({ swStatus: e.state })
+  }
+
+  componentDidMount() {
+    window.document.addEventListener('sw', this.onSwUpdate, false)
+  }
+
+  componentWillUnmount() {
+    window.document.removeEventListener('sw', this.onSwUpdate, false)
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <Helmet>
+          <title>robertomanzella.com</title>
+        </Helmet>
         <Switch>
-          <Route path="/photos/:country/:tag?" component={Photos} />
-          <Routes />
+          {routes.pages.map(({ layout, path, data }) => (
+            <Route
+              key={path}
+              exact
+              path={path}
+              data={data}
+              component={loadable(() => import(`./layouts/${layout}`), {
+                render: ({ Component, loading, ownProps }) => {
+                  if (loading) return <div>Loading...</div>
+                  return <Component {...ownProps} data={data} />
+                }
+              })}
+            />
+          ))}
+          <Route component={loadable(() => import('./layouts/NoMatch'))} />
         </Switch>
-      </MqlProvider>
-    </Router>
-  </ApolloProvider>
-)
+        {this.state.swStatus === 'new' && <div>New content, refresh</div>}
+      </React.Fragment>
+    )
+  }
+}
 
-export default hot(module)(App)
+export default App

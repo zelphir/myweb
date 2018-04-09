@@ -1,20 +1,32 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-
+import { hydrate, render } from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
+import { ApolloProvider } from 'react-apollo'
+import { loadComponents, getState } from 'loadable-components'
+import client from './lib/apollo'
+import { MqlProvider } from './lib/withMql'
 import App from './App'
-import { isBrowser } from './lib/utils'
+import registerServiceWorker from './registerServiceWorker'
 
-export default App
+window.snapSaveState = () => getState()
 
-if (isBrowser) {
-  const serviceWorker = require('./lib/serviceWorker')
-  const renderMethod = module.hot
-    ? ReactDOM.render
-    : ReactDOM.hydrate || ReactDOM.render
-  const render = Comp => {
-    renderMethod(<Comp />, document.getElementById('root'))
-  }
+const rootElement = document.getElementById('root')
+const EnhancedApp = (
+  <ApolloProvider client={client}>
+    <BrowserRouter>
+      <MqlProvider>
+        <App />
+      </MqlProvider>
+    </BrowserRouter>
+  </ApolloProvider>
+)
 
-  render(App)
-  serviceWorker.register()
+if (rootElement.hasChildNodes()) {
+  loadComponents().then(() => {
+    hydrate(EnhancedApp, rootElement)
+  })
+} else {
+  render(EnhancedApp, rootElement)
 }
+
+registerServiceWorker()

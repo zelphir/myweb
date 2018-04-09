@@ -81,7 +81,7 @@ class PhotoList extends React.PureComponent {
                     <a
                       className="picture"
                       key={photo.id}
-                      href="#"
+                      href="/"
                       onClick={this.handleToggleModal}
                     >
                       <LazyLoad
@@ -89,7 +89,7 @@ class PhotoList extends React.PureComponent {
                         offset={[100, 0]}
                         resize
                       >
-                        <img src={photo.thumbnailUrl} />
+                        <img src={photo.thumbnailUrl} alt=""/>
                       </LazyLoad>
                     </a>
                   ))}
