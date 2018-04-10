@@ -6,7 +6,6 @@ DIRS=(
   functions
   shared
   tools
-  web
 )
 
 for i in "${DIRS[@]}"; do
@@ -14,3 +13,7 @@ for i in "${DIRS[@]}"; do
   eslint --ignore-pattern '**/dist/*' --ignore-pattern '**/.build/*' .
   cd ..
 done
+
+cd web
+eslint  --config ../node_modules/eslint-config-react-app/index.js src scripts
+cd ..

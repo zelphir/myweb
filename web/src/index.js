@@ -10,23 +10,24 @@ import registerServiceWorker from './registerServiceWorker'
 
 window.snapSaveState = () => getState()
 
-const rootElement = document.getElementById('root')
-const EnhancedApp = (
+const AppWithProviders = (
   <ApolloProvider client={client}>
-    <BrowserRouter>
-      <MqlProvider>
+    <MqlProvider>
+      <BrowserRouter>
         <App />
-      </MqlProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </MqlProvider>
   </ApolloProvider>
 )
 
+const rootElement = document.getElementById('root')
+
 if (rootElement.hasChildNodes()) {
   loadComponents().then(() => {
-    hydrate(EnhancedApp, rootElement)
+    hydrate(AppWithProviders, rootElement)
   })
 } else {
-  render(EnhancedApp, rootElement)
+  render(AppWithProviders, rootElement)
 }
 
 registerServiceWorker()

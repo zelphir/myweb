@@ -16,4 +16,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # routes
-src/routes.json
+public/api/*.json

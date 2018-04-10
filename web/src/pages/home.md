@@ -1,11 +1,10 @@
 ---
 title: Hi, I'm Roberto.
 slug: /
+layout: Page
 partials:
 - file: cover.md
 ---
-
-
 * * *
 
 ## About this website
@@ -21,4 +20,3 @@ You can also find my latest resume and some pictures taken around the world.
 ## Get in touch
 
 % contact-form
-

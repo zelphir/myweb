@@ -39,37 +39,48 @@ const getPdf = (md, pdfFile) => {
 }
 
 const getPartials = partials =>
-  partials.map(partial => ({
-    ...partial,
-    content: fs.readFileSync(
-      path.resolve(__dirname, '../src/pages/partials', partial.file),
-      'utf8'
-    )
-  }))
+  partials.reduce(
+    (obj, { file, ...partial }) => ({
+      ...obj,
+      [file.replace('.md', '')]: {
+        ...partial,
+        content: fs.readFileSync(
+          path.resolve(__dirname, '../src/pages/partials', file),
+          'utf8'
+        )
+      }
+    }),
+    {}
+  )
 
-const getSlug = data =>
-  data.slug ||
-  `/${data.title
+const getId = (slug, title) =>
+  slug ||
+  title
     .toLowerCase()
     .replace(/ /g, '-')
-    .replace(/[^\w-]+/g, '')}`
+    .replace(/[^\w-]+/g, '')
 
 const getPage = async file => {
   if (path.extname(file.path) === '.md') {
     const markdownData = fs.readFileSync(file.path, 'utf8')
-    const { content, data, excerpt } = matter(markdownData, { excerpt: true })
+    const { content, excerpt, data: mdData } = matter(markdownData, {
+      excerpt: true
+    })
+    const { slug, ...data } = mdData
 
-    if (data.pdf && !process.env.NO_PDF) await getPdf(content, data.pdf)
+    if (data.pdf && process.env.GET_PDF) await getPdf(content, data.pdf)
+
+    const id = getId(slug, data.title)
 
     return {
-      path: getSlug(data),
-      data: {
-        content,
-        excerpt,
-        date: data.date && data.date.toString(),
-        ...data,
-        partials: data.partials && getPartials(data.partials)
-      }
+      id: id === '/' ? 'home' : id,
+      ...data,
+      content,
+      excerpt,
+      path: id.includes('/') ? id : `/${id}`,
+      layout: data.layout || 'Post',
+      date: data.date && data.date.toString(),
+      partials: data.partials && getPartials(data.partials)
     }
   }
 }
@@ -85,31 +96,39 @@ const getFiles = async folder => {
   return Promise.all(files.map(async file => getPage(file)))
 }
 
+const arrayToObj = array =>
+  array.reduce(
+    (obj, { id, ...item }) => ({
+      ...obj,
+      [id]: item
+    }),
+    {}
+  )
+
 const getRoutes = async () => {
   console.time(chalk.green(`[\u2713] Routes created`)) // eslint-disable-line
   const posts = await getFiles('posts')
   const pages = await getFiles('pages')
 
   return {
-    pages: [
-      ...pages.map(page => ({
-        layout: 'Page',
-        ...page
-      })),
-      {
-        path: '/photos',
-        layout: 'Photos'
-      },
-      {
-        path: '/blog',
-        layout: 'Blog'
-      }
-    ],
-    posts: posts.map(post => ({ ...post, layout: 'Post' }))
+    ...arrayToObj(pages),
+    photos: {
+      layout: 'Photos',
+      path: '/photos',
+      title: 'Photos'
+    },
+    blog: {
+      layout: 'Blog',
+      path: '/blog',
+      title: 'Blog',
+      posts: arrayToObj(posts)
+    }
   }
 }
 
 getRoutes().then(routes => {
-  fs.writeFileSync('src/routes.json', JSON.stringify(routes, null, 2))
+  const apiPath = 'public/api'
+  if (!fs.existsSync(apiPath)) fs.mkdirSync(apiPath)
+  fs.writeFileSync(`${apiPath}/routes.json`, JSON.stringify(routes, null, 2))
   console.timeEnd(chalk.green(`[\u2713] Routes created`)) // eslint-disable-line
 })

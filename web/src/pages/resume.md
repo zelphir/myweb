@@ -1,6 +1,7 @@
 ---
 title: Resume
 pdf: resume.pdf
+layout: Page
 partials:
 - file: contact-details.md
   printOnly: true
@@ -8,7 +9,6 @@ partials:
   printOnly: true
 
 ---
-
 ## Experience
 
 *   ### [NowTV - Sky](https://www.sky.com) *(2016 — Present)*
