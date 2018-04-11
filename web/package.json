@@ -2,6 +2,19 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "sass": "../shared/scripts/sass.sh",
+    "watch-sass": "yarn sass && yarn sass --watch",
+    "prestart": "node scripts/getRoutes.js && sed -e 's/^/REACT_APP_/' ../.env > .env",
+    "prebuild": "yarn prestart && sed -e 's/^/REACT_APP_/' ../.env.production > .env.production",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-sass start-js",
+    "build": "yarn sass && react-scripts build && react-snap && yarn run generate-sw",
+    "test": "react-scripts test --env=jsdom",
+    "generate-sw": "sw-precache --root=build --config scripts/sw-precache-config.js && uglifyjs build/service-worker.js -o build/service-worker.js",
+    "serve": "serve -s build -p 3000",
+    "deploy": "git checkout production && git rebase master && git push && git checkout -"
+  },
   "devDependencies": {
     "chalk": "^2.3.2",
     "electron-html-to": "^2.6.0",
@@ -48,17 +61,6 @@
     "typography-breakpoint-constants": "^0.15.10",
     "typography-theme-fairy-gates": "^0.15.11",
     "validator": "^9.4.1"
-  },
-  "scripts": {
-    "sass": "../shared/scripts/sass.sh",
-    "watch-sass": "yarn sass && yarn sass --watch",
-    "prestart": "node scripts/getRoutes.js && sed -e 's/^/REACT_APP_/' ../.env > .env",
-    "prebuild": "yarn prestart && sed -e 's/^/REACT_APP_/' ../.env.production > .env.production",
-    "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-sass start-js",
-    "build": "yarn sass && react-scripts build && react-snap && yarn run generate-sw",
-    "test": "react-scripts test --env=jsdom",
-    "generate-sw": "sw-precache --root=build --config scripts/sw-precache-config.js && uglifyjs build/service-worker.js -o build/service-worker.js"
   },
   "reactSnap": {
     "cacheAjaxRequests": true,

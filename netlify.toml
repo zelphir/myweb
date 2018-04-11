@@ -1,5 +1,5 @@
 [build]
-  publish = "web/dist"
+  publish = "web/build"
   command = "cd web && NODE_ENV=production yarn build"
 
 [context.production]
