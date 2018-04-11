@@ -1,6 +1,6 @@
 [build]
   publish = "web/build"
-  command = "cd web && NODE_ENV=production yarn build"
+  command = "cd web && NODE_ENV=production yarn sass && react-scripts build && react-snap && yarn run generate-sw"
 
 [context.production]
   [context.production.environment]
