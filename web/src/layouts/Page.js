@@ -7,8 +7,7 @@ import { matchPath } from 'react-router-dom'
 import pdf from '../assets/svgs/pdf.svg'
 import { withMql } from '../lib/withMql'
 import renderMarkdown from '../lib/renderMarkdown.js'
-
-import './Page.scss'
+import './Page.css'
 
 class Page extends React.PureComponent {
   static propTypes = {

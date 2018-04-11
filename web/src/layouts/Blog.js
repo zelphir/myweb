@@ -9,7 +9,7 @@ const Blog = ({ data }) => (
     <ul>
       {Object.entries(data.posts).map(([id, post]) => (
         <li key={id}>
-          <Link to={`/blog/${post.path}`}>{post.title}</Link>
+          <Link to={post.path}>{post.title}</Link>
         </li>
       ))}
     </ul>

@@ -1,39 +1,27 @@
 import React from 'react'
-import { Route, Link } from 'react-router-dom'
-import styled from 'styled-components'
+import classNames from 'classnames/dedupe'
+import { Route, NavLink as Link } from 'react-router-dom'
 
 const NavLink = ({ path, exact, reload, ...props }) => (
   <Route
     path={path}
     exact={exact}
-    children={({ match }) => (
-      <NavLinkStyle active={match}>
-        {reload ? (
-          <a href={path} reload={true}>
-            {props.title}
-          </a>
-        ) : (
-          <Link to={path}>{props.title}</Link>
-        )}
-      </NavLinkStyle>
-    )}
+    children={({ match }) => {
+      return reload ? (
+        <a
+          href={path}
+          reload={true}
+          className={classNames({ active: match && match.isExact })}
+        >
+          {props.title}
+        </a>
+      ) : (
+        <Link to={path} exact>
+          {props.title}
+        </Link>
+      )
+    }}
   />
 )
 
 export default NavLink
-
-const NavLinkStyle = styled.div`
-  a {
-    transition: color 0.2s, border-bottom-color 0.2s;
-    color: ${props => (props.active ? '#0000ff' : '#666')};
-    text-decoration: none;
-    border-bottom: 2px solid;
-    border-bottom-color: ${props =>
-      props.active ? 'rgba(0, 0, 255, 0.1)' : 'transparent'};
-    &:hover,
-    &:active,
-    &:focus {
-      color: ${props => (props.active ? '#0000ff' : '#222')};
-    }
-  }
-`

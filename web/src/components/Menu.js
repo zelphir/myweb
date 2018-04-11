@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-static'
 import { Query } from 'react-apollo'
 import sortBy from 'lodash/sortBy'
+import { Link } from 'react-router-dom'
 import Spinner from './Spinner'
 import { GetCountries } from 'gql/queries.graphql'
 

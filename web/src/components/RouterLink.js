@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const RouterLink = ({ href, children }) =>
@@ -10,10 +9,5 @@ const RouterLink = ({ href, children }) =>
   ) : (
     <Link to={href}>{children}</Link>
   )
-
-RouterLink.propTypes = {
-  href: PropTypes.string.isRequired,
-  children: PropTypes.array.isRequired
-}
 
 export default RouterLink

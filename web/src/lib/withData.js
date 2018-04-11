@@ -1,7 +1,7 @@
 import React from 'react'
 import { getComponentDisplayName } from './utils'
 
-const url = 'api/routes.json'
+const url = '/api/routes.json'
 
 const withData = ComposedComponent =>
   class WithData extends React.Component {

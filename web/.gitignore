@@ -17,3 +17,6 @@ yarn-error.log*
 
 # routes
 public/api/*.json
+
+# compiled css
+src/**/*.css*

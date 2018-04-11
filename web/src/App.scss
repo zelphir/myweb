@@ -1,0 +1,29 @@
+@import 'base';
+@import 'print';
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+main {
+  padding: 80px 30px 30px;
+
+  @include md {
+    max-width: 830px;
+    padding: 30px;
+    transform: translateX($sb-md);
+    width: calc(100% - #{$sb-md});
+  }
+
+  @include lg {
+    padding: 30px 100px 50px 50px;
+    transform: translateX($sb-lg);
+    width: calc(100% - #{$sb-lg});
+  }
+}
+
+@media print {
+  @include print;
+}

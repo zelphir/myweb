@@ -1,18 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
-// import PhotoList from '../components/PhotoList'
+import PhotoList from '../components/PhotoList'
 
-// eslint-disable-next-line
-const Photos = ({ match }) => (
+const Photos = () => (
   <main id="photos">
     <h1>Photos time</h1>
-    {/*<PhotoList params={match.params} />*/}
+    <PhotoList />
   </main>
 )
 
-Photos.propTypes = {
-  match: PropTypes.object.isRequired
-}
-
-export default withRouter(Photos)
+export default Photos

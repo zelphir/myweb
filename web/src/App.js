@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Helmet from 'react-helmet'
-import NavLink from './components/NavLink'
+import Sidebar from './components/Sidebar'
 import loadable from 'loadable-components'
 import withData from './lib/withData'
+import './App.css'
 
 const layouts = {
   Page: loadable(() => import('./layouts/Page')),
@@ -50,23 +51,17 @@ class App extends Component {
     if (error) return null
     if (loading) return null
 
+    const staticRoutes = Object.assign({}, routes, routes.blog.posts)
+
     return (
       <React.Fragment>
         <Helmet
           defaultTitle="robertomanzella.com"
           titleTemplate="%s | robertomanzella.com"
         />
-        <h1>Navigation</h1>
-        {Object.entries(routes).map(([id, data]) => (
-          <NavLink
-            key={id}
-            {...data}
-            path={data.path}
-            reload={this.state.serviceWorkerState === 'new'}
-          />
-        ))}
+        <Sidebar />
         <Switch>
-          {Object.entries(routes).map(([id, data]) => (
+          {Object.entries(staticRoutes).map(([id, data]) => (
             <Route
               key={id}
               exact
@@ -77,17 +72,13 @@ class App extends Component {
               }}
             />
           ))}
-          {Object.entries(routes.blog.posts).map(([id, data]) => (
-            <Route
-              key={id}
-              exact
-              path={`/blog/${data.path}`}
-              render={props => {
-                const Component = layouts[data.layout]
-                return <Component {...props} data={{ id, ...data }} />
-              }}
-            />
-          ))}
+          <Route
+            path="/photos/:country/:tag?"
+            render={props => {
+              const Component = layouts.Photos
+              return <Component {...props} />
+            }}
+          />
           <Route
             key={'/shell.html'}
             path="/shell.html"

@@ -1,45 +1,26 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import LazyLoad from 'react-lazyload'
 import { Query } from 'react-apollo'
 import { GetPictures } from 'gql/queries.graphql'
+import { Link, withRouter } from 'react-router-dom'
+import qs from 'query-string'
 // import { OnPicturesUpdate } from 'gql/subscriptions.graphql'
 import InfiniteScroll from '../lib/InfiniteScroll'
 import Spinner from './Spinner'
 import Overlay from './Overlay'
-import './PhotoList.scss'
+import './PhotoList.css'
 
 class PhotoList extends React.PureComponent {
-  static propTypes = {
-    params: PropTypes.object,
-    subscribeToPhotos: PropTypes.func
-  }
-
-  state = {
-    showModal: false
-  }
-
-  handleToggleModal = e => {
-    e.preventDefault()
-    this.setState({
-      showModal: !this.state.showModal
-    })
-  }
-
-  // componentDidMount() {
-  //   console.log('photos')
-  //   setTimeout(() => window.scrollTo(0, 0), 100)
-  //   console.log('after scroll')
-  // }
-
   render() {
+    const { pid } = qs.parse(this.props.location.search)
+
     return (
       <Query
         query={GetPictures}
         variables={{
           first: 24,
           orderBy: 'date_DESC',
-          filter: { countryCode: this.props.params.country }
+          filter: { countryCode: this.props.match.params.country }
         }}
         notifyOnNetworkStatusChange
       >
@@ -52,8 +33,9 @@ class PhotoList extends React.PureComponent {
           return (
             <React.Fragment>
               <Overlay
-                showModal={this.state.showModal}
-                handleModal={this.handleToggleModal}
+                showModal={!!pid}
+                location={this.props.location.pathname}
+                photo={photos.find(({ id }) => id === pid)}
               />
               <InfiniteScroll
                 wrapper="photos"
@@ -78,20 +60,19 @@ class PhotoList extends React.PureComponent {
               >
                 <div className="photo-list">
                   {photos.map(photo => (
-                    <a
+                    <Link
                       className="picture"
                       key={photo.id}
-                      href="/"
-                      onClick={this.handleToggleModal}
+                      to={`?pid=${photo.id}`}
                     >
                       <LazyLoad
                         placeholder={<Spinner pacman />}
                         offset={[100, 0]}
                         resize
                       >
-                        <img src={photo.thumbnailUrl} alt=""/>
+                        <img src={photo.thumbnailUrl} alt="" />
                       </LazyLoad>
-                    </a>
+                    </Link>
                   ))}
                   {loading && (
                     <div className="picture">
@@ -108,4 +89,4 @@ class PhotoList extends React.PureComponent {
   }
 }
 
-export default PhotoList
+export default withRouter(PhotoList)

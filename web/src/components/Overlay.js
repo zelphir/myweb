@@ -1,9 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
-import './Overlay.scss'
+import { Link } from 'react-router-dom'
+import './Overlay.css'
 
-const Overlay = ({ showModal, handleModal }) => {
+const Overlay = ({ showModal, photo, location }) => {
   return (
     <ReactModal
       isOpen={showModal}
@@ -11,15 +11,10 @@ const Overlay = ({ showModal, handleModal }) => {
       className="modal"
       overlayClassName="modal-overlay"
     >
-      <button onClick={handleModal}>Close Modal</button>
+      <Link to={location}>Close Modal</Link>
+      {photo && <img src={photo.imageUrl} alt={photo.caption} />}
     </ReactModal>
   )
-}
-
-Overlay.propTypes = {
-  picture: PropTypes.object,
-  showModal: PropTypes.bool,
-  handleModal: PropTypes.func
 }
 
 export default Overlay

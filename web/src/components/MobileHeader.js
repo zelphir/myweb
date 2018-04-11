@@ -4,7 +4,7 @@ import Svg from 'react-inlinesvg'
 import { sidebarService } from 'react-sidebarjs'
 import classNames from 'classnames/dedupe'
 import menu from '../assets/svgs/menu.svg'
-import './MobileHeader.scss'
+import './MobileHeader.css'
 
 class MobileHeader extends React.PureComponent {
   static propTypes = {

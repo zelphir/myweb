@@ -71,13 +71,15 @@ const getPage = async file => {
     if (data.pdf && process.env.GET_PDF) await getPdf(content, data.pdf)
 
     const id = getId(slug, data.title)
+    const isPost = file.path.includes('src/posts')
+    const path = isPost ? `/blog/${id}` : id.includes('/') ? id : `/${id}`
 
     return {
       id: id === '/' ? 'home' : id,
       ...data,
       content,
       excerpt,
-      path: id.includes('/') ? id : `/${id}`,
+      path,
       layout: data.layout || 'Post',
       date: data.date && data.date.toString(),
       partials: data.partials && getPartials(data.partials)

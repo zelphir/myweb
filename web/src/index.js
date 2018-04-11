@@ -7,6 +7,9 @@ import client from './lib/apollo'
 import { MqlProvider } from './lib/withMql'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
+import typography from './lib/typography'
+import 'typeface-work-sans'
+import 'typeface-quattrocento-sans'
 
 window.snapSaveState = () => getState()
 
@@ -30,4 +33,5 @@ if (rootElement.hasChildNodes()) {
   render(AppWithProviders, rootElement)
 }
 
+typography.injectStyles()
 registerServiceWorker()

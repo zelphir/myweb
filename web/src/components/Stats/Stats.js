@@ -7,7 +7,7 @@ import WhatDoing from './WhatDoing'
 import Languages from './Languages'
 import StatsInfo from './StatsInfo'
 import Spinner from '../Spinner'
-import './Stats.scss'
+import './Stats.css'
 
 class Stats extends React.PureComponent {
   static propTypes = {

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-static'
+import { Link } from 'react-router-dom'
 import avatarDev from '../assets/images/avatar_dev.jpg'
 import avatarPhotos from '../assets/images/avatar_photos.jpg'
 

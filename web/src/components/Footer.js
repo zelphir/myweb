@@ -1,15 +1,13 @@
 import React from 'react'
 import Svg from 'react-inlinesvg'
-import { Link } from 'react-static'
+import { Link } from 'react-router-dom'
 import { sidebarService } from 'react-sidebarjs'
-
 import twitter from '../assets/svgs/twitter.svg'
 import linkedin from '../assets/svgs/linkedin.svg'
 import github from '../assets/svgs/github.svg'
 import envelope from '../assets/svgs/envelope.svg'
 import instagram from '../assets/svgs/instagram.svg'
-
-import './Footer.scss'
+import './Footer.css'
 
 const socials = [
   {
