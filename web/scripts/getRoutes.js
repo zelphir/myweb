@@ -6,7 +6,6 @@ const chalk = require('chalk')
 const sass = require('node-sass')
 const Remarkable = require('remarkable')
 const Html2Pdf = require('electron-html-to')
-
 const remarkable = new Remarkable()
 const conversion = Html2Pdf({ converterPath: Html2Pdf.converters.PDF })
 
@@ -68,7 +67,9 @@ const getPage = async file => {
     })
     const { slug, ...data } = mdData
 
-    if (data.pdf && process.env.GET_PDF) await getPdf(content, data.pdf)
+    if (data.pdf && process.env.NODE_ENV === 'production') {
+      await getPdf(content, data.pdf)
+    }
 
     const id = getId(slug, data.title)
     const isPost = file.path.includes('src/posts')

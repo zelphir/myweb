@@ -5,10 +5,10 @@
     &:before {
       @include font-work;
       content: '\d7';
-      color: rgba($white, 0.3);
       font-size: 30px;
+      color: $white;
       position: absolute;
-      right: 6px;
+      right: 16px;
       top: 0;
     }
   }

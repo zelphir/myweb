@@ -5,15 +5,15 @@
   "scripts": {
     "sass": "../shared/scripts/sass.sh",
     "watch-sass": "yarn sass && yarn sass --watch",
-    "prestart": "node scripts/getRoutes.js && sed -e 's/^/REACT_APP_/' ../.env > .env",
-    "prebuild": "yarn prestart && sed -e 's/^/REACT_APP_/' ../.env.production > .env.production",
+    "prestart": "node scripts/getRoutes.js && sed -e 's/#.*$//' -e '/^$/d' -e 's/^/REACT_APP_/' ../.env > .env",
+    "prebuild": "yarn prestart && sed -e 's/#.*$//' -e '/^$/d' -e 's/^/REACT_APP_/' ../.env.production > .env.production",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-sass start-js",
     "build": "yarn sass && react-scripts build && react-snap && yarn run generate-sw",
     "test": "react-scripts test --env=jsdom",
     "generate-sw": "sw-precache --root=build --config scripts/sw-precache-config.js && uglifyjs build/service-worker.js -o build/service-worker.js",
-    "serve": "serve -s build -p 3000",
-    "deploy": "git checkout production && git rebase master && git push && git checkout -"
+    "serve": " yarn build serve -s build -p 3000",
+    "deploy": "NODE_ENV=production yarn build && netlifyctl deploy -b build"
   },
   "devDependencies": {
     "chalk": "^2.3.2",
@@ -46,7 +46,6 @@
     "react-dom": "^16.3.1",
     "react-form": "^3.5.1",
     "react-helmet": "^5.2.0",
-    "react-inlinesvg": "^0.8.1",
     "react-lazyload": "^2.3.0",
     "react-modal": "^3.3.2",
     "react-motion": "^0.5.2",

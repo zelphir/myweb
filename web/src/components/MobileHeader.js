@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Svg from 'react-inlinesvg'
 import { sidebarService } from 'react-sidebarjs'
 import classNames from 'classnames/dedupe'
-import menu from '../assets/svgs/menu.svg'
+import { ReactComponent as Menu } from '../assets/svgs/menu.svg'
 import './MobileHeader.css'
 
 class MobileHeader extends React.PureComponent {
@@ -22,7 +21,7 @@ class MobileHeader extends React.PureComponent {
     return (
       <div className={classNames('mobile-header', type)}>
         <span className="toggle-menu" onClick={this.handleOnClick}>
-          <Svg src={menu} />
+          <Menu />
         </span>
         <span className="mobile-title">{process.env.DOMAIN}</span>
       </div>

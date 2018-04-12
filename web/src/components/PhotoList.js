@@ -1,6 +1,6 @@
 import React from 'react'
 import LazyLoad from 'react-lazyload'
-import { Query } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import { GetPictures } from 'gql/queries.graphql'
 import { Link, withRouter } from 'react-router-dom'
 import qs from 'query-string'
@@ -12,81 +12,73 @@ import './PhotoList.css'
 
 class PhotoList extends React.PureComponent {
   render() {
+    const { photos, error, loading, meta, fetchMore } = this.props
     const { pid } = qs.parse(this.props.location.search)
 
+    if (error) return `Error! ${error.message}`
+    if (loading && !photos) return <Spinner fluid />
+
     return (
-      <Query
-        query={GetPictures}
-        variables={{
-          first: 24,
-          orderBy: 'date_DESC',
-          filter: { countryCode: this.props.match.params.country }
-        }}
-        notifyOnNetworkStatusChange
-      >
-        {({ loading, error, data, fetchMore }) => {
-          if (error) return `Error! ${error.message}`
-          if (loading && !data.allPictures) return <Spinner fluid />
-
-          const photos = data.allPictures
-
-          return (
-            <React.Fragment>
-              <Overlay
-                showModal={!!pid}
-                location={this.props.location.pathname}
-                photo={photos.find(({ id }) => id === pid)}
-              />
-              <InfiniteScroll
-                wrapper="photos"
-                isLoading={loading}
-                hasMore={photos.length !== data._allPicturesMeta.count}
-                loadMore={() =>
-                  fetchMore({
-                    variables: { skip: photos.length },
-                    updateQuery: (prev, { fetchMoreResult }) => {
-                      if (!fetchMoreResult) return prev
-
-                      return {
-                        ...prev,
-                        allPictures: [
-                          ...prev.allPictures,
-                          ...fetchMoreResult.allPictures
-                        ]
-                      }
-                    }
-                  })
-                }
-              >
-                <div className="photo-list">
-                  {photos.map(photo => (
-                    <Link
-                      className="picture"
-                      key={photo.id}
-                      to={`?pid=${photo.id}`}
-                    >
-                      <LazyLoad
-                        placeholder={<Spinner pacman />}
-                        offset={[100, 0]}
-                        resize
-                      >
-                        <img src={photo.thumbnailUrl} alt="" />
-                      </LazyLoad>
-                    </Link>
-                  ))}
-                  {loading && (
-                    <div className="picture">
-                      <Spinner pacman />
-                    </div>
-                  )}
-                </div>
-              </InfiniteScroll>
-            </React.Fragment>
-          )
-        }}
-      </Query>
+      <React.Fragment>
+        <Overlay
+          showModal={!!pid}
+          {...this.props}
+          photo={photos.find(({ id }) => id === pid)}
+        />
+        <InfiniteScroll
+          wrapper="photos"
+          isLoading={loading}
+          hasMore={photos.length !== meta.count}
+          loadMore={() => fetchMore(photos.length)}
+        >
+          <div className="photo-list">
+            {photos.map(photo => (
+              <Link className="picture" key={photo.id} to={`?pid=${photo.id}`}>
+                <LazyLoad placeholder={<Spinner />} offset={[100, 0]} resize>
+                  <img src={photo.thumbnailUrl} alt={photo.caption} />
+                </LazyLoad>
+              </Link>
+            ))}
+            {loading && (
+              <div className="picture">
+                <Spinner />
+              </div>
+            )}
+          </div>
+        </InfiniteScroll>
+      </React.Fragment>
     )
   }
 }
 
-export default withRouter(PhotoList)
+export default compose(
+  withRouter,
+  graphql(GetPictures, {
+    options: ({ match }) => ({
+      variables: {
+        first: 24,
+        orderBy: 'date_DESC',
+        filter: { countryCode: match.params.country }
+      },
+      notifyOnNetworkStatusChange: true
+    }),
+    props: ({ data }) => ({
+      loading: data.loading,
+      error: data.error,
+      photos: data.allPictures,
+      meta: data._allPicturesMeta,
+      fetchMore: skip =>
+        data.fetchMore({
+          variables: { skip },
+          updateQuery: (prev, { fetchMoreResult }) => {
+            if (!fetchMoreResult) return prev
+
+            return {
+              ...prev,
+              allPictures: [...prev.allPictures, ...fetchMoreResult.allPictures]
+            }
+          }
+        })
+    })
+  })
+)(PhotoList)

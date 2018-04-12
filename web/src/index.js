@@ -8,6 +8,7 @@ import { MqlProvider } from './lib/withMql'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import typography from './lib/typography'
+import ScrollToTop from './components/ScrollToTop'
 import 'typeface-work-sans'
 import 'typeface-quattrocento-sans'
 
@@ -17,7 +18,9 @@ const AppWithProviders = (
   <ApolloProvider client={client}>
     <MqlProvider>
       <BrowserRouter>
-        <App />
+        <ScrollToTop>
+          <App />
+        </ScrollToTop>
       </BrowserRouter>
     </MqlProvider>
   </ApolloProvider>

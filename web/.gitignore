@@ -20,3 +20,6 @@ public/api/*.json
 
 # compiled css
 src/**/*.css*
+
+# netlify
+netlify.toml

@@ -2,9 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import classNames from 'classnames/dedupe'
-import Svg from 'react-inlinesvg'
 import { matchPath } from 'react-router-dom'
-import pdf from '../assets/svgs/pdf.svg'
+import { ReactComponent as PdfIcon } from '../assets/svgs/pdf.svg'
 import { withMql } from '../lib/withMql'
 import renderMarkdown from '../lib/renderMarkdown.js'
 import './Page.css'
@@ -17,7 +16,7 @@ class Page extends React.PureComponent {
   renderPdf() {
     return (
       <a href="/resume.pdf" target="blank" className="icon">
-        <Svg src={pdf} />
+        <PdfIcon />
       </a>
     )
   }

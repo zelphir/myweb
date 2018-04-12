@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { sidebarService } from 'react-sidebarjs'
 import classNames from 'classnames/dedupe'
 import Stats from './Stats'
@@ -8,10 +7,6 @@ import Menu from './Menu'
 import Info from './Info'
 
 class Sidebar extends React.PureComponent {
-  static propTypes = {
-    type: PropTypes.string.isRequired
-  }
-
   closeMenu = () => {
     sidebarService.close('sidebar')
   }
@@ -23,7 +18,7 @@ class Sidebar extends React.PureComponent {
     return (
       <aside className={classNames('sidebar', type)} id="sidebar">
         <div className="sidebar-top">
-          <Info isDev={isDev} closeMenu={this.closeMenu} />
+          <Info isDev={isDev} />
           <Menu type={type} closeMenu={this.closeMenu} />
         </div>
         <div className="sidebar-bottom">

@@ -1,25 +1,64 @@
 @import 'base';
 
-.ReactModal__Body--open,
-.ReactModal__Html--open {
-  overflow: hidden;
+.ReactModal {
+  &__Body--open,
+  &__Html--open {
+    overflow: hidden;
+  }
+
+  &__Content {
+    opacity: 0;
+
+    &--after-open {
+      opacity: 1;
+      transition: opacity 0.2s linear;
+    }
+
+    &--before-close {
+      opacity: 0;
+    }
+  }
 }
 
 .modal {
-  bottom: 20px;
-  left: 20px;
+  bottom: 0;
+  left: 0;
   outline: none;
   overflow: auto;
   position: absolute;
-  right: 20px;
-  top: 20px;
+  right: 0;
+  top: 0;
 }
 
 .modal-overlay {
-  background-color: rgba($black, 0.9);
+  @include link(rgba($white, 0.8), $white);
+  background-color: rgba($black, 0.95);
   bottom: 0px;
   left: 0px;
   position: fixed;
-  right: 0px;
-  top: 0px;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.close-modal {
+  display: block;
+  font-size: 32px;
+  line-height: 32px;
+  padding: 0 5px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.modal-wrapper {
+  display: flex;
+
+  .details {
+    flex: 0 70%;
+  }
+
+  .map {
+    flex: 0 30%;
+  }
 }

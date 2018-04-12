@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import sortBy from 'lodash/sortBy'
 import { Link } from 'react-router-dom'
@@ -8,11 +7,12 @@ import { GetCountries } from 'gql/queries.graphql'
 
 const menus = {
   dev: [
+    { to: '/', label: 'Home' },
     { to: '/resume', label: 'Resume' },
     { to: '/blog', label: 'Blog' },
     { to: '/photos', label: 'Photos' }
   ],
-  photos: [{ to: '/photos', label: 'All' }]
+  photos: [{ to: '/', label: 'Home' }, { to: '/photos', label: 'All' }]
 }
 
 const Menu = ({ closeMenu, type }) => (
@@ -55,10 +55,5 @@ const Menu = ({ closeMenu, type }) => (
     )}
   </div>
 )
-
-Menu.propTypes = {
-  type: PropTypes.string.isRequired,
-  closeMenu: PropTypes.func.isRequired
-}
 
 export default Menu

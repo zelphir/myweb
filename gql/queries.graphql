@@ -28,9 +28,11 @@ query GetPictures(
 ) {
   allPictures(filter: $filter, first: $first, orderBy: $orderBy, skip: $skip) {
     id
-    country
     caption
+    country
     imageUrl
+    lat
+    lng
     thumbnailUrl
   }
   _allPicturesMeta(filter: $filter) {
