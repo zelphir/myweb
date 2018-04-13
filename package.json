@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "./shared/scripts/lint.sh",
     "precommit": "lint-staged && yarn lint",
-    "postmerge": "./shared/scripts/post-merge.sh"
+    "postmerge": "./shared/scripts/post_merge.sh"
   },
   "devDependencies": {
     "husky": "^0.14.3",

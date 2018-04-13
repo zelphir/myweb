@@ -1,59 +1,124 @@
 import React from 'react'
-import ReactModal from 'react-modal'
+import { withRouter } from 'react-router-dom'
+import GoogleMapReact from 'google-map-react'
+import { graphql, compose } from 'react-apollo'
+import { GetPictures } from 'gql/queries.graphql'
+import { withMql } from '../lib/withMql'
+import Modal from './Modal'
+import Spinner from './Spinner'
+import Marker from './Marker'
+import mapStyle from './mapStyle.json'
 import './Overlay.css'
 
 class Overlay extends React.PureComponent {
   static getDerivedStateFromProps(nextProps) {
+    const { photo } = nextProps
+
     return {
-      showModal: nextProps.showModal
+      photo,
+      showModal: !!photo
     }
   }
 
-  map = React.createRef()
-
   state = {
-    showModal: false
+    showModal: true,
+    photo: null
   }
 
-  handleClick = e => {
-    const { history, location } = this.props
-    e.preventDefault()
+  closeModal = e => {
+    if (e) e.preventDefault()
     this.setState({ showModal: false })
-    setTimeout(() => history.push(location.pathname), 250)
+    setTimeout(() => this.resetUrl(), 300)
   }
 
-  componentDidMount() {
-    const modal = this.map.current.node
+  resetUrl = () => {
+    const { history, location } = this.props
+    return history.push(location.pathname)
+  }
 
-    console.log(modal.querySelectorAll('div'))
+  renderHeader(photo) {
+    return (
+      <div className="modal-header">
+        <h2>{photo.country}</h2>
+        <a href="/photos" onClick={this.closeModal} className="close-modal">
+          &times;
+        </a>
+      </div>
+    )
+  }
+
+  renderContent(photo) {
+    const { lat, lng } = photo
+    return (
+      <div className="modal-content">
+        <div className="details">
+          <div className="picture">
+            <img src={photo.imageUrl} alt={photo.caption} />
+          </div>
+        </div>
+        {lat &&
+          lng && (
+            <div className="map">
+              <GoogleMapReact
+                resetBoundsOnResize
+                bootstrapURLKeys={{
+                  key: process.env.REACT_APP_GOOGLE_MAPS_KEY
+                }}
+                center={[lat, lng]}
+                defaultZoom={6}
+                options={{ styles: mapStyle }}
+              >
+                <Marker lat={lat} lng={lng} />
+              </GoogleMapReact>
+            </div>
+          )}
+      </div>
+    )
+  }
+
+  renderModal() {
+    const { photo } = this.state
+
+    return (
+      <React.Fragment>
+        {this.renderHeader(photo)}
+        {this.renderContent(photo)}
+      </React.Fragment>
+    )
+  }
+
+  componentDidUpdate() {
+    if (!this.state.photo) this.resetUrl()
   }
 
   render() {
-    const { photo } = this.props
-
-    if (!photo) return null
+    const { loading, error } = this.props
+    const { photo } = this.state
 
     return (
-      <ReactModal
-        isOpen={this.state.showModal}
-        ariaHideApp={false}
-        closeTimeoutMS={200}
-        className="modal"
-        ref={this.map}
-        overlayClassName="modal-overlay"
-      >
-        <a href="/photos" onClick={this.handleClick} className="close-modal">
-          &times;
-        </a>
-        <div className="modal-wrapper">
-          <div className="details">
-            {/*<img src={photo.imageUrl} alt={photo.caption} />*/}
-          </div>
-          <div className="map">map</div>
-        </div>
-      </ReactModal>
+      <Modal showModal={this.state.showModal}>
+        {error ? (
+          <div className="modal-error">{error.message}</div>
+        ) : loading ? (
+          <Spinner fluid light />
+        ) : (
+          !!photo && this.renderModal()
+        )}
+      </Modal>
     )
   }
 }
 
-export default Overlay
+export default compose(
+  withMql,
+  withRouter,
+  graphql(GetPictures, {
+    skip: ({ photo }) => !!photo,
+    options: ({ pid }) => ({ variables: { filter: { id: pid } } }),
+    props: ({ data }) => ({
+      loading: data.loading,
+      error: data.error,
+      photo: data && data.allPictures ? data.allPictures[0] : null
+    })
+  })
+)(Overlay)

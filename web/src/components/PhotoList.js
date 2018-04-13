@@ -20,11 +20,9 @@ class PhotoList extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <Overlay
-          showModal={!!pid}
-          {...this.props}
-          photo={photos.find(({ id }) => id === pid)}
-        />
+        {!!pid && (
+          <Overlay pid={pid} photo={photos.find(({ id }) => id === pid)} />
+        )}
         <InfiniteScroll
           wrapper="photos"
           isLoading={loading}

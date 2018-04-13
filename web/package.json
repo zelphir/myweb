@@ -5,8 +5,8 @@
   "scripts": {
     "sass": "../shared/scripts/sass.sh",
     "watch-sass": "yarn sass && yarn sass --watch",
-    "prestart": "node scripts/getRoutes.js && sed -e 's/#.*$//' -e '/^$/d' -e 's/^/REACT_APP_/' ../.env > .env",
-    "prebuild": "yarn prestart && sed -e 's/#.*$//' -e '/^$/d' -e 's/^/REACT_APP_/' ../.env.production > .env.production",
+    "prestart": "node scripts/getRoutes.js && ../shared/scripts/copy_envs.sh",
+    "prebuild": "yarn prestart && ../shared/scripts/copy_envs.sh .env.production",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-sass start-js",
     "build": "yarn sass && react-scripts build && react-snap && yarn run generate-sw",
@@ -35,6 +35,7 @@
     "apollo-boost": "^0.1.4",
     "apollo-link-ws": "^1.0.7",
     "classnames": "^2.2.5",
+    "google-map-react": "^0.34.0",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.8.0",
     "gray-percentage": "^2.0.0",
