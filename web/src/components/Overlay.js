@@ -52,21 +52,24 @@ class Overlay extends React.PureComponent {
     return (
       <div className="modal-content">
         <div className="details">
+          <p>{photo.caption}</p>
           <div className="picture">
             <img src={photo.imageUrl} alt={photo.caption} />
+          </div>
+          <div className="tags">
+            {photo.tags.map(({ name, id }) => <span key={id}>{name}</span>)}
           </div>
         </div>
         {lat &&
           lng && (
             <div className="map">
               <GoogleMapReact
-                resetBoundsOnResize
                 bootstrapURLKeys={{
                   key: process.env.REACT_APP_GOOGLE_MAPS_KEY
                 }}
                 center={[lat, lng]}
                 defaultZoom={6}
-                options={{ styles: mapStyle }}
+                options={{ styles: mapStyle, fullscreenControl: false }}
               >
                 <Marker lat={lat} lng={lng} />
               </GoogleMapReact>
