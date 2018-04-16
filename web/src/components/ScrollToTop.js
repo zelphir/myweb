@@ -1,11 +1,18 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, matchPath } from 'react-router-dom'
 
 class ScrollToTop extends React.PureComponent {
   componentDidUpdate(prevProps) {
+    const { location } = this.props
+    const isModal = prevProps.location.state && prevProps.location.state.modal
+    const isPhoto = matchPath(location.pathname, {
+      path: '/photo'
+    })
+
     if (
-      this.props.location !== prevProps.location &&
-      !prevProps.location.search
+      !isPhoto &&
+      !isModal &&
+      location !== prevProps.location
     ) {
       window.scrollTo(0, 0)
     }

@@ -1,0 +1,23 @@
+@import 'base';
+
+// .modal-open {
+//   height: 100vh;
+//   overflow: hidden;
+// }
+
+.modal {
+  background: $white;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  padding: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: opacity 0.2s ease-in;
+  z-index: 1;
+
+  &.entered {
+    opacity: 1;
+  }
+}

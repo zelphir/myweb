@@ -3,26 +3,20 @@ import LazyLoad from 'react-lazyload'
 import { graphql, compose } from 'react-apollo'
 import { GetPictures } from 'gql/queries.graphql'
 import { Link, withRouter } from 'react-router-dom'
-import qs from 'query-string'
 // import { OnPicturesUpdate } from 'gql/subscriptions.graphql'
-import InfiniteScroll from '../lib/InfiniteScroll'
-import Spinner from './Spinner'
-import Overlay from './Overlay'
-import './PhotoList.css'
+import InfiniteScroll from '../../lib/InfiniteScroll'
+import Spinner from '../Spinner'
+import './List.css'
 
 class PhotoList extends React.PureComponent {
   render() {
     const { photos, error, loading, meta, fetchMore } = this.props
-    const { pid } = qs.parse(this.props.location.search)
 
     if (error) return `Error! ${error.message}`
     if (loading && !photos) return <Spinner fluid />
 
     return (
       <React.Fragment>
-        {!!pid && (
-          <Overlay pid={pid} photo={photos.find(({ id }) => id === pid)} />
-        )}
         <InfiniteScroll
           wrapper="photos"
           isLoading={loading}
@@ -31,7 +25,17 @@ class PhotoList extends React.PureComponent {
         >
           <div className="photo-list">
             {photos.map(photo => (
-              <Link className="picture" key={photo.id} to={`?pid=${photo.id}`}>
+              <Link
+                className="picture"
+                key={photo.id}
+                to={{
+                  pathname: `/photo/${photo.id}`,
+                  state: {
+                    modal: true,
+                    photo
+                  }
+                }}
+              >
                 <LazyLoad placeholder={<Spinner />} offset={[100, 0]} resize>
                   <img src={photo.thumbnailUrl} alt={photo.caption} />
                 </LazyLoad>

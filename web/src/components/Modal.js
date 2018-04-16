@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactModal from 'react-modal'
 
-const Modal = ({ showModal, children }) => (
+const Modal = ({ children }) => (
   <ReactModal
-    isOpen={showModal}
+    isOpen
     ariaHideApp={false}
     closeTimeoutMS={200}
     className="modal"
