@@ -25,6 +25,8 @@ type Picture @model {
   createdAt: DateTime!
   updatedAt: DateTime!
   ratio: String!
+  width: Int!
+  height: Int!
 }
 
 type DailyStat @model {

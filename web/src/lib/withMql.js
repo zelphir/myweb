@@ -1,36 +1,40 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { getComponentDisplayName } from './utils'
 
 const Ctx = React.createContext()
 
 export class MqlProvider extends React.Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node
-    ])
-  }
-
-  state = { isMobile: false, isPrint: false }
+  state = { isMobile: false, isPrint: false, windowSize: null }
 
   componentDidMount() {
     this.mqlPrint = window.matchMedia('print')
     this.mqlMobile = window.matchMedia(`(max-width: 768px)`)
     this.mqlMobile.addListener(this.setMql)
     this.mqlPrint.addListener(this.setMql)
+    this.setWindowSize()
     this.setMql()
+    window.addEventListener('resize', this.setWindowSize, false)
   }
 
   componentWillUnmount() {
     this.mqlMobile.removeListener(this.setMql)
     this.mqlPrint.removeListener(this.setMql)
+    window.removeEventListener('resize', this.setWindowSize, false)
   }
 
   setMql = () => {
     this.setState({
       isMobile: this.mqlMobile.matches,
       isPrint: this.mqlPrint.matches
+    })
+  }
+
+  setWindowSize = () => {
+    this.setState({
+      windowSize: {
+        width: window.innerWidth,
+        height: window.innerHeight
+      }
     })
   }
 
@@ -48,10 +52,11 @@ export const withMql = ComposedComponent =>
     render() {
       return (
         <Ctx.Consumer>
-          {({ isMobile, isPrint }) => (
+          {({ isMobile, isPrint, windowSize }) => (
             <ComposedComponent
               isMobile={isMobile}
               isPrint={isPrint}
+              windowSize={windowSize}
               {...this.props}
             />
           )}

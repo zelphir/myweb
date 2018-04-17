@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { SidebarJS } from 'react-sidebarjs'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'react-apollo'
@@ -27,11 +26,6 @@ const Sidebar = ({ location, isMobile }) => {
   ) : (
     <SidebarContent type={type} />
   )
-}
-
-Sidebar.propTypes = {
-  location: PropTypes.object.isRequired,
-  isMobile: PropTypes.bool
 }
 
 export default compose(withMql, withRouter)(Sidebar)

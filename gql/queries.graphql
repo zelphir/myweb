@@ -35,6 +35,8 @@ query GetPictures(
     lng
     ratio
     thumbnailUrl
+    width
+    height
     tags {
       id
       name

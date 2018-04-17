@@ -18,6 +18,9 @@ yarn-error.log*
 # routes
 public/api/*.json
 
+# pdf
+public/*.pdf
+
 # compiled css
 src/**/*.css*
 

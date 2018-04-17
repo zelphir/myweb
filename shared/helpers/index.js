@@ -26,6 +26,18 @@ const generateTags = (allTags, newTags) => {
   }
 }
 
+const getRatio = ({ width, height }) => {
+  switch (true) {
+    case width > height:
+      return 'landscape'
+    case width < height:
+      return 'portrait'
+    case width === height:
+    default:
+      return 'square'
+  }
+}
+
 // For the new posted media
 const generateCarousel = carousel =>
   carousel ? carousel.split(',').map(url => url.replace('s640x640', '')) : []
@@ -37,6 +49,7 @@ export const transformBody = (
   ...body,
   ...generateTags(allTags, tags.split(',')),
   imageUrl: imageUrl.replace('s640x640', ''),
+  ratio: getRatio({ width: body.width, height: body.height }),
   carousel: generateCarousel(carousel),
   lat: lat && parseFloat(lat),
   lng: lng && parseFloat(lng),
@@ -51,7 +64,9 @@ const generateLoadUrl = images => {
   if (Array.isArray(mainImage)) {
     return {
       imageUrl: mainImage[0].url,
-      ratio: `${mainImage[0].width}:${mainImage[0].height}`,
+      ratio: getRatio(mainImage[0]),
+      width: mainImage[0].width,
+      height: mainImage[0].height,
       thumbnailUrl: generateThumbnail(mainImage[0]),
       carousel: images.slice(1).map(image => image[0].url)
     }
@@ -59,7 +74,9 @@ const generateLoadUrl = images => {
 
   return {
     imageUrl: mainImage.url,
-    ratio: `${mainImage.width}:${mainImage.height}`,
+    ratio: getRatio(mainImage),
+    width: mainImage.width,
+    height: mainImage.height,
     thumbnailUrl: generateThumbnail(mainImage),
     carousel: []
   }
