@@ -24,6 +24,7 @@ type Picture @model {
   countryCode: String
   createdAt: DateTime!
   updatedAt: DateTime!
+  ratio: String!
 }
 
 type DailyStat @model {

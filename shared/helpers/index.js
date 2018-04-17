@@ -51,6 +51,7 @@ const generateLoadUrl = images => {
   if (Array.isArray(mainImage)) {
     return {
       imageUrl: mainImage[0].url,
+      ratio: `${mainImage[0].width}:${mainImage[0].height}`,
       thumbnailUrl: generateThumbnail(mainImage[0]),
       carousel: images.slice(1).map(image => image[0].url)
     }
@@ -58,6 +59,7 @@ const generateLoadUrl = images => {
 
   return {
     imageUrl: mainImage.url,
+    ratio: `${mainImage.width}:${mainImage.height}`,
     thumbnailUrl: generateThumbnail(mainImage),
     carousel: []
   }

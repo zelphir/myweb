@@ -33,6 +33,7 @@ query GetPictures(
     imageUrl
     lat
     lng
+    ratio
     thumbnailUrl
     tags {
       id
