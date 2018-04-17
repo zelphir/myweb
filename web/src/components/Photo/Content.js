@@ -6,16 +6,11 @@ import mapStyle from './mapStyle.json'
 const PhotoContent = ({ photo: { lat, lng, caption, imageUrl, tags } }) => {
   return (
     <div className="photo-content">
-      <div className="details">
-        <p>{caption}</p>
-        <div className="picture">
-          <img src={imageUrl} alt={caption} />
-        </div>
-        <div className="tags">
-          {tags.map(({ name, id }) => <span key={id}>{name}</span>)}
-        </div>
+      <div className="picture">
+        <img src={imageUrl} alt={caption} />
       </div>
-      {lat &&
+      <div className="map" />
+      {/*lat &&
         lng && (
           <div className="map">
             <GoogleMapReact
@@ -30,6 +25,11 @@ const PhotoContent = ({ photo: { lat, lng, caption, imageUrl, tags } }) => {
             </GoogleMapReact>
           </div>
         )}
+      {/*
+        <div className="tags">
+          {tags.map(({ name, id }) => <span key={id}>{name}</span>)}
+        </div>
+      */}
     </div>
   )
 }

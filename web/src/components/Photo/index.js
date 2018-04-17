@@ -5,7 +5,7 @@ import classNames from 'classnames/dedupe'
 import { GetPictures } from 'gql/queries.graphql'
 import { withMql } from '../../lib/withMql'
 import Spinner from '../Spinner'
-import Header from './Header'
+// import Header from './Header'
 import Content from './Content'
 import './index.css'
 
@@ -22,14 +22,12 @@ class Photo extends React.PureComponent {
           [animation]: animation
         })}
       >
-        {animation}
         {error ? (
           <div className="photo-error">{error.message}</div>
         ) : loading ? (
           <Spinner fluid light />
         ) : (
           <React.Fragment>
-            <Header photo={photo} prevLocation={prevLocation} modal={modal} />
             <Content photo={photo} />
           </React.Fragment>
         )}
@@ -43,7 +41,11 @@ export default compose(
   withRouter,
   graphql(GetPictures, {
     skip: ({ photo }) => !!photo,
-    options: ({ match: { params: { id } } }) => ({
+    options: ({
+      match: {
+        params: { id }
+      }
+    }) => ({
       variables: { filter: { id } }
     }),
     props: ({ data }) => ({

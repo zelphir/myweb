@@ -66,12 +66,6 @@ class App extends Component {
     if (!location.state || !location.state.modal) {
       this.prevLocation = this.props.location
     }
-
-    // if (this.isModal()) {
-    //   document.body.classList.add('modal-open')
-    // } else {
-    //   document.body.classList.remove('modal-open')
-    // }
   }
 
   render() {

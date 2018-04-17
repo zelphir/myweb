@@ -1,16 +1,15 @@
 @import 'base';
 
-// .modal-open {
-//   height: 100vh;
-//   overflow: hidden;
-// }
-
 .modal {
-  background: $white;
+  align-items: center;
+  background: rgba($black, 0.8);
   bottom: 0;
+  display: flex;
+  justify-content: center;
   left: 0;
   opacity: 0;
-  padding: 0;
+  overflow: hidden;
+  padding: 30px;
   position: fixed;
   right: 0;
   top: 0;
@@ -19,5 +18,30 @@
 
   &.entered {
     opacity: 1;
+  }
+
+  .picture {
+    max-height: 100%;
+    max-width: 70%;
+
+    img {
+      display: block;
+      margin: 0;
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .map {
+    background: red;
+    flex: 1;
+    max-width: 30%;
+  }
+
+  .photo-content {
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
   }
 }
