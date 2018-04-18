@@ -4,7 +4,7 @@ import { graphql, compose } from 'react-apollo'
 import { GetPictures } from 'gql/queries.graphql'
 import { Link, withRouter } from 'react-router-dom'
 // import { OnPicturesUpdate } from 'gql/subscriptions.graphql'
-import InfiniteScroll from '../../lib/InfiniteScroll'
+import InfiniteScroll from '../InfiniteScroll'
 import Spinner from '../Spinner'
 import './List.css'
 
