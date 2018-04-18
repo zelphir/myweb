@@ -3,12 +3,13 @@
 .photo {
   img {
     display: block;
-    margin: 0;
+    margin: 0 0 15px;
     max-height: 100%;
     max-width: 100%;
   }
 
   .tags {
+    margin-top: 15px;
     display: flex;
     flex-wrap: wrap;
 
@@ -59,6 +60,10 @@
 
   p {
     font-size: 14px;
+  }
+
+  img {
+    margin: 0;
   }
 
   &.entered {

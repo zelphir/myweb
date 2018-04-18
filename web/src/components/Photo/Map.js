@@ -1,31 +1,40 @@
 import React from 'react'
-import ReactMapboxGl, { Marker } from 'react-mapbox-gl'
+import ReactMap from 'pigeon-maps'
+import Marker from 'pigeon-overlay'
 import Pin from './Pin'
-import 'mapbox-gl/dist/mapbox-gl.css'
 
-const MapBox = ReactMapboxGl({
-  accessToken: process.env.REACT_APP_MAPBOX_API_KEY
-})
+const mapbox = (mapboxId, accessToken) => (x, y, z) => {
+  const retina =
+    typeof window !== 'undefined' && window.devicePixelRatio >= 2 ? '@2x' : ''
+  return `https://api.mapbox.com/styles/v1/mapbox/${mapboxId}/tiles/256/${z}/${x}/${y}${retina}?access_token=${accessToken}`
+}
 
-const Map = ({ lat, lng, width, height }) => {
-  const containerStyle = {
-    ...(width && { width }),
-    ...(height && { height })
-  }
+const Map = ({ lat, lng, width, height, light }) => {
+  const position = [lat, lng]
+  const provider = mapbox(
+    light ? 'light-v9' : 'dark-v9',
+    process.env.REACT_APP_MAPBOX_API_KEY
+  )
 
   return (
     lat &&
     lng && (
-      <MapBox
-        center={[lng, lat]}
-        style="mapbox://styles/mapbox/dark-v9" // eslint-disable-line
-        zoom={[4]}
-        containerStyle={containerStyle}
+      <ReactMap
+        center={position}
+        zoom={4}
+        width={width}
+        height={height}
+        provider={provider}
+        animate={false}
+        attribution={false}
+        attributionPrefix={false}
+        zoomOnMouseWheel={false}
+        mouseWheelMetaText={null}
       >
-        <Marker coordinates={[lng, lat]} offset={-5}>
+        <Marker anchor={position} offset={[10, 25]}>
           <Pin />
         </Marker>
-      </MapBox>
+      </ReactMap>
     )
   )
 }
