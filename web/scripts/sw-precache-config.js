@@ -9,7 +9,8 @@ module.exports = {
     'build/static/js/*.js',
     'build/shell.html',
     'build/index.html',
-    'build/resume.pdf'
+    'build/resume.pdf',
+    'build/robots.txt'
   ],
   stripPrefix: 'build',
   publicPath: '.',

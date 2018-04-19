@@ -21,8 +21,11 @@ public/api/*.json
 # pdf
 public/*.pdf
 
+# robots.txt
+public/robots.txt
+
 # compiled css
 src/**/*.css*
 
 # netlify
-netlify.toml
+netlify.*

@@ -6,6 +6,7 @@ import { Transition } from 'react-transition-group'
 import Sidebar from './components/Sidebar'
 import loadable from 'loadable-components'
 import withData from './lib/withData'
+import withTracker from './lib/withTracker'
 import './App.css'
 
 const layouts = {
@@ -90,7 +91,7 @@ class App extends Component {
               exact
               path={data.path}
               render={props => {
-                const Component = layouts[data.layout]
+                const Component = withTracker(layouts[data.layout])
                 return <Component {...props} data={{ id, ...data }} />
               }}
             />
@@ -98,7 +99,7 @@ class App extends Component {
           <Route
             path="/photos/:country"
             render={props => {
-              const Component = layouts.Photos
+              const Component = withTracker(layouts.Photos)
               return <Component {...props} />
             }}
           />
@@ -110,11 +111,11 @@ class App extends Component {
           <Route
             path="/photo/:id"
             render={props => {
-              const Component = layouts.Photo
+              const Component = withTracker(layouts.Photo)
               return <Component {...props} />
             }}
           />
-          <Route key={'/404.html'} component={layouts.NoMatch} />
+          <Route key={'/404.html'} component={withTracker(layouts.NoMatch)} />
         </Switch>
         <Transition in={this.isModal()} timeout={100}>
           {state =>
@@ -122,7 +123,7 @@ class App extends Component {
               <Route
                 path="/photo/:id"
                 render={props => {
-                  const Component = layouts.Photo
+                  const Component = withTracker(layouts.Photo)
                   return (
                     <Component
                       {...props}
