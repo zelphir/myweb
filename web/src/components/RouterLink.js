@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const RouterLink = ({ href, children, ...props }) =>
+const RouterLink = ({ href, children, className }) =>
   href.match(/^(https?:)?\/\//) ? (
-    <a href={href} target="blank" {...props}>
+    <a href={href} target="blank" className={className}>
       {children}
     </a>
   ) : (
-    <Link to={href} {...props}>
+    <Link to={href} className={className}>
       {children}
     </Link>
   )

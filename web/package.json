@@ -76,6 +76,7 @@
     "skipThirdPartyRequests": true,
     "inlineCss": true,
     "http2PushManifest": true,
+    "sourceMaps": false,
     "include": ["/shell.html"]
   },
   "browserslist": {
