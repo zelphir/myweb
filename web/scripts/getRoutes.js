@@ -6,7 +6,7 @@ const chalk = require('chalk')
 const sass = require('node-sass')
 const Remarkable = require('remarkable')
 const Html2Pdf = require('electron-html-to')
-const remarkable = new Remarkable()
+const remarkable = new Remarkable({ typographer: false })
 const conversion = Html2Pdf({ converterPath: Html2Pdf.converters.PDF })
 
 const getPdf = (md, pdfFile) => {
@@ -17,6 +17,7 @@ const getPdf = (md, pdfFile) => {
   const html = `
     <html>
       <head>
+        <meta charset="utf-8">
         <style>${css}</style>
       </head>
       <body>

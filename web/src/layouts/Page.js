@@ -39,9 +39,8 @@ class Page extends React.PureComponent {
   }
 
   customH6() {
-    return this.props.isPrint
-      ? {}
-      : {
+    return !this.props.isPrint
+      ? {
           h6: ({ children }) => {
             return (
               <h6 className="tags">
@@ -52,6 +51,7 @@ class Page extends React.PureComponent {
             )
           }
         }
+      : {}
   }
 
   render() {
@@ -77,7 +77,7 @@ class Page extends React.PureComponent {
             <h1>{data.title}</h1>
           )}
           {data.partials && this.renderPartials()}
-          {renderMarkdown(data.content, this.customH6)}
+          {renderMarkdown(data.content, this.customH6())}
         </main>
       </React.Fragment>
     )

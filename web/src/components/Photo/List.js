@@ -6,6 +6,7 @@ import { Link, withRouter } from 'react-router-dom'
 // import { OnPicturesUpdate } from 'gql/subscriptions.graphql'
 import InfiniteScroll from '../InfiniteScroll'
 import Spinner from '../Spinner'
+import Img from '../Img'
 import './List.css'
 
 class PhotoList extends React.PureComponent {
@@ -37,7 +38,7 @@ class PhotoList extends React.PureComponent {
                 }}
               >
                 <LazyLoad placeholder={<Spinner />} offset={[100, 0]} resize>
-                  <img src={photo.thumbnailUrl} alt={photo.caption} />
+                  <Img src={photo.thumbnailUrl} alt={photo.caption} />
                 </LazyLoad>
               </Link>
             ))}

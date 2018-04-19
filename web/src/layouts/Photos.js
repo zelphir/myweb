@@ -3,7 +3,7 @@ import PhotoList from '../components/Photo/List'
 
 const Photos = () => (
   <main id="photos">
-    <h1>Photos time</h1>
+    <h1>Photos</h1>
     <PhotoList />
   </main>
 )

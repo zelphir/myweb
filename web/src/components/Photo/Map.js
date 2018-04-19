@@ -21,7 +21,7 @@ const Map = ({ lat, lng, width, height, light }) => {
     lng && (
       <ReactMap
         center={position}
-        zoom={4}
+        zoom={5}
         width={width}
         height={height}
         provider={provider}

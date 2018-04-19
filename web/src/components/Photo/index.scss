@@ -15,10 +15,11 @@
 
     span {
       background: lighten($black, 90%);
-      color: rgba($black, 0.4);
+      color: rgba($black, 0.5);
       font-size: 14px;
+      line-height: 14px;
       margin: 0 5px 5px 0;
-      padding: 3px 5px 1px;
+      padding: 4px 4px 3px;
     }
   }
 }
@@ -77,6 +78,7 @@
 
   .picture {
     align-items: center;
+    background: rgba($black, 0.8);
     display: flex;
     justify-content: center;
   }
@@ -85,7 +87,7 @@
     margin-top: 5px;
 
     span {
-      background: lighten($black, 15%);
+      background: lighten($black, 25%);
       color: rgba($white, 0.4);
       font-size: 12px;
     }

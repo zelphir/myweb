@@ -96,7 +96,7 @@ class App extends Component {
             />
           ))}
           <Route
-            path="/photos/:country/:tag?"
+            path="/photos/:country"
             render={props => {
               const Component = layouts.Photos
               return <Component {...props} />

@@ -3,11 +3,12 @@ import { compose } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import { withMql } from '../../lib/withMql'
 import Map from './Map'
+import Img from '../Img'
 
 class PhotoContent extends React.PureComponent {
   padding = {
     h: 140,
-    v: 200
+    v: 140
   }
 
   getPictureSize() {
@@ -18,25 +19,24 @@ class PhotoContent extends React.PureComponent {
     const width = calcWidth <= photo.width ? calcWidth : photo.width
     const height = calcHeight <= photo.height ? calcHeight : photo.width
 
-    switch (photo.ratio) {
-      case 'landscape':
-        return {
-          width,
-          height: width * photo.height / photo.width
-        }
-      case 'portrait':
-      default:
-        return {
-          width: height * photo.width / photo.height,
-          height
-        }
+    if (width * photo.height / photo.width >= height) {
+      return {
+        width: height * photo.width / photo.height,
+        height
+      }
+    }
+
+    return {
+      width,
+      height: width * photo.height / photo.width
     }
   }
 
   getMapSize() {
     const { windowSize } = this.props
+    const percent = 30 / 100
     return {
-      width: (windowSize.width - this.padding.h) * 30 / 100,
+      width: (windowSize.width - this.padding.h) * percent,
       height: this.getPictureSize().height
     }
   }
@@ -63,14 +63,13 @@ class PhotoContent extends React.PureComponent {
           <p>{photo.caption}</p>
           <div className="picture">
             <div style={this.getPictureSize()}>
-              <img src={photo.imageUrl} alt={photo.caption} />
+              <Img
+                src={photo.imageUrl}
+                alt={photo.caption}
+                spinner={{ light: true, fluid: true }}
+              />
             </div>
-            <Map
-              lat={photo.lat}
-              lng={photo.lng}
-              width={this.getMapSize().width}
-              height={this.getMapSize().height}
-            />
+            <Map lat={photo.lat} lng={photo.lng} {...this.getMapSize()} />
           </div>
           <div className="tags">
             {photo.tags.map(({ name, id }) => <span key={id}>{name}</span>)}

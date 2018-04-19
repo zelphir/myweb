@@ -53,7 +53,7 @@ class Photo extends React.PureComponent {
         ) : loading ? (
           <Spinner fluid light />
         ) : modal ? (
-          !!photo && <Modal photo={photo} />
+          <Modal photo={photo} />
         ) : (
           !!photo && (
             <React.Fragment>

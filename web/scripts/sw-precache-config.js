@@ -8,7 +8,8 @@ module.exports = {
     'build/static/css/*.css',
     'build/static/js/*.js',
     'build/shell.html',
-    'build/index.html'
+    'build/index.html',
+    'build/resume.pdf'
   ],
   stripPrefix: 'build',
   publicPath: '.',
