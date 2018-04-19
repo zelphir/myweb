@@ -4,15 +4,21 @@ import { getComponentDisplayName } from './utils'
 const Ctx = React.createContext()
 
 export class MqlProvider extends React.Component {
-  state = { isMobile: false, isPrint: false, windowSize: null }
+  mqlPrint = window.matchMedia('print')
+  mqlMobile = window.matchMedia(`(max-width: 768px)`)
+
+  state = {
+    isMobile: this.mqlMobile.matches,
+    isPrint: this.mqlPrint.matches,
+    windowSize: {
+      width: window.innerWidth,
+      height: window.innerHeight
+    }
+  }
 
   componentDidMount() {
-    this.mqlPrint = window.matchMedia('print')
-    this.mqlMobile = window.matchMedia(`(max-width: 768px)`)
     this.mqlMobile.addListener(this.setMql)
     this.mqlPrint.addListener(this.setMql)
-    this.setWindowSize()
-    this.setMql()
     window.addEventListener('resize', this.setWindowSize, false)
   }
 

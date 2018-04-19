@@ -60,9 +60,7 @@ class Stats extends React.PureComponent {
 
     return (
       <div id="stats">
-        {error ? (
-          <div className="stats-error">{error.message}</div>
-        ) : loading ? (
+        {error || loading ? (
           <Spinner fluid />
         ) : (
           <React.Fragment>

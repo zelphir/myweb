@@ -1,14 +1,35 @@
 import React from 'react'
 import { sidebarService } from 'react-sidebarjs'
+import PerfectScrollbar from 'perfect-scrollbar'
 import classNames from 'classnames/dedupe'
 import Stats from './Stats'
 import Footer from './Footer'
 import Menu from './Menu'
 import Info from './Info'
+import 'perfect-scrollbar/css/perfect-scrollbar.css'
 
 class Sidebar extends React.PureComponent {
   closeMenu = () => {
     sidebarService.close('sidebar')
+  }
+
+  applyScrollbar() {
+    this.ps = new PerfectScrollbar('#sidebar', {
+      suppressScrollX: true
+    })
+  }
+
+  componentDidUpdate() {
+    this.applyScrollbar()
+  }
+
+  componentDidMount() {
+    this.applyScrollbar()
+  }
+
+  componentWillUnmount() {
+    this.ps.destroy()
+    this.ps = null
   }
 
   render() {

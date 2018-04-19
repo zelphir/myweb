@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar'
 import loadable from 'loadable-components'
 import withData from './lib/withData'
 import withTracker from './lib/withTracker'
+import Spinner from './components/Spinner'
 import './App.css'
 
 const layouts = {
@@ -73,7 +74,7 @@ class App extends Component {
     const { routes, loading, error, location } = this.props
 
     if (error) return null
-    if (loading) return null
+    if (loading || !routes) return <Spinner fluid />
 
     const staticRoutes = Object.assign({}, routes, routes.blog.posts)
 

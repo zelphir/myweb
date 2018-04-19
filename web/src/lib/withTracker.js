@@ -3,7 +3,6 @@ import GoogleAnalytics from 'react-ga'
 import { getComponentDisplayName, isDev } from './utils'
 
 GoogleAnalytics.initialize(process.env.REACT_APP_GA_PROPERTY, {
-  debug: isDev,
   testMode: isDev
 })
 
