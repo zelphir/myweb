@@ -2,6 +2,7 @@ import React from 'react'
 import { hydrate, render } from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { ApolloProvider } from 'react-apollo'
+import Analytics from 'react-router-ga'
 import { loadComponents, getState } from 'loadable-components'
 import client from './lib/apollo'
 import { MqlProvider } from './lib/withMql'
@@ -19,7 +20,9 @@ const AppWithProviders = (
     <MqlProvider>
       <BrowserRouter>
         <ScrollToTop>
-          <App />
+          <Analytics id={process.env.REACT_APP_GA_PROPERTY}>
+            <App />
+          </Analytics>
         </ScrollToTop>
       </BrowserRouter>
     </MqlProvider>

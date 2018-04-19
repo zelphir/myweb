@@ -3,30 +3,26 @@ import Spinner from './Spinner'
 
 class Img extends React.PureComponent {
   state = {
-    loading: true,
-    error: false
+    loading: true
   }
 
-  componentDidMount() {
-    const img = new Image()
-
-    img.onload = () => {
-      this.setState({
-        loading: false,
-        error: false
-      })
-    }
-
-    img.src = this.props.src
-  }
+  handleOnLoad = () => this.setState({ loading: false })
 
   render() {
-    const { loading, error } = this.state
-    const { spinner } = this.props
+    const { loading } = this.state
+    const { spinner, alt } = this.props
 
-    if (loading || error) return <Spinner {...spinner} />
-
-    return <img {...this.props} /> // eslint-disable-line
+    return (
+      <React.Fragment>
+        {loading && <Spinner {...spinner} />}
+        <img
+          {...this.props}
+          alt={alt}
+          onLoad={this.handleOnLoad}
+          style={this.state.loading ? { display: 'none' } : {}}
+        />
+      </React.Fragment>
+    )
   }
 }
 
