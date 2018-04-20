@@ -1,5 +1,5 @@
 import React from 'react'
-import classNames from 'classnames/dedupe'
+import classNames from 'classnames'
 import { Route, NavLink as Link } from 'react-router-dom'
 
 const NavLink = ({ path, exact, reload, ...props }) => (

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form } from 'react-form'
 import isEmail from 'validator/lib/isEmail'
-import classNames from 'classnames/dedupe'
+import classNames from 'classnames'
 // import sendgrid from '../lib/sendgrid'
 import FormField from './FormField'
 import './ContactForm.css'

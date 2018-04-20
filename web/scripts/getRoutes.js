@@ -131,8 +131,9 @@ const getRoutes = async () => {
 }
 
 getRoutes().then(routes => {
-  const apiPath = 'public/api'
-  if (!fs.existsSync(apiPath)) fs.mkdirSync(apiPath)
-  fs.writeFileSync(`${apiPath}/routes.json`, JSON.stringify(routes, null, 2))
+  fs.writeFileSync(
+    path.resolve(__dirname, '../src/routes.json'),
+    JSON.stringify(routes, null, 2)
+  )
   console.timeEnd(chalk.green(`[\u2713] Routes created`)) // eslint-disable-line
 })

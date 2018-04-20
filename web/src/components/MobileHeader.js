@@ -1,6 +1,7 @@
 import React from 'react'
 import { sidebarService } from 'react-sidebarjs'
-import classNames from 'classnames/dedupe'
+import { withRouter } from 'react-router-dom'
+import classNames from 'classnames'
 import { ReactComponent as Menu } from '../assets/svgs/menu.svg'
 import './MobileHeader.css'
 
@@ -11,7 +12,8 @@ class MobileHeader extends React.PureComponent {
   }
 
   render() {
-    const { type } = this.props
+    const { location: { pathname } } = this.props
+    const type = pathname.includes('/photo') ? 'photos' : 'dev'
 
     return (
       <div className={classNames('mobile-header', type)}>
@@ -24,4 +26,4 @@ class MobileHeader extends React.PureComponent {
   }
 }
 
-export default MobileHeader
+export default withRouter(MobileHeader)

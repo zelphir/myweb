@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import classNames from 'classnames/dedupe'
+import classNames from 'classnames'
 import { matchPath } from 'react-router-dom'
 import { ReactComponent as PdfIcon } from '../assets/svgs/pdf.svg'
 import { withMql } from '../lib/withMql'

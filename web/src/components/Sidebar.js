@@ -1,15 +1,11 @@
 import React from 'react'
 import { SidebarJS } from 'react-sidebarjs'
-import { withRouter } from 'react-router-dom'
-import { compose } from 'react-apollo'
 import { withMql } from '../lib/withMql'
 import SidebarContent from './SidebarContent'
 import MobileHeader from './MobileHeader'
 import './Sidebar.css'
 
-const Sidebar = ({ location, isMobile }) => {
-  const type = location.pathname.includes('/photo') ? 'photos' : 'dev'
-
+const Sidebar = ({ isMobile }) => {
   return isMobile ? (
     <React.Fragment>
       <SidebarJS
@@ -19,13 +15,13 @@ const Sidebar = ({ location, isMobile }) => {
           nativeSwipeOpen: false
         }}
       >
-        <SidebarContent type={type} />
+        <SidebarContent />
       </SidebarJS>
-      <MobileHeader type={type} />
+      <MobileHeader />
     </React.Fragment>
   ) : (
-    <SidebarContent type={type} />
+    <SidebarContent />
   )
 }
 
-export default compose(withMql, withRouter)(Sidebar)
+export default withMql(Sidebar)

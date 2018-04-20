@@ -1,14 +1,15 @@
 import React from 'react'
 import { sidebarService } from 'react-sidebarjs'
 import PerfectScrollbar from 'perfect-scrollbar'
-import classNames from 'classnames/dedupe'
+import { withRouter } from 'react-router-dom'
+import classNames from 'classnames'
 import Stats from './Stats'
 import Footer from './Footer'
 import Menu from './Menu'
 import Info from './Info'
 import 'perfect-scrollbar/css/perfect-scrollbar.css'
 
-class Sidebar extends React.PureComponent {
+class SidebarContent extends React.PureComponent {
   closeMenu = () => {
     sidebarService.close('sidebar')
   }
@@ -33,17 +34,18 @@ class Sidebar extends React.PureComponent {
   }
 
   render() {
-    const { type } = this.props
-    const isDev = type === 'dev'
+    const { location: { pathname } } = this.props
+    const type = pathname.includes('/photo') ? 'photos' : 'dev'
+    const isPhoto = type === 'photos'
 
     return (
       <aside className={classNames('sidebar', type)} id="sidebar">
         <div className="sidebar-top">
-          <Info isDev={isDev} />
+          <Info isPhoto={isPhoto} />
           <Menu type={type} closeMenu={this.closeMenu} />
         </div>
         <div className="sidebar-bottom">
-          {isDev && <Stats />}
+          {!isPhoto && <Stats />}
           <Footer />
         </div>
       </aside>
@@ -51,4 +53,4 @@ class Sidebar extends React.PureComponent {
   }
 }
 
-export default Sidebar
+export default withRouter(SidebarContent)

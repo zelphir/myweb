@@ -29,7 +29,7 @@
     "npm-run-all": "^4.1.2",
     "prop-types": "^15.6.1",
     "react-scripts": "^2.0.0-next.b2fd8db8",
-    "react-snap": "^1.12.0",
+    "react-snap": "^1.12.2",
     "remarkable": "^1.7.1",
     "sw-precache": "^5.2.1",
     "uglifyjs": "^2.4.11"
@@ -65,19 +65,22 @@
     "typography": "^0.16.6",
     "typography-breakpoint-constants": "^0.15.10",
     "typography-theme-fairy-gates": "^0.15.11",
-    "validator": "^9.4.1"
+    "validator": "^9.4.1",
+    "webfontloader": "^1.6.28"
   },
   "reactSnap": {
+    "concurrency": 8,
+    "headless": true,
+    "waitFor": 1000,
+    "skipThirdPartyRequests": true,
+    "cacheAjaxRequests": true,
+    "asyncScriptTags": true,
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.0 Safari/537.36",
+    "include": ["/shell.html"],
     "viewport": {
       "width": 1440,
       "height": 1280
-    },
-    "cacheAjaxRequests": true,
-    "skipThirdPartyRequests": true,
-    "inlineCss": true,
-    "http2PushManifest": true,
-    "sourceMaps": false,
-    "include": ["/shell.html"]
+    }
   },
   "browserslist": {
     "development": ["last 2 chrome versions", "last 2 firefox versions", "last 2 edge versions"],

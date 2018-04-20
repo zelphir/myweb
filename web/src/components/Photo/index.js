@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { graphql, compose } from 'react-apollo'
-import classNames from 'classnames/dedupe'
+import classNames from 'classnames'
 import { GetPictures } from 'gql/queries.graphql'
 import { withMql } from '../../lib/withMql'
 import Spinner from '../Spinner'
@@ -87,11 +87,7 @@ export default compose(
   withRouter,
   graphql(GetPictures, {
     skip: ({ photo }) => !!photo,
-    options: ({
-      match: {
-        params: { id }
-      }
-    }) => ({
+    options: ({ match: { params: { id } } }) => ({
       variables: { filter: { id } }
     }),
     props: ({ data }) => ({

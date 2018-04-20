@@ -19,7 +19,6 @@
   flex-direction: column;
   font-size: $sb-font-size;
   height: 100%;
-  // overflow-y: auto;
   justify-content: space-between;
 
   .sidebarjs--left & {
@@ -38,6 +37,7 @@
   }
 
   &.photos {
+    background-color: lighten($black, 15%);
     background-image: $photos-bg;
     background-position: top;
     background-size: cover;

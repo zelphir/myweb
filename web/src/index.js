@@ -1,3 +1,4 @@
+import WebFont from 'webfontloader'
 import React from 'react'
 import { hydrate, render } from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
@@ -8,10 +9,14 @@ import client from './lib/apollo'
 import { MqlProvider } from './lib/withMql'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
-import typography from './lib/typography'
 import ScrollToTop from './components/ScrollToTop'
-import 'typeface-work-sans'
-import 'typeface-quattrocento-sans'
+import routes from './routes.json'
+
+WebFont.load({
+  google: {
+    families: ['Quattrocento Sans:400', 'Work Sans:600']
+  }
+})
 
 window.snapSaveState = () => getState()
 
@@ -21,7 +26,7 @@ const AppWithProviders = (
       <BrowserRouter>
         <ScrollToTop>
           <Analytics id={process.env.REACT_APP_GA_PROPERTY}>
-            <App />
+            <App routes={routes} />
           </Analytics>
         </ScrollToTop>
       </BrowserRouter>
@@ -39,5 +44,4 @@ if (rootElement.hasChildNodes()) {
   render(AppWithProviders, rootElement)
 }
 
-typography.injectStyles()
 registerServiceWorker()

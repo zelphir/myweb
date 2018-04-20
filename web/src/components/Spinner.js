@@ -1,5 +1,5 @@
 import React from 'react'
-import classNames from 'classnames/dedupe'
+import classNames from 'classnames'
 import { ReactComponent as Loading } from '../assets/svgs/loading.svg'
 import './Spinner.css'
 

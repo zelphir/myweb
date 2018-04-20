@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
-import { compose } from 'react-apollo'
 import Helmet from 'react-helmet'
 import { Transition } from 'react-transition-group'
 import Sidebar from './components/Sidebar'
 import loadable from 'loadable-components'
-import withData from './lib/withData'
-import Spinner from './components/Spinner'
 import './App.css'
 
 const layouts = {
@@ -70,11 +67,7 @@ class App extends Component {
   }
 
   render() {
-    const { routes, loading, error, location } = this.props
-
-    if (error) return null
-    if (loading || !routes) return <Spinner fluid />
-
+    const { location, routes } = this.props
     const staticRoutes = Object.assign({}, routes, routes.blog.posts)
 
     return (
@@ -143,4 +136,4 @@ class App extends Component {
   }
 }
 
-export default compose(withRouter, withData)(App)
+export default withRouter(App)

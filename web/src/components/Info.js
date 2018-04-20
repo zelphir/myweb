@@ -2,10 +2,10 @@ import React from 'react'
 import avatarDev from '../assets/images/avatar_dev.jpg'
 import avatarPhotos from '../assets/images/avatar_photos.jpg'
 
-const Info = ({ isDev }) => (
+const Info = ({ isPhoto }) => (
   <div className="info">
     <img
-      src={isDev ? avatarDev : avatarPhotos}
+      src={isPhoto ? avatarPhotos : avatarDev}
       className="avatar"
       alt="Roberto Manzella"
     />

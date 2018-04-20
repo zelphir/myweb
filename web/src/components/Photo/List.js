@@ -13,8 +13,7 @@ class PhotoList extends React.PureComponent {
   render() {
     const { photos, error, loading, meta, fetchMore } = this.props
 
-    if (error) return `Error! ${error.message}`
-    if (loading && !photos) return <Spinner fluid />
+    if (error || (loading && !photos)) return <Spinner fluid />
 
     return (
       <React.Fragment>
