@@ -2,6 +2,16 @@
 @import 'base';
 @import 'print';
 
+html {
+  box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
+
 html,
 body,
 #root {

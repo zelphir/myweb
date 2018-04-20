@@ -22,18 +22,29 @@
   }
 
   h2 {
-    margin: 15px 0 10px;
+    margin: 10px 0 5px;
+  }
+
+  h4 {
+    margin: 0;
+    color: #666;
+  }
+
+  h3 {
+    margin: 8px 0 5px;
   }
 
   h6 {
-    margin-bottom: 10px;
+    margin: 2px 0 10px;
   }
 
   p {
-    margin-bottom: 10px;
+    margin: 0 0 5px;
   }
 
   ul {
+    margin-bottom: 0;
+
     &:first-of-type {
       list-style: none;
       margin: 0 0 10px;
@@ -79,13 +90,17 @@
 
   li {
     break-inside: avoid-column;
+
+    p {
+      margin: 0;
+    }
   }
 
   hr {
     background: #999 !important;
     border: none;
     height: 1px;
-    margin: 0 0 20px;
+    margin: 0 0 5px;
     padding: 0;
   }
 
@@ -104,7 +119,7 @@
     width: 100%;
   }
 
-  .resume h1 {
+  #resume h1 {
     display: none;
   }
 }

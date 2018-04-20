@@ -5,6 +5,7 @@ import { Transition } from 'react-transition-group'
 import ThemeProvider from './lib/withTheme'
 import Sidebar from './components/Sidebar'
 import loadable from 'loadable-components'
+import 'normalize.css/normalize.css'
 import './App.css'
 
 const layouts = {
