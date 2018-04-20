@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import Helmet from 'react-helmet'
 import { Transition } from 'react-transition-group'
+import ThemeProvider from './lib/withTheme'
 import Sidebar from './components/Sidebar'
 import loadable from 'loadable-components'
 import './App.css'
@@ -71,7 +72,7 @@ class App extends Component {
     const staticRoutes = Object.assign({}, routes, routes.blog.posts)
 
     return (
-      <React.Fragment>
+      <ThemeProvider>
         <Helmet
           defaultTitle="robertomanzella.com"
           titleTemplate="%s | robertomanzella.com"
@@ -97,18 +98,13 @@ class App extends Component {
             }}
           />
           <Route
-            key={'/shell.html'}
-            path="/shell.html"
-            component={() => null}
-          />
-          <Route
             path="/photo/:id"
             render={props => {
               const Component = layouts.Photo
               return <Component {...props} />
             }}
           />
-          <Route key={'/404.html'} component={layouts.NoMatch} />
+          <Route component={layouts.NoMatch} />
         </Switch>
         <Transition in={this.isModal()} timeout={100}>
           {state =>
@@ -131,7 +127,7 @@ class App extends Component {
             )
           }
         </Transition>
-      </React.Fragment>
+      </ThemeProvider>
     )
   }
 }

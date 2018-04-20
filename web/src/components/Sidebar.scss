@@ -37,10 +37,8 @@
   }
 
   &.photos {
-    background-color: lighten($black, 15%);
-    background-image: $photos-bg;
-    background-position: top;
-    background-size: cover;
+    background-image: $photos-bg,
+      linear-gradient(45deg, lighten($black, 20%) 10%, lighten($black, 5%));
     border-right: 5px solid lighten($black, 30%);
     color: rgba($white, 0.8);
 

@@ -7,15 +7,14 @@ module.exports = {
   staticFileGlobs: [
     'build/static/css/*.css',
     'build/static/js/*.js',
-    'build/shell.html',
+    'build/200.html',
     'build/index.html',
     'build/resume.pdf',
     'build/robots.txt'
   ],
   stripPrefix: 'build',
   publicPath: '.',
-  // there is "reactSnap.include": ["/shell.html"] in package.json
-  navigateFallback: '/shell.html',
+  navigateFallback: '/200.html',
   // Ignores URLs starting from /__ (useful for Firebase):
   // https://github.com/facebookincubator/create-react-app/issues/2237#issuecomment-302693219
   navigateFallbackWhitelist: [/^(?!\/__).*/],
