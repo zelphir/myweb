@@ -1,15 +1,18 @@
 import React from 'react'
 import { sidebarService } from 'react-sidebarjs'
 import PerfectScrollbar from 'perfect-scrollbar'
-import { withRouter } from 'react-router-dom'
-import classNames from 'classnames'
 import Stats from './Stats'
+import { withRouter } from 'react-router-dom'
 import Footer from './Footer'
 import Menu from './Menu'
 import Info from './Info'
 import 'perfect-scrollbar/css/perfect-scrollbar.css'
 
 class SidebarContent extends React.PureComponent {
+  state = {
+    type: 'dev'
+  }
+
   closeMenu = () => {
     sidebarService.close('sidebar')
   }
@@ -21,11 +24,14 @@ class SidebarContent extends React.PureComponent {
   }
 
   componentDidUpdate() {
+    this.ps.destroy()
     this.applyScrollbar()
+    this.getType()
   }
 
   componentDidMount() {
     this.applyScrollbar()
+    this.getType()
   }
 
   componentWillUnmount() {
@@ -33,13 +39,18 @@ class SidebarContent extends React.PureComponent {
     this.ps = null
   }
 
+  getType = () => {
+    const { location } = this.props
+    const type = location.pathname.match(/\/photos?/) ? 'photos' : 'dev'
+    this.setState({ type })
+  }
+
   render() {
-    const { location: { pathname } } = this.props
-    const type = pathname.includes('/photo') ? 'photos' : 'dev'
+    const { type } = this.state
     const isPhoto = type === 'photos'
 
     return (
-      <aside className={classNames('sidebar', type)} id="sidebar">
+      <aside className={`sidebar ${type}`} id="sidebar">
         <div className="sidebar-top">
           <Info isPhoto={isPhoto} />
           <Menu type={type} closeMenu={this.closeMenu} />
