@@ -2,7 +2,7 @@ import React from 'react'
 import { Form } from 'react-form'
 import isEmail from 'validator/lib/isEmail'
 import classNames from 'classnames'
-// import sendgrid from '../lib/sendgrid'
+import sendgrid from '../lib/sendgrid'
 import FormField from './FormField'
 import './ContactForm.css'
 
@@ -31,19 +31,33 @@ class ContactForm extends React.PureComponent {
     statusText: undefined
   }
 
-  // onSubmit = async (values, _, formApi) => {
-  //   this.setState({ isSending: true })
-  //   const res = await sendgrid(values)
-  //   const { status, statusText } = await res.json()
-  //   this.setState({ status: status === 202 ? 'ok' : 'error', statusText })
-  //   this.setState({ isSending: false })
-  //   formApi.resetAll()
-  // }
+  // eslint-disable-next-line
+  onSubmit = async (values, _, formApi) => {
+    try {
+      this.setState({ isSending: true })
+      const res = await sendgrid(values)
+      const { status, statusText } = await res.json()
+      this.setState({
+        status: status === 202 ? 'ok' : 'error',
+        statusText,
+        isSending: false
+      })
+      formApi.resetAll()
+    } catch (err) {
+      this.setState({
+        status: 'error',
+        statusText: err.message,
+        isSending: false
+      })
+    }
+  }
 
   validations({ name, email, message }) {
     const isValidEmail = !email
       ? 'Email is required'
-      : !isEmail(email) ? 'Please enter a valid email' : null
+      : !isEmail(email)
+        ? 'Please enter a valid email'
+        : null
 
     return {
       name: !name ? 'Name is required' : null,
