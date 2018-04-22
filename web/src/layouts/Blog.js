@@ -1,16 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import BlogPost from '../components/BlogPost'
 
 const Blog = ({ data }) => (
   <main id="blog">
     <h1>Blog</h1>
-    <ul>
-      {Object.entries(data.posts).map(([id, post]) => (
-        <li key={id}>
-          <Link to={post.path}>{post.title}</Link>
-        </li>
-      ))}
-    </ul>
+    {Object.entries(data.posts).map(([id, post]) => (
+      <BlogPost key={id} post={post} />
+    ))}
   </main>
 )
 

@@ -64,7 +64,12 @@ const getPage = async file => {
   if (path.extname(file.path) === '.md') {
     const markdownData = fs.readFileSync(file.path, 'utf8')
     const { content, excerpt, data: mdData } = matter(markdownData, {
-      excerpt: true
+      excerpt: file => {
+        file.excerpt = file.content
+          .split('\n')
+          .slice(0, 3)
+          .join(' ')
+      }
     })
     const { slug, ...data } = mdData
 

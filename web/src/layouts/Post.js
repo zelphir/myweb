@@ -3,7 +3,7 @@ import renderMarkdown from '../lib/renderMarkdown'
 
 const Post = ({ data }) => (
   <main id="post">
-    <h3>{data.title}</h3>
+    <h1>{data.title}</h1>
     {renderMarkdown(data.content)}
   </main>
 )
