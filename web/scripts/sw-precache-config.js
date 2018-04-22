@@ -10,7 +10,8 @@ module.exports = {
     'build/200.html',
     'build/index.html',
     'build/resume.pdf',
-    'build/robots.txt'
+    'build/robots.txt',
+    'build/sitemap.xml'
   ],
   stripPrefix: 'build',
   publicPath: '.',

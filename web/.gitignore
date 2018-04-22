@@ -18,8 +18,9 @@ yarn-error.log*
 # routes
 src/routes.json
 
-# pdf
+# public
 public/*.pdf
+public/*.xml
 
 # robots.txt
 public/robots.txt

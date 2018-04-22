@@ -6,6 +6,7 @@ const chalk = require('chalk')
 const sass = require('node-sass')
 const Remarkable = require('remarkable')
 const Html2Pdf = require('electron-html-to')
+const format = require('date-fns/format')
 const remarkable = new Remarkable({ typographer: false })
 const conversion = Html2Pdf({ converterPath: Html2Pdf.converters.PDF })
 
@@ -135,10 +136,36 @@ const getRoutes = async () => {
   }
 }
 
+const buildSitemap = routes => {
+  const xml = `
+    <?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      ${Object.entries(Object.assign({}, routes, routes.blog.posts))
+        .map(
+          // eslint-disable-next-line
+          ([_, route]) => `
+          <url>
+            <loc>https://robertomanzella.com${route.path}</loc>
+            <lastmod>${format(new Date(), 'YYYY-MM-DD')}</lastmod>
+            <priority>${route.path === '/' ? 1 : 0.8}</priority>
+          </url>
+        `
+        )
+        .join(' ')}
+    </urlset>
+  `
+
+  fs.writeFileSync(
+    path.resolve(__dirname, '../public/sitemap.xml'),
+    xml.replace(/^\s+/gm, '')
+  )
+}
+
 getRoutes().then(routes => {
   fs.writeFileSync(
     path.resolve(__dirname, '../src/routes.json'),
     JSON.stringify(routes, null, 2)
   )
+  buildSitemap(routes)
   console.timeEnd(chalk.green(`[\u2713] Routes created`)) // eslint-disable-line
 })
