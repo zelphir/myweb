@@ -3,41 +3,6 @@ const path = require('path')
 const klaw = require('klaw-sync')
 const matter = require('gray-matter')
 const chalk = require('chalk')
-const sass = require('node-sass')
-const Remarkable = require('remarkable')
-const Html2Pdf = require('electron-html-to')
-const format = require('date-fns/format')
-const remarkable = new Remarkable({ typographer: false })
-const conversion = Html2Pdf({ converterPath: Html2Pdf.converters.PDF })
-
-const getPdf = (md, pdfFile) => {
-  const pdfPath = `./public/${pdfFile}`
-  const contact = fs.readFileSync('./src/pages/partials/contact-details.md')
-  const cover = fs.readFileSync('./src/pages/partials/cover.md')
-  const { css } = sass.renderSync({ file: './src/assets/scss/_pdf.scss' })
-  const html = `
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <style>${css}</style>
-      </head>
-      <body>
-        ${remarkable.render(contact + cover + md)}
-      </body>
-    </html>
-  `
-  console.time(chalk.green(`[\u2713] ${pdfPath} created`)) // eslint-disable-line
-
-  return new Promise((resolve, reject) =>
-    conversion({ html, pdf: { printBackground: true } }, (err, result) => {
-      if (err) return reject(err)
-      result.stream.pipe(fs.createWriteStream(pdfPath))
-      conversion.kill()
-      console.timeEnd(chalk.green(`[\u2713] ${pdfPath} created`)) // eslint-disable-line
-      resolve(pdfPath)
-    })
-  )
-}
 
 const getPartials = partials =>
   partials.reduce(
@@ -70,11 +35,6 @@ const getPage = async file => {
       }
     })
     const { slug, ...data } = mdData
-
-    if (data.pdf && process.env.NODE_ENV === 'production') {
-      await getPdf(content, data.pdf)
-    }
-
     const id = getId(slug, data.title)
     const isPost = file.path.includes('src/posts')
     const path = isPost ? `/blog/${id}` : id.includes('/') ? id : `/${id}`

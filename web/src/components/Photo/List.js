@@ -3,7 +3,6 @@ import LazyLoad from 'react-lazyload'
 import { graphql, compose } from 'react-apollo'
 import { GetPictures } from 'gql/queries.graphql'
 import { Link, withRouter } from 'react-router-dom'
-// import { OnPicturesUpdate } from 'gql/subscriptions.graphql'
 import Seo from '../Seo'
 import InfiniteScroll from '../InfiniteScroll'
 import Spinner from '../Spinner'
@@ -66,7 +65,8 @@ export default compose(
         orderBy: 'date_DESC',
         filter: { countryCode: match.params.country }
       },
-      notifyOnNetworkStatusChange: true
+      notifyOnNetworkStatusChange: true,
+      pollInterval: 6000
     }),
     props: ({ data }) => ({
       loading: data.loading,

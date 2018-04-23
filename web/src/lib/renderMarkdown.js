@@ -3,6 +3,8 @@ import Remarkable from 'remarkable'
 import RemarkableReactRenderer from 'remarkable-react'
 import RouterLink from '../components/RouterLink'
 import ContactForm from '../components/ContactForm'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/agate.css'
 
 /**
  * Registers a custom token to be parsed by Remarkable,
@@ -44,8 +46,9 @@ const addCustomMarkdownTokens = (remarkable, tags) => {
  * Automatically registers the tokens with Remarkable so that they can be parsed
  * and rendered into their associated components.
  */
-const createTokensFromCustomComponents = (remarkable, customComponents) => {
-  if (!remarkable || !customComponents) return {}
+const createTokensFromCustomComponents = customComponents => {
+  if (!customComponents) return {}
+  const remarkable = new Remarkable()
   const tokens = Object.keys(customComponents)
   addCustomMarkdownTokens(remarkable, tokens)
   const customTokens = {}
@@ -76,13 +79,12 @@ const defaultCustomComponents = {
 }
 
 export default (markdownSource, customComponents = {}) => {
-  const rm = new Remarkable()
-  const customTokens = createTokensFromCustomComponents(rm, {
+  const customTokens = createTokensFromCustomComponents({
     ...defaultCustomComponents,
     ...customComponents
   })
 
-  rm.renderer = new RemarkableReactRenderer({
+  const render = new RemarkableReactRenderer({
     components: {
       ...fixNestingWarnings,
       ...defaultCustomComponents,
@@ -90,6 +92,25 @@ export default (markdownSource, customComponents = {}) => {
     },
     tokens: { ...customTokens }
   })
+
+  const rm = new Remarkable('full', {
+    langPrefix: 'hljs language-',
+    highlight: (str, lang) => {
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return hljs.highlight(lang, str).value
+        } catch (err) {}
+      }
+
+      try {
+        return hljs.highlightAuto(str).value
+      } catch (err) {}
+
+      return ''
+    }
+  })
+
+  rm.renderer = render
 
   return {
     render: rm.render(markdownSource),

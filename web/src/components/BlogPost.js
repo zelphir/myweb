@@ -5,7 +5,7 @@ import styled from 'react-emotion'
 import Tag from './Tag'
 
 const Title = styled.h2`
-  margin-bottom: 0;
+  margin: 0;
 `
 
 const Small = styled.small`
@@ -14,11 +14,13 @@ const Small = styled.small`
 
 const BlogPost = ({ post }) => (
   <article>
+    {post.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
     <Link to={post.path}>
       <Title>{post.title}</Title>
     </Link>
-    <Small>{format(post.date, 'D MMM YY')} | </Small>
-    {post.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
+    <Small>
+      {format(post.date, 'D MMM YY')} | in: {post.category.map(tag => <span key={tag}>{tag}</span>)}
+    </Small>
     <p>{post.excerpt}</p>
   </article>
 )
