@@ -7,6 +7,7 @@ import Analytics from 'react-router-ga'
 import { loadComponents, getState } from 'loadable-components'
 import client from './lib/apollo'
 import { MqlProvider } from './lib/withMql'
+import { isDev } from './lib/utils'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import ScrollToTop from './components/ScrollToTop'
@@ -25,9 +26,13 @@ const AppWithProviders = (
     <MqlProvider>
       <BrowserRouter>
         <ScrollToTop>
-          <Analytics id={process.env.REACT_APP_GA_PROPERTY}>
+          {!isDev && navigator.userAgent !== 'ReactSnap' ? (
+            <Analytics id={process.env.REACT_APP_GA_PROPERTY}>
+              <App routes={routes} />
+            </Analytics>
+          ) : (
             <App routes={routes} />
-          </Analytics>
+          )}
         </ScrollToTop>
       </BrowserRouter>
     </MqlProvider>

@@ -33,31 +33,19 @@ class App extends Component {
   isModal() {
     const { location } = this.props
 
-    return !!(
-      location.state &&
-      location.state.modal &&
-      this.prevLocation !== location
-    )
+    return !!(location.state && location.state.modal && this.prevLocation !== location)
   }
 
   componentDidMount() {
     const elem = window.document
 
-    elem.addEventListener(
-      'serviceWorkerNotification',
-      this.onSwNotification,
-      false
-    )
+    elem.addEventListener('serviceWorkerNotification', this.onSwNotification, false)
   }
 
   componentWillUnmount() {
     const elem = window.document
 
-    elem.removeEventListener(
-      'serviceWorkerNotification',
-      this.onSwNotification,
-      false
-    )
+    elem.removeEventListener('serviceWorkerNotification', this.onSwNotification, false)
   }
 
   componentDidUpdate() {
@@ -75,8 +63,8 @@ class App extends Component {
     return (
       <ThemeProvider>
         <Helmet
-          defaultTitle="robertomanzella.com"
-          titleTemplate="%s | robertomanzella.com"
+          defaultTitle={process.env.REACT_APP_DOMAIN}
+          titleTemplate={`%s | ${process.env.REACT_APP_DOMAIN}`}
         />
         <Sidebar />
         <Switch location={this.isModal() ? this.prevLocation : location}>

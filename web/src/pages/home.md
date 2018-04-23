@@ -1,5 +1,5 @@
 ---
-title: Hi, I'm Roberto.
+title: Hi, I'm Roberto, Full stack developer.
 slug: /
 layout: Page
 partials:

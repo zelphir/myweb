@@ -21,8 +21,6 @@ src/routes.json
 # public
 public/*.pdf
 public/*.xml
-
-# robots.txt
 public/robots.txt
 
 # compiled css

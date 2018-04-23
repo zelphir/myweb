@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import { GetPictures } from 'gql/queries.graphql'
 import { withMql } from '../../lib/withMql'
 import Spinner from '../Spinner'
+import Seo from '../Seo'
 import Map from './Map'
 import Modal from './Modal'
 import './index.css'
@@ -36,7 +37,7 @@ class Photo extends React.PureComponent {
   }
 
   render() {
-    const { loading, error, modal, photo, animation } = this.props
+    const { location, loading, error, modal, photo, animation } = this.props
     const HtmlTag = modal ? 'div' : 'main'
 
     return (
@@ -59,11 +60,7 @@ class Photo extends React.PureComponent {
             <React.Fragment>
               <h1>{photo.country}</h1>
               <p>{photo.caption}</p>
-              <img
-                src={photo.imageUrl}
-                alt={photo.caption}
-                onLoad={this.handleImageLoaded}
-              />
+              <img src={photo.imageUrl} alt={photo.caption} onLoad={this.handleImageLoaded} />
               <Map
                 lat={photo.lat}
                 lng={photo.lng}
@@ -77,6 +74,14 @@ class Photo extends React.PureComponent {
             </React.Fragment>
           )
         )}
+        {!!photo && (
+          <Seo
+            image={photo.imageUrl}
+            path={location.pathname}
+            title={`Photo: ${photo.country}`}
+            description={photo.caption}
+          />
+        )}
       </HtmlTag>
     )
   }
@@ -87,7 +92,11 @@ export default compose(
   withRouter,
   graphql(GetPictures, {
     skip: ({ photo }) => !!photo,
-    options: ({ match: { params: { id } } }) => ({
+    options: ({
+      match: {
+        params: { id }
+      }
+    }) => ({
       variables: { filter: { id } }
     }),
     props: ({ data }) => ({

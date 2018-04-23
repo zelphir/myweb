@@ -62,9 +62,7 @@ const fixNestingWarnings = {
   p: ({ children }) =>
     children.some(
       element =>
-        element &&
-        typeof element.type === 'function' &&
-        element.type.displayName !== 'RouterLink'
+        element && typeof element.type === 'function' && element.type.displayName !== 'RouterLink'
     ) ? (
       <React.Fragment>{children}</React.Fragment>
     ) : (
@@ -93,5 +91,8 @@ export default (markdownSource, customComponents = {}) => {
     tokens: { ...customTokens }
   })
 
-  return rm.render(markdownSource)
+  return {
+    render: rm.render(markdownSource),
+    inline: rm.renderInline(markdownSource)
+  }
 }

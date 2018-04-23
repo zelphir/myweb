@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
 import classNames from 'classnames'
 import { matchPath } from 'react-router-dom'
 import { ReactComponent as PdfIcon } from '../assets/svgs/pdf.svg'
 import { withMql } from '../lib/withMql'
-import renderMarkdown from '../lib/renderMarkdown.js'
+import { getDescription } from '../lib/utils'
+import md from '../lib/renderMarkdown.js'
+import Seo from '../components/Seo'
 import './Page.css'
 
 class Page extends React.PureComponent {
@@ -26,9 +27,7 @@ class Page extends React.PureComponent {
 
     return Object.entries(data.partials)
       .filter(partial => !!partial[1].printOnly === isPrint)
-      .map(([id, data]) => (
-        <React.Fragment key={id}>{renderMarkdown(data.content)}</React.Fragment>
-      ))
+      .map(([id, data]) => <React.Fragment key={id}>{md(data.content).render}</React.Fragment>)
   }
 
   isMatch(path) {
@@ -44,9 +43,7 @@ class Page extends React.PureComponent {
           h6: ({ children }) => {
             return (
               <h6 className="tags">
-                {children[0]
-                  .split(/,\s?/)
-                  .map(tag => <span key={tag}>{tag}</span>)}
+                {children[0].split(/,\s?/).map(tag => <span key={tag}>{tag}</span>)}
               </h6>
             )
           }
@@ -56,12 +53,11 @@ class Page extends React.PureComponent {
 
   render() {
     const { isPrint, data } = this.props
+    const description = getDescription(data)
 
     return (
       <React.Fragment>
-        <Helmet>
-          <title>{data.title}</title>
-        </Helmet>
+        <Seo {...data} description={description} />
         <main
           id={this.isMatch('/') ? 'home' : data.id}
           className={classNames({
@@ -77,7 +73,7 @@ class Page extends React.PureComponent {
             <h1>{data.title}</h1>
           )}
           {data.partials && this.renderPartials()}
-          {renderMarkdown(data.content, this.customH6())}
+          {md(data.content, this.customH6()).render}
         </main>
       </React.Fragment>
     )
