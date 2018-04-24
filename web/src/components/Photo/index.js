@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import { GetPictures } from 'gql/queries.graphql'
 import { withMql } from '../../lib/withMql'
 import Spinner from '../Spinner'
+import Main from '../Main'
 import Seo from '../Seo'
 import Map from './Map'
 import Modal from './Modal'
@@ -37,16 +38,16 @@ class Photo extends React.PureComponent {
   }
 
   render() {
-    const { location, loading, error, modal, photo, animation } = this.props
-    const HtmlTag = modal ? 'div' : 'main'
+    const { location, loading, error, modal, photo, styles } = this.props
+    const HtmlTag = modal ? 'div' : Main
 
     return (
       <HtmlTag
         id="photo"
         ref={this.wrapper}
+        style={styles}
         className={classNames('photo', {
-          modal,
-          [animation]: animation
+          modal
         })}
       >
         {error ? (

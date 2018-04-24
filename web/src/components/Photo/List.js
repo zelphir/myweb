@@ -19,6 +19,7 @@ class PhotoList extends React.PureComponent {
 
     return (
       <React.Fragment>
+        <Spinner light />
         <Seo image={photos[0].imageUrl} path={location.pathname} title={title} />
         <InfiniteScroll
           wrapper="photos"
@@ -39,14 +40,18 @@ class PhotoList extends React.PureComponent {
                   }
                 }}
               >
-                <LazyLoad placeholder={<Spinner />} offset={[100, 0]} resize>
-                  <Img src={photo.thumbnailUrl} alt={photo.caption} />
+                <LazyLoad offset={[100, 0]} resize>
+                  <Img
+                    src={photo.thumbnailUrl}
+                    alt={photo.caption}
+                    spinner={{ light: true, fluid: true }}
+                  />
                 </LazyLoad>
               </Link>
             ))}
             {loading && (
               <div className="picture">
-                <Spinner />
+                <Spinner fluid />
               </div>
             )}
           </div>

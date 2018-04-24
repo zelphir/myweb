@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'react-emotion'
 
 const d = new Date()
 const dayOfWeek = d.getDay()
@@ -18,6 +19,13 @@ const renderWhatDoing = () => {
   }
 }
 
-const WhatDoing = () => <div className="no-languages">{renderWhatDoing()}</div>
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+`
+
+const WhatDoing = () => <Wrapper>{renderWhatDoing()}</Wrapper>
 
 export default WhatDoing

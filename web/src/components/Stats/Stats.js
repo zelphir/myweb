@@ -1,83 +1,70 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { TransitionMotion, spring, presets } from 'react-motion'
+import { Transition } from 'react-spring'
 import randomColor from 'randomcolor'
+import styled from 'react-emotion'
 import get from 'lodash/get'
 import WhatDoing from './WhatDoing'
-import Languages from './Languages'
+import { Languages, Language } from './Language'
 import StatsInfo from './StatsInfo'
 import Spinner from '../Spinner'
-import './Stats.css'
+
+const Wrapper = styled.div`
+  display: flex;
+  height: 165px;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding: 0 0 0 20px;
+`
 
 class Stats extends React.PureComponent {
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-    loading: PropTypes.bool,
-    error: PropTypes.object,
-    subscribeToDailyStats: PropTypes.func.isRequired
-  }
-
   componentDidMount() {
     this.props.subscribeToDailyStats()
   }
 
-  willLeave() {
-    return { opacity: spring(0), width: spring(0), height: 0 }
-  }
-
-  willEnter() {
-    return { width: 0 }
-  }
-
-  getStyles = languages =>
-    languages.map(({ name, percent, text }) => {
-      const bg = randomColor({
-        luminosity: 'dark',
+  updateBars({ percent }) {
+    return {
+      opacity: 1,
+      height: 30,
+      width: percent,
+      background: randomColor({
+        luminosity: 'light',
         format: 'rgba',
-        hue: 'monochrome',
-        alpha: 0.15,
-        seed: name
+        hue: '#b3b300',
+        alpha: 0.7
       })
-
-      return {
-        style: {
-          width: spring(percent, presets.wobbly),
-          opacity: 1,
-          height: 30
-        },
-        key: name.replace(/\s/g, '').toLowerCase(),
-        data: {
-          name,
-          text,
-          bg
-        }
-      }
-    })
+    }
+  }
 
   render() {
     const { error, loading, data } = this.props
     const languages = get(data, 'allDailyStats[0].entries', [])
 
     return (
-      <div id="stats">
+      <Wrapper>
         {error || loading ? (
           <Spinner fluid />
         ) : (
           <React.Fragment>
             {!languages.length && <WhatDoing />}
             {!!languages.length && (
-              <TransitionMotion
-                willEnter={this.willEnter}
-                willLeave={this.willLeave}
-                styles={this.getStyles(languages)}
-              >
-                {styles => <Languages languages={styles} />}
-              </TransitionMotion>
+              <Languages>
+                <Transition
+                  config={{ tension: 180, friction: 10 }}
+                  items={languages}
+                  keys={item => item.name}
+                  from={() => ({ opacity: 0, width: 0, height: 0 })}
+                  enter={this.updateBars}
+                  update={this.updateBars}
+                  leave={() => ({ opacity: 0, height: 0, width: 0 })}
+                >
+                  {languages.map(language => styles => <Language style={styles} {...language} />)}
+                </Transition>
+              </Languages>
             )}
           </React.Fragment>
         )}
         <StatsInfo />
-      </div>
+      </Wrapper>
     )
   }
 }

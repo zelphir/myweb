@@ -19,8 +19,6 @@ yarn-error.log*
 src/routes.json
 
 # public
-public/*.pdf
-public/*.xml
 public/robots.txt
 
 # compiled css

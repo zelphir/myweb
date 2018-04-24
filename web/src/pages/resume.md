@@ -2,6 +2,7 @@
 title: Resume
 pdf: resume.pdf
 layout: Page
+description: Latest CV. Roberto Manzella, Full Stack Developer based in London... love NodeJS/React/GraphQL/Docker/Git/Serverless
 partials:
 - file: contact-details.md
   printOnly: true

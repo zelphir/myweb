@@ -21,7 +21,6 @@
   },
   "devDependencies": {
     "chalk": "^2.4.0",
-    "electron-prebuilt": "^1.4.13",
     "generate-robotstxt": "^5.0.5",
     "gray-matter": "^4.0.1",
     "klaw-sync": "^3.0.2",
@@ -32,6 +31,7 @@
     "react-app-rewired": "^1.5.0",
     "react-scripts": "^2.0.0-next.b2fd8db8",
     "react-snap": "zelphir/react-snap",
+    "remove-markdown": "^0.2.2",
     "sw-precache": "^5.2.1",
     "uglifyjs": "^2.4.11"
   },
@@ -59,14 +59,12 @@
     "react-helmet": "^5.2.0",
     "react-lazyload": "^2.3.0",
     "react-markdown": "^3.3.0",
-    "react-motion": "^0.5.2",
     "react-router-dom": "^4.2.2",
     "react-router-ga": "^1.0.0",
     "react-sidebarjs": "^1.0.1",
+    "react-spring": "^4.2.1",
     "react-tooltip": "^3.5.0",
     "react-transition-group": "^2.3.1",
-    "remarkable": "^1.7.1",
-    "remarkable-react": "^1.3.0",
     "subscriptions-transport-ws": "^0.9.7",
     "validator": "^9.4.1",
     "webfontloader": "^1.6.28"
@@ -80,8 +78,15 @@
     "http2PushManifest": true,
     "inlineCss": true,
     "sitemap": true,
-    "exclude": ["/photo/**"],
-    "pdf": ["/resume"],
+    "exclude": ["/photo/**", "/resume.pdf"],
+    "pdf": [
+      {
+        "route": "/resume",
+        "options": {
+          "pageRanges": "1"
+        }
+      }
+    ],
     "viewport": {
       "width": 1440,
       "height": 1280

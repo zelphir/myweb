@@ -1,65 +1,66 @@
 import React from 'react'
+import styled, { css } from 'react-emotion'
 import { sidebarService } from 'react-sidebarjs'
 import RouterLink from './RouterLink'
+import { mq, sizes } from './common'
+import Icon from '../components/Icon'
 import { ReactComponent as Twitter } from '../assets/svgs/twitter.svg'
 import { ReactComponent as Linkedin } from '../assets/svgs/linkedin.svg'
 import { ReactComponent as Github } from '../assets/svgs/github.svg'
 import { ReactComponent as Envelope } from '../assets/svgs/envelope.svg'
 import { ReactComponent as Instagram } from '../assets/svgs/instagram.svg'
-import './Footer.css'
 
 const socials = [
   {
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/rmanzella/',
-    Icon: Linkedin
+    SocialIcon: Linkedin
   },
   {
     name: 'Twitter',
     href: 'https://twitter.com/robertomanzella',
-    Icon: Twitter
+    SocialIcon: Twitter
   },
   {
     name: 'Github',
     href: 'https://github.com/zelphir',
-    Icon: Github
+    SocialIcon: Github
   },
   {
     name: 'Instagram',
     href: 'https://www.instagram.com/robimanz/',
-    Icon: Instagram
+    SocialIcon: Instagram
   },
   {
     name: 'Email',
     href: '/contact',
-    Icon: Envelope
+    SocialIcon: Envelope
   }
 ]
 
-class Footer extends React.PureComponent {
-  closeMenu = () => {
-    sidebarService.close('sidebar')
-  }
+const CopyRight = styled.div`
+  margin-top: 10px;
+`
 
-  render() {
-    return (
-      <div className="footer">
-        <div className="socials">
-          {socials.map(({ name, href, Icon }) => (
-            <RouterLink
-              key={name}
-              href={href}
-              className="social"
-              onClick={this.closeMenu}
-            >
-              <Icon />
-            </RouterLink>
-          ))}
-        </div>
-        <div className="copyright">&copy; robertomanzella.com</div>
-      </div>
-    )
-  }
-}
+const Wrapper = styled.div`
+  margin-top: 20px;
+  text-align: right;
+  padding: 10px ${sizes.sidebar.padding.md}px 15px;
+
+  ${mq.lg(css`
+    padding-right: ${sizes.sidebar.padding.lg}px;
+  `)};
+`
+
+const Footer = () => (
+  <Wrapper>
+    {socials.map(({ name, href, SocialIcon }) => (
+      <RouterLink key={name} href={href} onClick={() => sidebarService.close('sidebar')}>
+        <Icon icon={<SocialIcon />} />
+      </RouterLink>
+    ))}
+    <CopyRight>&copy; robertomanzella.com</CopyRight>
+  </Wrapper>
+)
 
 export default Footer

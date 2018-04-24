@@ -1,10 +1,11 @@
 import React from 'react'
+import Main from '../components/Main'
 
 const NoMatch = () => {
   return (
-    <main>
+    <Main>
       <h1>404 - :(</h1>
-    </main>
+    </Main>
   )
 }
 

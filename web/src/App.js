@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import Helmet from 'react-helmet'
-import { Transition } from 'react-transition-group'
+// import { Transition } from 'react-transition-group'
+import { Transition } from 'react-spring'
 import ThemeProvider from './lib/withTheme'
 import Sidebar from './components/Sidebar'
 import loadable from 'loadable-components'
-import 'normalize.css/normalize.css'
-import './App.css'
+import './globalStyles'
 
 const layouts = {
   Page: loadable(() => import('./layouts/Page')),
@@ -95,9 +95,14 @@ class App extends Component {
           />
           <Route component={layouts.NoMatch} />
         </Switch>
-        <Transition in={this.isModal()} timeout={100}>
-          {state =>
-            this.isModal() && (
+        {this.isModal() && (
+          <Transition
+            from={{ opacity: 0 }}
+            enter={{ opacity: 1 }}
+            leave={{ opacity: 0 }}
+            config={{ tension: 100, friction: 15 }}
+          >
+            {styles => (
               <Route
                 path="/photo/:id"
                 render={props => {
@@ -108,17 +113,39 @@ class App extends Component {
                       photo={location.state.photo}
                       modal
                       prevLocation={this.prevLocation.pathname}
-                      animation={state}
+                      styles={styles}
                     />
                   )
                 }}
               />
-            )
-          }
-        </Transition>
+            )}
+          </Transition>
+        )}
       </ThemeProvider>
     )
   }
 }
 
 export default withRouter(App)
+
+// <Transition in={this.isModal()} timeout={100}>
+//   {state =>
+//     this.isModal() && (
+//       <Route
+//         path="/photo/:id"
+//         render={props => {
+//           const Component = layouts.Photo
+//           return (
+//             <Component
+//               {...props}
+//               photo={location.state.photo}
+//               modal
+//               prevLocation={this.prevLocation.pathname}
+//               animation={state}
+//             />
+//           )
+//         }}
+//       />
+//     )
+//   }
+// </Transition>

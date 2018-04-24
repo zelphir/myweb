@@ -3,6 +3,7 @@ const path = require('path')
 const klaw = require('klaw-sync')
 const matter = require('gray-matter')
 const chalk = require('chalk')
+const removeMd = require('remove-markdown')
 
 const getPartials = partials =>
   partials.reduce(
@@ -44,6 +45,7 @@ const getPage = async file => {
       ...data,
       content,
       excerpt,
+      description: data.description || removeMd(excerpt),
       path,
       layout: data.layout || 'Post',
       date: data.date && data.date.toString(),

@@ -2,6 +2,8 @@
 title: Hi, I'm Roberto, Full stack developer.
 slug: /
 layout: Page
+description: Roberto Manzella, Full Stack Developer based in London... love NodeJS/React/GraphQL/Docker/Git/Serverless
+contact: true
 partials:
 - file: cover.md
 ---
@@ -18,5 +20,3 @@ You can also find my latest resume and some pictures taken around the world.
 * * *
 
 ## Get in touch
-
-% contact-form

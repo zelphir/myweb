@@ -73,11 +73,7 @@ class ContactForm extends React.PureComponent {
         onSubmit={this.onSubmit}
         validate={this.validations}
         render={({ submitForm, errors, touched, values }) => (
-          <form
-            onSubmit={submitForm}
-            id="contact-form"
-            className="contact-form"
-          >
+          <form onSubmit={submitForm} id="contact-form" className="contact-form">
             {fields.map(field => {
               const isError = errors && touched[field.id] && errors[field.id]
               const fieldClass = classNames('form-field', field.type, {
@@ -88,9 +84,7 @@ class ContactForm extends React.PureComponent {
               return (
                 <div className={fieldClass} key={field.id}>
                   <FormField {...field} />
-                  <div className="error-message">
-                    {isError && errors[field.id]}
-                  </div>
+                  <div className="error-message">{isError && errors[field.id]}</div>
                 </div>
               )
             })}

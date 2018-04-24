@@ -1,16 +1,15 @@
 import React from 'react'
 import Seo from '../components/Seo'
-import Md from 'react-markdown'
-import { getDescription } from '../lib/utils'
+import Markdown from '../components/Markdown'
+import Main from '../components/Main'
 
 const Post = ({ data }) => {
-  const description = <Md source={getDescription(data)} />
   return (
-    <main id="post">
-      <Seo {...data} description={description} />
+    <Main id="post">
+      <Seo {...data} />
       <h1>{data.title}</h1>
-      <Md source={data.content} renderers={{ root: React.Fragment }} />
-    </main>
+      <Markdown source={data.content} />
+    </Main>
   )
 }
 

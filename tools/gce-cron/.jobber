@@ -4,14 +4,21 @@ notifyProgram: /usr/local/bin/jobberNotifier.sh
 [jobs]
 - name: ImportStats
   cmd: "cd ~ && node import.js"
-  time: "*/20 * 0-1 * * *"
+  time: "0 2 0-1 * * *"
   onError: Continue
   notifyOnError: true
   notifyOnSuccess: true
   notifyOnFailure: true
 - name: ImportStats
   cmd: "cd ~ && node import.js"
-  time: "*/20 * 9-23 * * *"
+  time: "*/10 * 9-18 * * *"
+  onError: Continue
+  notifyOnError: true
+  notifyOnSuccess: true
+  notifyOnFailure: true
+- name: ImportStats
+  cmd: "cd ~ && node import.js"
+  time: "0 1 18-23 * * *"
   onError: Continue
   notifyOnError: true
   notifyOnSuccess: true

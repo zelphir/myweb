@@ -1,17 +1,18 @@
 import React from 'react'
 import Seo from '../components/Seo'
 import PhotoList from '../components/Photo/List'
+import Main from '../components/Main'
 
 const title = 'Photos'
 const description = 'Some of the photos taken around the World...'
 
 const Photos = () => (
-  <main id="photos">
+  <Main id="photos">
     <Seo title={title} description={description} path="/photos" />
     <h1>{title}</h1>
     <p>{description}</p>
     <PhotoList />
-  </main>
+  </Main>
 )
 
 export default Photos

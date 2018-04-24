@@ -11,6 +11,7 @@ module.exports = {
     'build/index.html',
     'build/resume.pdf',
     'build/robots.txt',
+    'build/favicon.ico',
     'build/sitemap.xml'
   ],
   stripPrefix: 'build',
