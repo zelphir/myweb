@@ -20,7 +20,7 @@
     "deploy:beta": "NODE_ENV=production yarn generate-robots beta && REACT_APP_DOMAIN=beta.robertomanzella.com yarn build && netlifyctl d -b build -n betarobertomanzella"
   },
   "devDependencies": {
-    "chalk": "^2.4.0",
+    "chalk": "^2.4.1",
     "generate-robotstxt": "^5.0.5",
     "gray-matter": "^4.0.1",
     "klaw-sync": "^3.0.2",
@@ -28,7 +28,7 @@
     "npm-run-all": "^4.1.2",
     "prop-types": "^15.6.1",
     "react-app-rewire-emotion": "^3.0.1",
-    "react-app-rewired": "^1.5.0",
+    "react-app-rewired": "^1.5.2",
     "react-scripts": "^2.0.0-next.b2fd8db8",
     "react-snap": "zelphir/react-snap",
     "remove-markdown": "^0.2.2",
@@ -60,7 +60,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-ga": "^1.0.0",
     "react-sidebarjs": "^1.0.1",
-    "react-spring": "^4.2.1",
+    "react-spring": "^5.0.1",
     "react-tooltip": "^3.5.0",
     "subscriptions-transport-ws": "^0.9.7",
     "validator": "^9.4.1",
