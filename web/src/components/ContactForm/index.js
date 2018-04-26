@@ -1,10 +1,10 @@
 import React from 'react'
 import { Form } from 'react-form'
 import isEmail from 'validator/lib/isEmail'
-import classNames from 'classnames'
-import sendgrid from '../lib/sendgrid'
+import sendgrid from '../../lib/sendgrid'
 import FormField from './FormField'
-import './ContactForm.css'
+import Button from './Button'
+import { FormWrapper, ErrorMessage } from './elements'
 
 const fields = [
   {
@@ -67,38 +67,29 @@ class ContactForm extends React.PureComponent {
   }
 
   render() {
-    const { isSending, status, statusText } = this.state
     return (
       <Form
         onSubmit={this.onSubmit}
         validate={this.validations}
         render={({ submitForm, errors, touched, values }) => (
-          <form onSubmit={submitForm} id="contact-form" className="contact-form">
+          <FormWrapper onSubmit={submitForm} id="contact-form">
             {fields.map(field => {
               const isError = errors && touched[field.id] && errors[field.id]
-              const fieldClass = classNames('form-field', field.type, {
-                error: isError,
-                dirty: values[field.id]
-              })
 
               return (
-                <div className={fieldClass} key={field.id}>
-                  <FormField {...field} />
-                  <div className="error-message">{isError && errors[field.id]}</div>
-                </div>
+                <FormField
+                  {...field}
+                  key={field.id}
+                  type={field.type}
+                  isError={!!isError}
+                  isDirty={!!values[field.id]}
+                >
+                  <ErrorMessage>{isError && errors[field.id]}</ErrorMessage>
+                </FormField>
               )
             })}
-            <div className="form-field button">
-              <button
-                type="submit"
-                disabled={isSending}
-                className={isSending ? 'loading' : status}
-                data-status={statusText}
-              >
-                {isSending ? 'Sending...' : 'Send'}
-              </button>
-            </div>
-          </form>
+            <Button {...this.state} />
+          </FormWrapper>
         )}
       />
     )

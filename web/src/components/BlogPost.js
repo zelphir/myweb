@@ -2,7 +2,7 @@ import React from 'react'
 import { format } from 'date-fns'
 import { Link } from 'react-router-dom'
 import styled from 'react-emotion'
-import Tag from './Tag'
+import { Tag } from './Tags'
 
 const Title = styled.h2`
   margin: 0;

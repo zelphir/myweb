@@ -1,5 +1,5 @@
 import React from 'react'
-import classNames from 'classnames'
+import cx from 'emotion'
 import { Route, NavLink as Link } from 'react-router-dom'
 
 const NavLink = ({ path, exact, reload, ...props }) => (
@@ -8,11 +8,7 @@ const NavLink = ({ path, exact, reload, ...props }) => (
     exact={exact}
     children={({ match }) => {
       return reload ? (
-        <a
-          href={path}
-          reload={true}
-          className={classNames({ active: match && match.isExact })}
-        >
+        <a href={path} reload={true} className={cx({ active: match && match.isExact })}>
           {props.title}
         </a>
       ) : (

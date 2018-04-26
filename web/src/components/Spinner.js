@@ -1,7 +1,20 @@
 import React from 'react'
-import styled from 'react-emotion'
+import styled, { css } from 'react-emotion'
 import { ReactComponent as Loading } from '../assets/svgs/loading.svg'
 import { colors } from './common'
+
+const fluid = css`
+  height: 100%;
+  width: 100%;
+`
+
+const absolute = css`
+  ${fluid};
+  left: 0;
+  margin: 0;
+  position: absolute;
+  top: 0;
+`
 
 const Wrapper = styled.div`
   align-items: center;
@@ -9,6 +22,8 @@ const Wrapper = styled.div`
   justify-content: center;
   height: ${props => props.fluid && '100%'};
   width: ${props => props.fluid && '100%'};
+  ${props => props.fluid && fluid};
+  ${props => props.absolute && absolute};
 
   svg {
     opacity: 0.4;

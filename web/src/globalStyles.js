@@ -214,6 +214,20 @@ injectGlobal`
     padding: 0;
   }
 
+  .sidebarjs--is-visible {
+    [sidebarjs-backdrop] {
+      &:before {
+        ${fontWork};
+        content: '\\d7';
+        font-size: 30px;
+        color: ${colors.white};
+        position: absolute;
+        right: 16px;
+        top: 0;
+      }
+    }
+  }
+
   @media (max-width: 480px) {
     html {
       font-size: 106.25%;

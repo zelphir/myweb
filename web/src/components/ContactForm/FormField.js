@@ -1,13 +1,16 @@
 import React from 'react'
 import { Text, TextArea } from 'react-form'
+import { FieldWrapper } from './elements'
 
-const FormField = ({ id, placeholder, type }) => {
+const FormField = ({ id, placeholder, type, isDirty, isError, children }) => {
   const Field = type === 'input' ? Text : TextArea
+
   return (
-    <React.Fragment>
+    <FieldWrapper isError={isError} isDirty={isDirty} type={type}>
       <Field field={id} name={id} />
       <label htmlFor={id}>{placeholder}</label>
-    </React.Fragment>
+      {children}
+    </FieldWrapper>
   )
 }
 

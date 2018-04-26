@@ -4,7 +4,7 @@ import { rgba } from 'polished'
 import { ReactComponent as Pdf } from '../assets/svgs/pdf.svg'
 import Markdown from './Markdown'
 import Main from './Main'
-import Tag from './Tag'
+import Tags, { Tag } from './Tags'
 import Icon from './Icon'
 import { colors, fontQuattro } from './common'
 
@@ -55,12 +55,6 @@ const noPrintStyle = css`
   }
 `
 
-const Tags = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
-`
-
 const Header = styled.div`
   align-items: baseline;
   display: flex;
@@ -68,7 +62,9 @@ const Header = styled.div`
 
 const heading = props =>
   props.level === 6 ? (
-    <Tags>{props.children[0].split(/,\s?/).map(tag => <Tag key={tag}>{tag}</Tag>)}</Tags>
+    <Tags margin="0 0 30px">
+      {props.children[0].split(/,\s?/).map(tag => <Tag key={tag}>{tag}</Tag>)}
+    </Tags>
   ) : (
     <Markdown.renderers.heading {...props} />
   )

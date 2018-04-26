@@ -107,15 +107,7 @@ class App extends Component {
                 path="/photo/:id"
                 render={props => {
                   const Component = layouts.Photo
-                  return (
-                    <Component
-                      {...props}
-                      photo={location.state.photo}
-                      modal
-                      prevLocation={this.prevLocation.pathname}
-                      styles={styles}
-                    />
-                  )
+                  return <Component modal styles={styles} photo={location.state.photo} {...props} />
                 }}
               />
             )}
@@ -127,25 +119,3 @@ class App extends Component {
 }
 
 export default withRouter(App)
-
-// <Transition in={this.isModal()} timeout={100}>
-//   {state =>
-//     this.isModal() && (
-//       <Route
-//         path="/photo/:id"
-//         render={props => {
-//           const Component = layouts.Photo
-//           return (
-//             <Component
-//               {...props}
-//               photo={location.state.photo}
-//               modal
-//               prevLocation={this.prevLocation.pathname}
-//               animation={state}
-//             />
-//           )
-//         }}
-//       />
-//     )
-//   }
-// </Transition>

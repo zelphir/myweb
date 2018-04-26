@@ -7,7 +7,7 @@ const title = 'Photos'
 const description = 'Some of the photos taken around the World...'
 
 const Photos = () => (
-  <Main id="photos">
+  <Main id="photos" photos>
     <Seo title={title} description={description} path="/photos" />
     <h1>{title}</h1>
     <p>{description}</p>

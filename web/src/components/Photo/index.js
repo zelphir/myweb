@@ -1,15 +1,14 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { graphql, compose } from 'react-apollo'
-import classNames from 'classnames'
 import { GetPictures } from 'gql/queries.graphql'
 import { withMql } from '../../lib/withMql'
 import Spinner from '../Spinner'
+import Tags, { Tag } from '../Tags'
 import Main from '../Main'
 import Seo from '../Seo'
 import Map from './Map'
 import Modal from './Modal'
-import './index.css'
 
 class Photo extends React.PureComponent {
   wrapper = React.createRef()
@@ -19,7 +18,7 @@ class Photo extends React.PureComponent {
     imageLoaded: false
   }
 
-  updateWidth() {
+  updateWrapperWidth() {
     const wrapper = window.getComputedStyle(this.wrapper.current, null)
     const width = parseInt(wrapper.getPropertyValue('width'))
     const paddingLeft = parseInt(wrapper.getPropertyValue('padding-left'))
@@ -30,7 +29,7 @@ class Photo extends React.PureComponent {
 
   componentDidUpdate() {
     if (!this.props.photo) return this.props.history.push('/photos')
-    if (this.state.imageLoaded) this.updateWidth()
+    if (this.state.imageLoaded) this.updateWrapperWidth()
   }
 
   handleImageLoaded = () => {
@@ -39,41 +38,31 @@ class Photo extends React.PureComponent {
 
   render() {
     const { location, loading, error, modal, photo, styles } = this.props
-    const HtmlTag = modal ? 'div' : Main
+    const { wrapperWidth: width } = this.state
+    const height = width * 9 / 16
 
     return (
-      <HtmlTag
-        id="photo"
-        ref={this.wrapper}
-        style={styles}
-        className={classNames('photo', {
-          modal
-        })}
-      >
-        {error ? (
-          <div className="photo-error">{error.message}</div>
-        ) : loading ? (
-          <Spinner fluid light />
-        ) : modal ? (
-          <Modal photo={photo} />
+      <React.Fragment>
+        {modal ? (
+          <Modal photo={photo} styles={styles} />
         ) : (
-          !!photo && (
-            <React.Fragment>
-              <h1>{photo.country}</h1>
-              <p>{photo.caption}</p>
-              <img src={photo.imageUrl} alt={photo.caption} onLoad={this.handleImageLoaded} />
-              <Map
-                lat={photo.lat}
-                lng={photo.lng}
-                height={300}
-                width={this.state.wrapperWidth}
-                light
-              />
-              <div className="tags">
-                {photo.tags.map(({ name, id }) => <span key={id}>{name}</span>)}
-              </div>
-            </React.Fragment>
-          )
+          <Main id="photo" innerRef={this.wrapper}>
+            {error ? (
+              <p>{error.message}</p>
+            ) : loading || !photo ? (
+              <Spinner fluid light />
+            ) : (
+              <React.Fragment>
+                <h1>{photo.country}</h1>
+                <p>{photo.caption}</p>
+                <img src={photo.imageUrl} alt={photo.caption} onLoad={this.handleImageLoaded} />
+                <Map lat={photo.lat} lng={photo.lng} height={height} width={width} light />
+                <Tags margin="10px 0 0">
+                  {photo.tags.map(({ name, id }) => <Tag key={id}>{name}</Tag>)}
+                </Tags>
+              </React.Fragment>
+            )}
+          </Main>
         )}
         {!!photo && (
           <Seo
@@ -83,7 +72,7 @@ class Photo extends React.PureComponent {
             description={photo.caption}
           />
         )}
-      </HtmlTag>
+      </React.Fragment>
     )
   }
 }

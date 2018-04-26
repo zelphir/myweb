@@ -1,4 +1,4 @@
-import { css } from 'react-emotion'
+import { css, keyframes } from 'react-emotion'
 
 const breakpoints = {
   md: 769,
@@ -49,4 +49,26 @@ export const fontQuattro = css`
 export const fontWork = css`
   font-family: 'Work Sans', serif;
   font-weight: 600;
+`
+
+export const fadeAnimation = keyframes`
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  10% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  90% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 `
