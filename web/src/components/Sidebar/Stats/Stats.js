@@ -57,7 +57,7 @@ class Stats extends React.PureComponent {
                   update={this.updateBars}
                   leave={() => ({ opacity: 0, height: 0, width: 0 })}
                 >
-                  {languages.map(language => styles => <Language style={styles} {...language} />)}
+                  {languages.map(language => styles => <Language styles={styles} {...language} />)}
                 </Transition>
               </Languages>
             )}

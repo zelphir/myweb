@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'react-emotion'
 import ReactTooltip from 'react-tooltip'
-import { mq, sizes } from '../../common'
+import { mq, sizes, fadeAnimation } from '../../common'
 
 const Bar = styled.div`
   border-radius: 5px 0 0 5px;
@@ -20,6 +20,9 @@ const Label = styled.span`
   right: 0;
   top: 3px;
   z-index: 1200;
+`
+const Update = styled.span`
+  animation: ${fadeAnimation} 2s ease-in 0.2s forwards;
 `
 
 const Wrapper = styled.div`
@@ -44,12 +47,12 @@ export const Languages = styled.div`
   `)};
 `
 
-export const Language = ({ style, text, name }) => (
-  <Wrapper height={style.height}>
-    <Label opacity={style.opacity} data-tip={text}>
-      {name}
+export const Language = ({ styles, text, name }) => (
+  <Wrapper height={styles.height}>
+    <Label opacity={styles.opacity} data-tip={text}>
+      <Update>{text}</Update> {name}
     </Label>
-    <Bar {...style} />
+    <Bar {...styles} />
     <ReactTooltip place="left" effect="solid" />
   </Wrapper>
 )
