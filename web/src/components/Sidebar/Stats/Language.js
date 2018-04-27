@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'react-emotion'
 import ReactTooltip from 'react-tooltip'
-import { mq, sizes } from '../common'
+import { mq, sizes } from '../../common'
 
 const Bar = styled.div`
   border-radius: 5px 0 0 5px;

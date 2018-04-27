@@ -1,8 +1,11 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import sortBy from 'lodash/sortBy'
+import styled, { css } from 'react-emotion'
+import { rgba } from 'polished'
+import { mq, sidebarPadding, colors } from '../common'
 import { Link } from 'react-router-dom'
-import Spinner from './Spinner'
+import Spinner from '../Spinner'
 import { GetCountries } from 'gql/queries.graphql'
 
 const menus = {
@@ -15,8 +18,35 @@ const menus = {
   photos: [{ to: '/', label: 'Home' }, { to: '/photos', label: 'All' }]
 }
 
+const Wrapper = styled.div`
+  ${sidebarPadding(20)} align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  font-size: 24px;
+  text-transform: uppercase;
+
+  ${({ type }) => {
+    const isPhoto = type === 'photos'
+    const color = isPhoto ? 'white' : 'black'
+
+    return css`
+      a {
+        color: ${rgba(colors[color], 0.8)};
+
+        &:hover {
+          color: ${rgba(colors[color], isPhoto ? 0.7 : 0.4)};
+        }
+      }
+    `
+  }};
+
+  ${mq.md(css`
+    font-size: 18px;
+  `)};
+`
+
 const Menu = ({ closeMenu, type }) => (
-  <div className="menu">
+  <Wrapper type={type}>
     {menus[type].map(({ to, label }) => (
       <Link to={to} key={to} onClick={closeMenu}>
         {label}
@@ -37,11 +67,7 @@ const Menu = ({ closeMenu, type }) => (
                 return sortBy(
                   [
                     ...prev,
-                    <Link
-                      to={`/photos/${countryCode}`}
-                      key={countryCode}
-                      onClick={closeMenu}
-                    >
+                    <Link to={`/photos/${countryCode}`} key={countryCode} onClick={closeMenu}>
                       {country}
                     </Link>
                   ],
@@ -53,7 +79,7 @@ const Menu = ({ closeMenu, type }) => (
         }}
       </Query>
     )}
-  </div>
+  </Wrapper>
 )
 
 export default Menu

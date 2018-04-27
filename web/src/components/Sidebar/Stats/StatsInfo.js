@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'react-emotion'
-import { mq, sizes } from '../common'
+import { mq, sizes } from '../../common'
 
 const Info = styled.div`
   border-left: 1px solid rgba(0, 0, 0, 0.6);

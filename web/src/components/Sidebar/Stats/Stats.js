@@ -6,7 +6,7 @@ import get from 'lodash/get'
 import WhatDoing from './WhatDoing'
 import { Languages, Language } from './Language'
 import StatsInfo from './StatsInfo'
-import Spinner from '../Spinner'
+import Spinner from '../../Spinner'
 
 const Wrapper = styled.div`
   display: flex;

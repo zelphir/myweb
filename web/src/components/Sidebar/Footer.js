@@ -1,14 +1,14 @@
 import React from 'react'
 import styled, { css } from 'react-emotion'
 import { sidebarService } from 'react-sidebarjs'
-import RouterLink from './RouterLink'
-import { mq, sizes } from './common'
-import Icon from '../components/Icon'
-import { ReactComponent as Twitter } from '../assets/svgs/twitter.svg'
-import { ReactComponent as Linkedin } from '../assets/svgs/linkedin.svg'
-import { ReactComponent as Github } from '../assets/svgs/github.svg'
-import { ReactComponent as Envelope } from '../assets/svgs/envelope.svg'
-import { ReactComponent as Instagram } from '../assets/svgs/instagram.svg'
+import { mq, sizes } from '../common'
+import RouterLink from '../RouterLink'
+import Icon from '../Icon'
+import { ReactComponent as Twitter } from './svgs/twitter.svg'
+import { ReactComponent as Linkedin } from './svgs/linkedin.svg'
+import { ReactComponent as Github } from './svgs/github.svg'
+import { ReactComponent as Envelope } from './svgs/envelope.svg'
+import { ReactComponent as Instagram } from './svgs/instagram.svg'
 
 const socials = [
   {

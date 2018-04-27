@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'react-emotion'
-import { ReactComponent as Loading } from '../assets/svgs/loading.svg'
+import { ReactComponent as Loading } from './svgs/loading.svg'
 import { colors } from './common'
 
 const fluid = css`
@@ -20,8 +20,6 @@ const Wrapper = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  height: ${props => props.fluid && '100%'};
-  width: ${props => props.fluid && '100%'};
   ${props => props.fluid && fluid};
   ${props => props.absolute && absolute};
 

@@ -51,6 +51,21 @@ export const fontWork = css`
   font-weight: 600;
 `
 
+export const lineBreak = css`
+  span:first-of-type:after {
+    content: '\\A';
+    white-space: pre;
+  }
+`
+
+export const sidebarPadding = top => css`
+  padding: ${top}px ${sizes.sidebar.padding.md}px 15px;
+
+  ${mq.lg(css`
+    padding-right: ${sizes.sidebar.padding.lg}px;
+  `)};
+`
+
 export const fadeAnimation = keyframes`
   0% {
     opacity: 0;

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css, cx } from 'react-emotion'
 import { rgba } from 'polished'
-import { ReactComponent as Pdf } from '../assets/svgs/pdf.svg'
+import { ReactComponent as Pdf } from './svgs/pdf.svg'
 import Markdown from './Markdown'
 import Main from './Main'
 import Tags, { Tag } from './Tags'

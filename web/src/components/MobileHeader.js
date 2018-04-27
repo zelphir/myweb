@@ -4,7 +4,7 @@ import styled, { css } from 'react-emotion'
 import { sidebarService } from 'react-sidebarjs'
 import { withRouter } from 'react-router-dom'
 import { mq, colors } from './common'
-import { ReactComponent as Menu } from '../assets/svgs/menu.svg'
+import { ReactComponent as Menu } from './svgs/menu.svg'
 
 const Wrapper = styled.div`
   align-items: center;

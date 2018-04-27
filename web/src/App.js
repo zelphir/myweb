@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
+import { compose } from 'react-apollo'
 import Helmet from 'react-helmet'
-// import { Transition } from 'react-transition-group'
 import { Transition } from 'react-spring'
 import ThemeProvider from './lib/withTheme'
+import withData from './lib/withData'
 import Sidebar from './components/Sidebar'
 import loadable from 'loadable-components'
-import './globalStyles'
+import './lib/globalStyles'
 
 const layouts = {
   Page: loadable(() => import('./layouts/Page')),
@@ -57,7 +58,10 @@ class App extends Component {
   }
 
   render() {
-    const { location, routes } = this.props
+    const { location, routes, loading } = this.props
+
+    if (!routes || loading) return null
+
     const staticRoutes = Object.assign({}, routes, routes.blog.posts)
 
     return (
@@ -118,4 +122,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App)
+export default compose(withRouter, withData)(App)

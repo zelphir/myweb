@@ -1,9 +1,8 @@
 import React from 'react'
 import { SidebarJS } from 'react-sidebarjs'
-import { withMql } from '../lib/withMql'
-import SidebarContent from './SidebarContent'
-import MobileHeader from './MobileHeader'
-import './Sidebar.css'
+import { withMql } from '../../lib/withMql'
+import Content from './Content'
+import MobileHeader from '../MobileHeader'
 
 const Sidebar = ({ isMobile }) => {
   return isMobile ? (
@@ -15,12 +14,12 @@ const Sidebar = ({ isMobile }) => {
           nativeSwipeOpen: false
         }}
       >
-        <SidebarContent />
+        <Content />
       </SidebarJS>
       <MobileHeader />
     </React.Fragment>
   ) : (
-    <SidebarContent />
+    <Content />
   )
 }
 

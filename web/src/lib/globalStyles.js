@@ -1,6 +1,6 @@
 import { injectGlobal, css } from 'emotion'
 import { normalize, rgba, modularScale } from 'polished'
-import { colors, fontWork } from './components/common'
+import { colors, fontWork, fontQuattro } from '../components/common'
 import printStyles from './printStyles'
 
 const htag = css`
@@ -38,9 +38,8 @@ injectGlobal`
   }
 
   body {
+    ${fontQuattro};
     color: ${rgba(colors.black, 0.8)};
-    font-family: 'Quattrocento Sans', serif;
-    font-weight: 400;
     margin: 0;
     word-wrap: break-word;
   }

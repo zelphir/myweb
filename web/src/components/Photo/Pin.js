@@ -1,12 +1,14 @@
 import React from 'react'
-import { ReactComponent as PinSvg } from '../../assets/svgs/pin.svg'
+import { css } from 'emotion'
+import { ReactComponent as PinSvg } from './svgs/pin.svg'
 
-const size = 20
-const style = {
-  width: size,
-  height: size
-}
-
-const Pin = () => <PinSvg style={style} />
+const Pin = () => (
+  <PinSvg
+    className={css`
+      width: 20px;
+      height: 20px;
+    `}
+  />
+)
 
 export default Pin
