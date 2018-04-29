@@ -66,16 +66,16 @@ function registerValidSW(swUrl) {
               // It's the perfect time to display a "New content is
               // available; please refresh." message in your web app.
               const event = new CustomEvent('serviceWorkerNotification', {
-                state: 'new'
+                detail: { state: 'new' }
               })
               window.document.dispatchEvent(event)
-              console.log('New content is available; please refresh.')
+              console.log('New content is available, please refresh.')
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
               const event = new CustomEvent('serviceWorkerNotification', {
-                state: 'cached'
+                detail: { state: 'cached' }
               })
               window.document.dispatchEvent(event)
               console.log('Content is cached for offline use.')

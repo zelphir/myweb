@@ -3,7 +3,7 @@ import { getComponentDisplayName } from './utils'
 
 const Ctx = React.createContext()
 
-export class MqlProvider extends React.Component {
+class MqlProvider extends React.Component {
   mqlPrint = window.matchMedia('print')
   mqlMobile = window.matchMedia(`(max-width: 768px)`)
 
@@ -51,9 +51,7 @@ export class MqlProvider extends React.Component {
 
 export const withMql = ComposedComponent =>
   class WithMql extends React.Component {
-    static displayName = `WithMql(${getComponentDisplayName(
-      ComposedComponent
-    )})`
+    static displayName = `WithMql(${getComponentDisplayName(ComposedComponent)})`
 
     render() {
       return (
@@ -70,3 +68,5 @@ export const withMql = ComposedComponent =>
       )
     }
   }
+
+export default MqlProvider

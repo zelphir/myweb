@@ -58,10 +58,7 @@ const PhotoList = ({ photos, error, loading, meta, fetchMore, location, match })
         wrapper="photos"
         isLoading={loading}
         hasMore={photos.length !== meta.count}
-        loadMore={() => {
-          console.log('loadmore')
-          return fetchMore(photos.length)
-        }}
+        loadMore={() => fetchMore(photos.length)}
       >
         <Wrapper>
           {photos.map(photo => (

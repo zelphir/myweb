@@ -1,15 +1,25 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
+import { withSW } from '../lib/withSW'
 
-const RouterLink = ({ href, children, className }) =>
+const RouterLink = ({ href, children, newContent }) =>
   href.match(/^(https?:)?\/\//) ? (
-    <a href={href} target="blank" className={className}>
+    <a href={href} target="blank">
       {children}
     </a>
   ) : (
-    <Link to={href} className={className}>
-      {children}
-    </Link>
+    <Route
+      path={href}
+      children={() =>
+        newContent ? (
+          <a href={href} reload={true}>
+            {children}
+          </a>
+        ) : (
+          <Link to={href}>{children}</Link>
+        )
+      }
+    />
   )
 
-export default RouterLink
+export default withSW(RouterLink)

@@ -19,34 +19,11 @@ const layouts = {
 }
 
 class App extends Component {
-  state = {
-    serviceWorkerState: null
-  }
-
-  onSwNotification = e => {
-    this.setState({
-      serviceWorkerState: e.state
-    })
-  }
-
   prevLocation = this.props.location
 
   isModal() {
     const { location } = this.props
-
     return !!(location.state && location.state.modal && this.prevLocation !== location)
-  }
-
-  componentDidMount() {
-    const elem = window.document
-
-    elem.addEventListener('serviceWorkerNotification', this.onSwNotification, false)
-  }
-
-  componentWillUnmount() {
-    const elem = window.document
-
-    elem.removeEventListener('serviceWorkerNotification', this.onSwNotification, false)
   }
 
   componentDidUpdate() {
