@@ -4,7 +4,7 @@ import sortBy from 'lodash/sortBy'
 import styled, { css } from 'react-emotion'
 import { rgba } from 'polished'
 import { mq, sidebarPadding, colors } from '../common'
-import { Link } from 'react-router-dom'
+import NavLink from '../NavLink'
 import Spinner from '../Spinner'
 import { GetCountries } from 'gql/queries.graphql'
 
@@ -48,9 +48,9 @@ const Wrapper = styled.div`
 const Menu = ({ closeMenu, type }) => (
   <Wrapper type={type}>
     {menus[type].map(({ to, label }) => (
-      <Link to={to} key={to} onClick={closeMenu}>
+      <NavLink to={to} key={to} onClick={closeMenu}>
         {label}
-      </Link>
+      </NavLink>
     ))}
     {type === 'photos' && (
       <Query query={GetCountries}>
@@ -67,9 +67,9 @@ const Menu = ({ closeMenu, type }) => (
                 return sortBy(
                   [
                     ...prev,
-                    <Link to={`/photos/${countryCode}`} key={countryCode} onClick={closeMenu}>
+                    <NavLink to={`/photos/${countryCode}`} key={countryCode} onClick={closeMenu}>
                       {country}
-                    </Link>
+                    </NavLink>
                   ],
                   'props.children'
                 )

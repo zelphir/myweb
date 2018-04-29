@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'react-emotion'
 import { sidebarService } from 'react-sidebarjs'
 import { mq, sizes } from '../common'
-import RouterLink from '../RouterLink'
+import NavLink from '../NavLink'
 import Icon from '../Icon'
 import { ReactComponent as Twitter } from './svgs/twitter.svg'
 import { ReactComponent as Linkedin } from './svgs/linkedin.svg'
@@ -55,9 +55,9 @@ const Wrapper = styled.div`
 const Footer = () => (
   <Wrapper>
     {socials.map(({ name, href, SocialIcon }) => (
-      <RouterLink key={name} href={href} onClick={() => sidebarService.close('sidebar')}>
+      <NavLink key={name} to={href} onClick={() => sidebarService.close('sidebar')}>
         <Icon icon={<SocialIcon />} />
-      </RouterLink>
+      </NavLink>
     ))}
     <CopyRight>&copy; robertomanzella.com</CopyRight>
   </Wrapper>

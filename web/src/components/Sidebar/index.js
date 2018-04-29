@@ -4,7 +4,7 @@ import { withMql } from '../../lib/withMql'
 import Content from './Content'
 import MobileHeader from '../MobileHeader'
 
-const Sidebar = ({ isMobile }) => {
+const Sidebar = ({ isMobile, isPrint }) => {
   return isMobile ? (
     <React.Fragment>
       <SidebarJS
@@ -16,7 +16,7 @@ const Sidebar = ({ isMobile }) => {
       >
         <Content />
       </SidebarJS>
-      <MobileHeader />
+      {!isPrint && <MobileHeader />}
     </React.Fragment>
   ) : (
     <Content />

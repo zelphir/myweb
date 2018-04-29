@@ -1,13 +1,24 @@
 import React from 'react'
 import styled, { css } from 'react-emotion'
 import ReactTooltip from 'react-tooltip'
-import { mq, sizes, fadeAnimation } from '../../common'
+import { mq, sizes, colors, fontWork } from '../../common'
 
 const Bar = styled.div`
   border-radius: 5px 0 0 5px;
   height: 20px;
+  box-sizing: content-box;
   width: ${({ width }) => width}%;
-  background-color: ${({ background }) => background};
+  padding-left: ${({ isUpdated }) => isUpdated && '30px'};
+  transition: background-color 0.25s ease-in-out, padding-left 0.25s ease-in-out;
+  background-color: ${({ background, isUpdated }) => (isUpdated ? colors.white : background)};
+`
+
+const Update = styled.span`
+  ${fontWork};
+  font-size: 12px;
+  margin-right: 10px;
+  transition: opacity 0.25s ease-in-out;
+  opacity: ${({ isUpdated }) => (isUpdated ? 1 : 0)};
 `
 
 const Label = styled.span`
@@ -19,10 +30,6 @@ const Label = styled.span`
   position: absolute;
   right: 0;
   top: 3px;
-  z-index: 1200;
-`
-const Update = styled.span`
-  animation: ${fadeAnimation} 2s ease-in 0.2s forwards;
 `
 
 const Wrapper = styled.div`
@@ -47,12 +54,35 @@ export const Languages = styled.div`
   `)};
 `
 
-export const Language = ({ styles, text, name }) => (
-  <Wrapper height={styles.height}>
-    <Label opacity={styles.opacity} data-tip={text}>
-      <Update>{text}</Update> {name}
-    </Label>
-    <Bar {...styles} />
-    <ReactTooltip place="left" effect="solid" />
-  </Wrapper>
-)
+export class Language extends React.PureComponent {
+  state = {
+    isUpdated: false
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.text !== this.props.text) {
+      this.highlightUpdate()
+    }
+  }
+
+  highlightUpdate = () => {
+    this.setState({ isUpdated: true })
+    setTimeout(() => this.setState({ isUpdated: false }), 1000)
+  }
+
+  render() {
+    const { styles, text, name } = this.props
+    const { isUpdated } = this.state
+
+    return (
+      <Wrapper height={styles.height}>
+        <Label opacity={styles.opacity} data-tip={text}>
+          <Update isUpdated={isUpdated}>{text}</Update>
+          {name}
+        </Label>
+        <Bar {...styles} isUpdated={isUpdated} />
+        <ReactTooltip place="top" />
+      </Wrapper>
+    )
+  }
+}

@@ -1,9 +1,9 @@
 import React from 'react'
 import Md from 'react-markdown'
-import RouterLink from './RouterLink'
+import NavLink from './NavLink'
 
 const Markdown = ({ source, renderers }) => {
-  return <Md source={source} renderers={{ root: React.Fragment, link: RouterLink, ...renderers }} />
+  return <Md source={source} renderers={{ root: React.Fragment, link: NavLink, ...renderers }} />
 }
 
 Markdown.renderers = Md.renderers

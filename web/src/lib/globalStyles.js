@@ -227,6 +227,10 @@ injectGlobal`
     }
   }
 
+  .ps__rail-y {
+    margin-right: -5px;
+  }
+
   @media (max-width: 480px) {
     html {
       font-size: 106.25%;
