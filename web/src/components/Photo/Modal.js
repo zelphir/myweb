@@ -1,6 +1,6 @@
 import React from 'react'
 import { compose } from 'react-apollo'
-import styled from 'react-emotion'
+import styled, { css, cx } from 'react-emotion'
 import { rgba, lighten } from 'polished'
 import { withRouter } from 'react-router-dom'
 import { withMql } from '../../lib/withMql'
@@ -38,6 +38,7 @@ const Wrapper = styled.div`
 
   img {
     margin: 0;
+    display: block;
   }
 `
 
@@ -58,7 +59,7 @@ const ModalContent = styled.div`
 
 const Picture = styled.div`
   align-items: center;
-  background: rgba($black, 0.8);
+  background: ${rgba(colors.black, 0.8)};
   display: flex;
   justify-content: center;
 `
@@ -105,36 +106,44 @@ class PhotoContent extends React.PureComponent {
   }
 
   render() {
-    const { photo, styles } = this.props
+    const { photo, styles, isMobile } = this.props
     return (
       <Wrapper style={styles}>
         <CloseModal href="/photos" onClick={this.closeModal}>
           &times;
         </CloseModal>
         <ModalContent
-          style={{
-            width: this.getPictureSize().width + this.getMapSize().width
-          }}
+          className={cx(
+            isMobile
+              ? css`
+                  padding: 10px;
+                `
+              : css`
+                  width: ${this.getPictureSize().width + this.getMapSize().width}px;
+                `
+          )}
         >
           <h2>{photo.country}</h2>
           <p>{photo.caption}</p>
           <Picture>
-            <div style={this.getPictureSize()}>
+            <div className={cx(!isMobile && css(this.getPictureSize()))}>
               <Img
                 src={photo.imageUrl}
                 alt={photo.caption}
                 spinner={{ light: true, fluid: true }}
               />
             </div>
-            <Map lat={photo.lat} lng={photo.lng} {...this.getMapSize()} />
+            {!isMobile && <Map lat={photo.lat} lng={photo.lng} {...this.getMapSize()} />}
           </Picture>
-          <Tags margin="10px 0 0">
-            {photo.tags.map(({ name, id }) => (
-              <Tag key={id} dark small>
-                {name}
-              </Tag>
-            ))}
-          </Tags>
+          {!isMobile && (
+            <Tags margin="10px 0 0">
+              {photo.tags.map(({ name, id }) => (
+                <Tag key={id} dark small>
+                  {name}
+                </Tag>
+              ))}
+            </Tags>
+          )}
         </ModalContent>
       </Wrapper>
     )
