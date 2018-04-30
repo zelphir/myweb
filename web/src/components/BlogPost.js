@@ -15,7 +15,7 @@ const Small = styled.small`
 const BlogPost = ({ post }) => (
   <article>
     {post.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
-    <Link to={post.path}>
+    <Link to={{ pathname: post.path, state: { post } }}>
       <Title>{post.title}</Title>
     </Link>
     <Small>

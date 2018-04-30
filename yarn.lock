@@ -9290,9 +9290,9 @@ react-sidebarjs@^1.0.1:
     react "^16.2.0"
     sidebarjs "^5.0.0"
 
-react-snap@zelphir/react-snap:
+react-snap@zelphir/react-snap#master:
   version "1.12.2"
-  resolved "https://codeload.github.com/zelphir/react-snap/tar.gz/5819ec869b5ca8c98a23ae982fb478e1bb04936b"
+  resolved "https://codeload.github.com/zelphir/react-snap/tar.gz/70efdb963bb7f7f9fdfd874a2ce8d18e3115fd2f"
   dependencies:
     clean-css "^4.1.9"
     express "^4.16.1"
@@ -10974,6 +10974,14 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
+typeface-quattrocento-sans@^0.0.54:
+  version "0.0.54"
+  resolved "https://registry.npmjs.org/typeface-quattrocento-sans/-/typeface-quattrocento-sans-0.0.54.tgz#bdd1f323c48b4f0a181edca93d7f58c4a5578afa"
+
+typeface-work-sans@^0.0.54:
+  version "0.0.54"
+  resolved "https://registry.npmjs.org/typeface-work-sans/-/typeface-work-sans-0.0.54.tgz#1bf57d6a2c7dfa6f820adbe12d8c2291835f07c4"
+
 ua-parser-js@^0.7.9:
   version "0.7.17"
   resolved "https://registry.npmjs.org/ua-parser-js/-/ua-parser-js-0.7.17.tgz#e9ec5f9498b9ec910e7ae3ac626a805c4d09ecac"
@@ -11447,10 +11455,6 @@ wbuf@^1.1.0, wbuf@^1.7.2:
   resolved "https://registry.npmjs.org/wbuf/-/wbuf-1.7.3.tgz#c1d8d149316d3ea852848895cb6a0bfe887b87df"
   dependencies:
     minimalistic-assert "^1.0.0"
-
-webfontloader@^1.6.28:
-  version "1.6.28"
-  resolved "https://registry.npmjs.org/webfontloader/-/webfontloader-1.6.28.tgz#db786129253cb6e8eae54c2fb05f870af6675bae"
 
 webidl-conversions@^4.0.0, webidl-conversions@^4.0.2:
   version "4.0.2"

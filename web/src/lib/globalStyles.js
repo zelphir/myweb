@@ -119,6 +119,7 @@ injectGlobal`
   h1 {
     font-size: ${modularScale(2)};
     ${htag};
+    margin-top: 5px;
   }
 
   h2 {

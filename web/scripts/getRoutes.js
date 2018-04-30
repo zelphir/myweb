@@ -76,28 +76,37 @@ const arrayToObj = array =>
 
 const getRoutes = async () => {
   console.time(chalk.green(`[\u2713] Routes created`)) // eslint-disable-line
-  const posts = await getFiles('posts')
   const pages = await getFiles('pages')
+  const posts = await getFiles('posts')
+  const postsByDate = posts.sort((a, b) => new Date(b.date) - new Date(a.date))
+  const firstTenPosts = postsByDate.slice(0, 10)
 
   return {
-    ...arrayToObj(pages),
-    photos: {
-      layout: 'Photos',
-      path: '/photos',
-      title: 'Photos'
+    pages: {
+      ...arrayToObj(pages),
+      photos: {
+        layout: 'Photos',
+        path: '/photos',
+        title: 'Photos'
+      },
+      blog: {
+        layout: 'Blog',
+        path: '/blog',
+        title: 'Blog',
+        posts: firstTenPosts
+      }
     },
-    blog: {
-      layout: 'Blog',
-      path: '/blog',
-      title: 'Blog',
-      posts: arrayToObj(posts)
-    }
+    posts: posts
   }
 }
 
 getRoutes().then(routes => {
   const apiPath = 'public/api'
   if (!fs.existsSync(apiPath)) fs.mkdirSync(apiPath)
-  fs.writeFileSync(`${apiPath}/routes.json`, JSON.stringify(routes, null, 2))
+  fs.writeFileSync(
+    path.resolve(__dirname, '../src/routes.json'),
+    JSON.stringify(routes.pages, null, 2)
+  )
+  fs.writeFileSync(`${apiPath}/posts.json`, JSON.stringify(routes.posts, null, 2))
   console.timeEnd(chalk.green(`[\u2713] Routes created`)) // eslint-disable-line
 })

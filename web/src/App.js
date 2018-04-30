@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
-import { compose } from 'react-apollo'
 import Helmet from 'react-helmet'
 import { Transition } from 'react-spring'
 import ThemeProvider from './lib/withTheme'
-import withData from './lib/withData'
 import Sidebar from './components/Sidebar'
 import loadable from 'loadable-components'
 import './lib/globalStyles'
@@ -35,11 +33,7 @@ class App extends Component {
   }
 
   render() {
-    const { location, routes, loading } = this.props
-
-    if (!routes || loading) return null
-
-    const staticRoutes = Object.assign({}, routes, routes.blog.posts)
+    const { location, routes } = this.props
 
     return (
       <ThemeProvider>
@@ -49,7 +43,7 @@ class App extends Component {
         />
         <Sidebar />
         <Switch location={this.isModal() ? this.prevLocation : location}>
-          {Object.entries(staticRoutes).map(([id, data]) => (
+          {Object.entries(routes).map(([id, data]) => (
             <Route
               key={id}
               exact
@@ -60,6 +54,13 @@ class App extends Component {
               }}
             />
           ))}
+          <Route
+            path="/blog/:slug"
+            render={props => {
+              const Component = layouts.Post
+              return <Component {...props} />
+            }}
+          />
           <Route
             path="/photos/:country"
             render={props => {
@@ -99,4 +100,4 @@ class App extends Component {
   }
 }
 
-export default compose(withRouter, withData)(App)
+export default withRouter(App)

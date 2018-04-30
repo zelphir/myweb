@@ -3,7 +3,11 @@ import Seo from '../components/Seo'
 import Markdown from '../components/Markdown'
 import Main from '../components/Main'
 
-const Post = ({ data }) => {
+const Post = ({ location }) => {
+  const {
+    state: { post: data }
+  } = location
+
   return (
     <Main id="post">
       <Seo {...data} />

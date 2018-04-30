@@ -34,7 +34,7 @@ class Page extends React.PureComponent {
             {data.partials && this.renderPartials()}
           </Resume>
         ) : (
-          <Main id={this.isMatch('/') ? 'home' : data.id}>
+          <Main id={this.isMatch('/resume') && data.id}>
             <h1>{data.title}</h1>
             {data.partials && this.renderPartials()}
             <Markdown source={data.content} />
