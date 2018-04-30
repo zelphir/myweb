@@ -17,6 +17,12 @@ injectGlobal`
 
   html {
     box-sizing: border-box;
+    transition: opacity 0.15s ease-in;
+    opacity: 0;
+
+    &.wf-active {
+      opacity: 1;
+    }
   }
 
   *,

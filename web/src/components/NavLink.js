@@ -6,7 +6,7 @@ const NavLink = ({ to, href, children, newContent, closeMenu }) => {
   const path = href || to
 
   return path.match(/^(https?:)?\/\//) ? (
-    <a href={path} target="blank">
+    <a href={path} target="_blank">
       {children}
     </a>
   ) : (
@@ -14,7 +14,7 @@ const NavLink = ({ to, href, children, newContent, closeMenu }) => {
       path={path}
       children={() =>
         newContent ? (
-          <a href={path} reload={true} onClick={closeMenu}>
+          <a href={path} reload={true}>
             {children}
           </a>
         ) : (

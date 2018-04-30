@@ -44,7 +44,7 @@ const getPage = async file => {
       id: id === '/' ? 'home' : id,
       ...data,
       content,
-      excerpt,
+      excerpt: removeMd(excerpt),
       description: data.description || removeMd(excerpt),
       path,
       layout: data.layout || 'Post',

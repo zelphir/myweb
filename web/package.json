@@ -37,7 +37,6 @@
     "emotion": "^9.1.2",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.8.0",
-    "highlight.js": "^9.12.0",
     "loadable-components": "^1.3.0",
     "perfect-scrollbar": "^1.3.0",
     "pigeon-maps": "^0.9.2",
@@ -55,19 +54,19 @@
     "react-router-dom": "^4.2.2",
     "react-router-ga": "^1.0.0",
     "react-sidebarjs": "^1.0.1",
-    "react-spring": "^5.1.0",
+    "react-spring": "5.0.1",
+    "react-syntax-highlighter": "^7.0.2",
     "react-tooltip": "^3.5.0",
     "subscriptions-transport-ws": "^0.9.7",
-    "typeface-quattrocento-sans": "^0.0.54",
-    "typeface-work-sans": "^0.0.54",
-    "validator": "^9.4.1"
+    "validator": "^9.4.1",
+    "webfontloader": "^1.6.28"
   },
   "reactSnap": {
     "waitFor": 1000,
     "inlineCss": true,
     "sitemap": true,
     "cacheAjaxRequests": true,
-    "exclude": ["/photo/**", "/resume.pdf"],
+    "exclude": ["/photo/**"],
     "pdf": [
       {
         "route": "/resume",

@@ -1,4 +1,5 @@
 import React from 'react'
+import WebFont from 'webfontloader'
 import { hydrate, render } from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { ApolloProvider } from 'react-apollo'
@@ -12,8 +13,13 @@ import { isSnap } from './lib/utils'
 import App from './App'
 import ScrollToTop from './components/ScrollToTop'
 import routes from './routes.json'
-import 'typeface-quattrocento-sans'
-import 'typeface-work-sans'
+
+!isSnap &&
+  WebFont.load({
+    google: {
+      families: ['Quattrocento Sans:400', 'Work Sans:600']
+    }
+  })
 
 window.snapSaveState = () => getState()
 
