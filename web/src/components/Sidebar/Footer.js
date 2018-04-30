@@ -55,7 +55,7 @@ const Wrapper = styled.div`
 const Footer = () => (
   <Wrapper>
     {socials.map(({ name, href, SocialIcon }) => (
-      <NavLink key={name} to={href} onClick={() => sidebarService.close('sidebar')}>
+      <NavLink key={name} to={href} closeMenu={() => sidebarService.close('sidebar')}>
         <Icon icon={<SocialIcon />} />
       </NavLink>
     ))}

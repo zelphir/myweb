@@ -48,7 +48,7 @@ const Wrapper = styled.div`
 const Menu = ({ closeMenu, type }) => (
   <Wrapper type={type}>
     {menus[type].map(({ to, label }) => (
-      <NavLink to={to} key={to} onClick={closeMenu}>
+      <NavLink to={to} key={to} closeMenu={closeMenu}>
         {label}
       </NavLink>
     ))}
@@ -67,7 +67,7 @@ const Menu = ({ closeMenu, type }) => (
                 return sortBy(
                   [
                     ...prev,
-                    <NavLink to={`/photos/${countryCode}`} key={countryCode} onClick={closeMenu}>
+                    <NavLink to={`/photos/${countryCode}`} key={countryCode} closeMenu={closeMenu}>
                       {country}
                     </NavLink>
                   ],
