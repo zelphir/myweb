@@ -6,9 +6,9 @@ export const Tag = styled.span`
   ${fontQuattro};
   background: ${({ dark }) => lighten(dark ? 0.25 : 0.95, colors.black)};
   color: ${({ dark }) => rgba(dark ? colors.white : colors.black, 0.4)};
-  font-size: 14px;
+  font-size: ${({ small }) => (small ? '12px' : '14px')};
+  padding: ${({ small }) => (small ? '3px 5px 1px' : '2px 3px 1px')};
   margin: 0 5px 5px 0;
-  padding: 3px 5px 1px;
 `
 
 const Tags = styled.span`

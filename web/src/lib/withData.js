@@ -10,14 +10,9 @@ const withData = (ComposedComponent, options = {}) =>
     url = options.url || '/api/posts.json'
     type = options.type || 'posts'
 
-    isSnap = window.snapStore && window.snapStore[this.url]
-
     state = {
-      newData: this.isSnap ? window.snapStore[this.url] : [],
-      data:
-        this.type === 'posts'
-          ? this.props.data[this.type]
-          : this.props.location.state && this.props.location.state[this.type],
+      newData: window.snapStore[this.url] || [],
+      data: this.type === 'post' ? undefined : this.props.data[this.type],
       loading: false
     }
 
@@ -32,14 +27,23 @@ const withData = (ComposedComponent, options = {}) =>
       }
     }
 
-    updateState = data => {
+    getPost = data => {
+      const post = data.find(({ path }) => path === this.props.location.pathname)
+      if (!post) return this.props.history.push('/blog')
+      return post
+    }
+
+    updateState = newData => {
       this.setState(prevState => ({
         loading: false,
         data:
-          this.type === 'posts'
-            ? [...prevState.data, ...data.slice(prevState.data.length, prevState.data.length + 10)]
-            : data.find(({ path }) => path === this.props.location.pathname),
-        newData: data
+          this.type === 'post'
+            ? this.getPost(newData)
+            : [
+                ...prevState.data,
+                ...newData.slice(prevState.data.length, prevState.data.length + 10)
+              ],
+        newData
       }))
     }
 
@@ -51,6 +55,22 @@ const withData = (ComposedComponent, options = {}) =>
 
       const data = await this.fetchData()
       return this.updateState(data)
+    }
+
+    async componentDidMount() {
+      // Load all the posts for snapshot
+      if (this.props.isSnap) {
+        const data = await this.fetchData()
+        this.setState({ data, loading: false })
+      }
+
+      if (this.type === 'post') {
+        if (this.props.location.state) {
+          this.setState({ data: this.props.location.state.post })
+        } else {
+          await this.loadData()
+        }
+      }
     }
 
     render() {

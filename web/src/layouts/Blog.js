@@ -10,35 +10,23 @@ const title = 'Blog'
 const description =
   'My personal Blog, where I write about stuff that every developer could face in is coding life.'
 
-class Blog extends React.PureComponent {
-  componentDidMount() {
-    if (this.props.isSnap) {
-      // Load all the posts for snapshot
-      this.props.loadData()
-    }
-  }
-
-  render() {
-    const { loading, data, dataCount, loadData } = this.props
-
-    if (loading && !data) return <Spinner fluid />
-
-    return (
-      <Main id="blog">
-        <Seo title={title} description={description} path="/blog" />
-        <h1>{title}</h1>
-        <p>{description}</p>
-        <InfiniteScroll
-          wrapper="blog"
-          isLoading={loading}
-          hasMore={data.length !== dataCount}
-          loadMore={loadData}
-        >
-          {data.map(post => <BlogPost key={post.id} post={post} />)}
-        </InfiniteScroll>
-      </Main>
-    )
-  }
-}
+const Blog = ({ loading, data, dataCount, loadData }) =>
+  loading && !data ? (
+    <Spinner fluid />
+  ) : (
+    <Main id="blog">
+      <Seo title={title} description={description} path="/blog" />
+      <h1>{title}</h1>
+      <p>{description}</p>
+      <InfiniteScroll
+        wrapper="blog"
+        isLoading={loading}
+        hasMore={data.length !== dataCount}
+        loadMore={loadData}
+      >
+        {data.map(post => <BlogPost key={post.id} post={post} />)}
+      </InfiniteScroll>
+    </Main>
+  )
 
 export default withData(Blog)

@@ -15,7 +15,7 @@ sudo apt-get update
 curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt-get update && sudo apt-get install -y yarn nodejs build-essential jq
+sudo apt-get update && sudo apt-get install -y yarn nodejs build-essential jq dbus
 wget https://github.com/dshearer/jobber/releases/download/v1.3.2/jobber_1.3.2-1_amd64_deb9.deb -P /tmp
 sudo dpkg -i /tmp/jobber_1.3.2-1_amd64_deb9.deb
 sudo apt-get install -f'

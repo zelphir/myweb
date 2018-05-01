@@ -1,6 +1,7 @@
 import { injectGlobal, css } from 'emotion'
 import { normalize, rgba, modularScale } from 'polished'
 import { colors, fontWork, fontQuattro } from '../components/common'
+import { isSnap } from './utils'
 import printStyles from './printStyles'
 
 const htag = css`
@@ -20,7 +21,8 @@ injectGlobal`
     transition: opacity 0.15s ease-in;
     opacity: 0;
 
-    &.wf-active {
+    &.wf-active,
+    &.wf-inactive {
       opacity: 1;
     }
   }

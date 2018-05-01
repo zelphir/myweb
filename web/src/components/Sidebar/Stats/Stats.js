@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   height: 165px;
   justify-content: flex-end;
   overflow: hidden;
-  padding: 0 0 0 20px;
+  padding: 0 0 0 30px;
 `
 
 class Stats extends React.PureComponent {

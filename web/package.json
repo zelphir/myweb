@@ -64,7 +64,10 @@
   "reactSnap": {
     "waitFor": 1000,
     "inlineCss": true,
-    "sitemap": { "enabled": true, "exclude": ["/posts"] },
+    "sitemap": {
+      "enabled": true,
+      "exclude": ["/posts"]
+    },
     "cacheAjaxRequests": true,
     "exclude": ["/photo/**", "/resume.pdf"],
     "include": ["/posts"],

@@ -14,31 +14,12 @@ const Details = styled.small`
   margin-bottom: 15px;
 `
 
-class Post extends React.PureComponent {
-  state = {
-    data: this.props.data
-  }
-
-  componentDidMount() {
-    if (!this.props.data) {
-      this.props.loadData()
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!prevProps.data) {
-      console.log('didUpdate', prevProps.data)
-      // return this.props.history.push('/blog')
-    }
-  }
-
-  render() {
-    const { loading, data } = this.props
-
-    if (!data || loading) return <Spinner fluid />
-
-    return (
-      <Main id="post">
+const Post = ({ loading, data }) => (
+  <Main id="post">
+    {!data || loading ? (
+      <Spinner fluid />
+    ) : (
+      <React.Fragment>
         <Seo {...data} />
         <h1>{data.title}</h1>
         <Details>
@@ -46,9 +27,9 @@ class Post extends React.PureComponent {
         </Details>
         <Markdown source={data.content} />
         <Tags>{data.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}</Tags>
-      </Main>
-    )
-  }
-}
+      </React.Fragment>
+    )}
+  </Main>
+)
 
 export default withData(Post, { type: 'post' })

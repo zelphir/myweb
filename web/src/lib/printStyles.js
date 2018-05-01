@@ -11,6 +11,7 @@ const printStyles = css`
     body,
     #root,
     .main {
+      opacity: 1;
       margin: 0;
     }
 

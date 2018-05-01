@@ -1,5 +1,5 @@
 fragment Entries on DailyStat {
-  entries(filter: { percent_gte: 1, name_not: "Other" }, first: 5, orderBy: percent_DESC) {
+  entries(first: 5, orderBy: percent_DESC) {
     name
     text
     percent
