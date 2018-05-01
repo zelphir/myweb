@@ -1,4 +1,5 @@
 import React from 'react'
+import withData from '../lib/withData'
 import Seo from '../components/Seo'
 import BlogPost from '../components/BlogPost'
 import Main from '../components/Main'
@@ -10,57 +11,17 @@ const description =
   'My personal Blog, where I write about stuff that every developer could face in is coding life.'
 
 class Blog extends React.PureComponent {
-  static getDerivedStateFromProps({ data }) {
-    return {
-      postsToShow: data.posts
-    }
-  }
-
-  state = { posts: [], loading: false }
-
-  getPosts = async () => {
-    try {
-      const response = await fetch('/api/posts.json')
-      return response.json()
-    } catch (error) {
-      this.setState({ loading: false, error })
-    }
-  }
-
-  loadMore = async () => {
-    this.setState({ loading: true })
-    const { posts, postsToShow } = this.state
-    const length = postsToShow.length
-
-    if (posts.length) {
-      return this.setState({
-        loading: false,
-        postsToShow: [...postsToShow, ...posts.slice(length, length + 10)]
-      })
-    }
-
-    const newPosts = await this.getPosts()
-    this.setState({
-      loading: false,
-      posts: newPosts,
-      postsToShow: [...postsToShow, ...newPosts.slice(length, length + 10)]
-    })
-  }
-
-  async componentDidMount() {
+  componentDidMount() {
     if (this.props.isSnap) {
-      const postsToShow = await this.getPosts()
-      this.setState({
-        loading: false,
-        postsToShow
-      })
+      // Load all the posts for snapshot
+      this.props.loadData()
     }
   }
 
   render() {
-    const { loading, posts, postsToShow } = this.state
+    const { loading, data, dataCount, loadData } = this.props
 
-    if (loading && !postsToShow) return <Spinner fluid />
+    if (loading && !data) return <Spinner fluid />
 
     return (
       <Main id="blog">
@@ -70,14 +31,14 @@ class Blog extends React.PureComponent {
         <InfiniteScroll
           wrapper="blog"
           isLoading={loading}
-          hasMore={postsToShow.length !== posts.length}
-          loadMore={() => this.loadMore()}
+          hasMore={data.length !== dataCount}
+          loadMore={loadData}
         >
-          {postsToShow.map(post => <BlogPost key={post.id} post={post} />)}
+          {data.map(post => <BlogPost key={post.id} post={post} />)}
         </InfiniteScroll>
       </Main>
     )
   }
 }
 
-export default Blog
+export default withData(Blog)
