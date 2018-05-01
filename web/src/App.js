@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
+import loadable from 'loadable-components'
 import Helmet from 'react-helmet'
 import { Transition } from 'react-spring'
 import ThemeProvider from './lib/withTheme'
 import Sidebar from './components/Sidebar'
-import loadable from 'loadable-components'
+import { isSnap } from './lib/utils'
 import './lib/globalStyles'
 
 const layouts = {
@@ -54,6 +55,15 @@ class App extends Component {
               }}
             />
           ))}
+          {isSnap && (
+            <Route
+              path="/posts"
+              render={props => {
+                const Component = layouts.Blog
+                return <Component {...props} isSnap data={{ posts: [] }} />
+              }}
+            />
+          )}
           <Route
             path="/blog/:slug"
             render={props => {

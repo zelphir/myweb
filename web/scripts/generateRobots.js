@@ -8,7 +8,7 @@ const configProd = {
     {
       userAgent: '*',
       allow: '/',
-      disallow: '/api'
+      disallow: ['/api', '/posts']
     }
   ],
   sitemap: 'https://robertomanzella.com/sitemap.xml',

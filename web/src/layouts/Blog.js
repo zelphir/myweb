@@ -1,5 +1,4 @@
 import React from 'react'
-import { isSnap } from '../lib/utils'
 import Seo from '../components/Seo'
 import BlogPost from '../components/BlogPost'
 import Main from '../components/Main'
@@ -49,7 +48,7 @@ class Blog extends React.PureComponent {
   }
 
   async componentDidMount() {
-    if (isSnap) {
+    if (this.props.isSnap) {
       const postsToShow = await this.getPosts()
       this.setState({
         loading: false,
