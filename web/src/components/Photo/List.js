@@ -4,11 +4,12 @@ import styled, { css } from 'react-emotion'
 import { lighten } from 'polished'
 import { graphql, compose } from 'react-apollo'
 import { GetPictures } from 'gql/queries.graphql'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { mq, colors } from '../common'
 import Seo from '../Seo'
 import InfiniteScroll from '../InfiniteScroll'
 import Spinner from '../Spinner'
+import NavLink from '../NavLink'
 import Img from '../Img'
 
 const Wrapper = styled.div`
@@ -62,7 +63,7 @@ const PhotoList = ({ photos, error, loading, meta, fetchMore, location, match })
       >
         <Wrapper>
           {photos.map(photo => (
-            <Link
+            <NavLink
               className={picture}
               key={photo.id}
               to={{
@@ -76,7 +77,7 @@ const PhotoList = ({ photos, error, loading, meta, fetchMore, location, match })
               <LazyLoad resize offset={[100, 0]} placeholder={<Spinner absolute />}>
                 <Img src={photo.thumbnailUrl} alt={photo.caption} spinner={{ absolute: true }} />
               </LazyLoad>
-            </Link>
+            </NavLink>
           ))}
           {loading && (
             <div className={picture}>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { format } from 'date-fns'
-import { Link } from 'react-router-dom'
 import styled from 'react-emotion'
+import NavLink from './NavLink'
 
 const Title = styled.h2`
   margin: 0;
@@ -13,9 +13,9 @@ const Small = styled.small`
 
 const BlogPost = ({ post }) => (
   <article>
-    <Link to={{ pathname: post.path, state: { post } }}>
+    <NavLink to={{ pathname: post.path, state: { post } }}>
       <Title>{post.title}</Title>
-    </Link>
+    </NavLink>
     <Small>
       {format(post.date, 'D MMM YY')} | in: {post.category.map(cat => <span key={cat}>{cat}</span>)}
     </Small>
