@@ -28,7 +28,7 @@ const withData = (ComposedComponent, options = {}) =>
     }
 
     getPost = data => {
-      const post = data.find(({ path }) => path === this.props.location.pathname)
+      const post = data.find(({ path }) => this.props.location.pathname.includes(path))
       if (!post) return this.props.history.push('/blog')
       return post
     }

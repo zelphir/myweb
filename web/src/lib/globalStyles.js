@@ -1,7 +1,6 @@
 import { injectGlobal, css } from 'emotion'
 import { normalize, rgba, modularScale } from 'polished'
 import { colors, fontWork, fontQuattro } from '../components/common'
-import { isSnap } from './utils'
 import printStyles from './printStyles'
 
 const htag = css`
