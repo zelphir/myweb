@@ -16,9 +16,7 @@ class ThemeProvider extends React.Component {
 
 export const withTheme = ComposedComponent =>
   class WithTheme extends React.Component {
-    static displayName = `WithTheme(${getComponentDisplayName(
-      ComposedComponent
-    )})`
+    static displayName = `WithTheme(${getComponentDisplayName(ComposedComponent)})`
 
     render() {
       return (

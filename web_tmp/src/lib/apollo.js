@@ -11,9 +11,7 @@ const errorLink = onError(({ networkError, graphQLErrors }) => {
   if (graphQLErrors) {
     graphQLErrors.map(({ message, locations, path }) =>
       // eslint-disable-next-line
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      )
+      console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
     )
   }
 })
@@ -25,9 +23,7 @@ const httpLink = new HttpLink({
 })
 
 const wsLink = new WebSocketLink({
-  uri:
-    process.env.REACT_APP_GRAPHCOOL_WSS +
-    process.env.REACT_APP_GRAPHCOOL_SERVICE_ID,
+  uri: process.env.REACT_APP_GRAPHCOOL_WSS + process.env.REACT_APP_GRAPHCOOL_SERVICE_ID,
   options: { reconnect: true }
 })
 

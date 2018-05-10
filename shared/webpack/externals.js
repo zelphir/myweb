@@ -5,6 +5,6 @@ module.exports = dirname => [
   nodeExternals(),
   nodeExternals({
     modulesDir: path.resolve(dirname, '../node_modules'),
-    whitelist: [/^shared/, /^gql/]
+    whitelist: [/^shared/, /^gql/, /^web/]
   })
 ]

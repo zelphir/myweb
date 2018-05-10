@@ -2,6 +2,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CopyPkgJsonPlugin = require('copy-pkg-json-webpack-plugin')
 const { DefinePlugin } = require('webpack')
 const rules = require('shared/webpack/rules')
@@ -20,8 +21,12 @@ module.exports = ({ fnName }) => ({
   externals: externals(__dirname),
   target: 'node',
   plugins: [
-    new DefinePlugin(env()),
+    new DefinePlugin(Object.assign({}, env(), { 'process.env.LOCAL': process.env.LOCAL })),
     new CleanWebpackPlugin([outputPath]),
-    new CopyPkgJsonPlugin({ remove: ['scripts', 'devDependencies'] })
-  ]
+    new CopyPkgJsonPlugin({ remove: ['scripts', 'devDependencies'] }),
+    fnName === 'web' &&
+      new CopyWebpackPlugin([
+        { from: '../web/.next', to: path.resolve(__dirname, outputPath, fnName, '.next') }
+      ])
+  ].filter(Boolean)
 })
