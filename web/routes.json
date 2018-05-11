@@ -1,0 +1,67 @@
+{
+  "contact": {
+    "title": "Get in touch",
+    "layout": "Page",
+    "contact": true,
+    "content": "You can send me a message via this form or you can find me on Linkedin, Github, Twitter or Instagram.\n",
+    "excerpt": "You can send me a message via this form or you can find me on Linkedin, Github, Twitter or Instagram.",
+    "description": "You can send me a message via this form or you can find me on Linkedin, Github, Twitter or Instagram.",
+    "path": "/contact"
+  },
+  "home": {
+    "title": "Hi, I'm Roberto, Full stack developer.",
+    "layout": "Page",
+    "description": "Roberto Manzella, Full Stack Developer based in London... love NodeJS/React/GraphQL/Docker/Git/Serverless",
+    "contact": true,
+    "partials": {
+      "cover": {
+        "content":
+          "I've been playing with computers for a long time! :-)\n\nBased in London... love NodeJS/React/GraphQL/Docker/Git/Serverless!\n\nIn the past years I've worked for different companies, from startups to leading global technology companies.\n\nI always push myself to improve the code quality and the working flow everywhere I go. Automation is very important for me, and I always try to speed up and automate as much stuff as I can, from testing tools, continuous delivery, utility tools, etc... to make other devs' lives easier and more relaxed. Trying to use serverless architecture (from different provider like AWS, Google, Azure) as much as I can.\n\nI'm also an enthusiast photographer.\n\n"
+      }
+    },
+    "content":
+      "* * *\n\n## About this website\n\nThe source code of this project is open source and you can find it in this [Github repo](https://github.com/zelphir/myweb.git). More info on how it works in this [blog post](/blog/how-i-built-this-website--part-1).\n\nIn the sidebar you can see, if I'm coding, today's live stats coming from my IDE, I use **tmux+neovim** (my `.dotfiles` are here: [Github repo](https://github.com/zelphir/.dotfiles.git)). You should see the bars moving and if you mouseover them you can see how much time I'm spending on each language.\n\nYou can also find my latest resume and some pictures taken around the world.\n\n* * *\n\n## Get in touch\n",
+    "excerpt": "* *  ## About this website",
+    "path": "/"
+  },
+  "resume": {
+    "title": "Resume",
+    "pdf": "resume.pdf",
+    "layout": "Page",
+    "description": "Latest CV. Roberto Manzella, Full Stack Developer based in London... love NodeJS/React/GraphQL/Docker/Git/Serverless",
+    "partials": {
+      "contact-details": {
+        "printOnly": true,
+        "content": "### Roberto Manzella\n\n- London, GB\n- robertomanzella.com\n- info@robertomanzella.com\n- +44 (0) 7707797695\n\n* * *\n\n"
+      },
+      "cover": {
+        "printOnly": true,
+        "content":
+          "I've been playing with computers for a long time! :-)\n\nBased in London... love NodeJS/React/GraphQL/Docker/Git/Serverless!\n\nIn the past years I've worked for different companies, from startups to leading global technology companies.\n\nI always push myself to improve the code quality and the working flow everywhere I go. Automation is very important for me, and I always try to speed up and automate as much stuff as I can, from testing tools, continuous delivery, utility tools, etc... to make other devs' lives easier and more relaxed. Trying to use serverless architecture (from different provider like AWS, Google, Azure) as much as I can.\n\nI'm also an enthusiast photographer.\n\n"
+      }
+    },
+    "content":
+      "## Experience\n\n*   ### [NowTV - Sky](https://www.sky.com) *(2016 — Present)*\n    #### Senior Full Stack Developer, consultant\n\n    -   Internal CMS for editors to curate the NowTV Devices Homepage\n    -   NodeJS, Mongo, Redis app to feed all the NowTV apps and devices\n    -   Account broadband/tv status page\n    -   Sales website for UK\n\n    ###### NodeJS, Docker, React, Redux, React Native, AngularJS, ExpressJS, Jenkins, Mongo, Redis, AWS, Kubernetes\n\n*   ### [Photobox](https://www.photobox.co.uk) *(2015 — 2015)*\n    #### Senior NodeJS Developer, consultant\n\n    -   NodeJS checkout (payment flow)\n    -   Scaling application for peak season\n\n    ###### NodeJS, Docker, AWS, ExpressJS\n\n*   ### [DigitasLBi](https://www.digitas.com) *(2014 — 2015)*\n    #### Lead Front End Developer\n\n    -   World wide platform for Renault, Nissan, Infiniti, Datsun and Dacia. I worked as a Lead FE, leading a team of 10 people and managing offshore resources from Vietnam, Costa Rica, France and Colombia. This team was part of a 200 people group. A huge platform based on Adobe AEM.\n    -   Various internal projects\n\n    ###### React, Backbone, AngularJS, ElasticSearch, NodeJS, Docker, Mongo, Redis\n\n*   ### [OutOfView Ltd](http://www.altanawealth.com/) *(2012 — 2014)*\n    #### Lead Front End Developer\n\n    -   Gliff App (IOS, Android). Not on the Stores anymore. It was supposed to be a viral social app using Memes generated on the app using Canvas\n    -   Quib.ly: A Questions and Answers portal (a la Stack Overflow or Quora) for tech savvy parents and kids (not online anymore)\n    -   Other minor projects (nexus-club.com, mindthegap.org.uk, thegliff.com, altanawealth.com, etc…)\n\n    ###### Elasticsearch, NodeJS, Git, Python, Pyramid, AngularJS, Cordova, Ionic\n\n*   ### [Giglio.com](https://www.giglio.com/) *(2010 — 2012)*\n    #### Senior Full Stack Developer\n\n    -   Frontend/Backend for the blogs and the e-commerce website\n    -   DevOps\n\n    ###### PHP, Wordpress, Magento, Apache, Nginx, Varnish\n\n*   ### Freelancer *(2000 — 2009)*\n    #### UI designer/Frontend/Backend Developer\n\n    -   Wordpress specialist, templating, etc...\n\n    ###### PHP, Wordpress, Joomla, Magento, Apache, Nginx\n\n\n## Education\n\n*   ### University of Palermo *(2005 — 2007)*\n    #### Computer Science\n    Degree not completed\n\n*   ### University of Palermo *(2002 — 2004)*\n    #### Electrical Engineering\n    Degree not completed\n\n*   ### Garibaldi High School of Palermo *(1997 — 2002)*\n    #### Classical Lyceum\n    High School Diploma\n\n\n## Languages\n-   Italian: *Native*\n-   English: *Fluent*\n\n\n## Interests\n-   Sports\n-   Photography\n-   New technologies\n-   Motorbikes\n",
+    "excerpt": "Experience  *   ### NowTV - Sky (2016 — Present)",
+    "path": "/resume"
+  },
+  "blog": {
+    "layout": "Blog",
+    "path": "/blog",
+    "title": "Blog",
+    "posts": [
+      {
+        "id": "how-i-built-this-website--part-1",
+        "title": "How I built this website | Part 1",
+        "date": "Thu Apr 19 2018 01:00:00 GMT+0100 (BST)",
+        "category": ["Coding"],
+        "tags": ["javascript"],
+        "content": "Coming soon...\n\n",
+        "excerpt": "Coming soon...",
+        "description": "Coming soon...",
+        "path": "/blog/how-i-built-this-website--part-1",
+        "layout": "Post"
+      }
+    ]
+  }
+}
